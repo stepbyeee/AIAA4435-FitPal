@@ -8,7 +8,7 @@ FitPal watches a set through an ordinary laptop webcam, counts your reps, and gi
 
 | | |
 |---|---|
-| **Team** | Jiaqi Li · Yueran Qiu |
+| **Team** | Jiaqi Li · Ray · Yueran Qiu | 
 | **Instructor** | Yenchi Tseng |
 | **Status** | Week 1 — proof of concept / go-no-go |
 | **Scope** | Lat pulldown first, webcam only |
