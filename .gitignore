@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.taste-skill/
+.claude/
+.DS_Store
+# Fetched by `npm run setup:pose` and by hand for demos; not part of the source.
+ui/public/mediapipe/
+ui/public/demo/
