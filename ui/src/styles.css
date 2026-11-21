@@ -512,13 +512,14 @@ button.pill:active {
   bottom: 14%;
   right: 32px;
   width: 12px;
+  display: flex;
+  align-items: flex-end;
   border-radius: 999px;
   background: var(--raised);
 }
 
 .range-fill {
   width: 100%;
-  min-height: 12px;
   border-radius: 999px;
   background: var(--accent);
 }
@@ -570,6 +571,10 @@ button.pill:active {
   white-space: nowrap;
 }
 
+.demo:empty {
+  display: none;
+}
+
 .panel {
   background: var(--surface);
   border-radius: var(--radius-card);
@@ -584,6 +589,41 @@ button.pill:active {
   flex-direction: column;
   gap: 24px;
   min-width: 0;
+}
+
+.evidence {
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.evidence summary {
+  cursor: pointer;
+  color: var(--text);
+}
+
+.evidence p {
+  margin: 10px 0;
+}
+
+.rep-depths {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+}
+
+.rep-depths li {
+  border-radius: 999px;
+  padding: 4px 10px;
+  background: var(--raised);
+  font-variant-numeric: tabular-nums;
+}
+
+.rep-depths .in-range {
+  box-shadow: inset 0 0 0 1px var(--accent);
+  color: var(--text);
 }
 
 .sets {

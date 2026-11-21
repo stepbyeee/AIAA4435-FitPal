@@ -37,16 +37,17 @@ export function gearState(item: GearItem, owned: readonly GearId[], balance: num
 // Sample wardrobe to go with the sample history.
 export const SAMPLE_GEAR: GearId[] = ['tank', 'headband']
 
-const KEY = 'fitpal.gear.v1'
+// The preview wardrobe was bought with simulated EXP.
+const KEY = 'fitpal.gear.v2'
 
 export function loadGear(): GearId[] {
   try {
     const raw = localStorage.getItem(KEY)
     if (raw) return JSON.parse(raw) as GearId[]
   } catch {
-    // Storage can be unavailable; the sample still renders.
+    // Storage can be unavailable. The character can still be shown.
   }
-  return SAMPLE_GEAR
+  return []
 }
 
 export function saveGear(owned: GearId[]) {

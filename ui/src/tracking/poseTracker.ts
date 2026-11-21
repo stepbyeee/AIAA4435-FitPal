@@ -1,7 +1,7 @@
 import type { Landmark } from '../contract'
+import type { PoseFrame } from '../perception/pulldown'
 
-// Pose landmarks from a playing video, for the bone overlay. This is the one piece of tracking
-// the UI runs itself; counting reps and calibration belong to the perception module.
+// One stream feeds both the bone overlay and the perception module.
 // Frames are read on the device and never leave the page.
 
 const WASM = '/mediapipe/wasm'
@@ -30,33 +30,76 @@ function load(): Promise<Landmarker> {
   return loading
 }
 
-/** Calls back with the landmarks of each new video frame, or null when nobody is found. Returns a stop function. */
-export function trackPose(video: HTMLVideoElement, onLandmarks: (landmarks: Landmark[] | null) => void, onError: (error: unknown) => void): () => void {
+export type TrackedFrame = PoseFrame & { inferenceMs: number }
+
+/** Sample each newly presented frame and preserve its timestamp in the source video. */
+export function trackPose(
+  video: HTMLVideoElement,
+  onFrame: (frame: TrackedFrame) => void,
+  onError: (error: unknown) => void,
+  onReady?: () => void,
+): () => void {
   let stopped = false
-  let raf = 0
+  let callback = 0
   let lastTime = -1
+  let warmUp: (() => void) | null = null
+  const useVideoCallback = typeof video.requestVideoFrameCallback === 'function'
 
   load().then((landmarker) => {
-    const tick = () => {
+    if (stopped) return
+    const schedule = () => {
+      callback = useVideoCallback
+        ? video.requestVideoFrameCallback((_now, metadata) => tick(metadata.mediaTime))
+        : requestAnimationFrame(() => tick(video.currentTime))
+    }
+    const tick = (mediaTime: number) => {
       if (stopped) return
-      if (video.readyState >= 2 && video.videoWidth > 0 && video.currentTime !== lastTime) {
-        lastTime = video.currentTime
+      const width = video.videoWidth
+      const height = video.videoHeight
+      if (video.readyState >= 2 && width > 0 && height > 0 && mediaTime > lastTime) {
+        lastTime = mediaTime
         try {
-          const found = landmarker.detectForVideo(video, performance.now()).landmarks[0]
-          onLandmarks(found ? found.map((p) => ({ x: p.x, y: p.y, visibility: p.visibility ?? 0 })) : null)
+          const started = performance.now()
+          const found = landmarker.detectForVideo(video, started).landmarks[0]
+          const landmarks: Landmark[] | null = found?.map((p) => ({ x: p.x, y: p.y, visibility: p.visibility ?? 0 })) ?? null
+          onFrame({ landmarks, width, height, timestampMs: mediaTime * 1000, inferenceMs: performance.now() - started })
         } catch (error) {
           stopped = true
           onError(error)
           return
         }
       }
-      raf = requestAnimationFrame(tick)
+      if (!stopped) schedule()
     }
-    tick()
-  }, onError)
+    const start = () => {
+      if (stopped) return
+      schedule()
+      onReady?.()
+    }
+
+    if (video.srcObject) {
+      start()
+    } else {
+      // The first inference may initialize GPU shaders. Warm the full model on a paused
+      // file so the beginning of the recording cannot play through that startup cost.
+      warmUp = () => {
+        if (stopped) return
+        try {
+          landmarker.detectForVideo(video, performance.now())
+          start()
+        } catch (error) {
+          onError(error)
+        }
+      }
+      if (video.readyState >= 2) warmUp()
+      else video.addEventListener('loadeddata', warmUp, { once: true })
+    }
+  }, (error) => { if (!stopped) onError(error) })
 
   return () => {
     stopped = true
-    cancelAnimationFrame(raf)
+    if (warmUp) video.removeEventListener('loadeddata', warmUp)
+    if (useVideoCallback) video.cancelVideoFrameCallback(callback)
+    else cancelAnimationFrame(callback)
   }
 }

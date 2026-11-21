@@ -13,13 +13,16 @@ type Props = {
 }
 
 const LEFT_OVER: Record<string, (n: number) => string> = {
-  short_range: (n) => `上次最后一组有 ${n} 下没拉到底。`,
-  out_of_view: (n) => `上次最后一组有 ${n} 下镜头没看清。`,
+  short_range: (n) => `上次最后一组有 ${n} 下没到校准的目标范围。`,
+  out_of_view: (n) => n > 0 ? `上次最后一组有 ${n} 下镜头没看清。` : '上次最后一组镜头没看清。',
 }
 
 function lastSetLine(last: LastSet | undefined) {
   if (!last) return '还没有上一次的记录。'
-  if (!last.issue) return '上次最后一组全部到位。'
+  if (!last.issue) {
+    const verified = last.depths.filter((depth) => depth !== null).length
+    return verified ? `上次最后一组确认了 ${verified} 下。` : '上次最后一组没有可确认的动作。'
+  }
   return LEFT_OVER[last.issue.id]?.(last.issue.count) ?? '上次最后一组还有问题没改掉。'
 }
 

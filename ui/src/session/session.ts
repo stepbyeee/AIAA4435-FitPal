@@ -18,12 +18,12 @@ export type SessionEvent =
   | { type: 'setEnded'; result: SetResult }
   | { type: 'nextSet' }
 
-export const initialSession = (totalSets: number): SessionState => ({
+export const initialSession = (totalSets: number, lastIssueId: string | null = null): SessionState => ({
   stage: 'calibrating',
   setIndex: 0,
   totalSets,
   results: [],
-  lastIssueId: null,
+  lastIssueId,
 })
 
 export function reduce(state: SessionState, event: SessionEvent): SessionState {
@@ -36,7 +36,9 @@ export function reduce(state: SessionState, event: SessionEvent): SessionState {
       return {
         ...state,
         results,
-        lastIssueId: event.result.cue?.issueId ?? null,
+        lastIssueId: state.lastIssueId && event.result.exp.fixedBonus === 0
+          ? state.lastIssueId
+          : event.result.cue?.issueId ?? null,
         stage: results.length >= state.totalSets ? 'done' : 'rest',
       }
     }

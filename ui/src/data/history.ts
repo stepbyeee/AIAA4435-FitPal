@@ -9,9 +9,15 @@ export type LastSet = {
   issue: { id: string; count: number } | null
 }
 
-export type SessionRecord = { date: string; exerciseId: string; sets: SetRecord[]; lastSet?: LastSet }
+export type SessionRecord = {
+  date: string
+  exerciseId: string
+  sets: SetRecord[]
+  lastSet?: LastSet
+  outstandingIssueId?: string | null
+}
 
-// Sample history so the home screen is seen with data. Replaced by real sessions as they are saved.
+// Sample history for the explicit character preview.
 export const SAMPLE_HISTORY: SessionRecord[] = [
   { date: '2026-11-08', exerciseId: 'lat-pulldown', sets: [{ verified: 8, quality: 0, fixed: 0 }, { verified: 9, quality: 0, fixed: 0 }, { verified: 8, quality: 0, fixed: 0 }] },
   { date: '2026-11-10', exerciseId: 'lat-pulldown', sets: [{ verified: 9, quality: 0, fixed: 0 }, { verified: 10, quality: 5, fixed: 0 }, { verified: 8, quality: 0, fixed: 0 }] },
@@ -25,16 +31,17 @@ export const SAMPLE_HISTORY: SessionRecord[] = [
   },
 ]
 
-const KEY = 'fitpal.history.v2'
+// The UI shell used v2 for simulated sets. Real sessions begin in a new store.
+const KEY = 'fitpal.history.v3'
 
 export function loadHistory(): SessionRecord[] {
   try {
     const raw = localStorage.getItem(KEY)
     if (raw) return JSON.parse(raw) as SessionRecord[]
   } catch {
-    // Storage can be unavailable; the sample still renders.
+    // Storage can be unavailable. The session can still run.
   }
-  return SAMPLE_HISTORY
+  return []
 }
 
 export function saveSession(record: SessionRecord): SessionRecord[] {

@@ -10,7 +10,7 @@ FitPal watches a set through an ordinary laptop webcam, counts your reps, and gi
 |---|---|
 | **Team** | Jiaqi Li · Ray · Yueran Qiu | 
 | **Instructor** | Yenchi Tseng |
-| **Status** | Week 1 — proof of concept / go-no-go |
+| **Status** | Browser prototype with real lat-pulldown perception and two-video replay |
 | **Scope** | Lat pulldown first, webcam only |
 
 ---
@@ -29,7 +29,7 @@ Existing products each solve one of these and none solves the timing problem:
 |---|---|---|
 | Zing AI | Plans + camera form tips + coach chat | Form guidance is not a live check during the set |
 | Abundant class library | Rich content; an AI coach builds plans | Follow-along video, no live form check |
-| **FitPal** | **Live form check, webcam only — quiet during the set, one cue after it — tuned for Chinese users (fine-tuned on Chinese data, calibrated per user)** | |
+| **FitPal** | **Webcam-based movement checks, quiet during the set, one Chinese-language cue after it, calibrated per person** | |
 
 ## Research questions
 
@@ -41,7 +41,7 @@ Existing products each solve one of these and none solves the timing problem:
 
 ## How it works
 
-The coaching loop is a single pipeline with an explicit constraint on each layer:
+The midterm proposal defines the coaching loop below. The current build uses the official pretrained Pose Landmarker model and deterministic group-end feedback.
 
 ```
 frames ──► Perception ──► Decision policy ──► Explanation ──► Reward
@@ -150,17 +150,7 @@ Accuracy   80/100
 
 ## Getting started
 
-Not runnable yet — this repo is currently the proposal and the implementation plan. The W1 proof of concept lands here first; the scaffold below is the intended layout and will appear with real code rather than as empty placeholders:
-
-```
-fitpal/
-├── perception/     # pose tracking, calibration, rep state machine
-├── decision/       # interpretable rule policy, action log
-├── language/       # LLM cue explanation (set summary in, one cue out)
-├── reward/         # EXP settlement, level, session history
-├── ui/             # camera setup, live view, post-set card
-└── eval/           # technical gates + user-study harness
-```
+The [browser implementation](ui/README.md) connects real Pose Landmarker Full landmarks to three-rep calibration, counting and relative range. It generates one rule-based cue after a set and shows its evidence. See [replay and pilot notes](docs/pulldown-validation.md) for the two-video benchmark and remaining proposal milestones.
 
 ## Contributing
 

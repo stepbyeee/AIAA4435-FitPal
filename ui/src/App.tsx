@@ -1,16 +1,21 @@
 import { useCallback, useEffect, useState } from 'react'
 import { exerciseById } from './data/exercises'
-import { loadGear, saveGear, type GearId } from './data/gear'
-import { loadHistory, type SessionRecord } from './data/history'
+import { loadGear, SAMPLE_GEAR, saveGear, type GearId } from './data/gear'
+import { loadHistory, SAMPLE_HISTORY, type SessionRecord } from './data/history'
 import { Home } from './screens/Home'
 import { Session } from './screens/Session'
 
 const routeOf = () => window.location.hash.replace(/^#\/?/, '')
 
 export function App() {
+  const params = new URLSearchParams(window.location.search)
+  const clip = params.get('video')
+  const videoFile = clip && /^[\w-]+$/.test(clip) ? `/demo/${clip}.webm` : null
+  const useCamera = !params.has('nocam')
+  const preview = !useCamera && !videoFile
   const [route, setRoute] = useState(routeOf)
-  const [history, setHistory] = useState<SessionRecord[]>(loadHistory)
-  const [gear, setGear] = useState<GearId[]>(loadGear)
+  const [history, setHistory] = useState<SessionRecord[]>(() => preview ? SAMPLE_HISTORY : loadHistory())
+  const [gear, setGear] = useState<GearId[]>(() => preview ? SAMPLE_GEAR : loadGear())
 
   useEffect(() => {
     const onHash = () => setRoute(routeOf())
@@ -26,18 +31,12 @@ export function App() {
     setGear((owned) => {
       if (owned.includes(id)) return owned
       const next = [...owned, id]
-      saveGear(next)
+      if (!preview) saveGear(next)
       return next
     })
-  }, [])
+  }, [preview])
 
   const exercise = route.startsWith('session/') ? exerciseById(route.slice('session/'.length)) : undefined
-  // `?nocam` keeps the camera off, for demos and screenshots.
-  const params = new URLSearchParams(window.location.search)
-  const useCamera = !params.has('nocam')
-  // `?video=pulldown` plays public/demo/pulldown.webm on the stage instead of the camera.
-  const clip = params.get('video')
-  const videoFile = clip && /^[\w-]+$/.test(clip) ? `/demo/${clip}.webm` : null
 
   return (
     <div className="app">
