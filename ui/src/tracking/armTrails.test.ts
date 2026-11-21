@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { LANDMARK_COUNT, LM, type Landmark } from '../contract'
 import { advanceArmTrails, emptyArmTrails } from './armTrails'
+import { advanceLiveMotion, angleChartPath, emptyLiveMotion } from './liveMotion'
 
 function pose(timestampMs: number, leftX = 0.25, rightX = 0.65, leftVisibility = 0.99) {
   const landmarks: Landmark[] = Array.from({ length: LANDMARK_COUNT }, () => ({ x: 0, y: 0, visibility: 0 }))
@@ -48,5 +49,30 @@ describe('live arm trails', () => {
     for (let time = 0; time <= 2000; time += 40) trails = advanceArmTrails(trails, pose(time))
     expect(trails.left[0].timestampMs).toBeGreaterThanOrEqual(800)
     expect(trails.right.at(-1)?.timestampMs).toBe(2000)
+  })
+})
+
+describe('live elbow angle telemetry', () => {
+  it('breaks the obscured arm chart without interrupting the other side', () => {
+    let motion = advanceLiveMotion(emptyLiveMotion, pose(100))
+    motion = advanceLiveMotion(motion, pose(200, 0.27, 0.67))
+    motion = advanceLiveMotion(motion, pose(240, 0.28, 0.68, 0.4))
+    expect(motion.trails.left).toHaveLength(0)
+    expect(motion.angles.at(-1)?.left).toBeNull()
+    motion = advanceLiveMotion(motion, pose(280, 0.29, 0.69))
+    motion = advanceLiveMotion(motion, pose(400, 0.31, 0.71))
+    const left = angleChartPath(motion.angles, 'left', 300, 90)
+    const right = angleChartPath(motion.angles, 'right', 300, 90)
+    expect(left.match(/M/g)).toHaveLength(2)
+    expect(right.match(/M/g)).toHaveLength(1)
+  })
+
+  it('breaks the chart after a frame gap and expires older samples', () => {
+    let motion = advanceLiveMotion(emptyLiveMotion, pose(100))
+    motion = advanceLiveMotion(motion, pose(200))
+    motion = advanceLiveMotion(motion, pose(500))
+    expect(angleChartPath(motion.angles, 'right', 300, 90).match(/M/g)).toHaveLength(2)
+    motion = advanceLiveMotion(motion, pose(7000))
+    expect(motion.angles.map((point) => point.timestampMs)).toEqual([7000])
   })
 })

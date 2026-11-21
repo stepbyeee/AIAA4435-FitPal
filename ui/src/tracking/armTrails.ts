@@ -1,7 +1,7 @@
 import type { Landmark, PoseFrame } from '../contract'
 import { visibleArm, type ArmSide } from './armLandmarks'
 
-export type TrailPoint = { timestampMs: number; shoulder: Landmark; elbow: Landmark; wrist: Landmark }
+export type TrailPoint = { timestampMs: number; shoulder: Landmark; elbow: Landmark; wrist: Landmark; angle: number }
 export type ArmTrails = Record<ArmSide, readonly TrailPoint[]>
 
 const TRAIL_MS = 1200
@@ -17,13 +17,13 @@ function append(trail: readonly TrailPoint[], frame: PoseFrame, side: ArmSide): 
   if (!arm) return emptyArmTrails[side]
 
   const { timestampMs } = frame
-  const { shoulder, elbow, wrist } = arm
+  const { shoulder, elbow, wrist, angle } = arm
   const last = trail.at(-1)
   if (last && timestampMs <= last.timestampMs) return trail
   // Resume with a single point after a stalled stream or a sudden pose jump.
   const continuous = last && timestampMs - last.timestampMs <= MAX_GAP_MS
     && jump(last.elbow, elbow) <= MAX_JOINT_JUMP && jump(last.wrist, wrist) <= MAX_JOINT_JUMP
-  const point = { timestampMs, shoulder, elbow, wrist }
+  const point = { timestampMs, shoulder, elbow, wrist, angle }
   return continuous ? [...trail.filter((p) => timestampMs - p.timestampMs <= TRAIL_MS), point] : [point]
 }
 

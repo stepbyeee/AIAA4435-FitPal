@@ -1,5 +1,6 @@
 import { useEffect, useLayoutEffect, useReducer, useRef, useState } from 'react'
 import { ArmTrails } from '../components/ArmTrails'
+import { ElbowTelemetry } from '../components/ElbowTelemetry'
 import { Figure, useDemoPull } from '../components/Figure'
 import { Skeleton } from '../components/Skeleton'
 import { expOfResult, IN_RANGE, type FrameState, type PoseFrame, type SetResult, type SetSummary } from '../contract'
@@ -16,6 +17,7 @@ const CALIBRATION_REPS = 3
 const TOTAL_SETS = 3
 /** A visible top position held for this long ends a live set. */
 const IDLE_END_MS = 5000
+const phaseLabels: Record<FrameState['phase'], string> = { ready: '准备', pull: '下拉', bottom: '底部', return: '回程' }
 type EndTrigger = 'manual' | 'idle' | 'video-ended'
 
 const REST: FrameState = { phase: 'ready', q: 0, visible: false, repCount: 0, landmarks: null }
@@ -50,6 +52,7 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
   // EXP before this session, so the result does not depend on when the save lands.
   const startExp = useRef(totalExp(history))
   const live = state.stage === 'calibrating' || state.stage === 'set'
+  const calibrating = state.stage === 'calibrating'
   const preview = !useCamera && !videoFile
 
   useLayoutEffect(() => {
@@ -187,7 +190,7 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
         )}
         {live && video.source && video.frame && video.status === 'tracking' && (
           <>
-            <ArmTrails trails={video.trails} frame={video.frame} mirrored={video.source.kind === 'camera'} />
+            <ArmTrails trails={video.motion.trails} frame={video.frame} mirrored={video.source.kind === 'camera'} />
             <button className="bone-toggle" aria-pressed={showBones} onClick={() => setShowBones((visible) => !visible)}>骨架</button>
           </>
         )}
@@ -210,37 +213,44 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
         </div>
       </section>
 
-      <aside className="panel">
-        {state.stage === 'calibrating' && (
-          <div className="panel-body">
-            <p className="say">{calibrationPrompt(video.status, preview, Boolean(videoFile))}</p>
+      <aside className={live && !preview ? 'panel panel-live' : 'panel'}>
+        {live && (
+          <div className="panel-body live-panel">
             {!preview && (
-              <div className={frame.visible ? 'count num' : 'count count-dim num'} aria-live="polite">
-                <span className="count-now">{frame.repCount}</span>
-                <span className="count-of">/ {CALIBRATION_REPS}</span>
+              <>
+                <div className="live-panel-heading">
+                  <h2>{calibrating ? '个人校准' : `第 ${state.setIndex + 1} 组`}</h2>
+                  <span className="live-phase" data-ready={video.status === 'tracking' && frame.visible}>
+                    {video.status === 'tracking' && frame.visible ? phaseLabels[frame.phase] : '等待关键点'}
+                  </span>
+                </div>
+                <div className="live-count num" aria-live="polite">
+                  <span className="count-now">{frame.repCount}</span>
+                  <span className="count-of">/ {calibrating ? CALIBRATION_REPS : TARGET_REPS} 次</span>
+                </div>
+              </>
+            )}
+            {calibrating && <p className={preview ? 'say' : 'live-instruction'}>{calibrationPrompt(video.status, preview, Boolean(videoFile))}</p>}
+            {!preview && <ElbowTelemetry motion={video.motion} />}
+            {calibrating ? (
+              (video.status === 'ended' || video.status === 'unavailable' || video.status === 'tracking-error') && (
+                <button className="pill pill-wide" onClick={() => window.location.reload()}>重试</button>
+              )
+            ) : (
+              <div className="live-set-controls">
+                <SetMarks total={state.totalSets} index={state.setIndex} />
+                {idleMs > 600 && (
+                  <div className="idle">
+                    <div className="track">
+                      <div className="track-fill track-plain" style={{ width: `${Math.max(0, 1 - idleMs / IDLE_END_MS) * 100}%` }} />
+                    </div>
+                    <span className="num">{Math.ceil(Math.max(0, IDLE_END_MS - idleMs) / 1000)} 秒后结算这一组</span>
+                  </div>
+                )}
+                {(video.status === 'unavailable' || video.status === 'tracking-error') && <p className="note" role="status">追踪已中断。本组仅结算已确认的动作。</p>}
+                <button className="pill pill-wide" onClick={() => finishRef.current('manual')}>结束这一组</button>
               </div>
             )}
-            {(video.status === 'ended' || video.status === 'unavailable' || video.status === 'tracking-error') && (
-              <button className="pill pill-wide" onClick={() => window.location.reload()}>重试</button>
-            )}
-          </div>
-        )}
-
-        {state.stage === 'set' && (
-          <div className="panel-body">
-            <SetMarks total={state.totalSets} index={state.setIndex} />
-            <div className={frame.visible ? 'count num' : 'count count-dim num'} aria-live="polite">
-              <span className="count-now">{frame.repCount}</span>
-              <span className="count-of">/ {TARGET_REPS}</span>
-            </div>
-            <div className={idleMs > 600 ? 'idle idle-on' : 'idle'}>
-              <div className="track">
-                <div className="track-fill track-plain" style={{ width: `${Math.max(0, 1 - idleMs / IDLE_END_MS) * 100}%` }} />
-              </div>
-              <span className="num">{Math.ceil(Math.max(0, IDLE_END_MS - idleMs) / 1000)} 秒后结算这一组</span>
-            </div>
-            {(video.status === 'unavailable' || video.status === 'tracking-error') && <p className="note" role="status">追踪已中断。本组仅结算已确认的动作。</p>}
-            <button className="pill pill-wide" onClick={() => finishRef.current('manual')}>结束这一组</button>
           </div>
         )}
 

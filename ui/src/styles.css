@@ -1,5 +1,4 @@
-/* True-black flat: one ground, elevation by lightness alone, colour only on data.
-   The lime is the one hue: what the character has earned, EXP, the range gauge. */
+/* Neutral surfaces leave accent colors for tracking data and earned progress. */
 :root {
   --ground: #000000;
   --surface: #111111;
@@ -10,6 +9,8 @@
   --muted: #b4b4b4;
   --faint: #949494;
   --accent: #c6f24e;
+  --arm-left: #4ffbd1;
+  --arm-right: #ffbf52;
   --warning-bg: #2b2414;
   --warning-ink: #e5a93b;
 
@@ -508,8 +509,6 @@ button.pill:active {
 
 .arm-trails,
 .arm-legend {
-  --arm-left: #4ffbd1;
-  --arm-right: #ffbf52;
   pointer-events: none;
 }
 
@@ -548,6 +547,19 @@ button.pill:active {
 
 .arm-marker-elbow {
   fill: #10181d;
+}
+
+.arm-angle-label rect {
+  fill: rgb(12 20 24 / 0.94);
+  stroke: var(--arm-color);
+  stroke-opacity: 0.58;
+  vector-effect: non-scaling-stroke;
+}
+
+.arm-angle-label text {
+  fill: var(--arm-color);
+  font: 650 18px var(--font);
+  font-variant-numeric: tabular-nums;
 }
 
 .arm-legend {
@@ -688,6 +700,153 @@ button.pill:active {
   min-width: 0;
 }
 
+.panel-live {
+  background: linear-gradient(155deg, #161e21 0%, #111518 46%, #111111 100%);
+  border: 1px solid #263034;
+  padding: 24px;
+}
+
+.live-panel {
+  gap: 15px;
+}
+
+.live-panel-heading,
+.telemetry-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.live-panel-heading h2 {
+  font-size: 17px;
+  font-weight: 650;
+}
+
+.live-phase {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #20292d;
+  color: #bcc8cd;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.live-phase[data-ready='true'] {
+  background: #192e2a;
+  color: var(--arm-left);
+}
+
+.live-phase[data-ready='true']::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.live-count {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.live-count .count-now {
+  font-size: clamp(64px, 10vh, 94px);
+  line-height: 0.92;
+  font-weight: 650;
+  letter-spacing: -0.065em;
+}
+
+.live-count .count-of {
+  font-size: 17px;
+  color: #bcc8cd;
+}
+
+.live-instruction {
+  color: #d4dbdf;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.elbow-telemetry {
+  padding: 15px;
+  border: 1px solid #292f32;
+  border-radius: 15px;
+  background: #0c1114;
+}
+
+.telemetry-title h2 {
+  font-size: 15px;
+  font-weight: 650;
+}
+
+.telemetry-title > span,
+.telemetry-value > span {
+  color: #a5b3bb;
+  font-size: 12px;
+}
+
+.telemetry-values {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 11px 0 10px;
+  gap: 8px;
+}
+
+.telemetry-value {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+  padding: 7px 10px;
+  border-radius: 8px;
+  background: #171e22;
+}
+
+.telemetry-value strong {
+  font-size: 25px;
+  font-weight: 650;
+  line-height: 1.2;
+}
+
+.telemetry-value[data-side='left'] strong { color: var(--arm-left); }
+.telemetry-value[data-side='right'] strong { color: var(--arm-right); }
+.telemetry-value[data-visible='false'] strong { color: var(--faint); }
+
+.telemetry-chart {
+  display: block;
+  width: 100%;
+}
+
+.telemetry-chart text {
+  font-size: 10px;
+  fill: #a5b3bb;
+}
+
+.telemetry-chart line {
+  stroke: #354044;
+  stroke-width: 1;
+}
+
+.telemetry-chart path {
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.telemetry-chart path[data-side='left'] { stroke: var(--arm-left); }
+.telemetry-chart path[data-side='right'] { stroke: var(--arm-right); }
+
+.live-set-controls {
+  display: grid;
+  gap: 12px;
+  margin-top: auto;
+}
+
 .evidence {
   color: var(--muted);
   font-size: 15px;
@@ -743,45 +902,12 @@ button.pill:active {
   background: var(--text);
 }
 
-.count {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  transition: opacity 160ms ease;
-}
-
-.count-dim {
-  opacity: 0.35;
-}
-
-.count-now {
-  font-size: clamp(150px, 26vh, 240px);
-  line-height: 0.9;
-  font-weight: 600;
-  letter-spacing: -0.04em;
-}
-
-.count-of {
-  font-size: 40px;
-  line-height: 1;
-  font-weight: 500;
-  color: var(--faint);
-}
-
 .idle {
   display: flex;
   flex-direction: column;
   gap: 12px;
   color: var(--muted);
   font-size: 17px;
-  visibility: hidden;
-}
-
-.idle-on {
-  visibility: visible;
 }
 
 .say {
@@ -895,8 +1021,8 @@ button.pill:active {
     padding: 22px;
   }
 
-  .count-now {
-    font-size: 150px;
+  .live-count .count-now {
+    font-size: 64px;
   }
 }
 
@@ -908,8 +1034,7 @@ button.pill:active {
 
   .pill,
   .gear-item,
-  .back,
-  .count {
+  .back {
     transition: none;
   }
 }

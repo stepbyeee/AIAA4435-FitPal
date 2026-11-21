@@ -27,5 +27,8 @@ export function visibleArm({ landmarks, width, height }: PoseFrame, side: ArmSid
   const minLength = Math.min(width, height) * 0.015
   if (Math.min(Math.hypot(upperX, upperY), Math.hypot(lowerX, lowerY)) < minLength) return null
 
-  return { shoulder, elbow, wrist, upperX, upperY, lowerX, lowerY }
+  const cross = upperX * lowerY - upperY * lowerX
+  const dot = upperX * lowerX + upperY * lowerY
+  const angle = Math.atan2(Math.abs(cross), dot) * 180 / Math.PI
+  return { shoulder, elbow, wrist, angle }
 }

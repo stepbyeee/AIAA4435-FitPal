@@ -9,6 +9,7 @@ const joints = ['elbow', 'wrist'] as const
 export function ArmTrails({ trails, frame, mirrored }: { trails: Trails; frame: FrameSize; mirrored: boolean }) {
   const { width, height } = frame
   const markerSize = Math.min(width, height) * 0.009
+  const labelScale = Math.min(width, height) / 540
 
   return (
     <>
@@ -18,6 +19,9 @@ export function ArmTrails({ trails, frame, mirrored }: { trails: Trails; frame: 
           const latest = points.at(-1)
           if (!latest) return null
           const split = points.findIndex((point) => point.timestampMs >= latest.timestampMs - 420)
+          const labelX = Math.min(width - 27 * labelScale, Math.max(27 * labelScale,
+            latest.elbow.x * width + (side === 'left' ? -43 : 43) * labelScale))
+          const labelY = Math.max(17 * labelScale, latest.elbow.y * height - 21 * labelScale)
           return (
             <g key={side} className="arm-trail" data-side={side}>
               <polyline
@@ -39,6 +43,10 @@ export function ArmTrails({ trails, frame, mirrored }: { trails: Trails; frame: 
                   </g>
                 )
               })}
+              <g className="arm-angle-label" transform={`translate(${labelX} ${labelY}) scale(${mirrored ? -labelScale : labelScale} ${labelScale})`}>
+                <rect x="-25" y="-14" width="50" height="28" rx="8" />
+                <text textAnchor="middle" dominantBaseline="central">{Math.round(latest.angle)}°</text>
+              </g>
             </g>
           )
         })}

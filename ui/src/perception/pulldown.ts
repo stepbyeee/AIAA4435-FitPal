@@ -37,11 +37,9 @@ function median(values: number[]): number {
 function readArm(frame: PoseFrame, side: Side): ArmSample | null {
   const arm = visibleArm(frame, side)
   if (!arm) return null
-  const { shoulder, elbow, wrist, upperX, upperY, lowerX, lowerY } = arm
-  const cross = upperX * lowerY - upperY * lowerX
-  const dot = upperX * lowerX + upperY * lowerY
+  const { shoulder, elbow, wrist, angle } = arm
   return {
-    angle: Math.atan2(Math.abs(cross), dot) * 180 / Math.PI,
+    angle,
     lift: shoulder.y - wrist.y,
     confidence: Math.min(shoulder.visibility, elbow.visibility, wrist.visibility),
   }

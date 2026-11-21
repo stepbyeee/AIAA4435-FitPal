@@ -12,7 +12,7 @@ npm run dev          # http://localhost:5190
 | `/?nocam` | Character and wardrobe preview |
 | `/?video=NAME#/session/lat-pulldown` | Single playback of `public/demo/NAME.webm` |
 
-For webcam training, keep your shoulders, elbows and wrists in frame through the entire overhead return. The stage draws short live wrist and elbow trails for both arms, green for left and gold for right. A side stops drawing while its joints are obscured and starts a new trail on reacquisition. Use **骨架** to show the full skeleton.
+For webcam training, keep your shoulders, elbows and wrists in frame through the entire overhead return. The stage draws live wrist and elbow trails and shows each arm's projected elbow angle. The panel plots the latest six seconds of angles, green for left and gold for right. An obscured side pauses its overlay and leaves a gap in its angle chart. Use **骨架** to show the full skeleton.
 
 Keep the camera fixed after doing three complete calibration reps. A gym set ends after five seconds in a visible top pose or when you press Space or **结束这一组**. Open **查看这一组的动作依据** to see the projected calibration angles, observed depth per rep and set-end trigger. An incomplete calibration at video EOF prompts a retry. Playback scores do not enter training history.
 
