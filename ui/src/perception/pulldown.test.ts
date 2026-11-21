@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { IN_RANGE, LANDMARK_COUNT, LM, type Landmark } from '../contract'
-import { createPulldown, type Calibration, type PoseFrame } from './pulldown'
+import { IN_RANGE, LANDMARK_COUNT, LM, type Landmark, type PoseFrame } from '../contract'
+import { createPulldown, type Calibration } from './pulldown'
 
 const calibration: Calibration = { side: 'left', thetaTop: 160, thetaBottom: 80 }
 const WIDTH = 1280

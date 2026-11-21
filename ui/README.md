@@ -12,7 +12,9 @@ npm run dev          # http://localhost:5190
 | `/?nocam` | Character and wardrobe preview |
 | `/?video=NAME#/session/lat-pulldown` | Single playback of `public/demo/NAME.webm` |
 
-For webcam training, frame the shoulder, elbow and wrist of the nearer arm, including the entire overhead return. Keep the camera fixed after doing three complete calibration reps. A gym set ends after five seconds in a visible top pose or when you press Space or **结束这一组**. Open **查看这一组的动作依据** to see the projected calibration angles, observed depth per rep and set-end trigger. An incomplete calibration at video EOF prompts a retry. Playback scores do not enter training history.
+For webcam training, keep your shoulders, elbows and wrists in frame through the entire overhead return. The stage draws short live wrist and elbow trails for both arms, green for left and gold for right. A side stops drawing while its joints are obscured and starts a new trail on reacquisition. Use **骨架** to show the full skeleton.
+
+Keep the camera fixed after doing three complete calibration reps. A gym set ends after five seconds in a visible top pose or when you press Space or **结束这一组**. Open **查看这一组的动作依据** to see the projected calibration angles, observed depth per rep and set-end trigger. An incomplete calibration at video EOF prompts a retry. Playback scores do not enter training history.
 
 Pose Landmarker Full and WASM are served by the app. Local storage keeps session summaries and wardrobe choices. The live app starts in a fresh training store because the previous UI stored simulated results. Existing data under the old keys stays available in browser storage. The browser releases the webcam between sets and at session end.
 

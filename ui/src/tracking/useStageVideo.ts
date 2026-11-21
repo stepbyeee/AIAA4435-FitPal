@@ -1,6 +1,7 @@
 import { useEffect, useEffectEvent, useRef, useState } from 'react'
 import type { Landmark } from '../contract'
 import { trackPose, type TrackedFrame } from './poseTracker'
+import { advanceArmTrails, emptyArmTrails, type ArmTrails } from './armTrails'
 
 type VideoStatus = 'starting' | 'tracking' | 'ended' | 'unavailable' | 'tracking-error'
 
@@ -13,6 +14,7 @@ export type StageVideo = {
   frame: { width: number; height: number } | null
   /** The tracked body in the current frame. */
   landmarks: Landmark[] | null
+  trails: ArmTrails
   status: VideoStatus
 }
 
@@ -28,6 +30,7 @@ export function useStageVideo(options: {
   const [stream, setStream] = useState<MediaStream | null>(null)
   const [frame, setFrame] = useState<StageVideo['frame']>(null)
   const [landmarks, setLandmarks] = useState<Landmark[] | null>(null)
+  const [trails, setTrails] = useState(emptyArmTrails)
   const [status, setStatus] = useState<VideoStatus>('starting')
   const wantCamera = options.camera && !options.file && options.live
   const onFrame = useEffectEvent(options.onFrame)
@@ -68,13 +71,16 @@ export function useStageVideo(options: {
     if (stream) video.srcObject = stream
     const cameraTracks = stream?.getVideoTracks() ?? []
     setStatus('starting')
+    const clearTrails = () => setTrails(emptyArmTrails)
     const measure = () => {
+      clearTrails()
       if (video.videoWidth) setFrame({ width: video.videoWidth, height: video.videoHeight })
     }
     const ended = () => {
       stop()
       setStatus('ended')
       setLandmarks(null)
+      clearTrails()
       onEnded()
     }
     const failed = () => {
@@ -82,24 +88,33 @@ export function useStageVideo(options: {
       for (const track of cameraTracks) track.stop()
       setStatus('unavailable')
       setLandmarks(null)
+      clearTrails()
       video.pause()
     }
     measure()
     video.addEventListener('loadedmetadata', measure)
     video.addEventListener('resize', measure)
+    video.addEventListener('waiting', clearTrails)
+    video.addEventListener('pause', clearTrails)
+    video.addEventListener('seeking', clearTrails)
     if (!stream) video.addEventListener('ended', ended)
     video.addEventListener('error', failed)
-    for (const track of cameraTracks) track.addEventListener('ended', failed)
+    for (const track of cameraTracks) {
+      track.addEventListener('ended', failed)
+      track.addEventListener('mute', clearTrails)
+    }
     if (video.error || cameraTracks.some((track) => track.readyState === 'ended')) failed()
     else stop = trackPose(video, (sample) => {
       setStatus('tracking')
       setLandmarks(sample.landmarks)
+      setTrails((previous) => advanceArmTrails(previous, sample))
       onFrame(sample)
     }, (error) => {
       console.warn('Pose tracking is unavailable. Run `npm run setup:pose` to fetch the model.', error)
       for (const track of cameraTracks) track.stop()
       setStatus('tracking-error')
       setLandmarks(null)
+      clearTrails()
       video.pause()
     }, () => {
       video.play().catch(() => { if (!cancelled) failed() })
@@ -110,13 +125,20 @@ export function useStageVideo(options: {
       video.pause()
       video.removeEventListener('loadedmetadata', measure)
       video.removeEventListener('resize', measure)
+      video.removeEventListener('waiting', clearTrails)
+      video.removeEventListener('pause', clearTrails)
+      video.removeEventListener('seeking', clearTrails)
       video.removeEventListener('ended', ended)
       video.removeEventListener('error', failed)
-      for (const track of cameraTracks) track.removeEventListener('ended', failed)
+      for (const track of cameraTracks) {
+        track.removeEventListener('ended', failed)
+        track.removeEventListener('mute', clearTrails)
+      }
       setLandmarks(null)
       setFrame(null)
+      clearTrails()
     }
   }, [active, stream, options.file])
 
-  return { ref, source, frame, landmarks, status }
+  return { ref, source, frame, landmarks, trails, status }
 }

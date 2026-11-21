@@ -8,6 +8,13 @@ export type Phase = 'ready' | 'pull' | 'bottom' | 'return'
 /** One pose landmark, normalised to the camera frame: x and y run 0 to 1 from the top left. */
 export type Landmark = { x: number; y: number; visibility: number }
 
+export type PoseFrame = {
+  landmarks: Landmark[] | null
+  width: number
+  height: number
+  timestampMs: number
+}
+
 /** Indices into FrameState.landmarks. The order is MediaPipe Pose's 33 landmarks. */
 export const LM = {
   nose: 0,

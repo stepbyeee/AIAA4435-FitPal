@@ -1,5 +1,4 @@
-import type { Landmark } from '../contract'
-import type { PoseFrame } from '../perception/pulldown'
+import type { Landmark, PoseFrame } from '../contract'
 
 // One stream feeds both the bone overlay and the perception module.
 // Frames are read on the device and never leave the page.

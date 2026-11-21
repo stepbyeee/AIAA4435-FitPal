@@ -506,6 +506,103 @@ button.pill:active {
   object-fit: contain;
 }
 
+.arm-trails,
+.arm-legend {
+  --arm-left: #4ffbd1;
+  --arm-right: #ffbf52;
+  pointer-events: none;
+}
+
+.arm-trail[data-side='left'],
+.arm-legend [data-side='left'] {
+  --arm-color: var(--arm-left);
+}
+
+.arm-trail[data-side='right'],
+.arm-legend [data-side='right'] {
+  --arm-color: var(--arm-right);
+}
+
+.arm-trail polyline {
+  fill: none;
+  stroke: var(--arm-color);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 1px 2px #10181d);
+}
+
+.arm-trail .arm-segments {
+  opacity: 0.7;
+}
+
+.arm-marker {
+  stroke: var(--arm-color);
+  stroke-width: 2px;
+  vector-effect: non-scaling-stroke;
+}
+
+.arm-marker-wrist {
+  fill: var(--arm-color);
+  stroke: #10181d;
+}
+
+.arm-marker-elbow {
+  fill: #10181d;
+}
+
+.arm-legend {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.arm-legend > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 999px;
+  padding: 5px 9px;
+  background: rgb(16 24 29 / 0.9);
+  color: #f9fbfc;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.arm-legend-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--arm-color);
+}
+
+.arm-legend [data-visible='false'] .arm-legend-dot {
+  background: #9ca6aa;
+}
+
+.arm-legend-state {
+  color: #bdc9ce;
+}
+
+.bone-toggle {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  border: 1px solid #526068;
+  border-radius: 999px;
+  padding: 4px 10px;
+  background: rgb(16 24 29 / 0.9);
+  color: #f9fbfc;
+  font-size: 13px;
+}
+
+.bone-toggle[aria-pressed='true'] {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
 .range {
   position: absolute;
   top: 12%;

@@ -1,12 +1,13 @@
 import { useEffect, useLayoutEffect, useReducer, useRef, useState } from 'react'
+import { ArmTrails } from '../components/ArmTrails'
 import { Figure, useDemoPull } from '../components/Figure'
 import { Skeleton } from '../components/Skeleton'
-import { expOfResult, IN_RANGE, type FrameState, type SetResult, type SetSummary } from '../contract'
+import { expOfResult, IN_RANGE, type FrameState, type PoseFrame, type SetResult, type SetSummary } from '../contract'
 import type { Exercise } from '../data/exercises'
 import { POINTS_PER_LEVEL, type GearId } from '../data/gear'
 import { lastSessionOf, levelOf, saveSession, today, totalExp, type SessionRecord } from '../data/history'
 import { settle } from '../feedback/settle'
-import { createPulldown, type Calibration, type PoseFrame } from '../perception/pulldown'
+import { createPulldown, type Calibration } from '../perception/pulldown'
 import { useStageVideo } from '../tracking/useStageVideo'
 import { initialSession, reduce } from '../session/session'
 
@@ -40,6 +41,7 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
   })
   const [frame, setFrame] = useState<FrameState>(REST)
   const [idleMs, setIdleMs] = useState(0)
+  const [showBones, setShowBones] = useState(false)
   const consume = useRef<(frame: PoseFrame) => void>(() => {})
   const finishRef = useRef<(trigger: EndTrigger) => void>(() => {})
   const calibrationRef = useRef<Calibration | null>(null)
@@ -173,7 +175,7 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
       <section className="stage" aria-label="镜头画面">
         {live && video.source?.kind === 'camera' && <video className="stage-video stage-whole stage-mirror" ref={video.ref} muted playsInline />}
         {live && video.source?.kind === 'file' && <video className="stage-video stage-whole" ref={video.ref} src={video.source.src} preload="auto" muted playsInline />}
-        {live && video.source && video.frame && video.landmarks && (
+        {showBones && live && video.source && video.frame && video.landmarks && (
           <Skeleton
             className="stage-overlay"
             landmarks={video.landmarks}
@@ -182,6 +184,12 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
             mirrored={video.source.kind === 'camera'}
             label="追踪到的身体"
           />
+        )}
+        {live && video.source && video.frame && video.status === 'tracking' && (
+          <>
+            <ArmTrails trails={video.trails} frame={video.frame} mirrored={video.source.kind === 'camera'} />
+            <button className="bone-toggle" aria-pressed={showBones} onClick={() => setShowBones((visible) => !visible)}>骨架</button>
+          </>
         )}
         {(preview || !live) && <Figure q={targetQ} gear={gear} label={showTarget ? '动作示意：达到已校准的下拉范围' : '你的角色'} />}
 

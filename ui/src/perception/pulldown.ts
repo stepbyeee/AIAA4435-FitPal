@@ -1,7 +1,7 @@
-import { IN_RANGE, LM, type FrameState, type Landmark, type Phase, type RepResult, type SetSummary } from '../contract'
+import { IN_RANGE, type FrameState, type Phase, type PoseFrame, type RepResult, type SetSummary } from '../contract'
+import { visibleArm, type ArmSide } from '../tracking/armLandmarks'
 
-export type Calibration = SetSummary['calibration'] & { side: 'left' | 'right' }
-export type PoseFrame = { landmarks: Landmark[] | null; width: number; height: number; timestampMs: number }
+export type Calibration = SetSummary['calibration'] & { side: ArmSide }
 
 type Side = Calibration['side']
 type ArmPosition = { angle: number; lift: number }
@@ -18,13 +18,7 @@ type Attempt = {
   turn: { startedAt: number; highestAngle: number; frames: number } | null
 }
 
-const ARM = {
-  left: [LM.leftShoulder, LM.leftElbow, LM.leftWrist],
-  right: [LM.rightShoulder, LM.rightElbow, LM.rightWrist],
-} as const
 const CALIBRATION_CYCLES = 3
-const MIN_VISIBILITY = 0.6
-const MIN_SEGMENT_FRACTION = 0.015
 const MIN_CALIBRATION_SWING = 24
 const MIN_REP_MS = 550
 const MAX_REP_MS = 12_000
@@ -40,23 +34,10 @@ function median(values: number[]): number {
   return sorted[Math.floor(sorted.length / 2)]
 }
 
-function readArm({ landmarks, width, height }: PoseFrame, side: Side): ArmSample | null {
-  if (!landmarks || !Number.isFinite(width) || !Number.isFinite(height) || width <= 0 || height <= 0) return null
-
-  const [shoulder, elbow, wrist] = ARM[side].map((index) => landmarks[index])
-  const inFrame = (point: Landmark | undefined) => point
-    && Number.isFinite(point.visibility) && point.visibility >= MIN_VISIBILITY
-    && point.x >= 0 && point.x <= 1 && point.y >= 0 && point.y <= 1
-  if (![shoulder, elbow, wrist].every(inFrame)) return null
-
-  // Pose coordinates are scaled by different axes. Compute in camera pixel space.
-  const upperX = (shoulder.x - elbow.x) * width
-  const upperY = (shoulder.y - elbow.y) * height
-  const lowerX = (wrist.x - elbow.x) * width
-  const lowerY = (wrist.y - elbow.y) * height
-  const minLength = Math.min(width, height) * MIN_SEGMENT_FRACTION
-  if (Math.min(Math.hypot(upperX, upperY), Math.hypot(lowerX, lowerY)) < minLength) return null
-
+function readArm(frame: PoseFrame, side: Side): ArmSample | null {
+  const arm = visibleArm(frame, side)
+  if (!arm) return null
+  const { shoulder, elbow, wrist, upperX, upperY, lowerX, lowerY } = arm
   const cross = upperX * lowerY - upperY * lowerX
   const dot = upperX * lowerX + upperY * lowerY
   return {
