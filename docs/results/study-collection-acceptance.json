@@ -1,0 +1,31 @@
+{
+  "date": "2026-11-22",
+  "browser": "headless desktop Chrome, isolated contexts",
+  "wardrobe": {
+    "mobileWidth": 390,
+    "noHorizontalOverflow": true,
+    "unlocked": "bag",
+    "earnedAfterOneCheckIn": 1,
+    "reloadRetainedEquipped": true,
+    "manualLogAwardedTickets": 0,
+    "previewEditsDisabled": [
+      "nocam",
+      "video",
+      "study"
+    ],
+    "concurrentCheckIns": 3,
+    "concurrentDraws": 3,
+    "uniqueItemsWithOneTicket": 1
+  },
+  "pilotSetup": {
+    "participant": 5,
+    "period": 4,
+    "condition": "set-text",
+    "growth": "hidden",
+    "source": "recording",
+    "outOfRangeIdRejected": true,
+    "mobileWidth": 390,
+    "noHorizontalOverflow": true
+  },
+  "pageErrors": []
+}

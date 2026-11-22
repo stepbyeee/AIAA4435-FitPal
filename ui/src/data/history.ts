@@ -10,6 +10,7 @@ export type LastSet = {
 }
 
 export type SessionRecord = {
+  id?: string
   date: string
   exerciseId: string
   sets: SetRecord[]
@@ -37,7 +38,26 @@ const KEY = 'fitpal.history.v3'
 export function loadHistory(): SessionRecord[] {
   try {
     const raw = localStorage.getItem(KEY)
-    if (raw) return JSON.parse(raw) as SessionRecord[]
+    if (!raw) return []
+    const rows = JSON.parse(raw)
+    if (!Array.isArray(rows)) return []
+    const validCount = (n: unknown) => typeof n === 'number' && Number.isSafeInteger(n) && n >= 0
+    const valid: SessionRecord[] = []
+    for (const row of rows) {
+      if (!row || typeof row.date !== 'string' || typeof row.exerciseId !== 'string' || !Array.isArray(row.sets)) continue
+      if (!row.sets.every((set: SetRecord | null) => set && [set.verified, set.quality, set.fixed].every(validCount))) continue
+      const { lastSet, outstandingIssueId } = row
+      const record: SessionRecord = { date: row.date, exerciseId: row.exerciseId, sets: row.sets }
+      if (typeof row.id === 'string') record.id = row.id
+      if (lastSet && Array.isArray(lastSet.depths) && lastSet.depths.every((d: unknown) =>
+        d === null || (typeof d === 'number' && Number.isFinite(d) && d >= 0 && d <= 1)
+      ) && (lastSet.issue === null || (typeof lastSet.issue?.id === 'string' && validCount(lastSet.issue.count)))) {
+        record.lastSet = lastSet
+      }
+      if (outstandingIssueId === null || typeof outstandingIssueId === 'string') record.outstandingIssueId = outstandingIssueId
+      valid.push(record)
+    }
+    return valid
   } catch {
     // Storage can be unavailable. The session can still run.
   }
@@ -45,7 +65,11 @@ export function loadHistory(): SessionRecord[] {
 }
 
 export function saveSession(record: SessionRecord): SessionRecord[] {
-  const next = [...loadHistory(), record]
+  const next = loadHistory()
+  const index = record.id ? next.findIndex(s => s.id === record.id) : -1
+  if (index < 0) next.push(record)
+  else if (record.sets.length >= next[index].sets.length) next[index] = record
+  else return next
   try {
     localStorage.setItem(KEY, JSON.stringify(next))
   } catch {

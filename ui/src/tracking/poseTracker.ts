@@ -1,3 +1,4 @@
+import { cropBounds, mapLandmarks, type Focus } from './focus'
 import type { Landmark, PoseFrame } from '../contract'
 
 // One stream feeds both the bone overlay and the perception module.
@@ -6,27 +7,24 @@ import type { Landmark, PoseFrame } from '../contract'
 const WASM = '/mediapipe/wasm'
 const MODEL = '/mediapipe/pose_landmarker_full.task'
 
-type Landmarker = { detectForVideo(video: HTMLVideoElement, timestampMs: number): { landmarks: { x: number; y: number; visibility?: number }[][] } }
+async function prepareRuntime() {
+  const { FilesetResolver, PoseLandmarker } = await import('@mediapipe/tasks-vision')
+  return { fileset: await FilesetResolver.forVisionTasks(WASM), PoseLandmarker }
+}
+let runtime: ReturnType<typeof prepareRuntime> | null = null
 
-let loading: Promise<Landmarker> | null = null
-
-function load(): Promise<Landmarker> {
-  loading ??= (async () => {
-    // Loaded on demand: the model and runtime are large and only this screen needs them.
-    const { FilesetResolver, PoseLandmarker } = await import('@mediapipe/tasks-vision')
-    const fileset = await FilesetResolver.forVisionTasks(WASM)
-    const make = (delegate: 'GPU' | 'CPU') =>
-      PoseLandmarker.createFromOptions(fileset, { baseOptions: { modelAssetPath: MODEL, delegate }, runningMode: 'VIDEO', numPoses: 1 })
-    try {
-      return await make('GPU')
-    } catch {
-      return await make('CPU')
-    }
-  })()
-  loading.catch(() => {
-    loading = null
+async function createTracker(cancelled: () => boolean) {
+  runtime ??= prepareRuntime().catch(error => { runtime = null; throw error })
+  const { fileset, PoseLandmarker } = await runtime
+  if (cancelled()) return null
+  const make = (delegate: 'GPU' | 'CPU') => PoseLandmarker.createFromOptions(fileset, {
+    baseOptions: { modelAssetPath: MODEL, delegate }, runningMode: 'VIDEO', numPoses: 1,
   })
-  return loading
+  try { return await make('GPU') }
+  catch (error) {
+    if (cancelled()) return null
+    return make('CPU')
+  }
 }
 
 export type TrackedFrame = PoseFrame & { inferenceMs: number }
@@ -37,15 +35,37 @@ export function trackPose(
   onFrame: (frame: TrackedFrame) => void,
   onError: (error: unknown) => void,
   onReady?: () => void,
+  focus: Focus = 'full',
 ): () => void {
   let stopped = false
+  const cropCanvas = focus === 'full' ? null : document.createElement('canvas')
+  const ctx = cropCanvas?.getContext('2d', { alpha: false })
+  const input = () => {
+    if (!cropCanvas) return video
+    if (!ctx) throw Error('Camera crop canvas unavailable')
+    const crop = cropBounds(focus, video.videoWidth, Boolean(video.srcObject))
+    if (cropCanvas.width !== crop.width) cropCanvas.width = crop.width
+    if (cropCanvas.height !== video.videoHeight) cropCanvas.height = video.videoHeight
+    ctx.drawImage(video, crop.x, 0, crop.width, video.videoHeight, 0, 0, crop.width, video.videoHeight)
+    return cropCanvas
+  }
   let callback = 0
   let lastTime = -1
   let warmUp: (() => void) | null = null
   const useVideoCallback = typeof video.requestVideoFrameCallback === 'function'
 
-  load().then((landmarker) => {
-    if (stopped) return
+  // A new clip, camera stream or crop needs a fresh temporal tracker. Only the runtime is shared.
+  let release: (() => void) | null = null
+  const fail = (error: unknown) => {
+    stopped = true
+    release?.()
+    release = null
+    onError(error)
+  }
+  createTracker(() => stopped).then((landmarker) => {
+    if (!landmarker) return
+    if (stopped) { landmarker.close(); return }
+    release = () => landmarker.close()
     const schedule = () => {
       callback = useVideoCallback
         ? video.requestVideoFrameCallback((_now, metadata) => tick(metadata.mediaTime))
@@ -59,12 +79,16 @@ export function trackPose(
         lastTime = mediaTime
         try {
           const started = performance.now()
-          const found = landmarker.detectForVideo(video, started).landmarks[0]
-          const landmarks: Landmark[] | null = found?.map((p) => ({ x: p.x, y: p.y, visibility: p.visibility ?? 0 })) ?? null
+          const found = landmarker.detectForVideo(input(), started).landmarks[0]
+          let landmarks: Landmark[] | null = null
+          if (found) {
+            landmarks = cropCanvas
+              ? mapLandmarks(found, cropBounds(focus, width, Boolean(video.srcObject)), width)
+              : found.map(p => ({ x: p.x, y: p.y, visibility: p.visibility ?? 0 }))
+          }
           onFrame({ landmarks, width, height, timestampMs: mediaTime * 1000, inferenceMs: performance.now() - started })
         } catch (error) {
-          stopped = true
-          onError(error)
+          fail(error)
           return
         }
       }
@@ -84,10 +108,10 @@ export function trackPose(
       warmUp = () => {
         if (stopped) return
         try {
-          landmarker.detectForVideo(video, performance.now())
+          landmarker.detectForVideo(input(), performance.now())
           start()
         } catch (error) {
-          onError(error)
+          fail(error)
         }
       }
       if (video.readyState >= 2) warmUp()
@@ -97,6 +121,8 @@ export function trackPose(
 
   return () => {
     stopped = true
+    release?.()
+    release = null
     if (warmUp) video.removeEventListener('loadeddata', warmUp)
     if (useVideoCallback) video.cancelVideoFrameCallback(callback)
     else cancelAnimationFrame(callback)

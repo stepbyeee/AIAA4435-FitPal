@@ -43,7 +43,10 @@ const KEY = 'fitpal.gear.v2'
 export function loadGear(): GearId[] {
   try {
     const raw = localStorage.getItem(KEY)
-    if (raw) return JSON.parse(raw) as GearId[]
+    if (raw) {
+      const ids = JSON.parse(raw)
+      return Array.isArray(ids) ? GEAR.filter(item => ids.includes(item.id)).map(item => item.id) : []
+    }
   } catch {
     // Storage can be unavailable. The character can still be shown.
   }

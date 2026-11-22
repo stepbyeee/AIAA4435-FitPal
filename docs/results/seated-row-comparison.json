@@ -1,0 +1,82 @@
+{
+  "model": "MediaPipe Pose Landmarker Full",
+  "delegate": "CPU",
+  "browser": "157.0.8103.79",
+  "fps": 15,
+  "maxDimension": 640,
+  "sourceManifestSha256": "7876f76d70aa5f08da6e8f739fd207ded9082e09b9aa3c6e68977977e006da58",
+  "analyzerSha256": "45f160d39ddbf77662bbef695983ef90b512c97fcf78ab863e4ee15cbc13cbaa",
+  "modelSha256": "5134a3aad27a58b93da0088d431f366da362b44e3ccfbe3462b3827a839011b1",
+  "runs": [
+    {
+      "clip": "ymove-side",
+      "sourceSha256": "957579876dc560f4a889ea2e9dcf2a302abaa484ffcde7b82f0615bb70bc9004",
+      "frames": 60,
+      "coverage": 1,
+      "events": [
+        2.8
+      ],
+      "matches": [
+        2.8
+      ],
+      "missed": 0,
+      "extraTimes": []
+    },
+    {
+      "clip": "go4it-side",
+      "sourceSha256": "8ef16f7b2cbd3d8cf9fc0e61bb85b293c1b74670f90d5cb9381e662a512c3c3b",
+      "frames": 510,
+      "coverage": 0.9980392156862745,
+      "events": [
+        8.4,
+        12.333,
+        16.267,
+        20.133,
+        24.467,
+        28.2,
+        32.333
+      ],
+      "matches": [
+        null,
+        8.4,
+        12.333,
+        16.267,
+        20.133,
+        24.467,
+        28.2,
+        32.333
+      ],
+      "missed": 1,
+      "extraTimes": []
+    },
+    {
+      "clip": "dvids-band",
+      "sourceSha256": "c63d45ecad8df0c54c1e5e5395ff35b5bb41a121d3f2729196fb4bef7593bc85",
+      "frames": 173,
+      "coverage": 0.9942196531791907,
+      "events": [
+        5.867,
+        8.467
+      ],
+      "matches": [
+        null,
+        null,
+        5.867,
+        8.467,
+        null
+      ],
+      "missed": 3,
+      "extraTimes": []
+    },
+    {
+      "clip": "pulldown-negative",
+      "sourceSha256": "f6200b7691acc6e99b1b0ddee7783fea56da3a6e155c5b3020cdda958cd49e34",
+      "frames": 120,
+      "coverage": 1,
+      "events": [],
+      "matches": [],
+      "missed": 0,
+      "extraTimes": []
+    }
+  ]
+}

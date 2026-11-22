@@ -1,0 +1,27 @@
+{
+  "model": "MediaPipe Pose Landmarker Full",
+  "delegate": "CPU",
+  "browser": "157.0.8103.79",
+  "fps": 15,
+  "maxDimension": 640,
+  "sourceManifestSha256": "0feab41e6f9ea933a5646c77fd5047251bac97dcd1118547bb7cd13939c11145",
+  "analyzerSha256": "45f160d39ddbf77662bbef695983ef90b512c97fcf78ab863e4ee15cbc13cbaa",
+  "modelSha256": "5134a3aad27a58b93da0088d431f366da362b44e3ccfbe3462b3827a839011b1",
+  "runs": [
+    {
+      "clip": "pexels-5319750",
+      "sourceSha256": "9cc662e109872a7d74de4b4cc9af3f7d2f091c59df91b96f81ca00581c6cd712",
+      "frames": 267,
+      "coverage": 0.5393258426966292,
+      "events": [],
+      "matches": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "missed": 4,
+      "extraTimes": []
+    }
+  ]
+}

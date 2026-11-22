@@ -1,10 +1,10 @@
 import type { PoseFrame } from '../contract'
-import type { ArmSide } from './armLandmarks'
+import type { Side, Limb } from './limbLandmarks'
 import { advanceArmTrails, emptyArmTrails, type ArmTrails } from './armTrails'
 
-type AngleSample = Record<ArmSide, number | null> & {
+type AngleSample = Record<Side, number | null> & {
   timestampMs: number
-  breaks: Record<ArmSide, boolean>
+  breaks: Record<Side, boolean>
 }
 
 export type LiveMotion = { trails: ArmTrails; angles: readonly AngleSample[] }
@@ -15,13 +15,13 @@ const sides = ['left', 'right'] as const
 
 export const emptyLiveMotion: LiveMotion = { trails: emptyArmTrails, angles: [] }
 
-export function advanceLiveMotion(previous: LiveMotion, frame: PoseFrame): LiveMotion {
+export function advanceLiveMotion(previous: LiveMotion, frame: PoseFrame, limb: Limb = 'arm'): LiveMotion {
   const { timestampMs } = frame
   const last = previous.angles.at(-1)
   if (!Number.isFinite(timestampMs)) return emptyLiveMotion
   if (last && timestampMs <= last.timestampMs) return previous
 
-  const trails = advanceArmTrails(previous.trails, frame)
+  const trails = advanceArmTrails(previous.trails, frame, limb)
   const breaks = {
     left: previous.trails.left.length > 0 && trails.left.length === 1,
     right: previous.trails.right.length > 0 && trails.right.length === 1,
@@ -41,7 +41,7 @@ export function advanceLiveMotion(previous: LiveMotion, frame: PoseFrame): LiveM
 }
 
 /** A null or discontinuity starts a separate SVG subpath for this arm only. */
-export function angleChartPath(angles: LiveMotion['angles'], side: ArmSide, width: number, height: number): string {
+export function angleChartPath(angles: LiveMotion['angles'], side: Side, width: number, height: number): string {
   const end = angles.at(-1)?.timestampMs ?? 0
   let drawing = false
   const result: string[] = []

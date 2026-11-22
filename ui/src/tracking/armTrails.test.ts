@@ -18,15 +18,15 @@ describe('live arm trails', () => {
   it('drops only the obscured side and starts it afresh on reacquisition', () => {
     const first = advanceArmTrails(emptyArmTrails, pose(100))
     const visible = advanceArmTrails(first, pose(140, 0.27, 0.67))
-    expect(visible.left.map((point) => point.wrist.x)).toEqual([0.25, 0.27])
-    expect(visible.right.map((point) => point.wrist.x)).toEqual([0.65, 0.67])
+    expect(visible.left.map((point) => point.distal.x)).toEqual([0.25, 0.27])
+    expect(visible.right.map((point) => point.distal.x)).toEqual([0.65, 0.67])
 
     const obscured = advanceArmTrails(visible, pose(180, 0.29, 0.69, 0.4))
     expect(obscured.left).toEqual([])
-    expect(obscured.right.map((point) => point.wrist.x)).toEqual([0.65, 0.67, 0.69])
+    expect(obscured.right.map((point) => point.distal.x)).toEqual([0.65, 0.67, 0.69])
 
     const reacquired = advanceArmTrails(obscured, pose(220, 0.31, 0.71))
-    expect(reacquired.left.map((point) => point.wrist.x)).toEqual([0.31])
+    expect(reacquired.left.map((point) => point.distal.x)).toEqual([0.31])
     expect(reacquired.right).toHaveLength(4)
   })
 
@@ -74,5 +74,27 @@ describe('live elbow angle telemetry', () => {
     expect(angleChartPath(motion.angles, 'right', 300, 90).match(/M/g)).toHaveLength(2)
     motion = advanceLiveMotion(motion, pose(7000))
     expect(motion.angles.map((point) => point.timestampMs)).toEqual([7000])
+  })
+})
+
+describe('live knee telemetry', () => {
+  it('follows the hips, knees and ankles independently with an interrupted knee chart', () => {
+    const legs = (time: number, occludeLeft = false) => {
+      const frame = pose(time)
+      for (const [target, source] of [
+        [LM.leftHip, LM.leftShoulder], [LM.leftKnee, LM.leftElbow], [LM.leftAnkle, LM.leftWrist],
+        [LM.rightHip, LM.rightShoulder], [LM.rightKnee, LM.rightElbow], [LM.rightAnkle, LM.rightWrist],
+      ]) frame.landmarks[target] = { ...frame.landmarks[source] }
+      if (occludeLeft) frame.landmarks[LM.leftAnkle].visibility = 0.2
+      return frame
+    }
+    let motion = advanceLiveMotion(emptyLiveMotion, legs(100), 'leg')
+    motion = advanceLiveMotion(motion, legs(200), 'leg')
+    motion = advanceLiveMotion(motion, legs(300, true), 'leg')
+    expect(motion.trails.left).toHaveLength(0)
+    expect(motion.trails.right).toHaveLength(3)
+    motion = advanceLiveMotion(motion, legs(400), 'leg')
+    expect(motion.trails.left[0].joint).toEqual(legs(400).landmarks[LM.leftKnee])
+    expect(angleChartPath(motion.angles, 'left', 300, 90).match(/M/g)).toHaveLength(2)
   })
 })

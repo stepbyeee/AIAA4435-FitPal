@@ -1,0 +1,35 @@
+{
+  "annotation": "Second-stage prospective test. Inspector reviewed 2 Hz original frames before inference on this source. Final analyzer 45f160d39d was frozen beforehand. Windows in seconds from excerpt start.",
+  "clips": [
+    {
+      "id": "pexels-5319750",
+      "file": "pexels-row-5319750.mp4",
+      "sha256": "9cc662e109872a7d74de4b4cc9af3f7d2f091c59df91b96f81ca00581c6cd712",
+      "author": "Tima Miroshnichenko",
+      "source": "https://www.pexels.com/video/a-man-working-out-inside-the-gym-5319750/",
+      "download": "https://videos.pexels.com/video-files/5319750/5319750-hd_1280_720_25fps.mp4",
+      "license": "Pexels License",
+      "start": 2,
+      "duration": 17.8,
+      "returnWindows": [
+        [
+          3.55,
+          5.05
+        ],
+        [
+          7.5,
+          9.15
+        ],
+        [
+          11.55,
+          13.15
+        ],
+        [
+          15.6,
+          17.15
+        ]
+      ],
+      "notes": "Continuous oblique view of another person performing cable rows. Some hands reach the border or leave the frame at extension. First partial from source excluded. Counted visible trunk pulls and returns; four cycles, no edits/loops."
+    }
+  ]
+}

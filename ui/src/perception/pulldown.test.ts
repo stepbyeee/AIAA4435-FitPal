@@ -198,3 +198,48 @@ describe('calibrated pulldowns', () => {
     expect(track.endSet().coverage).toBe(0)
   })
 })
+
+describe('in-session rep evidence', () => {
+  it('ties each trace to the recorded attempt, including a camera gap', () => {
+    const track = input(calibration)
+    track.hold(160)
+    track.move(160, 110)
+    track.frame(null)
+    track.hold(105)
+    track.move(105, 160)
+    track.hold(160)
+    track.cycle(160, 104)
+    track.move(160, 80) // A final incomplete descent has no recorded result.
+    const { side, traces } = track.getRepReview()
+    expect(side).toBe('left')
+    expect(traces.map(trace => trace.repIndex)).toEqual([0, 1])
+    expect(traces[0].samples.slice(1).some(sample => sample.breakBefore)).toBe(true)
+    expect(traces[0].bottom).toBeNull()
+    expect(traces[1].samples.slice(1).some(sample => sample.breakBefore)).toBe(false)
+    expect(traces[1].bottom?.angle).toBeCloseTo(104, 4)
+    expect(traces[1].samples.at(-1)?.ms).toBe(track.endSet().reps[1].durationMs)
+    expect(JSON.stringify(track.endSet())).not.toContain('samples')
+  })
+
+  it('keeps only the last 32 detailed traces without renumbering or removing rep results', () => {
+    const track = input(calibration)
+    for (let i = 0; i < 35; i++) track.cycle(160, 80)
+    expect(track.endSet().reps).toHaveLength(35)
+    expect(track.getRepReview().traces).toHaveLength(32)
+    expect(track.getRepReview().traces[0].repIndex).toBe(3)
+    expect(track.getRepReview().traces.at(-1)?.repIndex).toBe(34)
+  })
+})
+
+it('withholds a pull assembled across an abrupt change of shoulder location', () => {
+  const track = input(calibration)
+  track.hold(160)
+  track.move(160, 80)
+  track.hold(80)
+  for (const angle of [82,90,104,124,144,158,160,160,160,160]) {
+    track.frame(pose(angle,'left').map(p => ({ ...p, x:p.x + .22 })))
+  }
+  const rep = track.endSet().reps[0]
+  expect(rep?.status).toBe('cannot_verify')
+  expect(track.getRepReview().traces[0].samples.some(p => p.breakBefore)).toBe(true)
+})

@@ -1,0 +1,103 @@
+{
+  "protocol": "Frozen visual inspection of two sequences from a new gym, with two different performers. Each window is [bottom, return top] in clip-relative seconds. Agent annotated source frames before inference; no independent human adjudication.",
+  "clips": [
+    {
+      "file": "szat-front.webm",
+      "asset": "szat-legs.webm",
+      "appDemo": false,
+      "exercise": "squat",
+      "sha256": "8e65d343541f2aadf7ba3dec061567d1be88fc0763b911c86703e03c85fc941a",
+      "durationSec": 37.25,
+      "startSec": 348.0,
+      "author": "Szatstrength",
+      "terms": "CC BY 3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:How_to_build_massive_Legs_ft_Mike_Israetel_from_Renaissance_Periodization_2_%28Full_leg_workout%29.webm",
+      "download": "https://upload.wikimedia.org/wikipedia/commons/2/26/How_to_build_massive_Legs_ft_Mike_Israetel_from_Renaissance_Periodization_2_%28Full_leg_workout%29.webm",
+      "visualCycles": 7,
+      "windows": [
+        [
+          6.3,
+          8.5
+        ],
+        [
+          11.1,
+          13.25
+        ],
+        [
+          15.8,
+          17.9
+        ],
+        [
+          20.4,
+          22.3
+        ],
+        [
+          24.8,
+          27.0
+        ],
+        [
+          29.9,
+          31.8
+        ],
+        [
+          34.4,
+          36.8
+        ]
+      ],
+      "notes": "Fixed low front oblique; black outfit, spotter adjacent and athlete near left, shin partly overlapped."
+    },
+    {
+      "file": "szat-side.webm",
+      "asset": "szat-legs.webm",
+      "appDemo": false,
+      "exercise": "squat",
+      "sha256": "8e65d343541f2aadf7ba3dec061567d1be88fc0763b911c86703e03c85fc941a",
+      "durationSec": 35.2,
+      "startSec": 386.0,
+      "author": "Szatstrength",
+      "terms": "CC BY 3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:How_to_build_massive_Legs_ft_Mike_Israetel_from_Renaissance_Periodization_2_%28Full_leg_workout%29.webm",
+      "download": "https://upload.wikimedia.org/wikipedia/commons/2/26/How_to_build_massive_Legs_ft_Mike_Israetel_from_Renaissance_Periodization_2_%28Full_leg_workout%29.webm",
+      "visualCycles": 9,
+      "windows": [
+        [
+          4.6,
+          6.1
+        ],
+        [
+          7.8,
+          9.15
+        ],
+        [
+          10.75,
+          12.2
+        ],
+        [
+          13.6,
+          15.2
+        ],
+        [
+          16.55,
+          18.2
+        ],
+        [
+          19.8,
+          21.2
+        ],
+        [
+          22.5,
+          24.3
+        ],
+        [
+          27.9,
+          29.8
+        ],
+        [
+          32.3,
+          34.7
+        ]
+      ],
+      "notes": "Fixed side view, green shirt; moving bar partly occludes hip. No cut inside window."
+    }
+  ]
+}

@@ -1,0 +1,212 @@
+{
+  "provenance": "Synthetic QA pair derived from existing public demo timings. A and B are scripted transformations, not independent human annotations or a reliability estimate.",
+  "changes": [
+    "B returns the first, fourth and fifth cycles 0.15, 0.18 and 0.12 s earlier.",
+    "Replace the second event with a spurious nearby cycle returning at 6.50 s.",
+    "B marks the third event uncertain; mask that interval in both streams.",
+    "B calls event four short."
+  ],
+  "exampleExports": {
+    "A": {
+      "schema": "fitpal.manual-labels.v1",
+      "clips": [
+        {
+          "file": "QA-test-01.webm",
+          "exercise": "lat-pulldown",
+          "appDemo": false,
+          "sha256": "f6200b7691acc6e99b1b0ddee7783fea56da3a6e155c5b3020cdda958cd49e34",
+          "durationSec": 18.32,
+          "rater": "A",
+          "reviewed": true,
+          "annotations": [
+            {
+              "kind": "cycle",
+              "startSec": 0.04,
+              "bottomSec": 2.15,
+              "topSec": 4.1,
+              "status": "visible"
+            },
+            {
+              "kind": "cycle",
+              "startSec": 4.1,
+              "bottomSec": 5.88,
+              "topSec": 7.6,
+              "status": "visible"
+            },
+            {
+              "kind": "cycle",
+              "startSec": 7.6,
+              "bottomSec": 9.25,
+              "topSec": 11,
+              "status": "visible"
+            },
+            {
+              "kind": "cycle",
+              "startSec": 11,
+              "bottomSec": 12.72,
+              "topSec": 14.7,
+              "status": "visible"
+            },
+            {
+              "kind": "cycle",
+              "startSec": 14.7,
+              "bottomSec": 16.32,
+              "topSec": 18.27,
+              "status": "visible"
+            }
+          ],
+          "windows": [
+            [
+              2.15,
+              4.1
+            ],
+            [
+              5.88,
+              7.6
+            ],
+            [
+              9.25,
+              11
+            ],
+            [
+              12.72,
+              14.7
+            ],
+            [
+              16.32,
+              18.27
+            ]
+          ],
+          "visualCycles": 5
+        }
+      ]
+    },
+    "B": {
+      "schema": "fitpal.manual-labels.v1",
+      "clips": [
+        {
+          "file": "QA-test-01.webm",
+          "exercise": "lat-pulldown",
+          "appDemo": false,
+          "sha256": "f6200b7691acc6e99b1b0ddee7783fea56da3a6e155c5b3020cdda958cd49e34",
+          "durationSec": 18.32,
+          "rater": "B",
+          "reviewed": true,
+          "annotations": [
+            {
+              "kind": "cycle",
+              "startSec": 0.04,
+              "bottomSec": 2.15,
+              "topSec": 3.95,
+              "status": "visible"
+            },
+            {
+              "kind": "cycle",
+              "startSec": 5.4,
+              "bottomSec": 6,
+              "topSec": 6.5,
+              "status": "visible"
+            },
+            {
+              "kind": "cycle",
+              "startSec": 7.6,
+              "bottomSec": 9.25,
+              "topSec": 11,
+              "status": "uncertain"
+            },
+            {
+              "kind": "cycle",
+              "startSec": 11,
+              "bottomSec": 12.72,
+              "topSec": 14.52,
+              "status": "short"
+            },
+            {
+              "kind": "cycle",
+              "startSec": 14.7,
+              "bottomSec": 16.32,
+              "topSec": 18.15,
+              "status": "visible"
+            }
+          ],
+          "windows": null,
+          "visualCycles": null
+        }
+      ]
+    }
+  },
+  "comparison": {
+    "sourceSha256": "f6200b7691acc6e99b1b0ddee7783fea56da3a6e155c5b3020cdda958cd49e34",
+    "exercise": "lat-pulldown",
+    "returnToleranceSec": 0.5,
+    "mutuallyObservableDurationSec": 14.92,
+    "maskedWindowsSec": [
+      [
+        7.6,
+        11
+      ]
+    ],
+    "uncertainOrExcludedEntries": {
+      "A": [],
+      "B": [
+        {
+          "entry": 3,
+          "startSec": 7.6,
+          "endSec": 11,
+          "label": "uncertain"
+        }
+      ]
+    },
+    "maskedVisibleEntries": {
+      "A": [
+        3
+      ],
+      "B": []
+    },
+    "comparableCounts": {
+      "A": 4,
+      "B": 4,
+      "absoluteDifference": 0,
+      "equal": true
+    },
+    "matchedCount": 3,
+    "matches": [
+      {
+        "entryA": 1,
+        "entryB": 1,
+        "returnA": 4.1,
+        "returnB": 3.95,
+        "returnDifferenceSec": -0.15,
+        "labelA": "visible",
+        "labelB": "visible"
+      },
+      {
+        "entryA": 4,
+        "entryB": 4,
+        "returnA": 14.7,
+        "returnB": 14.52,
+        "returnDifferenceSec": -0.18,
+        "labelA": "visible",
+        "labelB": "short"
+      },
+      {
+        "entryA": 5,
+        "entryB": 5,
+        "returnA": 18.27,
+        "returnB": 18.15,
+        "returnDifferenceSec": -0.12,
+        "labelA": "visible",
+        "labelB": "visible"
+      }
+    ],
+    "onlyA": [
+      2
+    ],
+    "onlyB": [
+      2
+    ],
+    "medianAbsoluteReturnDifferenceSec": 0.15,
+    "medianSignedReturnDifferenceSec": -0.15,
+    "matchedLabelDisagreements": 1
+  }
+}

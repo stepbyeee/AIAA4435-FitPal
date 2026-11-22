@@ -1,4 +1,7 @@
 import { useEffect, useEffectEvent, useRef, useState } from 'react'
+import type { Limb } from './limbLandmarks'
+import { selectLandmarks, type SideSelection } from './sideSelection'
+import type { Focus } from './focus'
 import type { Landmark } from '../contract'
 import { trackPose, type TrackedFrame } from './poseTracker'
 import { advanceLiveMotion, emptyLiveMotion, type LiveMotion } from './liveMotion'
@@ -20,7 +23,10 @@ export type StageVideo = {
 
 /** The stage's video, either the user's camera or a recorded clip, with the body in it tracked. */
 export function useStageVideo(options: {
+  side?: SideSelection
+  focus?: Focus
   camera: boolean
+  limb?: Limb
   file: string | null
   live: boolean
   onFrame: (frame: TrackedFrame) => void
@@ -104,10 +110,11 @@ export function useStageVideo(options: {
       track.addEventListener('mute', clearMotion)
     }
     if (video.error || cameraTracks.some((track) => track.readyState === 'ended')) failed()
-    else stop = trackPose(video, (sample) => {
+    else stop = trackPose(video, (measured) => {
+      const sample = { ...measured, landmarks: selectLandmarks(measured.landmarks, options.limb ?? 'arm', options.side ?? 'both') }
       setStatus('tracking')
       setLandmarks(sample.landmarks)
-      setMotion((previous) => advanceLiveMotion(previous, sample))
+      setMotion((previous) => advanceLiveMotion(previous, sample, options.limb))
       onFrame(sample)
     }, (error) => {
       console.warn('Pose tracking is unavailable. Run `npm run setup:pose` to fetch the model.', error)
@@ -118,7 +125,7 @@ export function useStageVideo(options: {
       video.pause()
     }, () => {
       video.play().catch(() => { if (!cancelled) failed() })
-    })
+    }, options.focus)
     return () => {
       cancelled = true
       stop()
@@ -138,7 +145,7 @@ export function useStageVideo(options: {
       setFrame(null)
       clearMotion()
     }
-  }, [active, stream, options.file])
+  }, [active, stream, options.focus, options.file, options.limb, options.side])
 
   return { ref, source, frame, landmarks, motion, status }
 }

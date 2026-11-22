@@ -1,4 +1,5 @@
 import { useEffect, useId, useState } from 'react'
+import type { CosmeticId } from '../data/collection'
 import type { GearId } from '../data/gear'
 import { jointsFor, type Pt } from '../pose'
 
@@ -9,12 +10,13 @@ type Props = {
   q: number | null
   /** What the character is wearing. */
   gear: readonly GearId[]
+  cosmetic?: CosmeticId | null
   label: string
 }
 
 const along = (a: Pt, b: Pt, t: number): Pt => ({ x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t })
 
-export function Figure({ q, gear, label }: Props) {
+export function Figure({ q, gear, label, cosmetic }: Props) {
   const clip = useId()
   const j = jointsFor(q)
   const pulling = j.barY !== null
@@ -60,6 +62,13 @@ export function Figure({ q, gear, label }: Props) {
         <line x1="200" y1="146" x2="200" y2="182" stroke={body} strokeWidth="26" strokeLinecap="round" />
         {block('M160 198 L240 198 L230 276 L170 276 Z', has('tank') ? worn : body)}
 
+        {cosmetic === 'bag' && <g data-cosmetic="bag">
+          <path d="M164 197 L235 283" stroke="#e9a24b" strokeWidth="9" strokeLinecap="round" />
+          <rect x="207" y="256" width="50" height="34" rx="11" fill="#e9a24b" stroke="var(--surface)" strokeWidth="3" />
+          <path d="M216 268 H245" stroke="#664320" strokeWidth="3" />
+        </g>}
+        {cosmetic === 'patch' && <path data-cosmetic="patch" d="M221 191 l4 9 10 1 -8 7 3 10 -9 -5 -9 5 2 -10 -7 -7 10 -1z" fill="#ffcd69" stroke="#ba6533" strokeWidth="2" />}
+
         {j.barY !== null && <line x1="200" y1="0" x2="200" y2={j.barY} stroke={body} strokeWidth="4" />}
 
         {([0, 1] as const).map((i) => (
@@ -80,6 +89,14 @@ export function Figure({ q, gear, label }: Props) {
             <rect x="140" y="62" width="120" height="19" fill={worn} clipPath={`url(#${clip})`} />
           </>
         )}
+        {cosmetic === 'cap' && <g data-cosmetic="cap">
+          <path d="M151 84 Q152 37 192 34 Q233 31 249 76 L247 82 Z" fill="#b68ce9" stroke="var(--surface)" strokeWidth="4" />
+          <path d="M193 72 Q226 69 263 80 Q255 93 209 87 Z" fill="#865ab8" />
+        </g>}
+        {cosmetic === 'headphones' && <g data-cosmetic="headphones">
+          <path d="M149 104 V87 a51 51 0 0 1 102 0 v17" fill="none" stroke="#6ac6da" strokeWidth="10" />
+          {[145,243].map(x => <rect key={x} x={x} y="91" width="14" height="31" rx="6" fill="#8fd7ec" stroke="var(--surface)" strokeWidth="3" />)}
+        </g>}
         <g className="figure-eyes" fill="var(--surface)">
           <circle cx="182" cy="102" r="6" />
           <circle cx="218" cy="102" r="6" />

@@ -1,13 +1,15 @@
 import { IN_RANGE, type FrameState, type Phase, type PoseFrame, type RepResult, type SetSummary } from '../contract'
+import { MAX_REVIEW_REPS, recordAttempt, type RepReviewData, type RepTrace } from './repReview'
 import { visibleArm, type ArmSide } from '../tracking/armLandmarks'
 
 export type Calibration = SetSummary['calibration'] & { side: ArmSide }
 
 type Side = Calibration['side']
 type ArmPosition = { angle: number; lift: number }
-type ArmSample = ArmPosition & { confidence: number }
+type ArmSample = ArmPosition & { shoulder: { x: number; y: number }; elbow: { x: number; y: number }; confidence: number; wrist: { x: number; y: number } }
 type EndpointPair = Pick<Calibration, 'thetaTop' | 'thetaBottom'>
 type Attempt = {
+  review?: ReturnType<typeof recordAttempt>
   startedAt: number
   topAngle: number
   bottomAngle: number
@@ -39,8 +41,9 @@ function readArm(frame: PoseFrame, side: Side): ArmSample | null {
   if (!arm) return null
   const { shoulder, elbow, wrist, angle } = arm
   return {
-    angle,
+    angle, shoulder, elbow,
     lift: shoulder.y - wrist.y,
+    wrist: { x: (wrist.x - shoulder.x) * frame.width / frame.height, y: wrist.y - shoulder.y },
     confidence: Math.min(shoulder.visibility, elbow.visibility, wrist.visibility),
   }
 }
@@ -48,6 +51,7 @@ function readArm(frame: PoseFrame, side: Side): ArmSample | null {
 function createSideTrack(side: Side, fixed?: Calibration) {
   const endpoints: EndpointPair[] = []
   const reps: RepResult[] = []
+  const traces: RepTrace[] = []
   const recent: ArmPosition[] = []
   let topAngle: number | null = null
   let topPose: ArmPosition | null = null
@@ -58,11 +62,13 @@ function createSideTrack(side: Side, fixed?: Calibration) {
   let q = 0
   let confidence = 0
   let verified = 0
+  let previousArm: ArmSample | null = null
 
   function loseTracking() {
     recent.length = 0
     if (attempt) {
       attempt.interrupted = true
+      attempt.review?.gap()
     } else {
       topAngle = null
       topPose = null
@@ -72,7 +78,17 @@ function createSideTrack(side: Side, fixed?: Calibration) {
 
   function update(sample: ArmSample | null, timestampMs: number) {
     confidence = sample?.confidence ?? 0
+    // A coherent jump of both anchors indicates a cut or change of tracked person.
+    // Rotation about a stable elbow can move the shoulder during a genuine rep.
+    if (previousArm && sample) {
+      const sx = sample.shoulder.x - previousArm.shoulder.x
+      const sy = sample.shoulder.y - previousArm.shoulder.y
+      const ex = sample.elbow.x - previousArm.elbow.x
+      const ey = sample.elbow.y - previousArm.elbow.y
+      if (Math.hypot(sx, sy) > 0.15 && Math.hypot(ex, ey) > 0.15 && sx * ex + sy * ey > 0) loseTracking()
+    }
     if (lastSampleTime !== null && timestampMs - lastSampleTime > MAX_FRAME_GAP_MS) loseTracking()
+    previousArm = sample
     lastSampleTime = timestampMs
     if (!sample) {
       loseTracking()
@@ -116,6 +132,7 @@ function createSideTrack(side: Side, fixed?: Calibration) {
 
       if (!topPose || angle > topAngle - departure) return
       attempt = {
+        review: fixed ? recordAttempt(timestampMs) : undefined,
         startedAt: timestampMs,
         topAngle,
         bottomAngle: angle,
@@ -125,11 +142,13 @@ function createSideTrack(side: Side, fixed?: Calibration) {
         interrupted: false,
         turn: null,
       }
+      attempt.review?.observe(timestampMs, angle, sample.wrist, true)
       phase = 'pull'
       return
     }
 
     const current = attempt
+    current.review?.observe(timestampMs, angle, sample.wrist, !current.turn)
     q = bounded((current.topAngle - angle) / swing, 0, 1)
     if (current.turn) {
       if (angle < current.turn.highestAngle - departure) {
@@ -183,6 +202,10 @@ function createSideTrack(side: Side, fixed?: Calibration) {
           qMax: bounded(excursion / swing, 0, 1),
           durationMs,
         })
+        if (current.review) {
+          traces.push(current.review.finish(reps.length - 1, !current.interrupted))
+          if (traces.length > MAX_REVIEW_REPS) traces.shift()
+        }
         if (!current.interrupted) verified++
       } else if (!current.interrupted && endpoints.length < CALIBRATION_CYCLES) {
         endpoints.push({ thetaTop: current.topAngle, thetaBottom: current.bottomAngle })
@@ -200,6 +223,7 @@ function createSideTrack(side: Side, fixed?: Calibration) {
   return {
     side,
     reps,
+    traces,
     update,
     get confidence() { return confidence },
     get phase() { return phase },
@@ -255,6 +279,10 @@ export function createPulldown(calibration?: Calibration) {
 
     getCalibration(): Calibration | null {
       return calibrated && { ...calibrated }
+    },
+
+    getRepReview(): RepReviewData {
+      return { side: active.side, traces: [...active.traces] }
     },
 
     endSet(): SetSummary {

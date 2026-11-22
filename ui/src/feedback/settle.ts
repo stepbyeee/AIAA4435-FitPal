@@ -10,15 +10,16 @@ export function settle(summary: SetSummary, lastIssueId: string | null): SetResu
   const outOfView = summary.issues.find((issue) => issue.id === 'out_of_view')
   const shortRange = summary.issues.find((issue) => issue.id === 'short_range')
 
+  const squat = summary.exerciseId === 'squat'
   let cue: SetResult['cue'] = null
   if (outOfView || (verified.length === 0 && !hasCoverage)) {
     const count = outOfView?.repIndexes.length ?? unverifiedCount
     const observation = count > 0 ? `有 ${count} 下镜头没看清。` : '这组镜头没看清。'
-    cue = { issueId: 'out_of_view', text: `${observation}下一组调整镜头，让手肘始终在画面里。` }
+    cue = { issueId: 'out_of_view', text: `${observation}下一组调整镜头，让${squat ? '髋、膝和脚踝' : '手肘'}始终在画面里。` }
   } else if (shortRange) {
     cue = {
       issueId: 'short_range',
-      text: `有 ${shortRange.repIndexes.length} 下没到校准的目标范围。下一组试着拉到校准时的目标位置，再慢慢还原。`,
+      text: `有 ${shortRange.repIndexes.length} 下没到校准的目标范围。下一组试着${squat ? '蹲到校准时的目标位置，再起身' : '拉到校准时的目标位置，再慢慢还原'}。`,
     }
   }
 

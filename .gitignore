@@ -6,3 +6,7 @@ dist/
 # Fetched by `npm run setup:pose` and by hand for demos; not part of the source.
 ui/public/mediapipe/
 ui/public/demo/
+# Optional on-device language model and its local runtime.
+.local-coach/
+ui/.benchmark-assets/
+__pycache__/

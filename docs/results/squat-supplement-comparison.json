@@ -1,0 +1,298 @@
+{
+  "protocol": {
+    "fps": 15,
+    "maxDimension": 640,
+    "format": "PNG",
+    "delegate": "CPU",
+    "browser": "157.0.8103.79",
+    "ffmpeg": "ffmpeg version 8.1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "platform": "darwin",
+    "cpu": "Apple M5",
+    "runtime": "1.2.3",
+    "manifestSha256": "56b461dc83d28ae6f37440cf3d811ffc51cc2e6cfce37b487391b4dddae49009",
+    "modelSha256": {
+      "lite": "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a",
+      "full": "5134a3aad27a58b93da0088d431f366da362b44e3ccfbe3462b3827a839011b1",
+      "heavy": "64437af838a65d18e5ba7a0d39b465540069bc8aae8308de3e318aad31fcbc7b"
+    },
+    "perceptionSha256": {
+      "src/perception/pulldown.ts": "613648f60cbf480809a568480a1f66746145037f977466db53098306eb2cc922",
+      "src/perception/squat.ts": "3e0fc590af819a04f4d39dbd4f7a721302428fad7d873de9a05c4db2c5b0c283",
+      "src/tracking/limbLandmarks.ts": "1ec36b043e06b8ecfd378b488611ea84fbbb468630725bd189bbe38128bee15e",
+      "src/tracking/armLandmarks.ts": "3c63a6e2844b632dd4282ce3d7ce4d3ebb36aeffb3409b5818c114aa4bf63095",
+      "src/perception/repReview.ts": "34c345f62b2f820b1599d92be451bfa5c7b10630db58c90d68c434ec03deed94",
+      "src/contract.ts": "943a5c09dba2b580a8dd49547f22956c901ceca87f3153daf723262e49e468c4"
+    }
+  },
+  "runs": [
+    {
+      "clip": "szat-front.webm",
+      "sourceSha256": "8e65d343541f2aadf7ba3dec061567d1be88fc0763b911c86703e03c85fc941a",
+      "startSec": 348,
+      "durationSec": 37.25,
+      "model": "lite",
+      "frames": 559,
+      "coverage": {
+        "left": 0.9928,
+        "right": 0.9911,
+        "either": 0.9928,
+        "engine": 0.9928
+      },
+      "calibrationEvents": [
+        22.133,
+        24.6,
+        31.067
+      ],
+      "verifiedEvents": [
+        36.667
+      ],
+      "chosenSide": "right",
+      "warmInferenceMs": {
+        "p50": 23.4,
+        "p95": 30.2
+      },
+      "firstInferenceMs": 160.2,
+      "attempts": [
+        {
+          "status": "verified",
+          "qMax": 0.963654057722539,
+          "durationMs": 3000
+        }
+      ]
+    },
+    {
+      "clip": "szat-front.webm",
+      "sourceSha256": "8e65d343541f2aadf7ba3dec061567d1be88fc0763b911c86703e03c85fc941a",
+      "startSec": 348,
+      "durationSec": 37.25,
+      "model": "full",
+      "frames": 559,
+      "coverage": {
+        "left": 0.9016,
+        "right": 0.8605,
+        "either": 0.9016,
+        "engine": 0.9016
+      },
+      "calibrationEvents": [],
+      "verifiedEvents": [],
+      "chosenSide": null,
+      "warmInferenceMs": {
+        "p50": 41.5,
+        "p95": 57.2
+      },
+      "firstInferenceMs": 208.2,
+      "attempts": []
+    },
+    {
+      "clip": "szat-front.webm",
+      "sourceSha256": "8e65d343541f2aadf7ba3dec061567d1be88fc0763b911c86703e03c85fc941a",
+      "startSec": 348,
+      "durationSec": 37.25,
+      "model": "heavy",
+      "frames": 559,
+      "coverage": {
+        "left": 0.8891,
+        "right": 0.814,
+        "either": 0.8891,
+        "engine": 0.8891
+      },
+      "calibrationEvents": [
+        13.2,
+        17.667,
+        22.267
+      ],
+      "verifiedEvents": [
+        24.533
+      ],
+      "chosenSide": "left",
+      "warmInferenceMs": {
+        "p50": 157.3,
+        "p95": 175.2
+      },
+      "firstInferenceMs": 360.2,
+      "attempts": [
+        {
+          "status": "verified",
+          "qMax": 0.6214077199478379,
+          "durationMs": 1133.3333333333321
+        }
+      ]
+    },
+    {
+      "clip": "szat-side.webm",
+      "sourceSha256": "8e65d343541f2aadf7ba3dec061567d1be88fc0763b911c86703e03c85fc941a",
+      "startSec": 386,
+      "durationSec": 35.2,
+      "model": "lite",
+      "frames": 528,
+      "coverage": {
+        "left": 0,
+        "right": 0.9848,
+        "either": 0.9848,
+        "engine": 0.9848
+      },
+      "calibrationEvents": [
+        12.2,
+        15.067,
+        21.067
+      ],
+      "verifiedEvents": [
+        24.2,
+        34.4
+      ],
+      "chosenSide": "right",
+      "warmInferenceMs": {
+        "p50": 22.5,
+        "p95": 26.2
+      },
+      "firstInferenceMs": 155.3,
+      "attempts": [
+        {
+          "status": "verified",
+          "qMax": 0.9561402457474788,
+          "durationMs": 2800
+        },
+        {
+          "status": "cannot_verify",
+          "qMax": 0,
+          "durationMs": 2066.666666666668
+        },
+        {
+          "status": "verified",
+          "qMax": 1,
+          "durationMs": 3466.666666666668
+        }
+      ]
+    },
+    {
+      "clip": "szat-side.webm",
+      "sourceSha256": "8e65d343541f2aadf7ba3dec061567d1be88fc0763b911c86703e03c85fc941a",
+      "startSec": 386,
+      "durationSec": 35.2,
+      "model": "full",
+      "frames": 528,
+      "coverage": {
+        "left": 0.0682,
+        "right": 1,
+        "either": 1,
+        "engine": 1
+      },
+      "calibrationEvents": [
+        6.267,
+        9.267,
+        12.2
+      ],
+      "verifiedEvents": [
+        15.133,
+        18.133,
+        21.067,
+        24.2,
+        29.6,
+        34.4
+      ],
+      "chosenSide": "right",
+      "warmInferenceMs": {
+        "p50": 30.2,
+        "p95": 38.2
+      },
+      "firstInferenceMs": 148.4,
+      "attempts": [
+        {
+          "status": "verified",
+          "qMax": 1,
+          "durationMs": 2666.666666666668
+        },
+        {
+          "status": "verified",
+          "qMax": 1,
+          "durationMs": 2733.333333333332
+        },
+        {
+          "status": "verified",
+          "qMax": 0.9922655278793149,
+          "durationMs": 2666.666666666668
+        },
+        {
+          "status": "verified",
+          "qMax": 0.9795010050364334,
+          "durationMs": 2800
+        },
+        {
+          "status": "verified",
+          "qMax": 1,
+          "durationMs": 2933.333333333332
+        },
+        {
+          "status": "verified",
+          "qMax": 1,
+          "durationMs": 3466.666666666668
+        }
+      ]
+    },
+    {
+      "clip": "szat-side.webm",
+      "sourceSha256": "8e65d343541f2aadf7ba3dec061567d1be88fc0763b911c86703e03c85fc941a",
+      "startSec": 386,
+      "durationSec": 35.2,
+      "model": "heavy",
+      "frames": 528,
+      "coverage": {
+        "left": 0,
+        "right": 1,
+        "either": 1,
+        "engine": 1
+      },
+      "calibrationEvents": [
+        6.267,
+        9.267,
+        12.133
+      ],
+      "verifiedEvents": [
+        15.067,
+        18.133,
+        21.067,
+        24.133,
+        29.6,
+        34.4
+      ],
+      "chosenSide": "right",
+      "warmInferenceMs": {
+        "p50": 98.1,
+        "p95": 122.3
+      },
+      "firstInferenceMs": 245.8,
+      "attempts": [
+        {
+          "status": "verified",
+          "qMax": 1,
+          "durationMs": 2600
+        },
+        {
+          "status": "verified",
+          "qMax": 1,
+          "durationMs": 2666.666666666666
+        },
+        {
+          "status": "verified",
+          "qMax": 1,
+          "durationMs": 2666.666666666668
+        },
+        {
+          "status": "verified",
+          "qMax": 0.9975733794021321,
+          "durationMs": 2733.333333333332
+        },
+        {
+          "status": "verified",
+          "qMax": 1,
+          "durationMs": 2866.666666666668
+        },
+        {
+          "status": "verified",
+          "qMax": 1,
+          "durationMs": 3466.666666666668
+        }
+      ]
+    }
+  ]
+}

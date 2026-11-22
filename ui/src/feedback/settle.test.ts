@@ -78,3 +78,12 @@ describe('post-set EXP', () => {
     expect(settle(set, 'short_range').exp.fixedBonus).toBe(0)
   })
 })
+
+it('grounds the squat cue in the hip, knee and ankle observations', () => {
+  const lost = settle({ ...summary([null], [outOfView], 0.5), exerciseId: 'squat' }, null)
+  const short = settle({ ...summary([0.6], [{ id: 'short_range', repIndexes: [0] }]), exerciseId: 'squat' }, null)
+  expect(lost.cue?.text).toContain('髋、膝和脚踝')
+  expect(lost.exp.verifiedReps).toBe(0)
+  expect(short.cue?.text).toContain('蹲到校准时的目标位置')
+  expect(short.exp.verifiedReps).toBe(1)
+})

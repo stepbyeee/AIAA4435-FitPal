@@ -1,0 +1,173 @@
+{
+  "date": "2026-11-22",
+  "asset": "ymove-dumbbell-goblet-squat-202e4f.mp4",
+  "model": "MediaPipe Pose Landmarker Full",
+  "environment": "isolated headless Chrome, local production build, macOS",
+  "filePlayback": {
+    "sampling": "HTMLVideoElement natural playback; timestamps below are approximate UI polling times",
+    "manualReference": "5 visibly complete squats; first 3 used for personal calibration",
+    "observations": [
+      {
+        "time": 0.0158,
+        "stage": "个人校准",
+        "count": "0",
+        "knees": 0,
+        "legs": [],
+        "ended": false
+      },
+      {
+        "time": 3.1133,
+        "stage": "个人校准",
+        "count": "1",
+        "knees": 2,
+        "legs": [
+          "左腿清晰",
+          "右腿清晰"
+        ],
+        "ended": false
+      },
+      {
+        "time": 6.7373,
+        "stage": "个人校准",
+        "count": "2",
+        "knees": 2,
+        "legs": [
+          "左腿清晰",
+          "右腿清晰"
+        ],
+        "ended": false
+      },
+      {
+        "time": 10.1388,
+        "stage": "第 1 组",
+        "count": "0",
+        "knees": 2,
+        "legs": [
+          "左腿清晰",
+          "右腿清晰"
+        ],
+        "ended": false
+      },
+      {
+        "time": 13.6537,
+        "stage": "第 1 组",
+        "count": "1",
+        "knees": 2,
+        "legs": [
+          "左腿清晰",
+          "右腿清晰"
+        ],
+        "ended": false
+      },
+      {
+        "time": 17.6056,
+        "stage": "第 1 组",
+        "count": "2",
+        "knees": 2,
+        "legs": [
+          "左腿清晰",
+          "右腿清晰"
+        ],
+        "ended": false
+      },
+      {
+        "time": null,
+        "knees": 0,
+        "legs": [],
+        "ended": false,
+        "done": "+2 EXP"
+      }
+    ],
+    "review": "深蹲\n第 1 组回顾\n逐次回顾\n个人幅度目标 85%\n1\n2\n第 1 下 · 已达标\n右膝 · 2.2 秒\n\n达到个人校准幅度的 100%，底部膝角 81°。\n\n投影膝角\n虚线 · 达标角 97°\n髋部轨迹\n相对同侧脚踝\n查看这一组的动作依据\n\n画面可用率 100% · 录像结束\n\n校准时的投影膝角 179° → 83°\n\n录像回放\n\n这一组确认了 2 下。\n\n+2\nEXP\n\n回放结算，不计入你的训练记录。\n\n完成",
+    "trainingHistory": null,
+    "pageErrors": []
+  },
+  "simulatedCamera": {
+    "fixture": "the same recorded clip padded to 960x540, 15 fps, YUV4MPEG2, Chromium fake capture",
+    "physicalCameraTested": false,
+    "requestedManualStopAfterVerifiedCounts": [
+      2,
+      1,
+      1
+    ],
+    "sets": [
+      {
+        "set": 1,
+        "count": 2,
+        "mirrored": 1,
+        "release": [
+          [
+            "ended"
+          ]
+        ],
+        "recap": "逐次回顾\n个人幅度目标 85%\n1\n2\n第 2 下 · 已达标\n右膝 · 2.2 秒\n\n达到个人校准幅度的 97%，底部膝角 84°。\n\n投影膝角\n虚线 · 达标角 96°\n髋部轨迹\n相对同侧脚踝",
+        "side": "本组按右腿计数"
+      },
+      {
+        "set": 2,
+        "count": 1,
+        "mirrored": 1,
+        "release": [
+          [
+            "ended"
+          ],
+          [
+            "ended"
+          ]
+        ],
+        "recap": "逐次回顾\n个人幅度目标 85%\n1\n第 1 下 · 已达标\n右膝 · 2.3 秒\n\n达到个人校准幅度的 97%，底部膝角 84°。\n\n投影膝角\n虚线 · 达标角 96°\n髋部轨迹\n相对同侧脚踝",
+        "side": "本组按右腿计数"
+      },
+      {
+        "set": 3,
+        "count": 1,
+        "mirrored": 1,
+        "release": [
+          [
+            "ended"
+          ],
+          [
+            "ended"
+          ],
+          [
+            "ended"
+          ]
+        ],
+        "recap": "逐次回顾\n个人幅度目标 85%\n1\n第 1 下 · 已达标\n右膝 · 2.3 秒\n\n达到个人校准幅度的 96%，底部膝角 85°。\n\n投影膝角\n虚线 · 达标角 96°\n髋部轨迹\n相对同侧脚踝",
+        "side": "本组按右腿计数"
+      }
+    ],
+    "trainingHistory": [
+      {
+        "date": "2026-11-22",
+        "exerciseId": "squat",
+        "outstandingIssueId": null,
+        "sets": [
+          {
+            "verified": 2,
+            "quality": 0,
+            "fixed": 0
+          },
+          {
+            "verified": 1,
+            "quality": 0,
+            "fixed": 0
+          },
+          {
+            "verified": 1,
+            "quality": 0,
+            "fixed": 0
+          }
+        ],
+        "lastSet": {
+          "depths": [
+            0.9602758049776626
+          ],
+          "issue": null
+        }
+      }
+    ],
+    "pageErrors": [],
+    "checkedReturningHome": true
+  }
+}

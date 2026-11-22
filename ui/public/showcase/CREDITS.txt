@@ -1,0 +1,33 @@
+go4it-rear.mp4
+
+Author: 헬스티비 (Health TV)
+Title: 47회[등운동]팀GO4IT 다니엘, 박소희by헬스티비
+Original: https://www.youtube.com/watch?v=Gndb_Sul2z8
+Wikimedia Commons record: https://commons.wikimedia.org/wiki/Special:Redirect/page/61802622
+License: Creative Commons Attribution 3.0 Unported
+https://creativecommons.org/licenses/by/3.0/
+
+FitPal excerpted the fixed rear-view shot from approximately 05:59.75 to 06:39.75,
+removed audio, and encoded the Commons 240p rendition as MP4 for local playback.
+Pose overlays and counters are computed by FitPal at playback time.
+
+goblet-squat.mp4
+
+Author: YMove
+Title: Dumbbell Goblet Squat
+Source and terms: https://github.com/ymove-app/exercise-api/tree/main/free-videos
+Upstream filename: dumbbell-goblet-squat-202e4f.mp4
+YMove permits use in applications; standalone redistribution as a product or library is prohibited.
+FitPal includes this unmodified example for interactive squat playback.
+
+go4it-seated-row.mp4
+
+Author: 헬스티비 (Health TV)
+Title: 47회[등운동]팀GO4IT 다니엘, 박소희by헬스티비
+Original: https://www.youtube.com/watch?v=Gndb_Sul2z8
+Wikimedia Commons record: https://commons.wikimedia.org/wiki/Special:Redirect/page/61802622
+License: Creative Commons Attribution 3.0 Unported
+https://creativecommons.org/licenses/by/3.0/
+
+FitPal excerpted 53:51.00–54:25.00 from the Commons 240p rendition, removed
+audio and encoded H.264 MP4. Overlays and counts are generated during playback.

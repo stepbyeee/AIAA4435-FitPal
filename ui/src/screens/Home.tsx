@@ -1,15 +1,17 @@
 import { useMemo, useState } from 'react'
 import { Figure, useDemoPull } from '../components/Figure'
+import type { CosmeticId } from '../data/collection'
 import { IN_RANGE } from '../contract'
 import { EXERCISES, type Half } from '../data/exercises'
 import { balanceOf, GEAR, gearState, type GearId, type GearItem } from '../data/gear'
 import { lastSessionOf, levelOf, repsByExercise, repsByHalf, totalExp, type LastSet, type SessionRecord } from '../data/history'
 
 type Props = {
+  cosmetic: CosmeticId | null
   history: SessionRecord[]
   gear: readonly GearId[]
   onBuy: (id: GearId) => void
-  onStart: (exerciseId: string) => void
+  onStart: (exerciseId: string, file?: File) => void
 }
 
 const LEFT_OVER: Record<string, (n: number) => string> = {
@@ -26,7 +28,8 @@ function lastSetLine(last: LastSet | undefined) {
   return LEFT_OVER[last.issue.id]?.(last.issue.count) ?? '上次最后一组还有问题没改掉。'
 }
 
-export function Home({ history, gear, onBuy, onStart }: Props) {
+export function Home({ cosmetic, history, gear, onBuy, onStart }: Props) {
+  const [replayExercise, setReplayExercise] = useState('lat-pulldown')
   const [trying, setTrying] = useState<GearId | null>(null)
   const [pulling, setPulling] = useState(false)
   const reps = useMemo(() => repsByExercise(history), [history])
@@ -37,7 +40,7 @@ export function Home({ history, gear, onBuy, onStart }: Props) {
   const worn = trying && !gear.includes(trying) ? [...gear, trying] : gear
 
   const today = EXERCISES.find((e) => e.available)
-  const later = EXERCISES.filter((e) => e !== today)
+  const later = EXERCISES.filter((e) => e !== today).sort((a, b) => Number(b.available) - Number(a.available))
   const last = today ? lastSessionOf(history, today.id)?.lastSet : undefined
 
   const rack = (half: Half) => (
@@ -60,7 +63,7 @@ export function Home({ history, gear, onBuy, onStart }: Props) {
         </p>
         <div className="hero-body">
           {rack('upper')}
-          <Figure q={q} gear={worn} label={`你的角色，等级 ${level}`} />
+          <Figure cosmetic={cosmetic} q={q} gear={worn} label={`你的角色，等级 ${level}`} />
           {rack('lower')}
         </div>
         <div className="level">
@@ -100,10 +103,33 @@ export function Home({ history, gear, onBuy, onStart }: Props) {
           {later.map((e) => (
             <li key={e.id} className="exercise">
               <span className="exercise-name">{e.name}</span>
-              <span className="exercise-off">未开放</span>
+              {e.id === 'seated-row' && !new URLSearchParams(window.location.search).has('study') &&
+                <a className="row-lab-link" href="#/lab/seated-row">侧面计数 · 实验</a>}
+              {e.available
+                ? <button className="start-exercise" onClick={() => onStart(e.id)} aria-label={`开始${e.name}`}>开始训练 <span aria-hidden="true">↗</span></button>
+                : <a className="manual-start" href={`#/manual/${e.id}`}>手动记录</a>}
             </li>
           ))}
         </ul>
+        <details className="replay-library">
+          <summary>录像回放</summary>
+          <div>
+            <p>选一段有连续动作的录像。前三次用于校准，视频只在本机播放。</p>
+            <label>录像中的动作
+              <select value={replayExercise} onChange={e => setReplayExercise(e.target.value)}>
+                {EXERCISES.filter(e => e.available).map(e => <option key={e.id} value={e.id}>{e.name}</option>)}
+              </select>
+            </label>
+            <label>选择本地录像<input type="file" accept="video/*" onChange={e => {
+              const file = e.target.files?.[0]
+              if (file) onStart(replayExercise, file)
+            }} /></label>
+            <div className="demo-links">
+              <a href="?video=go4it-rear#/session/lat-pulldown">高位下拉示范 ↗</a>
+              <a href="?video=goblet-squat#/session/squat">深蹲示范 ↗</a>
+            </div>
+          </div>
+        </details>
       </div>
     </main>
   )

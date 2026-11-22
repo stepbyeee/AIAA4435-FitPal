@@ -1,0 +1,138 @@
+{
+  "protocol": "Before adding the trunk-contact gate prompted by the Pexels forehead-pull error. All rows were first exposures for this analyzer.",
+  "initialAnalyzerSha256": "2976cba964bc7384e04f5e246911a7fa4d314f6cfb6d485349ebfbefa050a830",
+  "initialManifestSha256": "7876f76d70aa5f08da6e8f739fd207ded9082e09b9aa3c6e68977977e006da58",
+  "challengeManifestSha256": "3ff54e0f110883759897815871366fcc3ed0f802f88906a7d0dd141adacc48c6",
+  "runs": [
+    {
+      "clip": "ymove-side",
+      "sourceSha256": "957579876dc560f4a889ea2e9dcf2a302abaa484ffcde7b82f0615bb70bc9004",
+      "frames": 60,
+      "coverage": 1,
+      "events": [
+        2.8
+      ],
+      "matches": [
+        2.8
+      ],
+      "missed": 0,
+      "extraTimes": []
+    },
+    {
+      "clip": "go4it-side",
+      "sourceSha256": "8ef16f7b2cbd3d8cf9fc0e61bb85b293c1b74670f90d5cb9381e662a512c3c3b",
+      "frames": 510,
+      "coverage": 0.9980392156862745,
+      "events": [
+        8.4,
+        12.333,
+        16.267,
+        20.133,
+        24.467,
+        28.2,
+        32.333
+      ],
+      "matches": [
+        null,
+        8.4,
+        12.333,
+        16.267,
+        20.133,
+        24.467,
+        28.2,
+        32.333
+      ],
+      "missed": 1,
+      "extraTimes": []
+    },
+    {
+      "clip": "dvids-band",
+      "sourceSha256": "c63d45ecad8df0c54c1e5e5395ff35b5bb41a121d3f2729196fb4bef7593bc85",
+      "frames": 173,
+      "coverage": 0.9942196531791907,
+      "events": [
+        5.867,
+        8.467
+      ],
+      "matches": [
+        null,
+        null,
+        5.867,
+        8.467,
+        null
+      ],
+      "missed": 3,
+      "extraTimes": []
+    },
+    {
+      "clip": "pulldown-negative",
+      "sourceSha256": "f6200b7691acc6e99b1b0ddee7783fea56da3a6e155c5b3020cdda958cd49e34",
+      "frames": 120,
+      "coverage": 1,
+      "events": [],
+      "matches": [],
+      "missed": 0,
+      "extraTimes": []
+    },
+    {
+      "clip": "pexels-4367635",
+      "sourceSha256": "99ac222b0a3cd04514462b9c30099e5ff2b63e4fb1350f6d69458c777b67e321",
+      "frames": 223,
+      "coverage": 0.26905829596412556,
+      "events": [],
+      "matches": [],
+      "missed": 0,
+      "extraTimes": []
+    },
+    {
+      "clip": "pexels-35585654",
+      "sourceSha256": "f62c682de401488d25df8105e4fa467e503f508e2600551ea2f2b1bb779e11ec",
+      "frames": 173,
+      "coverage": 0,
+      "events": [],
+      "matches": [],
+      "missed": 0,
+      "extraTimes": []
+    },
+    {
+      "clip": "pexels-30916502",
+      "sourceSha256": "1e873c9a8b03da0ead1f41df73e24a592ee66cab83f3981e406e6abe4d91abe7",
+      "frames": 167,
+      "coverage": 0.9940119760479041,
+      "events": [
+        9.067
+      ],
+      "matches": [],
+      "missed": 0,
+      "extraTimes": [
+        9.067
+      ]
+    }
+  ],
+  "browser": {
+    "browser": "157.0.8103.79",
+    "demo": {
+      "count": 8,
+      "observedTimes": [
+        4.07,
+        8.59,
+        12.62,
+        16.5,
+        20.19,
+        24.55,
+        28.27,
+        32.45
+      ],
+      "observedBothArms": true
+    },
+    "localFile": {
+      "count": 2,
+      "blobUrlRevoked": true
+    },
+    "fakeCameraReleased": true,
+    "manualRoutePreserved": true,
+    "studyExcluded": true,
+    "storageUnchanged": true,
+    "pageErrors": []
+  }
+}

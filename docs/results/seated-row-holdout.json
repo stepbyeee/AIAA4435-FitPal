@@ -1,0 +1,42 @@
+{
+  "model": "MediaPipe Pose Landmarker Full",
+  "delegate": "CPU",
+  "browser": "157.0.8103.79",
+  "fps": 15,
+  "maxDimension": 640,
+  "sourceManifestSha256": "3ff54e0f110883759897815871366fcc3ed0f802f88906a7d0dd141adacc48c6",
+  "analyzerSha256": "45f160d39ddbf77662bbef695983ef90b512c97fcf78ab863e4ee15cbc13cbaa",
+  "modelSha256": "5134a3aad27a58b93da0088d431f366da362b44e3ccfbe3462b3827a839011b1",
+  "runs": [
+    {
+      "clip": "pexels-4367635",
+      "sourceSha256": "99ac222b0a3cd04514462b9c30099e5ff2b63e4fb1350f6d69458c777b67e321",
+      "frames": 223,
+      "coverage": 0.26905829596412556,
+      "events": [],
+      "matches": [],
+      "missed": 0,
+      "extraTimes": []
+    },
+    {
+      "clip": "pexels-35585654",
+      "sourceSha256": "f62c682de401488d25df8105e4fa467e503f508e2600551ea2f2b1bb779e11ec",
+      "frames": 173,
+      "coverage": 0,
+      "events": [],
+      "matches": [],
+      "missed": 0,
+      "extraTimes": []
+    },
+    {
+      "clip": "pexels-30916502",
+      "sourceSha256": "1e873c9a8b03da0ead1f41df73e24a592ee66cab83f3981e406e6abe4d91abe7",
+      "frames": 167,
+      "coverage": 0.9940119760479041,
+      "events": [],
+      "matches": [],
+      "missed": 0,
+      "extraTimes": []
+    }
+  ]
+}

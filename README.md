@@ -2,7 +2,7 @@
 
 **A webcam AI workout companion that knows when to speak.**
 
-FitPal watches a set through an ordinary laptop webcam, counts your reps, and gives you **one** focused cue **after** the set — never in the middle of a rep. Feedback that arrives between reps is the thing that makes workout AI annoying; FitPal's core claim is that a well-timed silent agent beats a chatty one.
+FitPal tracks a workout on a laptop webcam. Its default coaching mode shows the movement live and offers at most one focused cue after a set. The classroom study compares this design with per-rep feedback.
 
 > Course project · AIAA4435 Interactive AI Systems · built from the midterm proposal below.
 
@@ -10,8 +10,8 @@ FitPal watches a set through an ordinary laptop webcam, counts your reps, and gi
 |---|---|
 | **Team** | Jiaqi Li · Ray · Yueran Qiu | 
 | **Instructor** | Yenchi Tseng |
-| **Status** | Browser prototype with real lat-pulldown perception and two-video replay |
-| **Scope** | Lat pulldown first, webcam only |
+| **Status** | Local browser app with live tracking, three included video demos and a classroom pilot workflow |
+| **Scope** | Lat pulldown is the proposal task. Squats also support personal calibration. Side-view seated rowing has an experimental counter. |
 
 ---
 
@@ -41,7 +41,7 @@ Existing products each solve one of these and none solves the timing problem:
 
 ## How it works
 
-The midterm proposal defines the coaching loop below. The current build uses the official pretrained Pose Landmarker model and deterministic group-end feedback.
+The midterm proposal defines the coaching loop below. The app runs pretrained MediaPipe Pose Landmarker Full on device. Rules select the feedback, with optional local language-model wording.
 
 ```
 frames ──► Perception ──► Decision policy ──► Explanation ──► Reward
@@ -54,7 +54,7 @@ Constraint: if the camera can't see the joint clearly, no judgment is issued at 
 
 ### Layer 1 — Perception: frames → rep result
 
-Pose landmarks come from MediaPipe Pose. Each rep is scored on a **normalized elbow angle** so that absolute flexibility does not decide pass/fail:
+FitPal uses the projected elbow angle for lat pulldowns and the projected knee angle for squats. Range is relative to three complete cycles from the same person and camera position:
 
 ```
 q = (θtop − θ) / (θtop − θbottom)        0 = top of range, 1 = bottom of range
@@ -80,7 +80,7 @@ Five initial actions, each one logged with its trigger so the policy can be audi
 
 ### Layer 3 — Language: what to say
 
-The LLM only **explains** a cue the decision layer already chose. It does not judge the user and does not decide whether to speak. The call happens once per set; the prompt carries the set summary, not the video stream.
+When enabled, local Qwen2.5-0.5B-Instruct selects one observation and one action from the phrases approved for the measured issue. Clean sets skip inference. Timeouts or invalid responses fall back to the rule text. The study uses fixed wording. [Optional local coach and checks](docs/local-coach.md)
 
 ### Reward
 
@@ -99,13 +99,13 @@ History carries forward: today's cue is chosen against the previous session's ou
 
 ## Privacy
 
-Video is processed **on device**. Only a set summary — angles, counts, labels — reaches the LLM. No clip upload, no frame storage. This is a design constraint, not a setting.
+Video is processed on device. The optional language model receives permitted observation and action phrases over loopback. Camera sessions can retain counts, EXP and summary labels locally. Users can turn this off and clear FitPal data from Training History. Playback, per-rep trajectories and study responses stay out of personal training history. Study and annotation files are downloaded explicitly.
 
 ## Limits we state up front
 
 - **Not medical or load advice.** EXP is a game stat, not a health metric; FitPal never advises on weight or injury.
 - **Short pilot, exploratory.** User-study findings are expected to be short-term and directional, not causal or generalizable.
-- **Webcam-only geometry.** Single fixed camera, one exercise first (lat pulldown); occlusion is the main failure mode.
+- **Webcam-only geometry.** Keep the camera fixed with the returning limb in frame. Off-angle projection, multiple people and high-confidence landmark errors can cause misses or misleading traces.
 
 ---
 
@@ -126,13 +126,7 @@ Video is processed **on device**. Only a set summary — angles, counts, labels 
 2. **Conditions** — text vs. joint-target cards; per-rep vs. post-set feedback
 3. **Measures** — interruption, workload
 
-Illustrative shape of one result, used here only to show the reporting format (per-user calibration values, then visibility and accuracy for the set — **not a final result**):
-
-```
-Elbow      116° / 149°
-Visibility 1.00 · 8/8
-Accuracy   80/100
-```
+The targets above are the team's proposal goals. Current performance varies by camera placement. The technical evaluation and classroom rehearsal are complete enough to reproduce; the human participant study remains open. [Validation report and limitations](docs/validation.md)
 
 ## Roadmap
 
@@ -150,7 +144,11 @@ Accuracy   80/100
 
 ## Getting started
 
-The [browser implementation](ui/README.md) connects real Pose Landmarker Full landmarks to three-rep calibration, counting and relative range. It generates one rule-based cue after a set and shows its evidence. See [replay and pilot notes](docs/pulldown-validation.md) for the two-video benchmark and remaining proposal milestones.
+From `ui/`, run `npm ci`, `npm run setup:pose` and `npm run dev`. Open the replay library on the home screen to try the included real-video pulldown and squat examples without granting camera access. The seated-row experiment also has its own demo.
+
+- [Browser usage and reproducible checks](ui/README.md)
+- [Pretrained pose model comparison](docs/model-comparison.md) and [MoveNet Lightning](docs/movenet-benchmark.md)
+- [Classroom pilot protocol](docs/pilot.md) and [local dataset annotation](docs/local-video-labeling.md)
 
 ## Contributing
 

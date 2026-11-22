@@ -1,5 +1,8 @@
 # FitPal 高位下拉回放与课程验证
 
+For the expanded two-exercise evaluation, model comparisons and classroom workflow, see the [current validation report](validation.md). The results below describe the original two-video replay.
+
+
 ## 已实现的训练流程
 
 1. 浏览器本地运行 MediaPipe Pose Landmarker Full。骨架和动作判断共用同一份带时间戳的关键点。
