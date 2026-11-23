@@ -4,6 +4,7 @@ import { makeStudyRecord, type Condition, type Ratings, type TrialContext, type 
 
 /** A schematic in the same projected angle units as the personal range score. */
 export function JointTarget({ calibration, exercise }: { calibration: SetSummary['calibration']; exercise: string }) {
+  if (calibration.basis === 'upper-arm') return null
   const joint = exercise === 'squat' ? '膝' : '肘'
   const threshold = calibration.thetaTop - IN_RANGE * (calibration.thetaTop - calibration.thetaBottom)
   const angle = threshold * Math.PI / 180

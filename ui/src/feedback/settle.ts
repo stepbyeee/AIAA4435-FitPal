@@ -5,7 +5,7 @@ const MIN_COVERAGE = 0.9
 export function settle(summary: SetSummary, lastIssueId: string | null): SetResult {
   const verified = summary.reps.filter((rep) => rep.status === 'verified')
   const unverifiedCount = summary.reps.length - verified.length
-  const inRangeCount = verified.filter((rep) => rep.qMax >= IN_RANGE).length
+  const inRangeCount = verified.filter((rep) => rep.qMax !== null && rep.qMax >= IN_RANGE).length
   const hasCoverage = summary.coverage >= MIN_COVERAGE
   const outOfView = summary.issues.find((issue) => issue.id === 'out_of_view')
   const shortRange = summary.issues.find((issue) => issue.id === 'short_range')
@@ -25,7 +25,7 @@ export function settle(summary: SetSummary, lastIssueId: string | null): SetResu
 
   const meetsQualityTarget = inRangeCount >= 8 && inRangeCount / summary.reps.length >= 0.8
   const issueCleared = (lastIssueId === 'short_range' && !shortRange) || lastIssueId === 'out_of_view'
-  const fixed = issueCleared && hasCoverage && !outOfView && verified.length > 0 && unverifiedCount === 0
+  const fixed = issueCleared && hasCoverage && !outOfView && verified.length > 0 && unverifiedCount === 0 && verified.every(rep => rep.qMax !== null)
 
   return {
     cue,

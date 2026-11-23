@@ -7,7 +7,7 @@ import { parseArgs } from 'node:util'
 
 const { values } = parseArgs({ options: {
   artifacts: { type: 'string' }, repeat: { type: 'string', default: '1' },
-  only: { type: 'string' }, camera: { type: 'string' }, fixtures: { type: 'boolean' },
+  cropped: { type: 'string' }, only: { type: 'string' }, camera: { type: 'string' }, fixtures: { type: 'boolean' },
 } })
 const browserModule = process.env.FITPAL_PLAYWRIGHT
 const { chromium } = await import(browserModule ? pathToFileURL(resolve(browserModule)).href : 'playwright')
@@ -71,13 +71,13 @@ try {
   for (let i=0; i<repeat; i++) {
     await run('overlay-side', async page => {
       await page.setViewportSize({width:390,height:844})
-      await openUrl(page,'video=go4it-rear')
-      const selector = page.getByLabel(/可用的身体侧/)
-      await selector.selectOption('right')
+      await openUrl(page,'video=go4it-rear&side=right')
+      await expectVisible(page.getByRole('region', {name:'取景检查'}))
+      assert.equal(await page.getByLabel(/可用的身体侧/).count(),0)
       await button(page,'画中分析').click()
       await expectVisible(page.locator('.camera-stats .telemetry-chart'))
       await page.waitForFunction(() => document.querySelector('.arm-trail[data-side="right"]'))
-      await expectVisible(page.getByText('已排除',{exact:true}))
+      assert.equal(await page.getByText('已排除',{exact:true}).count(),0)
       const observed = await page.evaluate(async () => {
         let left = 0, right = 0
         for(let n=0;n<24;n++){
@@ -87,7 +87,7 @@ try {
         }
         return {left,right, width:document.documentElement.scrollWidth}
       })
-      assert.equal(observed.left,0)
+      assert(observed.left>0)
       assert(observed.right>0)
       assert(observed.width<=390)
       await screenshot(page,'pulldown-mobile-overlay.png')
@@ -132,6 +132,17 @@ try {
       await page.goBack()
       await expectVisible(page.getByRole('heading', {name:'今天练什么'}))
       assert.equal(await page.locator('video').count(),0)
+    })
+    if (values.cropped) await run('cropped-recap', async page => {
+      await page.goto(origin)
+      await page.getByText('录像回放', { exact: true }).click()
+      await page.locator('input[type=file]').setInputFiles(resolve(values.cropped))
+      await expectVisible(page.getByText('这一组确认了 3 下。'))
+      assert.equal(await page.locator('[data-status="count-only"]').count(), 3)
+      await expectVisible(page.getByText(/腕部证据不足/))
+      assert.equal(await page.locator('.review-plots, .review-meter i').count(), 0)
+      await screenshot(page, 'pulldown-cropped-recap.png')
+      await noHistory(page)
     })
     await run('exit-demo', async page => {
       for (const viaLogo of [false,true]) {

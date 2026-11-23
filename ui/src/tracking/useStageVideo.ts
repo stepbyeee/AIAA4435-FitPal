@@ -23,6 +23,7 @@ export type StageVideo = {
 
 /** The stage's video, either the user's camera or a recorded clip, with the body in it tracked. */
 export function useStageVideo(options: {
+  pulldown?: boolean
   side?: SideSelection
   focus?: Focus
   camera: boolean
@@ -125,7 +126,7 @@ export function useStageVideo(options: {
       video.pause()
     }, () => {
       video.play().catch(() => { if (!cancelled) failed() })
-    }, options.focus)
+    }, options.focus, options.pulldown)
     return () => {
       cancelled = true
       stop()
@@ -145,7 +146,7 @@ export function useStageVideo(options: {
       setFrame(null)
       clearMotion()
     }
-  }, [active, stream, options.focus, options.file, options.limb, options.side])
+  }, [active, stream, options.focus, options.file, options.limb, options.side, options.pulldown])
 
   return { ref, source, frame, landmarks, motion, status }
 }

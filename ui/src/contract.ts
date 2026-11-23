@@ -42,7 +42,7 @@ export const LANDMARK_COUNT = 33
 
 export type FrameState = {
   phase: Phase
-  /** Normalised elbow angle: 0 = top of the user's range, 1 = bottom. */
+  /** Progress on the active measured signal, 0 at the top and 1 at the bottom. */
   q: number
   /** False when the joint cannot be seen clearly. No judgment is made then. */
   visible: boolean
@@ -57,13 +57,14 @@ export const IN_RANGE = 0.85
 
 export type RepResult = {
   status: 'verified' | 'cannot_verify'
-  qMax: number
+  /** Null for a counted upper-arm cycle when wrist visibility prevented measuring elbow range. */
+  qMax: number | null
   durationMs: number
 }
 
 export type SetSummary = {
   exerciseId: string
-  calibration: { thetaTop: number; thetaBottom: number }
+  calibration: { thetaTop: number; thetaBottom: number; basis?: 'upper-arm' }
   reps: RepResult[]
   /** Share of frames in which the joint was visible, 0 to 1. */
   coverage: number

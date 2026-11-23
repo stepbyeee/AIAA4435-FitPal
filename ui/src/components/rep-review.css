@@ -21,6 +21,7 @@
 .review-meter { height: 26px; width: 12px; display: grid; align-items: end; background: #344147; border-radius: 3px; overflow: hidden; }
 .review-meter i { background: #63dcbb; border-radius: 2px; }
 .review-choices [data-status='short'] .review-meter i { background: #f2bd77; }
+.review-choices [data-status='count-only'] .review-meter,
 .review-choices [data-status='gap'] .review-meter { display: grid; place-content: center; background: transparent; color: #acb8bb; }
 .review-detail { border-top: 1px solid #384347; padding-top: 10px; }
 .review-detail p { margin: 6px 0; color: #c6cfd1; font-size: 13px; line-height: 1.55; }

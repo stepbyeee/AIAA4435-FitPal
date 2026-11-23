@@ -1,0 +1,56 @@
+{
+  "source": "go4it-rear.mp4",
+  "model": "MediaPipe Full, normal browser session",
+  "method": "Two five-second gray boxes cover one arm at a time on a rear-view recording. Status is the arm group actually drawn, sampled in media-time bins of 0.2s. Fractions use sampled bins, omit 0.4s at both mask boundaries. Control re-encodes the same frames. This measures display under artificial masks on one source.",
+  "windows": [
+    {
+      "side": "left",
+      "start": 17,
+      "end": 22,
+      "x": 0.18
+    },
+    {
+      "side": "right",
+      "start": 27,
+      "end": 32,
+      "x": 0.53
+    }
+  ],
+  "runs": [
+    {
+      "variant": "control",
+      "windows": [
+        {
+          "obstructedSide": "left",
+          "samples": 21,
+          "leftDrawn": 21,
+          "rightDrawn": 21
+        },
+        {
+          "obstructedSide": "right",
+          "samples": 21,
+          "leftDrawn": 20,
+          "rightDrawn": 18
+        }
+      ]
+    },
+    {
+      "variant": "masked",
+      "windows": [
+        {
+          "obstructedSide": "left",
+          "samples": 21,
+          "leftDrawn": 1,
+          "rightDrawn": 7
+        },
+        {
+          "obstructedSide": "right",
+          "samples": 21,
+          "leftDrawn": 17,
+          "rightDrawn": 0
+        }
+      ]
+    }
+  ],
+  "input": "Chromium file-backed getUserMedia camera feed"
+}

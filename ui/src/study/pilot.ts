@@ -11,6 +11,7 @@ export function parseCondition(value: string | null): Condition | null {
 
 export function repCue(rep: RepResult) {
   if (rep.status === 'cannot_verify') return '这一下未看清，请让计数侧留在画面内。'
+  if (rep.qMax === null) return '这一下已计数，手腕未全程可见，幅度未评估。'
   return rep.qMax >= IN_RANGE ? '这一下达到了你的校准目标。' : '这一下幅度偏短，下次试着达到你的校准目标。'
 }
 
@@ -21,6 +22,7 @@ export function makeStudyRecord(condition: Condition, summary: SetSummary, sourc
   return {
     schema: 1, ...context, events, exercise: summary.exerciseId, condition, source, cuesShown,
     attempts: summary.reps.length, verified: verified.length,
-    inRange: verified.filter(rep => rep.qMax >= IN_RANGE).length, coverage: summary.coverage, ratings,
+    countOnly: verified.filter(rep => rep.qMax === null).length,
+    inRange: verified.filter(rep => rep.qMax !== null && rep.qMax >= IN_RANGE).length, coverage: summary.coverage, ratings,
   }
 }

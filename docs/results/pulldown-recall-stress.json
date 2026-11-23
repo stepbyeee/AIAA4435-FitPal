@@ -1,0 +1,157 @@
+{
+  "protocol": "Controlled transformations of the same previously used demonstration; the five variants are not independent recordings. Expected depth labels are relative to the original personal calibration. Source for choosing the partial turn was the existing tuning-clip trace. Chrome runs each variant through the local-file input at native media speed with the app default Full model.",
+  "model": "MediaPipe Pose Landmarker Full",
+  "modelSha256": "5134a3aad27a58b93da0088d431f366da362b44e3ccfbe3462b3827a839011b1",
+  "source": "pulldown.webm",
+  "inputSha256": "f6200b7691acc6e99b1b0ddee7783fea56da3a6e155c5b3020cdda958cd49e34",
+  "ffmpeg": "ffmpeg version 8.1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "browser": "157.0.8103.79",
+  "cases": [
+    {
+      "name": "short",
+      "description": "Keep 0–12.32s inclusive. Hold the partial pull for 240ms. Reverse frames 307..275 back to the top, then append original frames 368..end for the last full rep.",
+      "expectedCalibrated": true,
+      "expectedStatuses": [
+        "short",
+        "met"
+      ],
+      "asset": "stress-pulldown-short.mp4",
+      "assetSha256": "585925b0bd9ab7cb98cf6d35ac47b3a804359010b5b47a9ae512de9e0226c13c",
+      "runs": [
+        {
+          "calibrated": true,
+          "verified": 2,
+          "statuses": [
+            "short",
+            "met"
+          ],
+          "details": [
+            "达到个人校准幅度的 80%，底部肘角 46°。",
+            "达到个人校准幅度的 100%，底部肘角 14°。"
+          ],
+          "cue": "有 1 下没到校准的目标范围。下一组试着拉到校准时的目标位置，再慢慢还原。",
+          "coveragePct": 100,
+          "trackedSide": "right",
+          "emptyHistory": true,
+          "pageErrors": [],
+          "match": true
+        }
+      ]
+    },
+    {
+      "name": "mirror",
+      "description": "Horizontal reflection of all frames.",
+      "expectedCalibrated": true,
+      "expectedStatuses": [
+        "met",
+        "met"
+      ],
+      "asset": "stress-pulldown-mirror.mp4",
+      "assetSha256": "42906c2070c68ab78628e54fbe2b1fd9c300552e4fc9d767c59205e0964198a6",
+      "runs": [
+        {
+          "calibrated": true,
+          "verified": 2,
+          "statuses": [
+            "met",
+            "met"
+          ],
+          "details": [
+            "达到个人校准幅度的 100%，底部肘角 19°。",
+            "达到个人校准幅度的 100%，底部肘角 17°。"
+          ],
+          "cue": "这一组确认了 2 下。",
+          "coveragePct": 100,
+          "trackedSide": "left",
+          "emptyHistory": true,
+          "pageErrors": [],
+          "match": true
+        }
+      ]
+    },
+    {
+      "name": "hold",
+      "description": "After three calibration cycles, hold the same upper position (source frame 284, 11.36s) exactly for another 8s.",
+      "expectedCalibrated": true,
+      "expectedStatuses": [],
+      "asset": "stress-pulldown-hold.mp4",
+      "assetSha256": "14db07a2444b6e560ee2140c1a3fbd09b59ac8e91219c338d99a39a2c3bfcd45",
+      "runs": [
+        {
+          "calibrated": true,
+          "verified": 0,
+          "statuses": [],
+          "details": [],
+          "cue": "这一组没有可确认的动作。",
+          "coveragePct": 100,
+          "trackedSide": null,
+          "emptyHistory": true,
+          "pageErrors": [],
+          "match": true
+        }
+      ]
+    },
+    {
+      "name": "small",
+      "description": "Downsample full clip to 224×398 with area averaging.",
+      "expectedCalibrated": true,
+      "expectedStatuses": [
+        "met",
+        "met"
+      ],
+      "asset": "stress-pulldown-small.mp4",
+      "assetSha256": "2ff1acb345355e499417fa18ca34483d3deed8086d6197b4793b8d60dd71ab1b",
+      "runs": [
+        {
+          "calibrated": true,
+          "verified": 2,
+          "statuses": [
+            "met",
+            "met"
+          ],
+          "details": [
+            "达到个人校准幅度的 99%，底部肘角 13°。",
+            "达到个人校准幅度的 98%，底部肘角 15°。"
+          ],
+          "cue": "这一组确认了 2 下。",
+          "coveragePct": 100,
+          "trackedSide": "right",
+          "emptyHistory": true,
+          "pageErrors": [],
+          "match": true
+        }
+      ]
+    },
+    {
+      "name": "fast",
+      "description": "Play the full movement 1.5× faster, resampling at 25 frames per second.",
+      "expectedCalibrated": true,
+      "expectedStatuses": [
+        "met",
+        "met"
+      ],
+      "asset": "stress-pulldown-fast.mp4",
+      "assetSha256": "c2903a70784a9a57aa64e47e9bde0c34d0ef600f353945c557ed686f47eec01d",
+      "runs": [
+        {
+          "calibrated": true,
+          "verified": 2,
+          "statuses": [
+            "met",
+            "met"
+          ],
+          "details": [
+            "达到个人校准幅度的 100%，底部肘角 14°。",
+            "达到个人校准幅度的 99%，底部肘角 16°。"
+          ],
+          "cue": "这一组确认了 2 下。",
+          "coveragePct": 100,
+          "trackedSide": "right",
+          "emptyHistory": true,
+          "pageErrors": [],
+          "match": true
+        }
+      ]
+    }
+  ]
+}

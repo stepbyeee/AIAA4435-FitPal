@@ -1,3 +1,4 @@
+import { createArmOcclusionFilter } from './armOcclusion'
 import { cropBounds, mapLandmarks, type Focus } from './focus'
 import type { Landmark, PoseFrame } from '../contract'
 
@@ -36,7 +37,9 @@ export function trackPose(
   onError: (error: unknown) => void,
   onReady?: () => void,
   focus: Focus = 'full',
+  pulldown = false,
 ): () => void {
+  const armFilter = pulldown ? createArmOcclusionFilter() : null
   let stopped = false
   const cropCanvas = focus === 'full' ? null : document.createElement('canvas')
   const ctx = cropCanvas?.getContext('2d', { alpha: false })
@@ -79,12 +82,13 @@ export function trackPose(
         lastTime = mediaTime
         try {
           const started = performance.now()
-          const found = landmarker.detectForVideo(input(), started).landmarks[0]
+          const image = input()
+          const found = landmarker.detectForVideo(image, started).landmarks[0]
           let landmarks: Landmark[] | null = null
           if (found) {
-            landmarks = cropCanvas
-              ? mapLandmarks(found, cropBounds(focus, width, Boolean(video.srcObject)), width)
-              : found.map(p => ({ x: p.x, y: p.y, visibility: p.visibility ?? 0 }))
+            landmarks = found.map(p => ({ x: p.x, y: p.y, visibility: p.visibility ?? 0 }))
+            if (armFilter) landmarks = armFilter.filter(landmarks, image, cropCanvas?.width ?? width, height, mediaTime * 1000)
+            if (cropCanvas && landmarks) landmarks = mapLandmarks(landmarks, cropBounds(focus, width, Boolean(video.srcObject)), width)
           }
           onFrame({ landmarks, width, height, timestampMs: mediaTime * 1000, inferenceMs: performance.now() - started })
         } catch (error) {

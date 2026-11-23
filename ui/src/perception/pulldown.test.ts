@@ -243,3 +243,102 @@ it('withholds a pull assembled across an abrupt change of shoulder location', ()
   expect(rep?.status).toBe('cannot_verify')
   expect(track.getRepReview().traces[0].samples.some(p => p.breakBefore)).toBe(true)
 })
+
+function croppedPose(elevation: number): Landmark[] {
+  const p = Array.from({ length: LANDMARK_COUNT }, () => ({ x: 0, y: 0, visibility: 0 }))
+  const radians = elevation * Math.PI / 180
+  const shoulder = { x: 0.45, y: 0.30, visibility: 0.99 }
+  const elbow = {
+    x: shoulder.x + 0.23 * Math.sin(radians) * HEIGHT / WIDTH,
+    y: shoulder.y + 0.23 * Math.cos(radians),
+    visibility: 0.99,
+  }
+  p[LM.leftShoulder] = shoulder
+  p[LM.leftElbow] = elbow
+  p[LM.leftWrist] = { x: elbow.x + 0.06, y: elevation >= 115 ? -0.04 : elbow.y - 0.2, visibility: 0.97 }
+  return p
+}
+
+describe('repeated overhead wrist crop', () => {
+  const cycle = [145, 145, 145, 120, 90, 65, 48, 48, 48, 68, 95, 118, 135, 145, 145]
+  const consume = (track: ReturnType<typeof input>, elevations: number[]) => {
+    for (const angle of elevations) track.frame(croppedPose(angle))
+  }
+  const upper: Calibration = { side: 'left', basis: 'upper-arm', thetaTop: 145, thetaBottom: 48 }
+
+  it('calibrates with observed upper-arm elevation and counts without producing an elbow ROM grade', () => {
+    const calibrating = input()
+    for (let i = 0; i < 3; i++) consume(calibrating, cycle)
+    const calibration = calibrating.getCalibration()!
+    expect(calibration).toMatchObject({ side: 'left', basis: 'upper-arm' })
+    expect(calibration.thetaTop).toBeCloseTo(145)
+    expect(calibration.thetaBottom).toBeCloseTo(48)
+    const live = input(calibration)
+    consume(live, cycle)
+    expect(live.endSet()).toMatchObject({ calibration: { basis: 'upper-arm' }, issues: [],
+      reps: [{ status: 'verified', qMax: null }] })
+  })
+
+  it('cannot complete a crop-mode rep across a bilateral tracking gap or a suppressed upper arm', () => {
+    for (const gap of [null, croppedPose(48)]) {
+      if (gap) gap[LM.leftElbow].visibility = 0
+      const live = input(upper)
+      consume(live, cycle.slice(0, 9))
+      expect(live.frame(gap).visible).toBe(false)
+      consume(live, cycle.slice(9))
+      expect(live.endSet().reps).toHaveLength(0)
+      consume(live, cycle)
+      expect(live.endSet().reps).toHaveLength(1)
+    }
+  })
+
+  it('requires a directly observed flexed wrist on the lowered side', () => {
+    const live = input(upper)
+    for (const angle of cycle) {
+      const p = croppedPose(angle)
+      if (angle < 115) p[LM.leftWrist].visibility = 0
+      live.frame(p)
+    }
+    expect(live.endSet().reps).toHaveLength(0)
+  })
+
+  it('ignores a partial return and an unfinished last descent', () => {
+    const live = input(upper)
+    consume(live, [...cycle.slice(0, 10), 96, 102, 102, 96, 70, 50])
+    expect(live.endSet().reps).toHaveLength(0)
+  })
+})
+
+describe('top recovery', () => {
+  function reacquire(firstVisibleAngle: number) {
+    const track = createPulldown()
+    let timestampMs = 0
+    for (const angle of [160, 160, 160, 160, null, firstVisibleAngle, 142, 130, 112, 96,
+      80, 80, 80, 84, 94, 114, 135, 148, 156, 160, 160]) {
+      timestampMs += 1000 / 15
+      track.accept({ landmarks: angle === null ? null : pose(angle, 'left'), timestampMs, width: WIDTH, height: HEIGHT })
+    }
+    return track
+  }
+
+  it('re-arms only when the same top is directly visible again after a brief idle gap', () => {
+    const recovered = reacquire(156)
+    // Two more clearly observed cycles finish a three-cycle calibration.
+    const phase = recovered.accept({ landmarks: pose(160, 'left'), timestampMs: 1550, width: WIDTH, height: HEIGHT })
+    expect(phase.repCount).toBe(1)
+    const displaced = reacquire(142)
+    const rejected = displaced.accept({ landmarks: pose(160, 'left'), timestampMs: 1550, width: WIDTH, height: HEIGHT })
+    expect(rejected.repCount).toBe(0)
+  })
+
+  it('accepts modest visible endpoint variation and rejects an incomplete return below that band', () => {
+    const track = input(calibration)
+    track.hold(160)
+    track.move(160, 80)
+    track.hold(80)
+    track.move(80, 135)
+    expect(track.hold(135).repCount).toBe(0)
+    track.move(135, 145)
+    expect(track.hold(145).repCount).toBe(1)
+  })
+})

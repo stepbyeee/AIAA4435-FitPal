@@ -1,0 +1,54 @@
+{
+  "protocol": "Independent extension of the first-use cohort, frozen before model inference on this source. Same scoring and first-three-cycle reservation as pulldown-r2-unseen-sources.json. Single reviewer marked lowest bar and next overhead return on 6 Hz RGB images with no pose predictions. Screened by source, continuity, angle and length only. Other screened items included Pexels 35585699 (possible same performer/session), 36871349 (too few complete cycles) and DVIDS 639891 (elastic band, split screen). No results from the preceding benchmark were consulted.",
+  "clips": [
+    {
+      "file": "pexels-35585697.mp4",
+      "title": "Intense Gym Workout with Lat Pulldown",
+      "author": "khezez | خزاز",
+      "exercise": "lat-pulldown",
+      "appDemo": false,
+      "sha256": "cadb3f11bc6e5ec282d58c8ac8ae1ac908bffef01a14c65f3555d58ea7f2e718",
+      "durationSec": 14.9,
+      "source": "https://www.pexels.com/video/intense-gym-workout-with-lat-pulldown-35585697/",
+      "download": "https://videos.pexels.com/video-files/35585697/15079855_1080_1920_30fps.mp4",
+      "terms": "Pexels License https://www.pexels.com/license/. No source files in repository.",
+      "usage": "licensed-stock",
+      "visualCycles": 8,
+      "windows": [
+        [
+          4.84,
+          5.52
+        ],
+        [
+          6.18,
+          6.88
+        ],
+        [
+          7.44,
+          8.1
+        ],
+        [
+          8.75,
+          9.34
+        ],
+        [
+          10.07,
+          10.74
+        ],
+        [
+          11.41,
+          12.06
+        ],
+        [
+          12.72,
+          13.42
+        ],
+        [
+          14.04,
+          14.64
+        ]
+      ],
+      "notes": "Continuous tall front-oblique portrait shot. Athlete initially grips the wide bar overhead; small overhead setup movements do not reach chest and are excluded. Lower to the chest, then extend to overhead on eight occasions. Real uninterrupted unlooped footage: torso, expression, bar and camera position evolve. A cable-machine upright enters from the left at the beginning of the set; far elbow or hand clipped by portrait framing at times. Creator also posted back-view 35585699, which was not included because the session/athlete may overlap."
+    }
+  ]
+}

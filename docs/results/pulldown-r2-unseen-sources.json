@@ -1,0 +1,177 @@
+{
+  "protocol": "Primary first-use model comparison cohort frozen from raw RGB before viewing/evaluating either counter. Single reviewer, no independent human adjudication. Windows in clip-relative seconds denote approximate lowest handle position and subsequent completion of an overhead return, sampled at 4 Hz. Require a prior overhead endpoint and exclude partial cycles, even if they visibly pass bottom. First three cycles always reserved for calibration, matching baseline evaluator. Each underlying film represents a different session/athlete here. Searched for SHA, item ID, title and matching scenes in prior project manifests. Cropped or fast sets and multi-person backgrounds remain in the cohort even if tracking fails. No looping, artificial repetitions or model-based filtering.",
+  "clips": [
+    {
+      "file": "venice-competition.mp4",
+      "title": "Muscle Beach Lat Pull Down Competition and Toy Drive",
+      "author": "Fabian Lewkowicz / Santa Monica Closeup",
+      "exercise": "lat-pulldown",
+      "appDemo": false,
+      "sha256": "e1640cad98da75b4b1a79d4912b30cb34ec9eefce18be26f443c36745b37a8e8",
+      "durationSec": 23.866667,
+      "source": "https://archive.org/details/youtube--75jWp9QxA4",
+      "download": "https://archive.org/download/youtube--75jWp9QxA4/-75jWp9QxA4.mp4",
+      "terms": "Copyright 2022 Fabian Lewkowicz / Santa Monica Closeup. Source explicitly reserves all rights and lists a licensing contact. Local evaluation and aggregate reporting only. No media redistribution.",
+      "visualCycles": 9,
+      "windows": [
+        [
+          1.2,
+          2.6
+        ],
+        [
+          4.0,
+          5.05
+        ],
+        [
+          6.3,
+          7.6
+        ],
+        [
+          9.0,
+          10.15
+        ],
+        [
+          11.3,
+          12.7
+        ],
+        [
+          14.0,
+          15.35
+        ],
+        [
+          16.9,
+          18.15
+        ],
+        [
+          19.6,
+          21.0
+        ],
+        [
+          22.45,
+          23.5
+        ]
+      ],
+      "notes": "Continuous front-oblique spectator shot with one central seated competitor, lever machine and a dense crowd of other people. Selected a contiguous section beginning and ending overhead. Subsequent reps outside this preselected excerpt excluded. Different body/handle timing and moving bystanders every cycle; no jump cut or playback loop in range.",
+      "usage": "local-only",
+      "sourceSpanSec": [
+        246.4,
+        270.25
+      ],
+      "sourceMd5": "6bf40da1f0ceb1a6b5d76c0f035f26b0",
+      "assetTransform": "FFmpeg input seek to span start, encode specified duration, map video 0, omit audio, libx264 / veryfast / CRF 19 / yuv420p / two encoder threads / faststart. Source and clip timelines differ by the span start."
+    },
+    {
+      "file": "gym-fast-set.mp4",
+      "title": "Back Workout w/ IFBB Pro Mr. Bubbles",
+      "author": "Archive item identifies David Laid as subject; no creator or rights field",
+      "exercise": "lat-pulldown",
+      "appDemo": false,
+      "sha256": "1e8aee4df537d594438870b75e059c0b278f6208d312eadc7db04c1df4ddf833",
+      "durationSec": 9.576233,
+      "source": "https://archive.org/details/backworkoutwifbbpromr.bubbles",
+      "download": "https://archive.org/download/backworkoutwifbbpromr.bubbles/Back%20Workout%20w_%20IFBB%20Pro%20Mr.Bubbles.mp4",
+      "terms": "Publicly downloadable archive item without a reuse license. Local evaluation and aggregate reporting only. No media redistribution.",
+      "visualCycles": 6,
+      "windows": [
+        [
+          1.33,
+          2.1
+        ],
+        [
+          2.73,
+          3.45
+        ],
+        [
+          4.11,
+          4.77
+        ],
+        [
+          5.55,
+          6.31
+        ],
+        [
+          7.0,
+          7.71
+        ],
+        [
+          8.49,
+          9.25
+        ]
+      ],
+      "notes": "Six rapid real cable pulldowns of the same seated athlete with headphones. Camera moves smoothly from side to front and widens. Hand, elbow or bar repeatedly leave frame. The image switches to a different performer later. End before the next rep becomes hidden behind the machine. No loop or shot cut in selected range.",
+      "usage": "local-only",
+      "sourceSpanSec": [
+        183.25,
+        192.85
+      ],
+      "sourceMd5": "938f18aa8c0600c6d0e1604f063e2f7d",
+      "assetTransform": "FFmpeg input seek to span start, encode specified duration, map video 0, omit audio, libx264 / veryfast / CRF 19 / yuv420p / two encoder threads / faststart. Source and clip timelines differ by the span start."
+    },
+    {
+      "file": "mixkit-100549.mp4",
+      "title": "Man working out on a lat pulldown machine",
+      "author": "Mixkit, contributor unlisted on item page",
+      "exercise": "lat-pulldown",
+      "appDemo": false,
+      "sha256": "9a51060a0d0ee20cdbc16cb2480e1b5adf6b9a8786eea3854661b637da861e16",
+      "durationSec": 17.642625,
+      "source": "https://mixkit.co/free-stock-video/man-working-out-on-a-lat-pulldown-machine-100549/",
+      "download": "https://assets.mixkit.co/active_storage/video_items/100549/1725385782/100549-video-720.mp4",
+      "terms": "Item links to the Mixkit Stock Video Free License. Source attribution retained; underlying media excluded from repository.",
+      "visualCycles": 5,
+      "windows": [
+        [
+          3.28,
+          4.87
+        ],
+        [
+          6.45,
+          8.06
+        ],
+        [
+          9.56,
+          11.02
+        ],
+        [
+          12.28,
+          13.64
+        ],
+        [
+          15.1,
+          16.49
+        ]
+      ],
+      "notes": "Fixed high rear view. Opening starts at the bottom and final cycle ends at the bottom: both partial cycles excluded. Previously visually screened for a six-cycle experiment and ineligible there; no prior scoring per repository manifests. Different athlete, machine, color and angle from Mixkit 100523. No visible loop.",
+      "usage": "licensed-stock"
+    },
+    {
+      "file": "pexels-7934717.mp4",
+      "title": "A Woman Doing a Pull Down Exercise",
+      "author": "Ojyrai Films",
+      "exercise": "lat-pulldown",
+      "appDemo": false,
+      "sha256": "33803f148fcb8b88eb3821d5fcb9474bf5b1fb24e5fc1b7492db25bc13ef90b9",
+      "durationSec": 11.285,
+      "source": "https://www.pexels.com/video/a-woman-doing-a-pull-down-exercise-7934717/",
+      "download": "https://videos.pexels.com/video-files/7934717/7934717-hd_1280_720_25fps.mp4",
+      "terms": "Pexels License https://www.pexels.com/license/. Underlying media excluded from repository.",
+      "visualCycles": 3,
+      "windows": [
+        [
+          2.22,
+          3.65
+        ],
+        [
+          5.2,
+          6.7
+        ],
+        [
+          8.08,
+          9.6
+        ]
+      ],
+      "notes": "Continuous warm-lit close-up with the head, wrists and/or elbows cropped in most frames. Uneven cadence and gradual framing change. Opening and closing partial cycles excluded. Three complete cycles only; this clip tests calibration and false positives and contributes zero post-calibration reference reps.",
+      "usage": "licensed-stock"
+    }
+  ]
+}

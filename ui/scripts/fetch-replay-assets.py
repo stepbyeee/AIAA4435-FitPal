@@ -5,6 +5,7 @@ import json
 import os
 from pathlib import Path
 import struct
+import subprocess
 import tempfile
 import time
 from urllib.error import HTTPError
@@ -80,6 +81,24 @@ def install(path, checksum, get_data):
     print('Installed', path.name)
 
 
+def pulldown_fixture(clip):
+    if 'sourceSpanSec' not in clip:
+        return fetch(clip['download'], 90_000_000)
+    start, end = clip['sourceSpanSec']
+    # Seek the public archive by range; the full competition film is 1.45 GB.
+    # Encoder differences across FFmpeg/libx264 builds are caught by install().
+    with tempfile.TemporaryDirectory() as directory:
+        output = Path(directory) / 'excerpt.mp4'
+        subprocess.run([
+            'ffmpeg', '-nostdin', '-v', 'error', '-rw_timeout', '90000000',
+            '-ss', str(start), '-i', clip['download'], '-t', str(end - start),
+            '-map', '0:v:0', '-an', '-c:v', 'libx264', '-threads', '2',
+            '-preset', 'veryfast', '-crf', '19', '-pix_fmt', 'yuv420p',
+            '-movflags', '+faststart', str(output),
+        ], check=True)
+        return output.read_bytes()
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--include-dataset', action='store_true',
@@ -87,7 +106,17 @@ def main():
     parser.add_argument('--app-only', action='store_true', help='Only fetch the three featured UI videos.')
     parser.add_argument('--supplementary', action='store_true', help='Use the independently annotated two-window gym squat supplement.')
     parser.add_argument('--seated-row', action='store_true', help='Fetch only the row experiment and its held-out stress clips.')
+    parser.add_argument('--pulldown-holdout', action='store_true',
+                        help='Fetch the five new locally scored pulldown videos. Archive excerpts use FFmpeg 8.1/libx264.')
     args = parser.parse_args()
+    if args.pulldown_holdout:
+        if args.seated_row or args.supplementary or args.app_only or args.include_dataset:
+            parser.error('--pulldown-holdout selects a separate fixture set')
+        for name in ('pulldown-r2-unseen-sources.json', 'pulldown-r2-unseen-stock-sources.json'):
+            for clip in json.loads(MANIFEST.with_name(name).read_text())['clips']:
+                path = UI / '.benchmark-assets/pulldown-r2-unseen' / clip['file']
+                install(path, clip['sha256'], lambda: pulldown_fixture(clip))
+        return
     if args.seated_row:
         if args.supplementary or args.app_only or args.include_dataset:
             parser.error('--seated-row selects a separate fixture set')

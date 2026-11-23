@@ -142,8 +142,8 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
         const reps = perception.endSet().reps
         if (reps.length > previousAttempts) {
           const rep = reps[reps.length - 1]
-          setTrialCue({ text: repCue(rep), target: rep.status === 'verified' })
-          logCue('rep-cue', rep.status === 'cannot_verify' ? 'out_of_view' : rep.qMax < IN_RANGE ? 'short_range' : 'in_range', sample.timestampMs)
+          setTrialCue({ text: repCue(rep), target: rep.status === 'verified' && rep.qMax !== null })
+          logCue('rep-cue', rep.status === 'cannot_verify' ? 'out_of_view' : rep.qMax === null ? 'count_only' : rep.qMax < IN_RANGE ? 'short_range' : 'in_range', sample.timestampMs)
           previousAttempts = reps.length
           clearTimeout(cueTimer)
           cueTimer = setTimeout(() => setTrialCue(null), 2000)
@@ -205,6 +205,7 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
         lastSet: last
           ? {
               depths: last.reps.map((r) => (r.status === 'verified' ? r.qMax : null)),
+              countOnly: last.reps.flatMap((r, i) => r.status === 'verified' && r.qMax === null ? [i] : []),
               issue: issueId ? { id: issueId, count: issue?.repIndexes.length ?? 0 } : null,
             }
           : undefined,
@@ -213,7 +214,7 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
 
   const video = useStageVideo({
     camera: useCamera,
-    focus, side,
+    focus, side: squat ? side : 'both', pulldown: !squat,
     limb,
     file: videoFile,
     live: live && !paused,
@@ -278,14 +279,15 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
         )}
         {!paused && live && video.source && video.frame && video.status === 'tracking' && (
           <>
-            <ArmTrails limb={limb} trails={video.motion.trails} selection={side} frame={video.frame} mirrored={video.source.kind === 'camera'} />
+            <ArmTrails limb={limb} trails={video.motion.trails} selection={squat ? side : 'both'} frame={video.frame} mirrored={video.source.kind === 'camera'} />
             {analysis && <button className="bone-toggle" aria-pressed={showBones} onClick={() => setShowBones((visible) => !visible)}>骨架</button>}
           </>
         )}
         {!paused && live && analysis && overlay && <div className="camera-stats" data-landscape={Boolean(video.frame && video.frame.width / video.frame.height >= 1.3)} aria-label="画中分析数据">
           <div className="camera-count"><span>{calibrating ? '个人校准' : '已确认'}</span>
             <strong>{frame.repCount}<small>{calibrating ? ' / 3' : ' 下'}</small></strong>
-            {!calibrating && <span>当前幅度 <b>{frame.visible ? Math.round(frame.q * 100) + '%' : '—'}</b></span>}
+            {!calibrating && calibrationRef.current?.basis === 'upper-arm' && <span>上臂计数 · 幅度未评估</span>}
+            {!calibrating && calibrationRef.current?.basis !== 'upper-arm' && <span>当前幅度 <b>{frame.visible ? Math.round(frame.q * 100) + '%' : '—'}</b></span>}
           </div>
           <ElbowTelemetry limb={limb} motion={video.motion} />
         </div>}
@@ -335,11 +337,11 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
             {!paused && calibrating && !preview && video.status === 'tracking' && framing && (
               <section className="framing" aria-label="取景检查">
                 <h3>取景检查</h3>
-                <p>{squat ? '侧对镜头，站直和蹲下时，让同侧髋、膝和脚踝完整入镜。' : '手举到最高时，至少一侧肩、肘、腕要留在画面内。'}</p>
+                <p>{squat ? '侧对镜头，站直和蹲下时，让同侧髋、膝和脚踝完整入镜。' : '双臂分别自动追踪。手举到最高时，尽量让肩、肘、腕留在画面内。'}</p>
                 <dl>{(['left', 'right'] as const).map(side => <div key={side} data-ready={framing[side] === '可用于校准'}>
                   <dt>{sideName(side)}</dt><dd>{framing[side]}</dd>
                 </div>)}</dl>
-                {!trial && analysis && <label className="focus-select">可用的身体侧
+                {!trial && analysis && squat && <label className="focus-select">可用的身体侧
                   <select value={side} onChange={e=>onSide(parseSide(e.target.value))}>
                     <option value="both">自动 · 左右分开追踪</option>
                     <option value="left">仅左侧 · 右侧被遮挡</option><option value="right">仅右侧 · 左侧被遮挡</option>
@@ -354,7 +356,7 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
                 </label>}
               </section>
             )}
-            {!calibrating && !preview && <p className="count-side">本组按{selectedSide}计数</p>}
+            {!calibrating && !preview && <p className="count-side">本组按{selectedSide}计数{calibrationRef.current?.basis === 'upper-arm' && ' · 腕部出画，仅记录次数'}</p>}
             {trialCue && !calibrating && trial && <div className="trial-cue" role="status">
               {trialCue.text}
               {trialCue.target && calibrationRef.current && <TrialTarget format={trial.format} calibration={calibrationRef.current} exercise={exercise.id} />}
@@ -416,6 +418,7 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
 }
 
 function TrialTarget({ format, calibration, exercise }: { format: 'text' | 'card'; calibration: SetSummary['calibration']; exercise: string }) {
+  if (calibration.basis === 'upper-arm') return <p className="note">已根据上臂动作计数。手腕全程入镜时才能校准肘角幅度。</p>
   if (format === 'card') return <JointTarget calibration={calibration} exercise={exercise} />
   const target = calibration.thetaTop - IN_RANGE * (calibration.thetaTop - calibration.thetaBottom)
   return <p className="note">个人幅度达标线 · 投影{exercise === 'squat' ? '膝' : '肘'}角 {Math.round(target)}°</p>
@@ -444,7 +447,7 @@ function SetEvidence({ summary, trigger }: { summary: SetSummary; trigger: EndTr
     <details className="evidence">
       <summary>查看这一组的动作依据</summary>
       <p>画面可用率 {Math.round(coverage * 100)}% · {SET_END_LABELS[trigger]}</p>
-      <p>校准时的投影{summary.exerciseId === 'squat' ? '膝' : '肘'}角 {Math.round(calibration.thetaTop)}° → {Math.round(calibration.thetaBottom)}°</p>
+      <p>校准时的{calibration.basis === 'upper-arm' ? '上臂相对竖直向下的角度' : summary.exerciseId === 'squat' ? '投影膝角' : '投影肘角'} {Math.round(calibration.thetaTop)}° → {Math.round(calibration.thetaBottom)}°</p>
     </details>
   )
 }

@@ -87,3 +87,12 @@ it('grounds the squat cue in the hip, knee and ankle observations', () => {
   expect(short.cue?.text).toContain('蹲到校准时的目标位置')
   expect(short.exp.verifiedReps).toBe(1)
 })
+
+it('awards a counted wrist-cropped cycle one rep without a quality or improvement claim', () => {
+  const set = summary([])
+  set.calibration = { thetaTop: 135, thetaBottom: 66, basis: 'upper-arm' }
+  set.reps = Array.from({ length: 8 }, () => ({ status: 'verified', durationMs: 1700, qMax: null }))
+  expect(settle(set, 'short_range')).toMatchObject({
+    cue: null, exp: { verifiedReps: 8, qualityBonus: 0, fixedBonus: 0 },
+  })
+})

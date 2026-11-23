@@ -46,10 +46,27 @@ if __name__ == '__main__':
     root = Path(__file__).resolve().parents[2]
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('results', type=Path)
+    parser.add_argument('--paired', action='store_true', help='Score both versions from one pair of synchronized runs.')
     reference = parser.add_mutually_exclusive_group()
     reference.add_argument('--supplementary', action='store_true')
     reference.add_argument('--manifest', type=Path, help='Use a private reference file exported from the local annotation screen.')
     args = parser.parse_args()
+    if args.paired:
+        clips = json.loads(args.results.read_text())['clips']
+        refs = {c['file']: {**c, 'sha256': c['sourceSha256']} for c in clips}
+        result = {}
+        for version in ('before', 'after'):
+            events = [dict(c[version], clip=c['file'], model=version, sourceSha256=c['sourceSha256']) for c in clips]
+            scored = score(refs, events)
+            counts = {'matched': 0, 'missed': 0, 'extras': 0}
+            for row in scored:
+                if 'training' in row:
+                    counts['matched'] += len(row['training']['matched'])
+                    counts['missed'] += len(row['training']['missedTopSec'])
+                    counts['extras'] += len(row['training']['unmatchedSec'])
+            result[version] = {'totals': counts, 'scores': scored}
+        print(json.dumps(result, indent=2))
+        raise SystemExit(0)
     name = 'squat-supplement-sources.json' if args.supplementary else 'replay-sources.json'
     manifest = args.manifest or (root / 'docs/results' / name)
     clips = json.loads(manifest.read_text())['clips']

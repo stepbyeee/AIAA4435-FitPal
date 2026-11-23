@@ -1,0 +1,346 @@
+{
+  "protocol": {
+    "fps": 15,
+    "maxDimension": 640,
+    "delegate": "CPU",
+    "browser": "157.0.8103.79",
+    "manifestSha256": [
+      "ea5da2f9c407e4753564edbd99a6ec8a20514688e3b2eee2fe5181133f9fc649"
+    ],
+    "modelSha256": "5134a3aad27a58b93da0088d431f366da362b44e3ccfbe3462b3827a839011b1",
+    "sources": {
+      "before": {
+        "perception/pulldown": "613648f60cbf480809a568480a1f66746145037f977466db53098306eb2cc922",
+        "tracking/armLandmarks": "3c63a6e2844b632dd4282ce3d7ce4d3ebb36aeffb3409b5818c114aa4bf63095",
+        "tracking/limbLandmarks": "1ec36b043e06b8ecfd378b488611ea84fbbb468630725bd189bbe38128bee15e",
+        "tracking/armTrails": "e6d1948405c0897e4a4363cb98ed8d5acd0a1355f7cdfc596c86d6ad8c77dfb9",
+        "perception/repReview": "34c345f62b2f820b1599d92be451bfa5c7b10630db58c90d68c434ec03deed94",
+        "contract": "943a5c09dba2b580a8dd49547f22956c901ceca87f3153daf723262e49e468c4"
+      },
+      "after": {
+        "perception/pulldown": "978ce8d95e969a5e341cbe4e740d5e28aee4ac01baede2d65a1ceab50d30fd52",
+        "tracking/armLandmarks": "3c63a6e2844b632dd4282ce3d7ce4d3ebb36aeffb3409b5818c114aa4bf63095",
+        "tracking/limbLandmarks": "1ec36b043e06b8ecfd378b488611ea84fbbb468630725bd189bbe38128bee15e",
+        "tracking/armTrails": "e6d1948405c0897e4a4363cb98ed8d5acd0a1355f7cdfc596c86d6ad8c77dfb9",
+        "perception/repReview": "34c345f62b2f820b1599d92be451bfa5c7b10630db58c90d68c434ec03deed94",
+        "contract": "9e2ea38d228b60f1fd9e676d3acb5bcb7c7b897d510dda1b62a9070088d47381",
+        "perception/pulldownUpperArm": "8593e6bff5f1fce23868ece1657c345d6622610b95c5ff159d0daf18a490f1fa",
+        "tracking/armOcclusion": "595d6f30aa7eb7a207aab39785ecb1e9b1491087a3b66b143afc174787fb92b7"
+      }
+    }
+  },
+  "clips": [
+    {
+      "file": "venice-competition.mp4",
+      "sourceSha256": "e1640cad98da75b4b1a79d4912b30cb34ec9eefce18be26f443c36745b37a8e8",
+      "windows": [
+        [
+          1.2,
+          2.6
+        ],
+        [
+          4,
+          5.05
+        ],
+        [
+          6.3,
+          7.6
+        ],
+        [
+          9,
+          10.15
+        ],
+        [
+          11.3,
+          12.7
+        ],
+        [
+          14,
+          15.35
+        ],
+        [
+          16.9,
+          18.15
+        ],
+        [
+          19.6,
+          21
+        ],
+        [
+          22.45,
+          23.5
+        ]
+      ],
+      "visualCycles": 9,
+      "decodedPngsSha256": "743e6b5f055fa725559584ff0505e6d9ba9a01f0d6e20a72d4e3f67b8063ceab",
+      "before": {
+        "frames": 358,
+        "calibrationEvents": [
+          2.667,
+          4.933,
+          7.533
+        ],
+        "verifiedEvents": [
+          10.067,
+          12.6,
+          15.333,
+          18.067,
+          21,
+          23.4
+        ],
+        "calibration": {
+          "side": "right",
+          "thetaTop": 161.1724296524426,
+          "thetaBottom": 34.287129060633596
+        },
+        "attempts": [
+          {
+            "status": "verified",
+            "qMax": 0.9719773210685895,
+            "durationMs": 1866.666666666666
+          },
+          {
+            "status": "verified",
+            "qMax": 0.9969649760252655,
+            "durationMs": 1866.666666666666
+          },
+          {
+            "status": "verified",
+            "qMax": 0.9743800236848814,
+            "durationMs": 2066.666666666668
+          },
+          {
+            "status": "verified",
+            "qMax": 0.9746693867791797,
+            "durationMs": 2066.666666666668
+          },
+          {
+            "status": "verified",
+            "qMax": 0.9736020960547438,
+            "durationMs": 2200
+          },
+          {
+            "status": "verified",
+            "qMax": 0.9684863745545187,
+            "durationMs": 1800
+          }
+        ],
+        "visibleFrames": {
+          "left": 343,
+          "right": 358
+        },
+        "p95ProcessingMs": 40.3
+      },
+      "after": {
+        "frames": 358,
+        "calibrationEvents": [
+          2.6,
+          4.867,
+          7.4
+        ],
+        "verifiedEvents": [
+          9.933,
+          12.533,
+          15.2,
+          18,
+          20.933,
+          23.333
+        ],
+        "calibration": {
+          "side": "right",
+          "thetaTop": 161.1724296524426,
+          "thetaBottom": 34.287129060633596
+        },
+        "attempts": [
+          {
+            "status": "verified",
+            "qMax": 0.9719773210685895,
+            "durationMs": 1733.333333333334
+          },
+          {
+            "status": "verified",
+            "qMax": 0.9969649760252655,
+            "durationMs": 1800
+          },
+          {
+            "status": "verified",
+            "qMax": 0.9743800236848814,
+            "durationMs": 1933.333333333334
+          },
+          {
+            "status": "verified",
+            "qMax": 0.9746693867791797,
+            "durationMs": 2000
+          },
+          {
+            "status": "verified",
+            "qMax": 0.9736020960547438,
+            "durationMs": 2133.333333333332
+          },
+          {
+            "status": "verified",
+            "qMax": 0.9684863745545187,
+            "durationMs": 1733.3333333333321
+          }
+        ],
+        "visibleFrames": {
+          "left": 343,
+          "right": 358
+        },
+        "p95ProcessingMs": 40.5
+      }
+    },
+    {
+      "file": "gym-fast-set.mp4",
+      "sourceSha256": "1e8aee4df537d594438870b75e059c0b278f6208d312eadc7db04c1df4ddf833",
+      "windows": [
+        [
+          1.33,
+          2.1
+        ],
+        [
+          2.73,
+          3.45
+        ],
+        [
+          4.11,
+          4.77
+        ],
+        [
+          5.55,
+          6.31
+        ],
+        [
+          7,
+          7.71
+        ],
+        [
+          8.49,
+          9.25
+        ]
+      ],
+      "visualCycles": 6,
+      "decodedPngsSha256": "f924676cabe872827edb9bfa94152322f9555fb687a311d5c1d2fa0e1de9430f",
+      "before": {
+        "frames": 144,
+        "calibrationEvents": [],
+        "verifiedEvents": [],
+        "calibration": null,
+        "attempts": [],
+        "visibleFrames": {
+          "left": 25,
+          "right": 32
+        },
+        "p95ProcessingMs": 42.1
+      },
+      "after": {
+        "frames": 144,
+        "calibrationEvents": [],
+        "verifiedEvents": [],
+        "calibration": null,
+        "attempts": [],
+        "visibleFrames": {
+          "left": 25,
+          "right": 32
+        },
+        "p95ProcessingMs": 42.9
+      }
+    },
+    {
+      "file": "mixkit-100549.mp4",
+      "sourceSha256": "9a51060a0d0ee20cdbc16cb2480e1b5adf6b9a8786eea3854661b637da861e16",
+      "windows": [
+        [
+          3.28,
+          4.87
+        ],
+        [
+          6.45,
+          8.06
+        ],
+        [
+          9.56,
+          11.02
+        ],
+        [
+          12.28,
+          13.64
+        ],
+        [
+          15.1,
+          16.49
+        ]
+      ],
+      "visualCycles": 5,
+      "decodedPngsSha256": "0603a7169ad371471b03f445d8c121ee81a8ac7d02815202b47b98474a846ca2",
+      "before": {
+        "frames": 265,
+        "calibrationEvents": [],
+        "verifiedEvents": [],
+        "calibration": null,
+        "attempts": [],
+        "visibleFrames": {
+          "left": 43,
+          "right": 22
+        },
+        "p95ProcessingMs": 44.8
+      },
+      "after": {
+        "frames": 265,
+        "calibrationEvents": [],
+        "verifiedEvents": [],
+        "calibration": null,
+        "attempts": [],
+        "visibleFrames": {
+          "left": 42,
+          "right": 21
+        },
+        "p95ProcessingMs": 47.2
+      }
+    },
+    {
+      "file": "pexels-7934717.mp4",
+      "sourceSha256": "33803f148fcb8b88eb3821d5fcb9474bf5b1fb24e5fc1b7492db25bc13ef90b9",
+      "windows": [
+        [
+          2.22,
+          3.65
+        ],
+        [
+          5.2,
+          6.7
+        ],
+        [
+          8.08,
+          9.6
+        ]
+      ],
+      "visualCycles": 3,
+      "decodedPngsSha256": "dadf66224ac7b89e2f124456b8402c16d7196b96edc80e34022344543a5313b4",
+      "before": {
+        "frames": 169,
+        "calibrationEvents": [],
+        "verifiedEvents": [],
+        "calibration": null,
+        "attempts": [],
+        "visibleFrames": {
+          "left": 0,
+          "right": 21
+        },
+        "p95ProcessingMs": 54.4
+      },
+      "after": {
+        "frames": 169,
+        "calibrationEvents": [],
+        "verifiedEvents": [],
+        "calibration": null,
+        "attempts": [],
+        "visibleFrames": {
+          "left": 0,
+          "right": 21
+        },
+        "p95ProcessingMs": 55.6
+      }
+    }
+  ]
+}

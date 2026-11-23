@@ -60,7 +60,7 @@ function Traces({ trace, calibration, duration, mirrored, squat }: {
 }
 
 const statusText = (rep: RepResult) => rep.status === 'cannot_verify'
-  ? '未看清' : rep.qMax < IN_RANGE ? '未达标' : '已达标'
+  ? '未看清' : rep.qMax === null ? '已计数 · 幅度未评估' : rep.qMax < IN_RANGE ? '未达标' : '已达标'
 
 export function RepReview({ summary, review, mirrored = false }: {
   summary: SetSummary; review: RepReviewData; mirrored?: boolean
@@ -76,18 +76,18 @@ export function RepReview({ summary, review, mirrored = false }: {
   const rep = summary.reps[selected]
   const trace = review.traces.find(item => item.repIndex === selected)
   const verified = rep.status === 'verified'
-  const rounded = Math.round(rep.qMax * 100)
-  const percentage = rep.qMax < IN_RANGE && rounded === IN_RANGE * 100 ? `<${rounded}` : String(rounded)
+  const rounded = rep.qMax === null ? null : Math.round(rep.qMax * 100)
+  const percentage = rep.qMax !== null && rep.qMax < IN_RANGE && rounded === IN_RANGE * 100 ? `<${rounded}` : String(rounded)
   return <section className="rep-review" aria-label="逐次动作回顾" data-side={review.side}>
-    <div className="review-heading"><h3>逐次回顾</h3><span>个人幅度目标 {IN_RANGE * 100}%</span></div>
+    <div className="review-heading"><h3>逐次回顾</h3><span>{summary.calibration.basis === 'upper-arm' ? '上臂计数' : `个人幅度目标 ${IN_RANGE * 100}%`}</span></div>
     <div className="review-choices" role="group" aria-label="选择要回顾的动作">
       {summary.reps.map((result, index) => <button type="button" key={index}
         aria-pressed={index === selected} aria-controls={detailId}
         aria-label={`第 ${index + 1} 下，${statusText(result)}`}
-        data-status={result.status === 'cannot_verify' ? 'gap' : result.qMax < IN_RANGE ? 'short' : 'met'}
+        data-status={result.status === 'cannot_verify' ? 'gap' : result.qMax === null ? 'count-only' : result.qMax < IN_RANGE ? 'short' : 'met'}
         onClick={() => choose(index)}>
         <span className="review-meter" aria-hidden="true">
-          {result.status === 'verified' ? <i style={{ height: `${result.qMax * 100}%` }} /> : '—'}
+          {result.status === 'verified' && result.qMax !== null ? <i style={{ height: `${result.qMax * 100}%` }} /> : '—'}
         </span>
         <small>{index + 1}</small>
       </button>)}
@@ -95,13 +95,13 @@ export function RepReview({ summary, review, mirrored = false }: {
     <div id={detailId} className="review-detail">
       <div className="review-heading">
         <strong>第 {selected + 1} 下 · {statusText(rep)}</strong>
-        <span>{review.side === 'left' ? '左' : '右'}{joint} · {(rep.durationMs / 1000).toFixed(1)} 秒</span>
+        <span>{rep.qMax !== null && `${review.side === 'left' ? '左' : '右'}${joint} · `}{(rep.durationMs / 1000).toFixed(1)} 秒</span>
       </div>
-      <p>{verified
+      <p>{verified && rep.qMax === null ? '上臂完成了一次下拉和还原。腕部证据不足，无法计算个人幅度。' : verified
         ? `达到个人校准幅度的 ${percentage}%${trace?.bottom ? `，底部${joint}角 ${Math.round(trace.bottom.angle)}°` : ''}。`
         : '动作中途丢失关键点。这一下不评幅度，也不计 EXP。'}</p>
-      {verified && trace?.bottom && <p className="rep-timing">跟踪起点至底部 {(trace.bottom.ms / 1000).toFixed(1)} 秒 · 底部至确认返回 {((rep.durationMs - trace.bottom.ms) / 1000).toFixed(1)} 秒</p>}
-      {trace
+      {verified && rep.qMax !== null && trace?.bottom && <p className="rep-timing">跟踪起点至底部 {(trace.bottom.ms / 1000).toFixed(1)} 秒 · 底部至确认返回 {((rep.durationMs - trace.bottom.ms) / 1000).toFixed(1)} 秒</p>}
+      {summary.calibration.basis === 'upper-arm' || (verified && rep.qMax === null) ? null : trace
         ? <Traces trace={trace} calibration={summary.calibration} duration={rep.durationMs} mirrored={mirrored} squat={squat} />
         : <p>本组保留最近 32 下的详细轨迹。</p>}
     </div>

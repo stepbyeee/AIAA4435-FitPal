@@ -4,8 +4,10 @@ export type SetRecord = { verified: number; quality: number; fixed: number }
 
 /** The last set of a session, kept so the next visit can open on what was left to fix. */
 export type LastSet = {
-  /** Deepest q of each rep; null for a rep the camera could not verify. */
+  /** Deepest q of each rep; null when depth was unavailable. */
   depths: (number | null)[]
+  /** Indices of verified reps whose range could not be measured. */
+  countOnly?: number[]
   issue: { id: string; count: number } | null
 }
 
@@ -52,7 +54,11 @@ export function loadHistory(): SessionRecord[] {
       if (lastSet && Array.isArray(lastSet.depths) && lastSet.depths.every((d: unknown) =>
         d === null || (typeof d === 'number' && Number.isFinite(d) && d >= 0 && d <= 1)
       ) && (lastSet.issue === null || (typeof lastSet.issue?.id === 'string' && validCount(lastSet.issue.count)))) {
-        record.lastSet = lastSet
+        record.lastSet = { depths: lastSet.depths, issue: lastSet.issue }
+        if (Array.isArray(lastSet.countOnly)) {
+          record.lastSet.countOnly = [...new Set<number>(lastSet.countOnly.filter((i: number) =>
+            validCount(i) && i < lastSet.depths.length && lastSet.depths[i] === null))]
+        }
       }
       if (outstandingIssueId === null || typeof outstandingIssueId === 'string') record.outstandingIssueId = outstandingIssueId
       valid.push(record)

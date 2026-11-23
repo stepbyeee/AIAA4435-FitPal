@@ -1,0 +1,1432 @@
+{
+  "protocol": "Raw Pose Landmarker Full frames at 15 Hz. Compare rule changes on identical input. Scored by score-replay.py.",
+  "modelSha256": "5134a3aad27a58b93da0088d431f366da362b44e3ccfbe3462b3827a839011b1",
+  "baselineSources": {
+    "src/contract.ts": "943a5c09dba2b580a8dd49547f22956c901ceca87f3153daf723262e49e468c4",
+    "src/perception/repReview.ts": "34c345f62b2f820b1599d92be451bfa5c7b10630db58c90d68c434ec03deed94",
+    "src/tracking/limbLandmarks.ts": "1ec36b043e06b8ecfd378b488611ea84fbbb468630725bd189bbe38128bee15e",
+    "src/tracking/armLandmarks.ts": "3c63a6e2844b632dd4282ce3d7ce4d3ebb36aeffb3409b5818c114aa4bf63095",
+    "src/perception/pulldown.ts": "613648f60cbf480809a568480a1f66746145037f977466db53098306eb2cc922"
+  },
+  "candidateSources": {
+    "src/contract.ts": "9e2ea38d228b60f1fd9e676d3acb5bcb7c7b897d510dda1b62a9070088d47381",
+    "src/perception/repReview.ts": "34c345f62b2f820b1599d92be451bfa5c7b10630db58c90d68c434ec03deed94",
+    "src/tracking/limbLandmarks.ts": "1ec36b043e06b8ecfd378b488611ea84fbbb468630725bd189bbe38128bee15e",
+    "src/perception/pulldownUpperArm.ts": "8593e6bff5f1fce23868ece1657c345d6622610b95c5ff159d0daf18a490f1fa",
+    "src/tracking/armLandmarks.ts": "3c63a6e2844b632dd4282ce3d7ce4d3ebb36aeffb3409b5818c114aa4bf63095",
+    "src/perception/pulldown.ts": "978ce8d95e969a5e341cbe4e740d5e28aee4ac01baede2d65a1ceab50d30fd52"
+  },
+  "clips": [
+    {
+      "file": "pulldown.webm",
+      "frames": 274,
+      "sourceSha256": "f6200b7691acc6e99b1b0ddee7783fea56da3a6e155c5b3020cdda958cd49e34",
+      "inputSha256": "b9d066b6bf5454c3ee15455777ca08cd7b6c600a2309a56b223efcce9b2bffc6",
+      "reference": [
+        [
+          2.15,
+          4.1
+        ],
+        [
+          5.88,
+          7.6
+        ],
+        [
+          9.25,
+          11
+        ],
+        [
+          12.72,
+          14.7
+        ],
+        [
+          16.32,
+          18.27
+        ]
+      ],
+      "baseline": {
+        "calibration": {
+          "side": "right",
+          "thetaTop": 171.58509698910274,
+          "thetaBottom": 14.395441394497015
+        },
+        "calibrationEvents": [
+          3.8,
+          7.267,
+          10.667
+        ],
+        "verifiedEvents": [
+          14.133,
+          17.8
+        ],
+        "attempts": [
+          {
+            "status": "verified",
+            "qMax": 0.9896224187767709,
+            "durationMs": 2000
+          },
+          {
+            "status": "verified",
+            "qMax": 0.992290556015055,
+            "durationMs": 2066.666666666666
+          }
+        ],
+        "scoring": {
+          "eligible": true,
+          "calibration": {
+            "matched": [
+              {
+                "referenceTopSec": 4.1,
+                "observedSec": 3.8
+              },
+              {
+                "referenceTopSec": 7.6,
+                "observedSec": 7.267
+              },
+              {
+                "referenceTopSec": 11,
+                "observedSec": 10.667
+              }
+            ],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "training": {
+            "matched": [
+              {
+                "referenceTopSec": 14.7,
+                "observedSec": 14.133
+              },
+              {
+                "referenceTopSec": 18.27,
+                "observedSec": 17.8
+              }
+            ],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "calibrationOnFirstThree": true
+        }
+      },
+      "candidate": {
+        "calibration": {
+          "side": "right",
+          "thetaTop": 171.58509698910274,
+          "thetaBottom": 14.395441394497015
+        },
+        "calibrationEvents": [
+          3.667,
+          7.2,
+          10.4
+        ],
+        "verifiedEvents": [
+          13.733,
+          17.533
+        ],
+        "attempts": [
+          {
+            "status": "verified",
+            "qMax": 0.9896224187767709,
+            "durationMs": 1600
+          },
+          {
+            "status": "verified",
+            "qMax": 0.992290556015055,
+            "durationMs": 1799.9999999999982
+          }
+        ],
+        "scoring": {
+          "eligible": true,
+          "calibration": {
+            "matched": [
+              {
+                "referenceTopSec": 4.1,
+                "observedSec": 3.667
+              },
+              {
+                "referenceTopSec": 7.6,
+                "observedSec": 7.2
+              },
+              {
+                "referenceTopSec": 11,
+                "observedSec": 10.4
+              }
+            ],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "training": {
+            "matched": [
+              {
+                "referenceTopSec": 14.7,
+                "observedSec": 13.733
+              },
+              {
+                "referenceTopSec": 18.27,
+                "observedSec": 17.533
+              }
+            ],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "calibrationOnFirstThree": true
+        }
+      }
+    },
+    {
+      "file": "pulldown-mistakes.webm",
+      "frames": 163,
+      "sourceSha256": "0765784da54e2bf0ec32bc0def3014a729b009b54d39533b135dc64a312efcf5",
+      "inputSha256": "85558944b62aaf1a61df85e9a2e749e47b9e8fc2ebf53df64c46f1d5efbee5f1",
+      "reference": [
+        [
+          9.4,
+          10.86
+        ]
+      ],
+      "baseline": {
+        "calibration": null,
+        "calibrationEvents": [],
+        "verifiedEvents": [],
+        "attempts": [],
+        "scoring": {
+          "eligible": false,
+          "calibration": {
+            "matched": [],
+            "missedTopSec": [
+              10.86
+            ],
+            "unmatchedSec": []
+          },
+          "training": {
+            "matched": [],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "calibrationOnFirstThree": false
+        }
+      },
+      "candidate": {
+        "calibration": null,
+        "calibrationEvents": [
+          10.733
+        ],
+        "verifiedEvents": [],
+        "attempts": [],
+        "scoring": {
+          "eligible": false,
+          "calibration": {
+            "matched": [
+              {
+                "referenceTopSec": 10.86,
+                "observedSec": 10.733
+              }
+            ],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "training": {
+            "matched": [],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "calibrationOnFirstThree": false
+        }
+      }
+    },
+    {
+      "file": "pexels-3209241.mp4",
+      "frames": 206,
+      "sourceSha256": "01d1938612efe9d99984a22285da6e7b88aa8c30ba735367a7429f28fa838a35",
+      "inputSha256": "580f1be4205dc216ba5de8d5fda849daafdfd20d985646c2fb8436866d94a246",
+      "reference": null,
+      "baseline": {
+        "calibration": null,
+        "calibrationEvents": [],
+        "verifiedEvents": [],
+        "attempts": [],
+        "scoring": {
+          "eligible": false,
+          "reason": "no reliable cycle reference"
+        }
+      },
+      "candidate": {
+        "calibration": null,
+        "calibrationEvents": [],
+        "verifiedEvents": [],
+        "attempts": [],
+        "scoring": {
+          "eligible": false,
+          "reason": "no reliable cycle reference"
+        }
+      }
+    },
+    {
+      "file": "pexels-3209802.mp4",
+      "frames": 224,
+      "sourceSha256": "f260d0e78608c08766bfdb32452b35df26f1b8e57ac258758fe29d57fe232525",
+      "inputSha256": "80f0b83dab489ce6b7879660584c80aeaff4709d69bdd7281353a623299eaf57",
+      "reference": null,
+      "baseline": {
+        "calibration": null,
+        "calibrationEvents": [],
+        "verifiedEvents": [],
+        "attempts": [],
+        "scoring": {
+          "eligible": false,
+          "reason": "no reliable cycle reference"
+        }
+      },
+      "candidate": {
+        "calibration": null,
+        "calibrationEvents": [],
+        "verifiedEvents": [],
+        "attempts": [],
+        "scoring": {
+          "eligible": false,
+          "reason": "no reliable cycle reference"
+        }
+      }
+    },
+    {
+      "file": "pexels-5983521.mp4",
+      "frames": 161,
+      "sourceSha256": "36c08e1fac43d6777846e09fe0d6fea7794b30fbc95226dbf9bb04ecd14fd10a",
+      "inputSha256": "a8cd8c898f074156970c516f4e583b15f1db4aa0d81f3c22ee526239a7c7ca27",
+      "reference": [
+        [
+          6,
+          10.45
+        ]
+      ],
+      "baseline": {
+        "calibration": null,
+        "calibrationEvents": [
+          10.2
+        ],
+        "verifiedEvents": [],
+        "attempts": [],
+        "scoring": {
+          "eligible": false,
+          "calibration": {
+            "matched": [
+              {
+                "referenceTopSec": 10.45,
+                "observedSec": 10.2
+              }
+            ],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "training": {
+            "matched": [],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "calibrationOnFirstThree": false
+        }
+      },
+      "candidate": {
+        "calibration": null,
+        "calibrationEvents": [
+          9.933
+        ],
+        "verifiedEvents": [],
+        "attempts": [],
+        "scoring": {
+          "eligible": false,
+          "calibration": {
+            "matched": [
+              {
+                "referenceTopSec": 10.45,
+                "observedSec": 9.933
+              }
+            ],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "training": {
+            "matched": [],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "calibrationOnFirstThree": false
+        }
+      }
+    },
+    {
+      "file": "pexels-6892546.mp4",
+      "frames": 194,
+      "sourceSha256": "3a912d39a53e68bc3870b040192cfd5705c5fd37555b7f9e966169294e3e432a",
+      "inputSha256": "5167852378b82044cc86d888dc336c9133b4875206756c320661cc4932329247",
+      "reference": null,
+      "baseline": {
+        "calibration": null,
+        "calibrationEvents": [],
+        "verifiedEvents": [],
+        "attempts": [],
+        "scoring": {
+          "eligible": false,
+          "reason": "no reliable cycle reference"
+        }
+      },
+      "candidate": {
+        "calibration": null,
+        "calibrationEvents": [],
+        "verifiedEvents": [],
+        "attempts": [],
+        "scoring": {
+          "eligible": false,
+          "reason": "no reliable cycle reference"
+        }
+      }
+    },
+    {
+      "file": "hf-lat-1.mp4",
+      "frames": 51,
+      "sourceSha256": "9480b086255f005491b367d05d5ec8060daf618a727ee761aeed661b07bfea32",
+      "inputSha256": "116f6f72cc479f2b8b5072eab208de9b757dbe32d324c64aa2dec8e8c35ad5e5",
+      "reference": [
+        [
+          2,
+          3.18
+        ]
+      ],
+      "baseline": {
+        "calibration": null,
+        "calibrationEvents": [
+          3.267
+        ],
+        "verifiedEvents": [],
+        "attempts": [],
+        "scoring": {
+          "eligible": false,
+          "calibration": {
+            "matched": [
+              {
+                "referenceTopSec": 3.18,
+                "observedSec": 3.267
+              }
+            ],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "training": {
+            "matched": [],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "calibrationOnFirstThree": false
+        }
+      },
+      "candidate": {
+        "calibration": null,
+        "calibrationEvents": [
+          3.067
+        ],
+        "verifiedEvents": [],
+        "attempts": [],
+        "scoring": {
+          "eligible": false,
+          "calibration": {
+            "matched": [
+              {
+                "referenceTopSec": 3.18,
+                "observedSec": 3.067
+              }
+            ],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "training": {
+            "matched": [],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "calibrationOnFirstThree": false
+        }
+      }
+    },
+    {
+      "file": "hf-lat-2.mp4",
+      "frames": 37,
+      "sourceSha256": "05c348d0ee6edef95246d55dbeca5808fcd06410bfa4a31479a6ffdb8cd8d138",
+      "inputSha256": "03319224927e8bcd96868752a32bc35e757e45b65364d060f554bb6e478a6cc3",
+      "reference": [
+        [
+          1,
+          2.29
+        ]
+      ],
+      "baseline": {
+        "calibration": null,
+        "calibrationEvents": [
+          2.333
+        ],
+        "verifiedEvents": [],
+        "attempts": [],
+        "scoring": {
+          "eligible": false,
+          "calibration": {
+            "matched": [
+              {
+                "referenceTopSec": 2.29,
+                "observedSec": 2.333
+              }
+            ],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "training": {
+            "matched": [],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "calibrationOnFirstThree": false
+        }
+      },
+      "candidate": {
+        "calibration": null,
+        "calibrationEvents": [
+          2.133
+        ],
+        "verifiedEvents": [],
+        "attempts": [],
+        "scoring": {
+          "eligible": false,
+          "calibration": {
+            "matched": [
+              {
+                "referenceTopSec": 2.29,
+                "observedSec": 2.133
+              }
+            ],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "training": {
+            "matched": [],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "calibrationOnFirstThree": false
+        }
+      }
+    },
+    {
+      "file": "hf-lat-3.mp4",
+      "frames": 35,
+      "sourceSha256": "3293236fdba8427474fd577e03ce0f545fcbdb09c9d7d0a91ad3cd9d065ff8a4",
+      "inputSha256": "7ed11edd05e3cb712259e693986fad2de2fbb61406d6e7d8af07c7cffef6df4f",
+      "reference": [
+        [
+          0.85,
+          2.18
+        ]
+      ],
+      "baseline": {
+        "calibration": null,
+        "calibrationEvents": [
+          2.067
+        ],
+        "verifiedEvents": [],
+        "attempts": [],
+        "scoring": {
+          "eligible": false,
+          "calibration": {
+            "matched": [
+              {
+                "referenceTopSec": 2.18,
+                "observedSec": 2.067
+              }
+            ],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "training": {
+            "matched": [],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "calibrationOnFirstThree": false
+        }
+      },
+      "candidate": {
+        "calibration": null,
+        "calibrationEvents": [
+          1.933
+        ],
+        "verifiedEvents": [],
+        "attempts": [],
+        "scoring": {
+          "eligible": false,
+          "calibration": {
+            "matched": [
+              {
+                "referenceTopSec": 2.18,
+                "observedSec": 1.933
+              }
+            ],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "training": {
+            "matched": [],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "calibrationOnFirstThree": false
+        }
+      }
+    },
+    {
+      "file": "hf-lat-27.mp4",
+      "frames": 210,
+      "sourceSha256": "ed3278c77f3f6026832b114e7b3ef28c06e81a1dc2a712b5341d7460dd71a543",
+      "inputSha256": "7273d7081d8f833ee073e6f47a5cd263bb175f57f4d1360293a3264ce5722b83",
+      "reference": [
+        [
+          5.9,
+          9.2
+        ]
+      ],
+      "baseline": {
+        "calibration": null,
+        "calibrationEvents": [
+          9.533,
+          13.8
+        ],
+        "verifiedEvents": [],
+        "attempts": [],
+        "scoring": {
+          "eligible": false,
+          "calibration": {
+            "matched": [
+              {
+                "referenceTopSec": 9.2,
+                "observedSec": 9.533
+              }
+            ],
+            "missedTopSec": [],
+            "unmatchedSec": [
+              13.8
+            ]
+          },
+          "training": {
+            "matched": [],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "calibrationOnFirstThree": false
+        }
+      },
+      "candidate": {
+        "calibration": null,
+        "calibrationEvents": [
+          9.267,
+          13.733
+        ],
+        "verifiedEvents": [],
+        "attempts": [],
+        "scoring": {
+          "eligible": false,
+          "calibration": {
+            "matched": [
+              {
+                "referenceTopSec": 9.2,
+                "observedSec": 9.267
+              }
+            ],
+            "missedTopSec": [],
+            "unmatchedSec": [
+              13.733
+            ]
+          },
+          "training": {
+            "matched": [],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "calibrationOnFirstThree": false
+        }
+      }
+    },
+    {
+      "file": "hf-lat-30.mp4",
+      "frames": 132,
+      "sourceSha256": "54fd7be7a875be5bdbc144b321668c63e895aab17290b44562c7ecf6df89b4c7",
+      "inputSha256": "33f42398c4f9fe2a9627424b512769249e74b86e7831f2fa729c4510e12d9e3f",
+      "reference": [
+        [
+          0.9,
+          2.45
+        ],
+        [
+          3.65,
+          5.15
+        ],
+        [
+          6.15,
+          7.7
+        ]
+      ],
+      "baseline": {
+        "calibration": null,
+        "calibrationEvents": [
+          5.267,
+          7.867
+        ],
+        "verifiedEvents": [],
+        "attempts": [],
+        "scoring": {
+          "eligible": false,
+          "calibration": {
+            "matched": [
+              {
+                "referenceTopSec": 5.15,
+                "observedSec": 5.267
+              },
+              {
+                "referenceTopSec": 7.7,
+                "observedSec": 7.867
+              }
+            ],
+            "missedTopSec": [
+              2.45
+            ],
+            "unmatchedSec": []
+          },
+          "training": {
+            "matched": [],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "calibrationOnFirstThree": false
+        }
+      },
+      "candidate": {
+        "calibration": null,
+        "calibrationEvents": [
+          5.067,
+          7.667
+        ],
+        "verifiedEvents": [],
+        "attempts": [],
+        "scoring": {
+          "eligible": false,
+          "calibration": {
+            "matched": [
+              {
+                "referenceTopSec": 5.15,
+                "observedSec": 5.067
+              },
+              {
+                "referenceTopSec": 7.7,
+                "observedSec": 7.667
+              }
+            ],
+            "missedTopSec": [
+              2.45
+            ],
+            "unmatchedSec": []
+          },
+          "training": {
+            "matched": [],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "calibrationOnFirstThree": false
+        }
+      }
+    },
+    {
+      "file": "hf-lat-40.mp4",
+      "frames": 150,
+      "sourceSha256": "02dff1e715388ffe34979b0c27ac1a57dfafc3a57764eded1f3b5f6cfd556348",
+      "inputSha256": "785f2c0f1926951c6769bf74a9df920db5aa614b427432f754863798fcbc6746",
+      "reference": [
+        [
+          3.85,
+          6.85
+        ]
+      ],
+      "baseline": {
+        "calibration": null,
+        "calibrationEvents": [],
+        "verifiedEvents": [],
+        "attempts": [],
+        "scoring": {
+          "eligible": false,
+          "calibration": {
+            "matched": [],
+            "missedTopSec": [
+              6.85
+            ],
+            "unmatchedSec": []
+          },
+          "training": {
+            "matched": [],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "calibrationOnFirstThree": false
+        }
+      },
+      "candidate": {
+        "calibration": null,
+        "calibrationEvents": [
+          6.267
+        ],
+        "verifiedEvents": [],
+        "attempts": [],
+        "scoring": {
+          "eligible": false,
+          "calibration": {
+            "matched": [
+              {
+                "referenceTopSec": 6.85,
+                "observedSec": 6.267
+              }
+            ],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "training": {
+            "matched": [],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "calibrationOnFirstThree": false
+        }
+      }
+    },
+    {
+      "file": "hf-lat-45.mp4",
+      "frames": 111,
+      "sourceSha256": "ae91e6da4d51e6fc615ae0e71c82269ece00f9f7a7b94790f446bcc6301886a5",
+      "inputSha256": "3db8360886be2ba535de2762d0dcb06dd39fa6abec533e44d66d77e2e7c54a57",
+      "reference": [
+        [
+          1.15,
+          2.6
+        ],
+        [
+          4.05,
+          5.85
+        ]
+      ],
+      "baseline": {
+        "calibration": null,
+        "calibrationEvents": [],
+        "verifiedEvents": [],
+        "attempts": [],
+        "scoring": {
+          "eligible": false,
+          "calibration": {
+            "matched": [],
+            "missedTopSec": [
+              2.6,
+              5.85
+            ],
+            "unmatchedSec": []
+          },
+          "training": {
+            "matched": [],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "calibrationOnFirstThree": false
+        }
+      },
+      "candidate": {
+        "calibration": null,
+        "calibrationEvents": [
+          2.4,
+          5.533
+        ],
+        "verifiedEvents": [],
+        "attempts": [],
+        "scoring": {
+          "eligible": false,
+          "calibration": {
+            "matched": [
+              {
+                "referenceTopSec": 2.6,
+                "observedSec": 2.4
+              },
+              {
+                "referenceTopSec": 5.85,
+                "observedSec": 5.533
+              }
+            ],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "training": {
+            "matched": [],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "calibrationOnFirstThree": false
+        }
+      }
+    },
+    {
+      "file": "hf-lat-47.mp4",
+      "frames": 44,
+      "sourceSha256": "da1af2c9e6fcc454bd678dc39ec323aebf53552197b32cb5cfa7ca48dbb7f9d3",
+      "inputSha256": "cbf69a25472d494545a45dcf4d17d0c52e32998fe0170a05f3b69f0ad7cfa4dd",
+      "reference": null,
+      "baseline": {
+        "calibration": null,
+        "calibrationEvents": [],
+        "verifiedEvents": [],
+        "attempts": [],
+        "scoring": {
+          "eligible": false,
+          "reason": "no reliable cycle reference"
+        }
+      },
+      "candidate": {
+        "calibration": null,
+        "calibrationEvents": [
+          2.2
+        ],
+        "verifiedEvents": [],
+        "attempts": [],
+        "scoring": {
+          "eligible": false,
+          "reason": "no reliable cycle reference"
+        }
+      }
+    },
+    {
+      "file": "hf-lat-51.mp4",
+      "frames": 48,
+      "sourceSha256": "4602ae5333fe326b8b64ee26725e55dfc6cc5b867d19934771c60fe0d41cd5d9",
+      "inputSha256": "7ff323ff0a3143e958b1e7a198d1b9032c01e9ee0005b5d5ba89510575edad12",
+      "reference": [],
+      "baseline": {
+        "calibration": null,
+        "calibrationEvents": [],
+        "verifiedEvents": [],
+        "attempts": [],
+        "scoring": {
+          "eligible": false,
+          "calibration": {
+            "matched": [],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "training": {
+            "matched": [],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "calibrationOnFirstThree": false
+        }
+      },
+      "candidate": {
+        "calibration": null,
+        "calibrationEvents": [],
+        "verifiedEvents": [],
+        "attempts": [],
+        "scoring": {
+          "eligible": false,
+          "calibration": {
+            "matched": [],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "training": {
+            "matched": [],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "calibrationOnFirstThree": false
+        }
+      }
+    },
+    {
+      "file": "go4it-rear.webm",
+      "frames": 600,
+      "sourceSha256": "8ef16f7b2cbd3d8cf9fc0e61bb85b293c1b74670f90d5cb9381e662a512c3c3b",
+      "inputSha256": "503f811ef67985487b963eb4302b832d67c60cfabb1d6b07742891fae1ba99a4",
+      "reference": [
+        [
+          2.2,
+          5.75
+        ],
+        [
+          7.35,
+          11.35
+        ],
+        [
+          13.05,
+          17.35
+        ],
+        [
+          18.95,
+          23.35
+        ],
+        [
+          25.05,
+          29.05
+        ],
+        [
+          30.4,
+          34.05
+        ],
+        [
+          35.85,
+          39.55
+        ]
+      ],
+      "baseline": {
+        "calibration": {
+          "side": "right",
+          "thetaTop": 169.06973081863433,
+          "thetaBottom": 49.866186591146764
+        },
+        "calibrationEvents": [
+          5.8,
+          10.733,
+          16.4
+        ],
+        "verifiedEvents": [
+          23.067,
+          27.667,
+          33.133,
+          38.867
+        ],
+        "attempts": [
+          {
+            "status": "verified",
+            "qMax": 1,
+            "durationMs": 4866.666666666668
+          },
+          {
+            "status": "verified",
+            "qMax": 1,
+            "durationMs": 3200
+          },
+          {
+            "status": "verified",
+            "qMax": 0.9969558977358122,
+            "durationMs": 3533.3333333333358
+          },
+          {
+            "status": "verified",
+            "qMax": 0.978449908821563,
+            "durationMs": 3866.6666666666642
+          }
+        ],
+        "scoring": {
+          "eligible": true,
+          "calibration": {
+            "matched": [
+              {
+                "referenceTopSec": 5.75,
+                "observedSec": 5.8
+              },
+              {
+                "referenceTopSec": 11.35,
+                "observedSec": 10.733
+              },
+              {
+                "referenceTopSec": 17.35,
+                "observedSec": 16.4
+              }
+            ],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "training": {
+            "matched": [
+              {
+                "referenceTopSec": 23.35,
+                "observedSec": 23.067
+              },
+              {
+                "referenceTopSec": 29.05,
+                "observedSec": 27.667
+              },
+              {
+                "referenceTopSec": 34.05,
+                "observedSec": 33.133
+              },
+              {
+                "referenceTopSec": 39.55,
+                "observedSec": 38.867
+              }
+            ],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "calibrationOnFirstThree": true
+        }
+      },
+      "candidate": {
+        "calibration": {
+          "side": "left",
+          "thetaTop": 159.7425598981672,
+          "thetaBottom": 55.96018236581824
+        },
+        "calibrationEvents": [
+          5.067,
+          10.333,
+          16.2
+        ],
+        "verifiedEvents": [
+          21.933,
+          27.667,
+          33,
+          38.6
+        ],
+        "attempts": [
+          {
+            "status": "verified",
+            "qMax": 0.9945193240580128,
+            "durationMs": 3666.6666666666642
+          },
+          {
+            "status": "verified",
+            "qMax": 0.9742756226731959,
+            "durationMs": 3133.3333333333358
+          },
+          {
+            "status": "verified",
+            "qMax": 1,
+            "durationMs": 3333.333333333332
+          },
+          {
+            "status": "verified",
+            "qMax": 0.9884728848713473,
+            "durationMs": 3533.3333333333358
+          }
+        ],
+        "scoring": {
+          "eligible": true,
+          "calibration": {
+            "matched": [
+              {
+                "referenceTopSec": 5.75,
+                "observedSec": 5.067
+              },
+              {
+                "referenceTopSec": 11.35,
+                "observedSec": 10.333
+              },
+              {
+                "referenceTopSec": 17.35,
+                "observedSec": 16.2
+              }
+            ],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "training": {
+            "matched": [
+              {
+                "referenceTopSec": 23.35,
+                "observedSec": 21.933
+              },
+              {
+                "referenceTopSec": 29.05,
+                "observedSec": 27.667
+              },
+              {
+                "referenceTopSec": 34.05,
+                "observedSec": 33
+              },
+              {
+                "referenceTopSec": 39.55,
+                "observedSec": 38.6
+              }
+            ],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "calibrationOnFirstThree": true
+        }
+      }
+    },
+    {
+      "file": "go4it-coach.webm",
+      "frames": 627,
+      "sourceSha256": "8ef16f7b2cbd3d8cf9fc0e61bb85b293c1b74670f90d5cb9381e662a512c3c3b",
+      "inputSha256": "4a0ea58639a8191769d550c0e75543178431f73d74cfea9d46ff4a5ee92464fc",
+      "reference": [
+        [
+          3.8,
+          7.3
+        ],
+        [
+          9,
+          13
+        ],
+        [
+          16.1,
+          19.9
+        ],
+        [
+          23.4,
+          28
+        ],
+        [
+          30.8,
+          34.5
+        ],
+        [
+          37.1,
+          40.8
+        ]
+      ],
+      "baseline": {
+        "calibration": {
+          "side": "left",
+          "thetaTop": 160.63555860769165,
+          "thetaBottom": 49.56568952878036
+        },
+        "calibrationEvents": [
+          13.067,
+          28.867,
+          41.4
+        ],
+        "verifiedEvents": [],
+        "attempts": [],
+        "scoring": {
+          "eligible": true,
+          "calibration": {
+            "matched": [
+              {
+                "referenceTopSec": 13,
+                "observedSec": 13.067
+              }
+            ],
+            "missedTopSec": [
+              7.3,
+              19.9
+            ],
+            "unmatchedSec": [
+              28.867,
+              41.4
+            ]
+          },
+          "training": {
+            "matched": [],
+            "missedTopSec": [
+              28,
+              34.5,
+              40.8
+            ],
+            "unmatchedSec": []
+          },
+          "calibrationOnFirstThree": false
+        }
+      },
+      "candidate": {
+        "calibration": {
+          "side": "left",
+          "thetaTop": 160.63555860769165,
+          "thetaBottom": 50.099648160436146
+        },
+        "calibrationEvents": [
+          12.333,
+          19.8,
+          28.4
+        ],
+        "verifiedEvents": [
+          33.867,
+          40.667
+        ],
+        "attempts": [
+          {
+            "status": "verified",
+            "qMax": 1,
+            "durationMs": 3799.9999999999964
+          },
+          {
+            "status": "verified",
+            "qMax": 1,
+            "durationMs": 4466.666666666664
+          }
+        ],
+        "scoring": {
+          "eligible": true,
+          "calibration": {
+            "matched": [
+              {
+                "referenceTopSec": 13,
+                "observedSec": 12.333
+              },
+              {
+                "referenceTopSec": 19.9,
+                "observedSec": 19.8
+              }
+            ],
+            "missedTopSec": [
+              7.3
+            ],
+            "unmatchedSec": [
+              28.4
+            ]
+          },
+          "training": {
+            "matched": [
+              {
+                "referenceTopSec": 34.5,
+                "observedSec": 33.867
+              },
+              {
+                "referenceTopSec": 40.8,
+                "observedSec": 40.667
+              }
+            ],
+            "missedTopSec": [
+              28
+            ],
+            "unmatchedSec": []
+          },
+          "calibrationOnFirstThree": false
+        }
+      }
+    },
+    {
+      "file": "mixkit-100523.mp4",
+      "frames": 231,
+      "sourceSha256": "e39fd249826084f4da60c1ee964c353f96b27b456e9b273b775af4f353667835",
+      "inputSha256": "d1ef1b5e022fc3b197b97626c4c844086bdd315806e1c394399c5c0bb8258969",
+      "reference": [
+        [
+          1.1,
+          2.3
+        ],
+        [
+          3.45,
+          4.65
+        ],
+        [
+          5.8,
+          7
+        ],
+        [
+          8.1,
+          9.4
+        ],
+        [
+          10.6,
+          11.8
+        ],
+        [
+          13.05,
+          14.25
+        ]
+      ],
+      "baseline": {
+        "calibration": null,
+        "calibrationEvents": [],
+        "verifiedEvents": [],
+        "attempts": [],
+        "scoring": {
+          "eligible": true,
+          "calibration": {
+            "matched": [],
+            "missedTopSec": [
+              2.3,
+              4.65,
+              7
+            ],
+            "unmatchedSec": []
+          },
+          "training": {
+            "matched": [],
+            "missedTopSec": [
+              9.4,
+              11.8,
+              14.25
+            ],
+            "unmatchedSec": []
+          },
+          "calibrationOnFirstThree": false
+        }
+      },
+      "candidate": {
+        "calibration": {
+          "basis": "upper-arm",
+          "side": "right",
+          "thetaTop": 155.50233981351687,
+          "thetaBottom": 39.710000058881306
+        },
+        "calibrationEvents": [
+          1.867,
+          4.333,
+          6.667
+        ],
+        "verifiedEvents": [
+          9.067,
+          11.6,
+          13.8
+        ],
+        "attempts": [
+          {
+            "status": "verified",
+            "qMax": null,
+            "durationMs": 2333.333333333333
+          },
+          {
+            "status": "verified",
+            "qMax": null,
+            "durationMs": 2533.333333333334
+          },
+          {
+            "status": "verified",
+            "qMax": null,
+            "durationMs": 2200
+          }
+        ],
+        "scoring": {
+          "eligible": true,
+          "calibration": {
+            "matched": [
+              {
+                "referenceTopSec": 2.3,
+                "observedSec": 1.867
+              },
+              {
+                "referenceTopSec": 4.65,
+                "observedSec": 4.333
+              },
+              {
+                "referenceTopSec": 7,
+                "observedSec": 6.667
+              }
+            ],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "training": {
+            "matched": [
+              {
+                "referenceTopSec": 9.4,
+                "observedSec": 9.067
+              },
+              {
+                "referenceTopSec": 11.8,
+                "observedSec": 11.6
+              },
+              {
+                "referenceTopSec": 14.25,
+                "observedSec": 13.8
+              }
+            ],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "calibrationOnFirstThree": true
+        }
+      }
+    }
+  ],
+  "matching": "One-to-one, bottom <= event <= reference top + 0.35s. Missing calibration retains all uncounted training cycles as misses."
+}

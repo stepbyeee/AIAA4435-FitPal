@@ -22,7 +22,7 @@ const LEFT_OVER: Record<string, (n: number) => string> = {
 function lastSetLine(last: LastSet | undefined) {
   if (!last) return '还没有上一次的记录。'
   if (!last.issue) {
-    const verified = last.depths.filter((depth) => depth !== null).length
+    const verified = last.depths.filter((depth) => depth !== null).length + (last.countOnly?.length ?? 0)
     return verified ? `上次最后一组确认了 ${verified} 下。` : '上次最后一组没有可确认的动作。'
   }
   return LEFT_OVER[last.issue.id]?.(last.issue.count) ?? '上次最后一组还有问题没改掉。'
@@ -86,7 +86,7 @@ export function Home({ cosmetic, history, gear, onBuy, onStart }: Props) {
           <section className="focus" onPointerEnter={() => setPulling(true)} onPointerLeave={() => setPulling(false)}>
             <h2 className="focus-name">{today.name}</h2>
             <p className="focus-say">{lastSetLine(last)}</p>
-            {last && <Depths depths={last.depths} />}
+            {last && <Depths depths={last.depths} countOnly={last.countOnly} />}
             <div className="focus-foot">
               <span className="focus-reps num">
                 {reps[today.id] ?? 0}
@@ -162,13 +162,13 @@ function GearButton({ item, state, onBuy, onTry }: { item: GearItem; state: Retu
 }
 
 /** How deep each rep of a set went, against the line a rep has to reach. */
-function Depths({ depths }: { depths: (number | null)[] }) {
+function Depths({ depths, countOnly = [] }: Pick<LastSet, 'depths' | 'countOnly'>) {
   const short = depths.filter((d) => d !== null && d < IN_RANGE).length
-  const unseen = depths.filter((d) => d === null).length
+  const unseen = depths.filter((d) => d === null).length - countOnly.length
   return (
-    <div className="depths" role="img" aria-label={`${depths.length} 下：${short} 下没到位，${unseen} 下没看清`}>
+    <div className="depths" role="img" aria-label={`${depths.length} 下：${short} 下没到位，${unseen} 下没看清，${countOnly.length} 下已计数但未评幅度`}>
       {depths.map((d, i) =>
-        d === null ? <i key={i} className="depth-unseen" /> : <i key={i} className={d < IN_RANGE ? 'depth-short' : undefined} style={{ height: `${d * 100}%` }} />,
+        d === null ? <i key={i} className="depth-unseen" title={countOnly.includes(i) ? '已计数，幅度未评估' : '动作未看清'} /> : <i key={i} className={d < IN_RANGE ? 'depth-short' : undefined} style={{ height: `${d * 100}%` }} />,
       )}
       <span className="depths-target" style={{ bottom: `${IN_RANGE * 100}%` }} />
     </div>

@@ -170,7 +170,7 @@ export function createSquat(calibration?: SquatCalibration) {
     getRepReview(): RepReviewData { return { side: leader.side, traces: [...leader.traces] } },
     endSet(): SetSummary {
       const reps = leader.reps.map((r) => ({ ...r }))
-      const short = reps.flatMap((r, i) => r.status === 'verified' && r.qMax < IN_RANGE ? [i] : [])
+      const short = reps.flatMap((r, i) => r.status === 'verified' && r.qMax !== null && r.qMax < IN_RANGE ? [i] : [])
       const unseen = reps.flatMap((r, i) => r.status === 'cannot_verify' ? [i] : [])
       const issues: SetSummary['issues'] = []
       if (short.length) issues.push({ id: 'short_range', repIndexes: short })

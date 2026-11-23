@@ -25,10 +25,10 @@ function wording(summary: SetSummary, issue: string | undefined) {
     ] }
   }
   if (issue !== 'short_range') return null
-  const short = summary.reps.flatMap((rep, index) => rep.status === 'verified' && rep.qMax < IN_RANGE ? [index] : [])
+  const short = summary.reps.flatMap((rep, index) => rep.status === 'verified' && rep.qMax !== null && rep.qMax < IN_RANGE ? [{ index, depth: rep.qMax }] : [])
   if (!short.length) return null
-  const index = short[0]
-  const pct = Math.round(summary.reps[index].qMax * 100)
+  const { index, depth } = short[0]
+  const pct = Math.round(depth * 100)
   const target = IN_RANGE * 100
   const observation = [`这组有 ${short.length} 下低于个人幅度目标 ${target}%。`]
   if (pct < target) observation.push(`第 ${index + 1} 下约为校准幅度的 ${pct}%，目标是 ${target}%。`)

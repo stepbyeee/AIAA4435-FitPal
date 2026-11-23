@@ -1,5 +1,6 @@
 import { IN_RANGE, type FrameState, type Phase, type PoseFrame, type RepResult, type SetSummary } from '../contract'
 import { MAX_REVIEW_REPS, recordAttempt, type RepReviewData, type RepTrace } from './repReview'
+import { createUpperArmTrack } from './pulldownUpperArm'
 import { visibleArm, type ArmSide } from '../tracking/armLandmarks'
 
 export type Calibration = SetSummary['calibration'] & { side: ArmSide }
@@ -27,7 +28,7 @@ const MAX_REP_MS = 12_000
 const MAX_FRAME_GAP_MS = 500
 const ASSUMED_SWING = 50
 const MIN_LIFT_TOLERANCE = 0.012
-const LIFT_TOLERANCE_FRACTION = 0.1
+const LIFT_TOLERANCE_FRACTION = 0.18
 
 const bounded = (n: number, min: number, max: number) => Math.max(min, Math.min(max, n))
 
@@ -63,6 +64,7 @@ function createSideTrack(side: Side, fixed?: Calibration) {
   let confidence = 0
   let verified = 0
   let previousArm: ArmSample | null = null
+  let recentlyRaised: { arm: ArmSample; time: number } | null = null
 
   function loseTracking() {
     recent.length = 0
@@ -88,11 +90,29 @@ function createSideTrack(side: Side, fixed?: Calibration) {
       if (Math.hypot(sx, sy) > 0.15 && Math.hypot(ex, ey) > 0.15 && sx * ex + sy * ey > 0) loseTracking()
     }
     if (lastSampleTime !== null && timestampMs - lastSampleTime > MAX_FRAME_GAP_MS) loseTracking()
+    // Calibration can re-arm from a directly observed top after a brief detector
+    // dropout. The first returning frame must itself match the prior top on this
+    // side. An active descent/return always follows the interrupted-attempt path.
+    if (!sample && !fixed && !attempt && topPose && topReady && previousArm && lastSampleTime !== null
+      && Math.abs(previousArm.angle - topPose.angle) <= 9) {
+      recentlyRaised = { arm: previousArm, time: lastSampleTime }
+    }
     previousArm = sample
     lastSampleTime = timestampMs
     if (!sample) {
       loseTracking()
       return
+    }
+    if (recentlyRaised) {
+      const { arm, time } = recentlyRaised
+      recentlyRaised = null
+      if (timestampMs - time <= 170 && Math.abs(sample.angle - arm.angle) <= 9
+        && Math.abs(sample.lift - arm.lift) <= 0.04
+        && Math.hypot(sample.shoulder.x - arm.shoulder.x, sample.shoulder.y - arm.shoulder.y) <= 0.06) {
+        topAngle = sample.angle
+        topPose = { angle: sample.angle, lift: sample.lift }
+        topReady = true
+      }
     }
 
     recent.push(sample)
@@ -184,7 +204,9 @@ function createSideTrack(side: Side, fixed?: Calibration) {
     }
 
     phase = timestampMs - current.turn.startedAt < 120 ? 'bottom' : 'return'
-    const returnTolerance = fixed ? topTolerance : bounded(0.2 * excursion, 5, 12)
+    // A slow return may not recover the exact angle measured at the start.
+    // Require most of this pull's excursion back at both the elbow and wrist.
+    const returnTolerance = bounded(0.24 * excursion, 5, 26)
     if (angle < current.topAngle - returnTolerance || recent.length < 3) return
 
     // Elbow extension can precede the bar's return overhead. Confirm the wrist
@@ -215,8 +237,10 @@ function createSideTrack(side: Side, fixed?: Calibration) {
     attempt = null
     // The angle can still extend after crossing the return threshold.
     topAngle = fixed?.thetaTop ?? angle
-    topPose = fixed ? { angle, lift } : null
-    topReady = Boolean(fixed)
+    // A verified return is itself evidence of a top pose. Continuous repetitions
+    // can start the next descent without making a second stationary hold.
+    topPose = { angle, lift }
+    topReady = true
     phase = 'ready'
   }
 
@@ -242,6 +266,10 @@ function createSideTrack(side: Side, fixed?: Calibration) {
 export function createPulldown(calibration?: Calibration) {
   const fixed = calibration && { ...calibration }
   const tracks = fixed ? [createSideTrack(fixed.side, fixed)] : [createSideTrack('left'), createSideTrack('right')]
+  const upperTracks = fixed
+    ? (fixed.basis === 'upper-arm' ? [createUpperArmTrack(fixed.side, fixed)] : [])
+    : [createUpperArmTrack('left'), createUpperArmTrack('right')]
+  let upper = fixed?.basis === 'upper-arm' ? upperTracks[0] : null
   let active = tracks[0]
   let calibrated = fixed ?? null
   let frameCount = 0
@@ -254,7 +282,9 @@ export function createPulldown(calibration?: Calibration) {
       if (!Number.isFinite(frame.timestampMs) || frame.timestampMs <= lastTime) return frameState
       lastTime = frame.timestampMs
 
-      if (calibrated) {
+      if (upper) {
+        upper.update(frame)
+      } else if (calibrated) {
         active.update(readArm(frame, active.side), frame.timestampMs)
       } else {
         for (const track of tracks) track.update(readArm(frame, track.side), frame.timestampMs)
@@ -262,16 +292,27 @@ export function createPulldown(calibration?: Calibration) {
         // Preserve each arm's own history. The visible leader supplies calibration progress.
         if (other.count > active.count || (other.count === active.count && other.confidence > active.confidence)) active = other
         calibrated = active.getCalibration()
+        if (!calibrated) {
+          for (const track of upperTracks) {
+            track.update(frame)
+            const candidate = track.getCalibration()
+            if (candidate) {
+              upper = track
+              calibrated = candidate
+              break
+            }
+          }
+        }
       }
 
       frameCount++
-      const visible = active.confidence > 0
+      const visible = upper ? upper.visible : active.confidence > 0
       if (visible) visibleCount++
       frameState = {
-        phase: active.phase,
-        q: active.q,
+        phase: upper?.phase ?? active.phase,
+        q: upper?.q ?? active.q,
         visible,
-        repCount: active.count,
+        repCount: upper?.count ?? (calibrated ? active.count : Math.max(active.count, ...upperTracks.map(track => track.count))),
         landmarks: frame.landmarks,
       }
       return frameState
@@ -282,19 +323,23 @@ export function createPulldown(calibration?: Calibration) {
     },
 
     getRepReview(): RepReviewData {
-      return { side: active.side, traces: [...active.traces] }
+      return upper ? { side: upper.side, traces: [] } : { side: active.side, traces: [...active.traces] }
     },
 
     endSet(): SetSummary {
-      const reps = active.reps.map((rep) => ({ ...rep }))
-      const short = reps.flatMap((rep, i) => rep.status === 'verified' && rep.qMax < IN_RANGE ? [i] : [])
+      const reps = (upper?.reps ?? active.reps).map((rep) => ({ ...rep }))
+      const short = reps.flatMap((rep, i) => rep.status === 'verified' && rep.qMax !== null && rep.qMax < IN_RANGE ? [i] : [])
       const unseen = reps.flatMap((rep, i) => rep.status === 'cannot_verify' ? [i] : [])
       const issues: SetSummary['issues'] = []
       if (short.length) issues.push({ id: 'short_range', repIndexes: short })
       if (unseen.length) issues.push({ id: 'out_of_view', repIndexes: unseen })
       return {
         exerciseId: 'lat-pulldown',
-        calibration: { thetaTop: calibrated?.thetaTop ?? 0, thetaBottom: calibrated?.thetaBottom ?? 0 },
+        calibration: {
+          thetaTop: calibrated?.thetaTop ?? 0,
+          thetaBottom: calibrated?.thetaBottom ?? 0,
+          ...(calibrated?.basis ? { basis: calibrated.basis } : {}),
+        },
         reps,
         coverage: frameCount ? visibleCount / frameCount : 0,
         issues,

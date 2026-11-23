@@ -36,3 +36,15 @@ it('keeps one session across set settlements and ignores a late older snapshot',
   expect(loadHistory()).toHaveLength(1)
   expect(totalExp(loadHistory())).toBe(4)
 })
+
+it('retains counted repetitions whose range is missing without reclassifying older missing attempts', () => {
+  const set = { verified: 2, quality: 0, fixed: 0 }
+  const base = { date: '2026-11-23', exerciseId: 'lat-pulldown', sets: [set] }
+  const lastSet = { depths: [1, null, null], issue: null }
+  vi.stubGlobal('localStorage', { getItem: () => JSON.stringify([
+    { ...base, lastSet }, { ...base, lastSet: { ...lastSet, countOnly: [1, 1, 0, -1, 8] } },
+  ]) })
+  const [old, current] = loadHistory()
+  expect(old.lastSet?.countOnly).toBeUndefined()
+  expect(current.lastSet?.countOnly).toEqual([1])
+})

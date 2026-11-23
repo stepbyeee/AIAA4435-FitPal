@@ -12,6 +12,7 @@ const { values } = parseArgs({ options: {
   models: { type: 'string', default: 'lite,full,heavy' },
   'movenet-score': { type: 'string', default: '0.6' },
   clip: { type: 'string' },
+  'frame-cache': { type: 'string' },
   manifest: { type: 'string' },
   'video-dir': { type: 'string' },
   supplementary: { type: 'boolean' },
@@ -43,7 +44,7 @@ const report = { protocol: { fps, maxDimension: 640, format: 'PNG', delegate: 'C
   ffmpeg: execFileSync('ffmpeg', ['-version'], { encoding: 'utf8' }).split('\n')[0],
   platform: platform(), cpu: cpus()[0]?.model, runtime: JSON.parse(await readFile(join(ui, 'node_modules/@mediapipe/tasks-vision/package.json'))).version,
   manifestSha256: await hash(manifestPath), modelSha256: {} }, runs: [] }
-const coreFiles = ['src/perception/pulldown.ts', 'src/perception/squat.ts', 'src/tracking/limbLandmarks.ts',
+const coreFiles = ['src/perception/pulldown.ts', 'src/perception/pulldownUpperArm.ts', 'src/perception/squat.ts', 'src/tracking/limbLandmarks.ts',
   'src/tracking/armLandmarks.ts', 'src/perception/repReview.ts', 'src/contract.ts']
 async function coreHashes() {
   return Object.fromEntries(await Promise.all(coreFiles.map(async file => [file, await hash(join(ui, file))])))
@@ -82,7 +83,9 @@ try {
         if (model !== 'movenet') await page.route(new URL('/benchmark.task', url).href, (route) => route.fulfill({ path: modelPath(model) }))
         await page.goto(urlPath)
         if (model === 'movenet') await loadMoveNet(page, moveNetDir, moveNetScore)
-        await page.evaluate(async ({ exercise, model }) => {
+        await page.evaluate(async ({ exercise, model, cache }) => {
+          const recordedFrames = []
+          window.cachedFrames = () => recordedFrames
           const { visibleLimb } = await import('/src/tracking/limbLandmarks.ts')
           const create = exercise === 'squat' ? (await import('/src/perception/squat.ts')).createSquat
             : (await import('/src/perception/pulldown.ts')).createPulldown
@@ -112,6 +115,7 @@ try {
                 }
                 ms.push(performance.now() - t)
                 const frame = { width, height, landmarks, timestampMs }
+                if (cache) recordedFrames.push(frame)
                 const limb = exercise === 'squat' ? 'leg' : 'arm'
                 const left = Boolean(visibleLimb(frame, 'left', limb)), right = Boolean(visibleLimb(frame, 'right', limb))
                 visible.left += left; visible.right += right; visible.either += left || right
@@ -141,12 +145,19 @@ try {
             else window.closeMoveNet()
             return result
           }
-        }, { exercise: clip.exercise, model })
+        }, { exercise: clip.exercise, model, cache: Boolean(values['frame-cache']) })
         for (let i = 0; i < files.length; i += 12) {
           const batch = await Promise.all(files.slice(i, i + 12).map((file) => readFile(join(folder,file), 'base64')))
           await page.evaluate(([images,hz]) => window.consumeFrames(images,hz), [batch,fps])
         }
         const run = { clip: clip.file, sourceSha256: clip.sha256, startSec: clip.startSec ?? 0, durationSec: clip.durationSec, model, ...await page.evaluate(() => window.report()) }
+        if (values['frame-cache']) {
+          await mkdir(values['frame-cache'], { recursive: true })
+          await writeFile(join(values['frame-cache'], model + '-' + clip.file + '.json'), JSON.stringify({
+            clip: clip.file, startSec: run.startSec, fps, sourceSha256: run.sourceSha256, model,
+            modelSha256: report.protocol.modelSha256[model], frames: await page.evaluate(() => window.cachedFrames()),
+          }))
+        }
         report.runs.push(run)
         console.error(`${clip.file} ${model}: ${run.frames} frames, ${run.calibrationEvents.length} cal + ${run.verifiedEvents.length} reps, p95 ${run.warmInferenceMs.p95}ms`)
         if (values.output) await writeFile(values.output, JSON.stringify(report,null,2) + '\n')

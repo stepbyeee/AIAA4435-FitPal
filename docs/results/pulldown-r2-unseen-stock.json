@@ -1,0 +1,100 @@
+{
+  "protocol": {
+    "fps": 15,
+    "maxDimension": 640,
+    "delegate": "CPU",
+    "browser": "157.0.8103.79",
+    "manifestSha256": [
+      "f57478330914a0d54c23c13bad2e19130e91129a73335304340e0dfb54e3ae98"
+    ],
+    "modelSha256": "5134a3aad27a58b93da0088d431f366da362b44e3ccfbe3462b3827a839011b1",
+    "sources": {
+      "before": {
+        "perception/pulldown": "613648f60cbf480809a568480a1f66746145037f977466db53098306eb2cc922",
+        "tracking/armLandmarks": "3c63a6e2844b632dd4282ce3d7ce4d3ebb36aeffb3409b5818c114aa4bf63095",
+        "tracking/limbLandmarks": "1ec36b043e06b8ecfd378b488611ea84fbbb468630725bd189bbe38128bee15e",
+        "tracking/armTrails": "e6d1948405c0897e4a4363cb98ed8d5acd0a1355f7cdfc596c86d6ad8c77dfb9",
+        "perception/repReview": "34c345f62b2f820b1599d92be451bfa5c7b10630db58c90d68c434ec03deed94",
+        "contract": "943a5c09dba2b580a8dd49547f22956c901ceca87f3153daf723262e49e468c4"
+      },
+      "after": {
+        "perception/pulldown": "978ce8d95e969a5e341cbe4e740d5e28aee4ac01baede2d65a1ceab50d30fd52",
+        "tracking/armLandmarks": "3c63a6e2844b632dd4282ce3d7ce4d3ebb36aeffb3409b5818c114aa4bf63095",
+        "tracking/limbLandmarks": "1ec36b043e06b8ecfd378b488611ea84fbbb468630725bd189bbe38128bee15e",
+        "tracking/armTrails": "e6d1948405c0897e4a4363cb98ed8d5acd0a1355f7cdfc596c86d6ad8c77dfb9",
+        "perception/repReview": "34c345f62b2f820b1599d92be451bfa5c7b10630db58c90d68c434ec03deed94",
+        "contract": "9e2ea38d228b60f1fd9e676d3acb5bcb7c7b897d510dda1b62a9070088d47381",
+        "perception/pulldownUpperArm": "8593e6bff5f1fce23868ece1657c345d6622610b95c5ff159d0daf18a490f1fa",
+        "tracking/armOcclusion": "595d6f30aa7eb7a207aab39785ecb1e9b1491087a3b66b143afc174787fb92b7"
+      }
+    }
+  },
+  "clips": [
+    {
+      "file": "pexels-35585697.mp4",
+      "sourceSha256": "cadb3f11bc6e5ec282d58c8ac8ae1ac908bffef01a14c65f3555d58ea7f2e718",
+      "windows": [
+        [
+          4.84,
+          5.52
+        ],
+        [
+          6.18,
+          6.88
+        ],
+        [
+          7.44,
+          8.1
+        ],
+        [
+          8.75,
+          9.34
+        ],
+        [
+          10.07,
+          10.74
+        ],
+        [
+          11.41,
+          12.06
+        ],
+        [
+          12.72,
+          13.42
+        ],
+        [
+          14.04,
+          14.64
+        ]
+      ],
+      "visualCycles": 8,
+      "decodedPngsSha256": "f8ccfeb45950f4bf89cba72101433f8dec018e07fffa519e17c65df880b664d2",
+      "before": {
+        "frames": 224,
+        "calibrationEvents": [],
+        "verifiedEvents": [],
+        "calibration": null,
+        "attempts": [],
+        "visibleFrames": {
+          "left": 111,
+          "right": 218
+        },
+        "p95ProcessingMs": 39.6
+      },
+      "after": {
+        "frames": 224,
+        "calibrationEvents": [
+          14.6
+        ],
+        "verifiedEvents": [],
+        "calibration": null,
+        "attempts": [],
+        "visibleFrames": {
+          "left": 99,
+          "right": 199
+        },
+        "p95ProcessingMs": 40.7
+      }
+    }
+  ]
+}

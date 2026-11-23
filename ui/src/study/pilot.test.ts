@@ -11,6 +11,7 @@ describe('pilot conditions', () => {
   })
   it('abstains on missing observations', () => {
     expect(repCue({ ...summary.reps[0], status: 'cannot_verify' })).toMatch(/未看清/)
+    expect(repCue({ ...summary.reps[0], qMax: null })).toMatch(/已计数.*未评估/)
     expect(repCue(summary.reps[0])).toMatch(/目标/)
   })
   it('exports a versioned anonymous result with exposure count and ratings', () => {
