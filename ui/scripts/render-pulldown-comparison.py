@@ -21,8 +21,7 @@ if hashlib.sha256(source.read_bytes()).hexdigest() != clip['sha256']:
     raise ValueError('Source checksum mismatch')
 traces = json.loads(args.trace.read_text())
 assert len(traces['before']) == len(traces['after']) > 1
-fps, pane_w, pane_h = 15, 560, 325
-w, h = 1120, 494
+fps = 15
 fg, hint, mint = '#eff5f4', '#aac0c2', '#64e6ba'
 ink = '#122124'
 colors = {'left': '#59e7cb', 'right': '#ffbb69'}
@@ -36,6 +35,9 @@ probe = json.loads(subprocess.check_output(['ffprobe','-v','error','-select_stre
 sw, sh = probe['width'], probe['height']
 if any(abs(row.get('rotation',0)) % 180 == 90 for row in probe.get('side_data_list',[])):
     sw, sh = sh, sw
+pane_w, pane_h = (350, 510) if sh > sw else (560, 325)
+w, h = 2*pane_w, 2*((pane_h+169)//2)
+info_y = 80+pane_h
 scale = min(pane_w/sw, pane_h/sh)
 dw, dh = round(sw*scale), round(sh*scale)
 scale_filter = f'fps={fps},scale=640:640:force_original_aspect_ratio=decrease,scale={dw}:{dh}'
@@ -75,14 +77,22 @@ try:
                         draw.line([p0[k] for p0 in trail],fill=col,width=k+1)
                     a,b=p[k]
                     draw.ellipse((a-3,b-3,a+3,b+3),fill=col,outline='white')
-            draw.text((base+18,407),f"校准 {row['cal']}/3     正式计数 {row['count']} 下",font=fonts[22],fill=fg if j==0 else mint)
-        draw.line((pane_w,44,pane_w,434),fill='#4d6667',width=1)
-        draw.text((18,445),'● 左臂',font=fonts[16],fill=colors['left'])
-        draw.text((90,445),'● 右臂',font=fonts[16],fill=colors['right'])
+            draw.text((base+18,info_y+2),f"校准 {row['cal']}/3     正式计数 {row['count']} 下",font=fonts[22],fill=fg if j==0 else mint)
+        draw.line((pane_w,44,pane_w,info_y+29),fill='#4d6667',width=1)
+        draw.text((18,info_y+40),'● 左臂',font=fonts[16],fill=colors['left'])
+        draw.text((90,info_y+40),'● 右臂',font=fonts[16],fill=colors['right'])
         seen=sum(1 for _,top in clip['windows'] if top<=new['sec'])
-        draw.text((185,445),f'人工参考已回顶 {seen} 次（前三次校准）',font=fonts[16],fill=hint)
-        credit = 'Mixkit · stock video '+clip['file'].split('-')[-1].split('.')[0] if 'mixkit' in clip['source'] else clip['author']
-        draw.text((18,473),f'{credit}   /   {clip["source"].split("?")[0][:99]}',font=fonts[13],fill=hint)
+        draw.text((185,info_y+40),f'人工参考已回顶 {seen} 次（前三次校准）',font=fonts[16],fill=hint)
+        credit = clip['author']
+        if 'pexels.com' in clip['source']:
+            credit += '   /   Pexels License   /   Pexels '+clip['file'].split('-')[-1].split('.')[0]
+        elif 'mixkit.co' in clip['source']:
+            credit = 'Mixkit Stock Video Free License   /   Mixkit '+clip['file'].split('-')[-1].split('.')[0]
+        elif clip.get('usage') == 'cc-by':
+            credit += '   /   CC BY 3.0   /   creativecommons.org/licenses/by/3.0/   /   Excerpt'
+        else:
+            credit += '   /   '+clip['terms']
+        draw.text((18,info_y+68), credit+'   /   FitPal evaluation overlay', font=fonts[13], fill=hint)
         encoder.stdin.write(image.tobytes())
     if decoder.stdout.read(1):
         raise RuntimeError('Trace ended before the selected source video')

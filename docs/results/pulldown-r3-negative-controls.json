@@ -1,0 +1,247 @@
+{
+  "protocol": "Raw Pose Landmarker Full frames at 15 Hz. Compare rule changes on identical input. Scored by score-replay.py.",
+  "modelSha256": "5134a3aad27a58b93da0088d431f366da362b44e3ccfbe3462b3827a839011b1",
+  "baselineSources": {
+    "src/contract.ts": "9e2ea38d228b60f1fd9e676d3acb5bcb7c7b897d510dda1b62a9070088d47381",
+    "src/perception/repReview.ts": "34c345f62b2f820b1599d92be451bfa5c7b10630db58c90d68c434ec03deed94",
+    "src/tracking/limbLandmarks.ts": "1ec36b043e06b8ecfd378b488611ea84fbbb468630725bd189bbe38128bee15e",
+    "src/perception/pulldownUpperArm.ts": "8593e6bff5f1fce23868ece1657c345d6622610b95c5ff159d0daf18a490f1fa",
+    "src/tracking/armLandmarks.ts": "3c63a6e2844b632dd4282ce3d7ce4d3ebb36aeffb3409b5818c114aa4bf63095",
+    "src/perception/pulldown.ts": "978ce8d95e969a5e341cbe4e740d5e28aee4ac01baede2d65a1ceab50d30fd52"
+  },
+  "candidateSources": {
+    "src/contract.ts": "9e2ea38d228b60f1fd9e676d3acb5bcb7c7b897d510dda1b62a9070088d47381",
+    "src/perception/repReview.ts": "34c345f62b2f820b1599d92be451bfa5c7b10630db58c90d68c434ec03deed94",
+    "src/tracking/limbLandmarks.ts": "1ec36b043e06b8ecfd378b488611ea84fbbb468630725bd189bbe38128bee15e",
+    "src/perception/pulldownUpperArm.ts": "8593e6bff5f1fce23868ece1657c345d6622610b95c5ff159d0daf18a490f1fa",
+    "src/tracking/armLandmarks.ts": "3c63a6e2844b632dd4282ce3d7ce4d3ebb36aeffb3409b5818c114aa4bf63095",
+    "src/perception/pulldown.ts": "be9f3911fb7263c482c60c948dcfb9e2cc4b06972efd9c0008577447876a57d4"
+  },
+  "clips": [
+    {
+      "file": "squat-criles.webm",
+      "frames": 790,
+      "sourceSha256": "d37c07d2ae87af305a7e74ad0dc41f71281e20a0eac5a15247e792d1d56a4b32",
+      "inputSha256": "590e4ab33b9c64ac399aaeccdb23fb95f4e678397c408883754357fbe89c846e",
+      "reference": [],
+      "baseline": {
+        "calibration": null,
+        "calibrationEvents": [],
+        "verifiedEvents": [],
+        "attempts": [],
+        "scoring": {
+          "eligible": false,
+          "calibration": {
+            "matched": [],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "training": {
+            "matched": [],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "calibrationOnFirstThree": false
+        }
+      },
+      "candidate": {
+        "calibration": null,
+        "calibrationEvents": [],
+        "verifiedEvents": [],
+        "attempts": [],
+        "scoring": {
+          "eligible": false,
+          "calibration": {
+            "matched": [],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "training": {
+            "matched": [],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "calibrationOnFirstThree": false
+        }
+      }
+    },
+    {
+      "file": "ymove-dumbbell-goblet-squat-202e4f.mp4",
+      "frames": 287,
+      "sourceSha256": "b904f193848260c75d89c56cccf00237cbcbca1d15b27136f698853a1e5f6536",
+      "inputSha256": "6a801bd2d72d00ac1dc1c121cb98753d0d0e6e79fecbefbbdcb09d4d0c6aef97",
+      "reference": [],
+      "baseline": {
+        "calibration": null,
+        "calibrationEvents": [],
+        "verifiedEvents": [],
+        "attempts": [],
+        "scoring": {
+          "eligible": false,
+          "calibration": {
+            "matched": [],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "training": {
+            "matched": [],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "calibrationOnFirstThree": false
+        }
+      },
+      "candidate": {
+        "calibration": null,
+        "calibrationEvents": [],
+        "verifiedEvents": [],
+        "attempts": [],
+        "scoring": {
+          "eligible": false,
+          "calibration": {
+            "matched": [],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "training": {
+            "matched": [],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "calibrationOnFirstThree": false
+        }
+      }
+    },
+    {
+      "file": "dvids-seated-band-row.mp4",
+      "frames": 413,
+      "sourceSha256": "c63d45ecad8df0c54c1e5e5395ff35b5bb41a121d3f2729196fb4bef7593bc85",
+      "inputSha256": "6bb2bb40b98298312c8573900746e650c5320e09c7efcdc7497bc354f62312ba",
+      "reference": [],
+      "baseline": {
+        "calibration": {
+          "side": "right",
+          "thetaTop": 166.36127077388608,
+          "thetaBottom": 58.65938003935371
+        },
+        "calibrationEvents": [
+          15.667,
+          18.333,
+          21.267
+        ],
+        "verifiedEvents": [],
+        "attempts": [],
+        "scoring": {
+          "eligible": false,
+          "calibration": {
+            "matched": [],
+            "missedTopSec": [],
+            "unmatchedSec": [
+              15.667,
+              18.333,
+              21.267
+            ]
+          },
+          "training": {
+            "matched": [],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "calibrationOnFirstThree": false
+        }
+      },
+      "candidate": {
+        "calibration": {
+          "side": "right",
+          "thetaTop": 166.36127077388608,
+          "thetaBottom": 58.65938003935371
+        },
+        "calibrationEvents": [
+          15.667,
+          18.333,
+          21.267
+        ],
+        "verifiedEvents": [],
+        "attempts": [],
+        "scoring": {
+          "eligible": false,
+          "calibration": {
+            "matched": [],
+            "missedTopSec": [],
+            "unmatchedSec": [
+              15.667,
+              18.333,
+              21.267
+            ]
+          },
+          "training": {
+            "matched": [],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "calibrationOnFirstThree": false
+        }
+      }
+    },
+    {
+      "file": "pexels-row-30916502.mp4",
+      "frames": 168,
+      "sourceSha256": "1e873c9a8b03da0ead1f41df73e24a592ee66cab83f3981e406e6abe4d91abe7",
+      "inputSha256": "872e2dde770f24edf83e99e7065563efc5f1af75f66bea7f40c1e04c29ee198f",
+      "reference": [],
+      "baseline": {
+        "calibration": null,
+        "calibrationEvents": [
+          6.067,
+          9.533
+        ],
+        "verifiedEvents": [],
+        "attempts": [],
+        "scoring": {
+          "eligible": false,
+          "calibration": {
+            "matched": [],
+            "missedTopSec": [],
+            "unmatchedSec": [
+              6.067,
+              9.533
+            ]
+          },
+          "training": {
+            "matched": [],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "calibrationOnFirstThree": false
+        }
+      },
+      "candidate": {
+        "calibration": null,
+        "calibrationEvents": [
+          6.067,
+          9.533
+        ],
+        "verifiedEvents": [],
+        "attempts": [],
+        "scoring": {
+          "eligible": false,
+          "calibration": {
+            "matched": [],
+            "missedTopSec": [],
+            "unmatchedSec": [
+              6.067,
+              9.533
+            ]
+          },
+          "training": {
+            "matched": [],
+            "missedTopSec": [],
+            "unmatchedSec": []
+          },
+          "calibrationOnFirstThree": false
+        }
+      }
+    }
+  ],
+  "matching": "One-to-one, bottom <= event <= reference top + 0.35s. Missing calibration retains all uncounted training cycles as misses."
+}

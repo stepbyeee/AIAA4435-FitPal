@@ -323,7 +323,6 @@ describe('top recovery', () => {
 
   it('re-arms only when the same top is directly visible again after a brief idle gap', () => {
     const recovered = reacquire(156)
-    // Two more clearly observed cycles finish a three-cycle calibration.
     const phase = recovered.accept({ landmarks: pose(160, 'left'), timestampMs: 1550, width: WIDTH, height: HEIGHT })
     expect(phase.repCount).toBe(1)
     const displaced = reacquire(142)
@@ -340,5 +339,58 @@ describe('top recovery', () => {
     expect(track.hold(135).repCount).toBe(0)
     track.move(135, 145)
     expect(track.hold(145).repCount).toBe(1)
+  })
+})
+
+/** A projected arm with shoulder fixed and forearm bending toward the athlete on descent. */
+function overheadPose(flexion: number, zoom = 1): Landmark[] {
+  const p = Array.from({ length: LANDMARK_COUNT }, () => ({ x: 0, y: 0, visibility: 0 }))
+  const shoulder = { x: 0.45, y: 0.58, visibility: 0.99 }
+  const elevation = 50 + 0.95 * (flexion - 65)
+  const segment = (start: Landmark, heading: number): Landmark => {
+    const radians = heading * Math.PI / 180
+    const length = 0.14 * zoom
+    return { x: start.x + length * Math.sin(radians) * HEIGHT / WIDTH,
+      y: start.y + length * Math.cos(radians), visibility: 0.99 }
+  }
+  const elbow = segment(shoulder, elevation)
+  p[LM.leftShoulder] = shoulder
+  p[LM.leftElbow] = elbow
+  p[LM.leftWrist] = segment(elbow, elevation + 180 - flexion)
+  return p
+}
+
+describe('pulldown with continuously moving overhead turns', () => {
+  const stroke = [139, 115, 92, 74, 62, 71, 92, 119, 144, 156]
+
+  it('calibrates on physically raised extended arms without stationary top holds', () => {
+    const track = input()
+    for (const angle of [80, 95, 116, 137, 151, 156, ...stroke, ...stroke, ...stroke]) {
+      track.frame(overheadPose(angle))
+    }
+    expect(track.getCalibration()?.side).toBe('left')
+    expect(track.getCalibration()?.thetaBottom).toBeLessThan(90)
+  })
+
+  it('confirms a full return when camera zoom changes projected arm length', () => {
+    const track = input(calibration)
+    for (const angle of [160, 160, 160, 160, 140, 119, 94, 80, 70]) track.frame(overheadPose(angle, 1.3))
+    for (const angle of [73, 82, 96, 115, 135, 150, 158, 158, 158]) track.frame(overheadPose(angle, 0.75))
+    expect(track.endSet().reps).toMatchObject([{ status: 'verified', qMax: 1 }])
+  })
+
+  it('ignores overhead grip adjustments and consecutive low half-pulls', () => {
+    const track = input(calibration)
+    for (const angle of [158, 154, 160, 154, 159, 151, 158, 153, 160, 140, 120, 95, 72,
+      82, 96, 112, 119, 104, 83, 70, 81, 96, 115, 118]) track.frame(overheadPose(angle))
+    expect(track.endSet().reps).toHaveLength(0)
+  })
+
+  it('never assembles an overhead return across a missing person', () => {
+    const track = input(calibration)
+    for (const angle of [160, 160, 160, 155, 138, 116, 97, 78, 68]) track.frame(overheadPose(angle))
+    track.frame(null)
+    for (const angle of [82, 98, 119, 138, 154, 160, 160]) track.frame(overheadPose(angle))
+    expect(track.endSet().reps.filter(rep => rep.status === 'verified')).toHaveLength(0)
   })
 })

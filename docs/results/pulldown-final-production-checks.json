@@ -1,0 +1,54 @@
+[
+  {
+    "condition": "Concurrent replay and other diagnostics",
+    "checks": [
+      {
+        "name": "overlay-side",
+        "pass": true,
+        "seconds": 5.323,
+        "frames": 99,
+        "callbackToNextAnimationFrameP95ms": 21.1
+      },
+      {
+        "name": "pulldown",
+        "pass": true,
+        "seconds": 20.227,
+        "frames": 399,
+        "callbackToNextAnimationFrameP95ms": 23.2
+      },
+      {
+        "name": "occlusion",
+        "pass": true,
+        "seconds": 12.777,
+        "frames": 441,
+        "callbackToNextAnimationFrameP95ms": 26.5
+      },
+      {
+        "name": "cropped-recap",
+        "pass": false,
+        "error": "TimeoutError: locator.waitFor: Timeout 45000ms exceeded.\nCall log:\n  - waiting for getByText('这一组确认了 3 下。') to be visible\n",
+        "faults": [],
+        "screen": "FitPal\n高位下拉\n第 1 组回顾\n逐次回顾\n上臂计数\n—\n1\n—\n2\n第 1 下 · 已计数 · 幅度未评估\n2.4 秒\n\n上臂完成了一次下拉和还原。腕部证据不足，无法计算个人幅度。\n\n查看这一组的动作依据\n录像回放\n\n这一组确认了 2 下。\n\n+2\nEXP\n\n回放结算，不计入你的训练记录。\n\n完成"
+      },
+      {
+        "name": "fake-camera",
+        "pass": true,
+        "seconds": 28.134,
+        "frames": 578,
+        "callbackToNextAnimationFrameP95ms": 23.9
+      }
+    ]
+  },
+  {
+    "condition": "Independent retry using the same unmodified production build and same source",
+    "checks": [
+      {
+        "name": "cropped-recap",
+        "pass": true,
+        "seconds": 16.336,
+        "frames": 329,
+        "callbackToNextAnimationFrameP95ms": 21.3
+      }
+    ]
+  }
+]

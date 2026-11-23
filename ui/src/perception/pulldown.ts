@@ -6,7 +6,7 @@ import { visibleArm, type ArmSide } from '../tracking/armLandmarks'
 export type Calibration = SetSummary['calibration'] & { side: ArmSide }
 
 type Side = Calibration['side']
-type ArmPosition = { angle: number; lift: number }
+type ArmPosition = { angle: number; lift: number; normalizedLift: number }
 type ArmSample = ArmPosition & { shoulder: { x: number; y: number }; elbow: { x: number; y: number }; confidence: number; wrist: { x: number; y: number } }
 type EndpointPair = Pick<Calibration, 'thetaTop' | 'thetaBottom'>
 type Attempt = {
@@ -14,6 +14,8 @@ type Attempt = {
   startedAt: number
   topAngle: number
   bottomAngle: number
+  topHeight: number
+  lowestHeight: number
   topLift: number
   furthestLift: number
   descentFrames: number
@@ -29,6 +31,7 @@ const MAX_FRAME_GAP_MS = 500
 const ASSUMED_SWING = 50
 const MIN_LIFT_TOLERANCE = 0.012
 const LIFT_TOLERANCE_FRACTION = 0.18
+const OVERHEAD_WRIST_HEIGHT = 0.65
 
 const bounded = (n: number, min: number, max: number) => Math.max(min, Math.min(max, n))
 
@@ -41,8 +44,11 @@ function readArm(frame: PoseFrame, side: Side): ArmSample | null {
   const arm = visibleArm(frame, side)
   if (!arm) return null
   const { shoulder, elbow, wrist, angle } = arm
+  const length = Math.hypot((shoulder.x - elbow.x) * frame.width, (shoulder.y - elbow.y) * frame.height)
+    + Math.hypot((wrist.x - elbow.x) * frame.width, (wrist.y - elbow.y) * frame.height)
+  const normalizedLift = (shoulder.y - wrist.y) * frame.height / length
   return {
-    angle, shoulder, elbow,
+    angle, shoulder, elbow, normalizedLift,
     lift: shoulder.y - wrist.y,
     wrist: { x: (wrist.x - shoulder.x) * frame.width / frame.height, y: wrist.y - shoulder.y },
     confidence: Math.min(shoulder.visibility, elbow.visibility, wrist.visibility),
@@ -53,7 +59,7 @@ function createSideTrack(side: Side, fixed?: Calibration) {
   const endpoints: EndpointPair[] = []
   const reps: RepResult[] = []
   const traces: RepTrace[] = []
-  const recent: ArmPosition[] = []
+  const recent: ArmSample[] = []
   let topAngle: number | null = null
   let topPose: ArmPosition | null = null
   let topReady = false
@@ -110,7 +116,7 @@ function createSideTrack(side: Side, fixed?: Calibration) {
         && Math.abs(sample.lift - arm.lift) <= 0.04
         && Math.hypot(sample.shoulder.x - arm.shoulder.x, sample.shoulder.y - arm.shoulder.y) <= 0.06) {
         topAngle = sample.angle
-        topPose = { angle: sample.angle, lift: sample.lift }
+        topPose = { angle: sample.angle, lift: sample.lift, normalizedLift: sample.normalizedLift }
         topReady = true
       }
     }
@@ -120,6 +126,7 @@ function createSideTrack(side: Side, fixed?: Calibration) {
     const angles = recent.map((position) => position.angle)
     const angle = recent.length === 3 ? median(angles) : sample.angle
     const lift = recent.length === 3 ? median(recent.map((position) => position.lift)) : sample.lift
+    const normalizedLift = recent.length === 3 ? median(recent.map(position => position.normalizedLift)) : sample.normalizedLift
     const calibrationSwing = endpoints.length
       ? median(endpoints.map((cycle) => cycle.thetaTop - cycle.thetaBottom))
       : ASSUMED_SWING
@@ -144,10 +151,18 @@ function createSideTrack(side: Side, fixed?: Calibration) {
       }
 
       topAngle = fixed?.thetaTop ?? Math.max(topAngle ?? angle, angle)
+      // Two actual overhead observations can establish the starting pose during a
+      // continuous set. Grip height and extension must agree on the same arm.
+      if (!fixed && !topReady && recent.slice(-2).every(position =>
+        position.normalizedLift >= OVERHEAD_WRIST_HEIGHT && position.angle >= 132)) {
+        topAngle = angle
+        topPose = { angle, lift, normalizedLift }
+        topReady = true
+      }
       q = bounded((topAngle - angle) / swing, 0, 1)
       if (angle >= topAngle - topTolerance) {
         if (fixed || (angle >= topAngle - 5 && Math.max(...angles) - Math.min(...angles) <= 7)) topReady = true
-        if (topReady && (!topPose || angle > topPose.angle)) topPose = { angle, lift }
+        if (topReady && (!topPose || angle > topPose.angle)) topPose = { angle, lift, normalizedLift }
       }
 
       if (!topPose || angle > topAngle - departure) return
@@ -157,6 +172,8 @@ function createSideTrack(side: Side, fixed?: Calibration) {
         topAngle,
         bottomAngle: angle,
         topLift: topPose.lift,
+        topHeight: topPose.normalizedLift,
+        lowestHeight: normalizedLift,
         furthestLift: lift,
         descentFrames: 1,
         interrupted: false,
@@ -168,6 +185,7 @@ function createSideTrack(side: Side, fixed?: Calibration) {
     }
 
     const current = attempt
+    current.lowestHeight = Math.min(current.lowestHeight, normalizedLift)
     current.review?.observe(timestampMs, angle, sample.wrist, !current.turn)
     q = bounded((current.topAngle - angle) / swing, 0, 1)
     if (current.turn) {
@@ -213,7 +231,12 @@ function createSideTrack(side: Side, fixed?: Calibration) {
     // also approached the observed starting height relative to the shoulder.
     const liftExcursion = current.furthestLift - current.topLift
     const liftTolerance = Math.max(MIN_LIFT_TOLERANCE, Math.abs(liftExcursion) * LIFT_TOLERANCE_FRACTION)
-    if ((lift - current.topLift) * Math.sign(liftExcursion) > liftTolerance) return
+    // When framing changes, the same overhead grip moves fewer pixels. Confirm
+    // the return against measured arm length only after a clear downward stroke.
+    const heightSwing = current.topHeight - current.lowestHeight
+    const returnedOverhead = current.topHeight >= OVERHEAD_WRIST_HEIGHT && heightSwing >= 0.35
+      && normalizedLift >= Math.max(OVERHEAD_WRIST_HEIGHT, current.topHeight - LIFT_TOLERANCE_FRACTION * heightSwing)
+    if ((lift - current.topLift) * Math.sign(liftExcursion) > liftTolerance && !returnedOverhead) return
 
     const durationMs = timestampMs - current.startedAt
     const returned = current.turn.frames >= 2 || current.interrupted
@@ -239,7 +262,7 @@ function createSideTrack(side: Side, fixed?: Calibration) {
     topAngle = fixed?.thetaTop ?? angle
     // A verified return is itself evidence of a top pose. Continuous repetitions
     // can start the next descent without making a second stationary hold.
-    topPose = { angle, lift }
+    topPose = { angle, lift, normalizedLift }
     topReady = true
     phase = 'ready'
   }

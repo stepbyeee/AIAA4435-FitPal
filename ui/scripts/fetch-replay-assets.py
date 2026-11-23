@@ -85,13 +85,23 @@ def pulldown_fixture(clip):
     if 'sourceSpanSec' not in clip:
         return fetch(clip['download'], 90_000_000)
     start, end = clip['sourceSpanSec']
-    # Seek the public archive by range; the full competition film is 1.45 GB.
     # Encoder differences across FFmpeg/libx264 builds are caught by install().
     with tempfile.TemporaryDirectory() as directory:
         output = Path(directory) / 'excerpt.mp4'
+        if 'sourceSha256' in clip:
+            # A single verified download avoids repeated range requests to short sources.
+            data = fetch(clip['download'], 90_000_000)
+            if sha256(data) != clip['sourceSha256']:
+                raise ValueError(f"Unexpected original for {clip['file']}")
+            original = Path(directory) / 'original'
+            original.write_bytes(data)
+            source_options = ['-i', str(original)]
+        else:
+            # Seek long archive films by range; the competition original is 1.45 GB.
+            source_options = ['-rw_timeout', '90000000', '-i', clip['download']]
         subprocess.run([
-            'ffmpeg', '-nostdin', '-v', 'error', '-rw_timeout', '90000000',
-            '-ss', str(start), '-i', clip['download'], '-t', str(end - start),
+            'ffmpeg', '-nostdin', '-v', 'error', '-ss', str(start),
+            *source_options, '-t', str(end - start),
             '-map', '0:v:0', '-an', '-c:v', 'libx264', '-threads', '2',
             '-preset', 'veryfast', '-crf', '19', '-pix_fmt', 'yuv420p',
             '-movflags', '+faststart', str(output),
@@ -107,14 +117,18 @@ def main():
     parser.add_argument('--supplementary', action='store_true', help='Use the independently annotated two-window gym squat supplement.')
     parser.add_argument('--seated-row', action='store_true', help='Fetch only the row experiment and its held-out stress clips.')
     parser.add_argument('--pulldown-holdout', action='store_true',
-                        help='Fetch the five new locally scored pulldown videos. Archive excerpts use FFmpeg 8.1/libx264.')
+                        help='Fetch both held-out pulldown cohorts. Time excerpts use FFmpeg 8.1/libx264.')
     args = parser.parse_args()
     if args.pulldown_holdout:
         if args.seated_row or args.supplementary or args.app_only or args.include_dataset:
             parser.error('--pulldown-holdout selects a separate fixture set')
-        for name in ('pulldown-r2-unseen-sources.json', 'pulldown-r2-unseen-stock-sources.json'):
+        for name, folder in [
+            ('pulldown-r2-unseen-sources.json', 'pulldown-r2-unseen'),
+            ('pulldown-r2-unseen-stock-sources.json', 'pulldown-r2-unseen'),
+            ('pulldown-r3-reserve-sources.json', 'pulldown-r3-unseen'),
+        ]:
             for clip in json.loads(MANIFEST.with_name(name).read_text())['clips']:
-                path = UI / '.benchmark-assets/pulldown-r2-unseen' / clip['file']
+                path = UI / '.benchmark-assets' / folder / clip['file']
                 install(path, clip['sha256'], lambda: pulldown_fixture(clip))
         return
     if args.seated_row:

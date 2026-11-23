@@ -1,0 +1,60 @@
+{
+  "protocol": "Controlled transformations of the same previously used demonstration; the five variants are not independent recordings. Expected depth labels are relative to the original personal calibration. Source for choosing the partial turn was the existing tuning-clip trace. Chrome runs each variant through the local-file input at native media speed with the app default Full model.",
+  "model": "MediaPipe Pose Landmarker Full",
+  "modelSha256": "5134a3aad27a58b93da0088d431f366da362b44e3ccfbe3462b3827a839011b1",
+  "source": "pulldown.webm",
+  "inputSha256": "f6200b7691acc6e99b1b0ddee7783fea56da3a6e155c5b3020cdda958cd49e34",
+  "ffmpeg": "ffmpeg version 8.1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "browser": "157.0.8103.79",
+  "cases": [
+    {
+      "name": "small",
+      "description": "Downsample full clip to 224×398 with area averaging.",
+      "expectedCalibrated": true,
+      "expectedStatuses": [
+        "met",
+        "met"
+      ],
+      "asset": "stress-pulldown-small.mp4",
+      "assetSha256": "2ff1acb345355e499417fa18ca34483d3deed8086d6197b4793b8d60dd71ab1b",
+      "runs": [
+        {
+          "calibrated": true,
+          "verified": 2,
+          "statuses": [
+            "met",
+            "met"
+          ],
+          "details": [
+            "达到个人校准幅度的 99%，底部肘角 14°。",
+            "达到个人校准幅度的 98%，底部肘角 15°。"
+          ],
+          "cue": "这一组确认了 2 下。",
+          "coveragePct": 100,
+          "trackedSide": "right",
+          "emptyHistory": true,
+          "pageErrors": [],
+          "match": true
+        },
+        {
+          "calibrated": true,
+          "verified": 2,
+          "statuses": [
+            "met",
+            "met"
+          ],
+          "details": [
+            "达到个人校准幅度的 99%，底部肘角 14°。",
+            "达到个人校准幅度的 99%，底部肘角 15°。"
+          ],
+          "cue": "这一组确认了 2 下。",
+          "coveragePct": 100,
+          "trackedSide": "right",
+          "emptyHistory": true,
+          "pageErrors": [],
+          "match": true
+        }
+      ]
+    }
+  ]
+}

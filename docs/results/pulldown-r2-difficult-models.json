@@ -1,0 +1,121 @@
+{
+  "protocol": {
+    "fps": 15,
+    "maxDimension": 640,
+    "format": "PNG",
+    "delegate": "CPU",
+    "browser": "157.0.8103.79",
+    "ffmpeg": "ffmpeg version 8.1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "platform": "darwin",
+    "cpu": "Apple M5",
+    "runtime": "1.2.3",
+    "manifestSha256": "ea5da2f9c407e4753564edbd99a6ec8a20514688e3b2eee2fe5181133f9fc649",
+    "modelSha256": {
+      "lite": "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a",
+      "heavy": "64437af838a65d18e5ba7a0d39b465540069bc8aae8308de3e318aad31fcbc7b"
+    },
+    "perceptionSha256": {
+      "src/perception/pulldown.ts": "978ce8d95e969a5e341cbe4e740d5e28aee4ac01baede2d65a1ceab50d30fd52",
+      "src/perception/pulldownUpperArm.ts": "8593e6bff5f1fce23868ece1657c345d6622610b95c5ff159d0daf18a490f1fa",
+      "src/perception/squat.ts": "737da2ea4426080f5189f738385fe816ebe1155966f31446568c8a017e6d84bc",
+      "src/tracking/limbLandmarks.ts": "1ec36b043e06b8ecfd378b488611ea84fbbb468630725bd189bbe38128bee15e",
+      "src/tracking/armLandmarks.ts": "3c63a6e2844b632dd4282ce3d7ce4d3ebb36aeffb3409b5818c114aa4bf63095",
+      "src/perception/repReview.ts": "34c345f62b2f820b1599d92be451bfa5c7b10630db58c90d68c434ec03deed94",
+      "src/contract.ts": "9e2ea38d228b60f1fd9e676d3acb5bcb7c7b897d510dda1b62a9070088d47381"
+    }
+  },
+  "runs": [
+    {
+      "clip": "gym-fast-set.mp4",
+      "sourceSha256": "1e8aee4df537d594438870b75e059c0b278f6208d312eadc7db04c1df4ddf833",
+      "startSec": 0,
+      "durationSec": 9.576233,
+      "model": "lite",
+      "frames": 144,
+      "coverage": {
+        "left": 0.3264,
+        "right": 0.4514,
+        "either": 0.5556,
+        "engine": 0.5556
+      },
+      "calibrationEvents": [],
+      "verifiedEvents": [],
+      "chosenSide": null,
+      "warmInferenceMs": {
+        "p50": 18.6,
+        "p95": 20.1
+      },
+      "firstInferenceMs": 111.3,
+      "attempts": []
+    },
+    {
+      "clip": "gym-fast-set.mp4",
+      "sourceSha256": "1e8aee4df537d594438870b75e059c0b278f6208d312eadc7db04c1df4ddf833",
+      "startSec": 0,
+      "durationSec": 9.576233,
+      "model": "heavy",
+      "frames": 144,
+      "coverage": {
+        "left": 0,
+        "right": 0,
+        "either": 0,
+        "engine": 0
+      },
+      "calibrationEvents": [],
+      "verifiedEvents": [],
+      "chosenSide": null,
+      "warmInferenceMs": {
+        "p50": 84.6,
+        "p95": 102.2
+      },
+      "firstInferenceMs": 205.8,
+      "attempts": []
+    },
+    {
+      "clip": "mixkit-100549.mp4",
+      "sourceSha256": "9a51060a0d0ee20cdbc16cb2480e1b5adf6b9a8786eea3854661b637da861e16",
+      "startSec": 0,
+      "durationSec": 17.642625,
+      "model": "lite",
+      "frames": 265,
+      "coverage": {
+        "left": 0.4075,
+        "right": 0.4566,
+        "either": 0.4679,
+        "engine": 0.4679
+      },
+      "calibrationEvents": [],
+      "verifiedEvents": [],
+      "chosenSide": null,
+      "warmInferenceMs": {
+        "p50": 17.9,
+        "p95": 19.6
+      },
+      "firstInferenceMs": 117.1,
+      "attempts": []
+    },
+    {
+      "clip": "mixkit-100549.mp4",
+      "sourceSha256": "9a51060a0d0ee20cdbc16cb2480e1b5adf6b9a8786eea3854661b637da861e16",
+      "startSec": 0,
+      "durationSec": 17.642625,
+      "model": "heavy",
+      "frames": 265,
+      "coverage": {
+        "left": 0,
+        "right": 0,
+        "either": 0,
+        "engine": 0
+      },
+      "calibrationEvents": [],
+      "verifiedEvents": [],
+      "chosenSide": null,
+      "warmInferenceMs": {
+        "p50": 89.6,
+        "p95": 97.6
+      },
+      "firstInferenceMs": 219.6,
+      "attempts": []
+    }
+  ]
+}
