@@ -1,7 +1,8 @@
 import type { Landmark, PoseFrame } from '../contract'
-import { visibleLimb, type Limb, type Side } from './limbLandmarks'
+import { limbJoints, visibleLimb, type Limb, type Side } from './limbLandmarks'
 
-export type TrailPoint = { timestampMs: number; proximal: Landmark; joint: Landmark; distal: Landmark; angle: number }
+type TrailJoints = { proximal: Landmark; joint: Landmark; distal: Landmark }
+export type TrailPoint = TrailJoints & { timestampMs: number; angle: number; draw?: TrailJoints }
 export type ArmTrails = Record<Side, readonly TrailPoint[]>
 
 const TRAIL_MS = 1200
@@ -12,7 +13,7 @@ export const emptyArmTrails: ArmTrails = { left: [], right: [] }
 
 const jump = (a: Landmark, b: Landmark) => Math.hypot(a.x - b.x, a.y - b.y)
 
-function append(trail: readonly TrailPoint[], frame: PoseFrame, side: Side, limb: Limb): readonly TrailPoint[] {
+function append(trail: readonly TrailPoint[], frame: PoseFrame, side: Side, limb: Limb, display?: Landmark[] | null): readonly TrailPoint[] {
   const sample = visibleLimb(frame, side, limb)
   if (!sample) return emptyArmTrails[side]
 
@@ -25,10 +26,12 @@ function append(trail: readonly TrailPoint[], frame: PoseFrame, side: Side, limb
     && jump(last.joint, joint) <= MAX_JOINT_JUMP && jump(last.distal, distal) <= MAX_JOINT_JUMP
     && jump(last.proximal, proximal) <= MAX_JOINT_JUMP
   const point = { timestampMs, proximal, joint, distal, angle }
-  return continuous ? [...trail.filter((p) => timestampMs - p.timestampMs <= TRAIL_MS), point] : [point]
+  const [a, b, c] = limbJoints[limb][side]
+  const next = display ? { ...point, draw: { proximal: display[a], joint: display[b], distal: display[c] } } : point
+  return continuous ? [...trail.filter((p) => timestampMs - p.timestampMs <= TRAIL_MS), next] : [next]
 }
 
-export function advanceArmTrails(trails: ArmTrails, frame: PoseFrame, limb: Limb = 'arm'): ArmTrails {
+export function advanceArmTrails(trails: ArmTrails, frame: PoseFrame, limb: Limb = 'arm', display?: Landmark[] | null): ArmTrails {
   if (!frame.landmarks || !Number.isFinite(frame.timestampMs)) return emptyArmTrails
-  return { left: append(trails.left, frame, 'left', limb), right: append(trails.right, frame, 'right', limb) }
+  return { left: append(trails.left, frame, 'left', limb, display), right: append(trails.right, frame, 'right', limb, display) }
 }

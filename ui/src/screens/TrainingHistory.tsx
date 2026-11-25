@@ -17,7 +17,8 @@ export function TrainingHistory({ history, preview }: { history: SessionRecord[]
         <dl>{entry.sets.map((set, index) => <div key={index}><dt>第 {index + 1} 组</dt><dd>{set.verified} 下</dd></div>)}</dl>
         {entry.lastSet && <p className="history-last">最后一组 · {entry.lastSet.issue?.id === 'short_range'
           ? `${entry.lastSet.issue.count} 下幅度偏短`
-          : entry.lastSet.issue?.id === 'out_of_view' ? '镜头有遮挡' : '没有待改进提示'}</p>}
+          : entry.lastSet.issue?.id === 'trunk_swing' ? `${entry.lastSet.issue.count} 下起拉时上身后摆`
+            : entry.lastSet.issue?.id === 'out_of_view' ? '镜头有遮挡' : '没有待改进提示'}</p>}
       </li>)}</ol>}
     {manual.length > 0 && <section className="manual-history"><h2>手动记录</h2><ol className="history-list">
       {manual.map(row => <li key={row.id}><time>{row.date}</time><p>{exerciseById(row.exerciseId)?.name} · {row.reps} 下</p></li>)}

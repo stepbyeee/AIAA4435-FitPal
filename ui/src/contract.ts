@@ -55,11 +55,21 @@ export type FrameState = {
 /** A rep counts as in range when its deepest q reaches this. */
 export const IN_RANGE = 0.85
 
+export type TrunkForm = {
+  status: 'steady' | 'swing'
+  changeDeg: number
+  /** Peak relative to the arm-based pull phase trigger; may precede it. */
+  atMs: number
+  view: { side: 'left' | 'right'; direction: 1 | -1; hipX: number; hipY: number; scale: number }
+}
+
 export type RepResult = {
   status: 'verified' | 'cannot_verify'
   /** Null for a counted upper-arm cycle when wrist visibility prevented measuring elbow range. */
   qMax: number | null
   durationMs: number
+  /** Present only when the side view supported a form assessment. */
+  trunkForm?: TrunkForm
 }
 
 export type SetSummary = {
@@ -68,6 +78,8 @@ export type SetSummary = {
   reps: RepResult[]
   /** Share of frames in which the joint was visible, 0 to 1. */
   coverage: number
+  /** The form detector was enabled. An assessed rep carries its own evidence. */
+  assessesTrunkForm?: boolean
   issues: { id: string; repIndexes: number[] }[]
 }
 

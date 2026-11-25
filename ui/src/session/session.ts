@@ -33,12 +33,13 @@ export function reduce(state: SessionState, event: SessionEvent): SessionState {
     case 'setEnded': {
       if (state.stage !== 'set') return state
       const results = [...state.results, event.result]
+      const issue = event.result.cue?.issueId
       return {
         ...state,
         results,
         lastIssueId: state.lastIssueId && event.result.exp.fixedBonus === 0
           ? state.lastIssueId
-          : event.result.cue?.issueId ?? null,
+          : issue === 'trunk_swing' ? null : issue ?? null,
         stage: results.length >= state.totalSets ? 'done' : 'rest',
       }
     }

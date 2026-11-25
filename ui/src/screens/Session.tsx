@@ -20,6 +20,7 @@ import { lastSessionOf, levelOf, saveSession, today, totalExp, type SessionRecor
 import { withProgressLock } from '../data/progressLock'
 import { keepSummaries } from '../data/privacy'
 import { settle } from '../feedback/settle'
+import { compareTrunkSets } from '../feedback/trunkRecheck'
 import { createPulldown, type Calibration } from '../perception/pulldown'
 import { useStageVideo } from '../tracking/useStageVideo'
 import { initialSession, reduce } from '../session/session'
@@ -96,7 +97,8 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
     const calibrating = state.stage === 'calibrating'
     const calibrated = calibrationRef.current
     if (!calibrating && !calibrated) return
-    const perception = (squat ? createSquat : createPulldown)(calibrating ? undefined : calibrated ?? undefined)
+    const setCalibration = calibrating ? undefined : calibrated ?? undefined
+    const perception = squat ? createSquat(setCalibration) : createPulldown(setCalibration, { assessForm: !trial && focus === 'full' })
     let previousPhase: FrameState['phase'] = 'ready'
     let previousAttempts = 0
     let firstTime: number | null = null
@@ -173,7 +175,7 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
       consume.current = () => {}
       finishRef.current = () => {}
     }
-  }, [live, preview, state.stage, state.setIndex, state.lastIssueId, videoFile, squat, trial])
+  }, [live, preview, state.stage, state.setIndex, state.lastIssueId, videoFile, squat, trial, focus])
 
   // The space bar is available when the user is standing at the machine.
   useEffect(() => {
@@ -267,10 +269,10 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
             <rect className="focus-outline" x={bounds.x} y="0" width={bounds.width} height={video.frame.height} />
           </svg>
         )}
-        {!paused && analysis && showBones && live && video.source && video.frame && video.landmarks && (
+        {!paused && analysis && showBones && live && video.source && video.frame && video.displayLandmarks && (
           <Skeleton
             className="stage-overlay"
-            landmarks={video.landmarks}
+            landmarks={video.displayLandmarks}
             frame={video.frame}
             fit="meet"
             mirrored={video.source.kind === 'camera'}
@@ -300,6 +302,8 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
           {reviewing.summary.reps.length > 0
             ? <RepReview key={reviewIndex} summary={reviewing.summary} review={reviewing.review} mirrored={!videoFile} />
             : <p>这一组没有可回顾的完整动作。</p>}
+          {reviewIndex > 0 && state.results[reviewIndex - 1]?.cue?.issueId === 'trunk_swing' &&
+            <TrunkRecheck previous={completed[reviewIndex - 1].summary} current={reviewing.summary} />}
           <SetEvidence summary={reviewing.summary} trigger={reviewing.trigger} />
         </section>}
         {(preview || (!live && !reviewing)) && <Figure q={null} gear={gear} label="你的角色" />}
@@ -338,6 +342,7 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
               <section className="framing" aria-label="取景检查">
                 <h3>取景检查</h3>
                 <p>{squat ? '侧对镜头，站直和蹲下时，让同侧髋、膝和脚踝完整入镜。' : '双臂分别自动追踪。手举到最高时，尽量让肩、肘、腕留在画面内。'}</p>
+                  {!squat && !trial && <p>用侧面固定机位并让肩、髋入镜，可评估起拉时上身是否后摆。</p>}
                 <dl>{(['left', 'right'] as const).map(side => <div key={side} data-ready={framing[side] === '可用于校准'}>
                   <dt>{sideName(side)}</dt><dd>{framing[side]}</dd>
                 </div>)}</dl>
@@ -430,13 +435,27 @@ function cueText(r: SetResult) {
   return r.exp.verifiedReps ? `这一组确认了 ${r.exp.verifiedReps} 下。` : '这一组没有可确认的动作。'
 }
 
+function TrunkRecheck({ previous, current }: { previous: SetSummary; current: SetSummary }) {
+  const check = compareTrunkSets(previous, current)
+  const observation = check.status === 'lower' ? '这组明显后摆的比例下降。'
+    : check.status === 'higher' ? '这组明显后摆的比例上升。'
+      : '两组明显后摆的比例相同。'
+  return <section className="trunk-recheck" aria-label="起拉后摆复查" data-comparison={check.status}>
+    <h3>起拉后摆复查</h3>
+    <p>上组 {check.previous.swings}/{check.previous.assessed || '—'} · 本组 {check.current.swings}/{check.current.assessed || '—'}（后摆／可评估）</p>
+    <p>{check.status === 'unavailable' ? '两组的取景、可用动作或下拉幅度不足以直接比较。' : observation}</p>
+  </section>
+}
+
 function calibrationPrompt(status: ReturnType<typeof useStageVideo>['status'], preview: boolean, playback: boolean, squat: boolean) {
   if (preview) return '角色预览。开启摄像头即可开始训练。'
   if (status === 'ended') return `录像已结束。校准需要 3 次清晰的完整${squat ? '深蹲' : '下拉'}。`
   if (status === 'unavailable') return playback ? '录像未能播放。' : '摄像头未开启。开启权限后重试。'
   if (status === 'tracking-error') return '姿态模型未能启动。'
   if (status === 'starting') return '正在启动姿态追踪。'
-  return playback ? '正在用录像中的 3 次完整动作校准。' : squat ? '先站直，再做 3 次完整深蹲。' : '先伸展手臂，再做 3 次完整下拉。'
+  if (playback) return '正在用录像中的 3 次完整动作校准。校准完成后开始计数。'
+  const direction = squat ? '先站直，再做 3 次完整深蹲。' : '先伸展手臂，再做 3 次完整下拉。'
+  return `${direction}校准完成后开始计数。`
 }
 
 const SET_END_LABELS: Record<EndTrigger, string> = { manual: '手动结束', idle: '顶端停留 5 秒', 'video-ended': '录像结束' }

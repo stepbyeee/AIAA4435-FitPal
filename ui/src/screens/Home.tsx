@@ -15,6 +15,7 @@ type Props = {
 }
 
 const LEFT_OVER: Record<string, (n: number) => string> = {
+  trunk_swing: (n) => `上次最后一组有 ${n} 下起拉时上身明显后摆。`,
   short_range: (n) => `上次最后一组有 ${n} 下没到校准的目标范围。`,
   out_of_view: (n) => n > 0 ? `上次最后一组有 ${n} 下镜头没看清。` : '上次最后一组镜头没看清。',
 }

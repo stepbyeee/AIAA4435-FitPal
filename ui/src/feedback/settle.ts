@@ -8,6 +8,7 @@ export function settle(summary: SetSummary, lastIssueId: string | null): SetResu
   const inRangeCount = verified.filter((rep) => rep.qMax !== null && rep.qMax >= IN_RANGE).length
   const hasCoverage = summary.coverage >= MIN_COVERAGE
   const outOfView = summary.issues.find((issue) => issue.id === 'out_of_view')
+  const trunkSwing = summary.issues.find((issue) => issue.id === 'trunk_swing')
   const shortRange = summary.issues.find((issue) => issue.id === 'short_range')
 
   const squat = summary.exerciseId === 'squat'
@@ -17,6 +18,10 @@ export function settle(summary: SetSummary, lastIssueId: string | null): SetResu
     const observation = count > 0 ? `有 ${count} 下镜头没看清。`
       : outOfView ? '这组有一段画面没看清。' : '这组镜头没看清。'
     cue = { issueId: 'out_of_view', text: `${observation}下一组调整镜头，让${squat ? '髋、膝和脚踝' : '手肘'}始终在画面里。` }
+  } else if (trunkSwing) {
+    const numbers = trunkSwing.repIndexes.map(index => index + 1)
+    const affected = numbers.length <= 4 ? `第 ${numbers.join('、')} 下` : `有 ${numbers.length} 下`
+    cue = { issueId: 'trunk_swing', text: `${affected}起拉时上身明显向后摆。下一组试着保持上身稳定，再启动下拉。` }
   } else if (shortRange) {
     cue = {
       issueId: 'short_range',

@@ -24,6 +24,39 @@ function pose(angle: number, side: Calibration['side'], rotation = 0): Landmark[
   return landmarks
 }
 
+function sideViewPulldowns(torso = 0.24) {
+  const track = createPulldown(calibration, { assessForm: true })
+  let timestampMs = 0
+  function frame(angle: number, tilt: number, hipVisible = true) {
+    const landmarks = pose(angle, 'left')
+    const radians = tilt * Math.PI / 180
+    const shoulder = {
+      x: 0.5 - Math.sin(radians) * torso * HEIGHT / WIDTH,
+      y: 0.86 - Math.cos(radians) * torso,
+      visibility: 0.99,
+    }
+    const { x, y } = landmarks[LM.leftShoulder]
+    for (const i of [LM.leftShoulder, LM.leftElbow, LM.leftWrist]) {
+      landmarks[i].x += shoulder.x - x
+      landmarks[i].y += shoulder.y - y
+    }
+    landmarks[LM.rightShoulder] = { ...shoulder, x: shoulder.x + 0.01 }
+    landmarks[LM.leftHip] = { x: 0.5, y: 0.86, visibility: hipVisible ? 0.99 : 0 }
+    landmarks[LM.leftEar] = { ...shoulder, y: shoulder.y - 0.08 }
+    landmarks[LM.nose] = { x: shoulder.x + 0.06, y: shoulder.y - 0.07, visibility: 0.99 }
+    timestampMs += 50
+    track.accept({ landmarks, width: WIDTH, height: HEIGHT, timestampMs })
+  }
+  function finish(tilt: number) {
+    for (const angle of [120, 110, 100, 90, 80, 80, 80, 80, 90, 100, 110, 120, 130, 140, 150, 160, 160, 160]) frame(angle, tilt)
+    const { reps } = track.endSet()
+    expect(reps).toHaveLength(1)
+    expect(reps[0].status).toBe('verified')
+    return reps[0]
+  }
+  return { frame, finish }
+}
+
 function input(initial?: Calibration) {
   const perception = createPulldown(initial)
   let timestampMs = 0
@@ -108,6 +141,37 @@ describe('pulldown calibration', () => {
 })
 
 describe('calibrated pulldowns', () => {
+  it('does not use a pre-cut torso baseline to judge an otherwise verified pull', () => {
+    const { frame, finish } = sideViewPulldowns(0.55)
+    for (let i = 0; i < 7; i++) frame(160, -15)
+    for (const angle of [160, 160, 150, 140, 130]) frame(angle, 30)
+    expect(finish(30).trunkForm).toBeUndefined()
+  })
+
+  it('assesses a sustained rearward change that peaks before the arm triggers the pull phase', () => {
+    const { frame, finish } = sideViewPulldowns()
+    for (let i = 0; i < 6; i++) frame(160, 8)
+    for (const [angle, tilt] of [[158, 9], [154, 16], [148, 24], [145, 27], [143, 26], [140, 25], [135, 22], [128, 15]]) frame(angle, tilt)
+    expect(finish(8).trunkForm).toMatchObject({ status: 'swing', changeDeg: 19, atMs: -150 })
+  })
+
+  it('does not replace a stable baseline with a leaned pose reached while the arm is descending', () => {
+    const { frame, finish } = sideViewPulldowns()
+    for (let i = 0; i < 7; i++) frame(160, 8)
+    for (const [angle, tilt] of [[158, 18], [156, 27], [154, 28], [152, 28], [150, 28], [148, 28], [134, 28], [126, 28]]) frame(angle, tilt)
+    expect(finish(28).trunkForm).toMatchObject({ status: 'swing', changeDeg: 20 })
+  })
+
+  it('abstains when the hip disappears between the ready pose and the arm trigger', () => {
+    const { frame, finish } = sideViewPulldowns()
+    for (let i = 0; i < 6; i++) frame(160, 8)
+    for (const [angle, tilt] of [[158, 9], [154, 16], [148, 23], [146, 24]]) frame(angle, tilt)
+    frame(145, 25, false)
+    frame(144, 25, false)
+    for (const [angle, tilt] of [[139, 28], [136, 29], [131, 31], [127, 31]]) frame(angle, tilt)
+    expect(finish(31).trunkForm).toBeUndefined()
+  })
+
   it('reports a sustained loss before a rep without inventing a rep attempt', () => {
     const track = input(calibration)
     track.hold(160)

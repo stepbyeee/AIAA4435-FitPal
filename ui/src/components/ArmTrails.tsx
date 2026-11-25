@@ -23,28 +23,30 @@ export function ArmTrails({ trails, frame, mirrored, limb = 'arm', selection = '
           const points = trails[side]
           const latest = points.at(-1)
           if (!latest) return null
+          const position = latest.draw ?? latest
           const split = points.findIndex((point) => point.timestampMs >= latest.timestampMs - 420)
           const labelX = Math.min(width - 27 * labelScale, Math.max(27 * labelScale,
-            latest.joint.x * width + (side === 'left' ? -43 : 43) * labelScale))
-          const labelY = Math.max(17 * labelScale, latest.joint.y * height - 21 * labelScale)
+            position.joint.x * width + (side === 'left' ? -43 : 43) * labelScale))
+          const labelY = Math.max(17 * labelScale, position.joint.y * height - 21 * labelScale)
           return (
             <g key={side} className="arm-trail" data-side={side}>
               <polyline
                 className="arm-segments"
-                points={[latest.proximal, latest.joint, latest.distal].map((point) => `${point.x * width},${point.y * height}`).join(' ')}
+                points={[position.proximal, position.joint, position.distal].map((point) => `${point.x * width},${point.y * height}`).join(' ')}
                 strokeWidth="2"
                 vectorEffect="non-scaling-stroke"
               />
               {joints.map((joint) => {
                 const stroke = joint !== 'joint' ? 4 : 2.5
                 const trace = (start: number, end?: number) => points.slice(start, end)
-                  .map((point) => `${point[joint].x * width},${point[joint].y * height}`).join(' ')
+                  .map((point) => (point.draw ?? point)[joint])
+                  .map((point) => `${point.x * width},${point.y * height}`).join(' ')
                 const recent = trace(split)
                 return (
                   <g key={joint}>
                     {split > 0 && <polyline className="arm-tail" points={trace(0, split + 1)} strokeWidth={stroke} opacity="0.42" vectorEffect="non-scaling-stroke" />}
                     {split < points.length - 1 && <polyline className="arm-tail" points={recent} strokeWidth={stroke} vectorEffect="non-scaling-stroke" />}
-                    <circle cx={latest[joint].x * width} cy={latest[joint].y * height} r={markerSize} className={`arm-marker arm-marker-${joint === 'joint' ? 'elbow' : 'wrist'}`} />
+                    <circle cx={position[joint].x * width} cy={position[joint].y * height} r={markerSize} className={`arm-marker arm-marker-${joint === 'joint' ? 'elbow' : 'wrist'}`} />
                   </g>
                 )
               })}

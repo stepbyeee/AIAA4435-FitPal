@@ -5,6 +5,7 @@ import type { Focus } from './focus'
 import type { Landmark } from '../contract'
 import { trackPose, type TrackedFrame } from './poseTracker'
 import { advanceLiveMotion, emptyLiveMotion, type LiveMotion } from './liveMotion'
+import { createPoseDisplay } from './poseDisplay'
 
 type VideoStatus = 'starting' | 'tracking' | 'ended' | 'unavailable' | 'tracking-error'
 
@@ -17,6 +18,8 @@ export type StageVideo = {
   frame: { width: number; height: number } | null
   /** The tracked body in the current frame. */
   landmarks: Landmark[] | null
+  /** Stabilized coordinates for drawing the overlay. */
+  displayLandmarks: Landmark[] | null
   motion: LiveMotion
   status: VideoStatus
 }
@@ -37,6 +40,7 @@ export function useStageVideo(options: {
   const [stream, setStream] = useState<MediaStream | null>(null)
   const [frame, setFrame] = useState<StageVideo['frame']>(null)
   const [landmarks, setLandmarks] = useState<Landmark[] | null>(null)
+  const [displayLandmarks, setDisplayLandmarks] = useState<Landmark[] | null>(null)
   const [motion, setMotion] = useState(emptyLiveMotion)
   const [status, setStatus] = useState<VideoStatus>('starting')
   const wantCamera = options.camera && !options.file && options.live
@@ -78,7 +82,12 @@ export function useStageVideo(options: {
     if (stream) video.srcObject = stream
     const cameraTracks = stream?.getVideoTracks() ?? []
     setStatus('starting')
-    const clearMotion = () => setMotion(emptyLiveMotion)
+    const display = createPoseDisplay()
+    const clearMotion = () => {
+      display.reset()
+      setDisplayLandmarks(null)
+      setMotion(emptyLiveMotion)
+    }
     const measure = () => {
       clearMotion()
       if (video.videoWidth) setFrame({ width: video.videoWidth, height: video.videoHeight })
@@ -113,9 +122,11 @@ export function useStageVideo(options: {
     if (video.error || cameraTracks.some((track) => track.readyState === 'ended')) failed()
     else stop = trackPose(video, (measured) => {
       const sample = { ...measured, landmarks: selectLandmarks(measured.landmarks, options.limb ?? 'arm', options.side ?? 'both') }
+      const displayPoints = display.update(sample)
       setStatus('tracking')
       setLandmarks(sample.landmarks)
-      setMotion((previous) => advanceLiveMotion(previous, sample, options.limb))
+      setDisplayLandmarks(displayPoints)
+      setMotion((previous) => advanceLiveMotion(previous, sample, options.limb, displayPoints))
       onFrame(sample)
     }, (error) => {
       console.warn('Pose tracking is unavailable. Run `npm run setup:pose` to fetch the model.', error)
@@ -148,5 +159,5 @@ export function useStageVideo(options: {
     }
   }, [active, stream, options.focus, options.file, options.limb, options.side, options.pulldown])
 
-  return { ref, source, frame, landmarks, motion, status }
+  return { ref, source, frame, landmarks, displayLandmarks, motion, status }
 }

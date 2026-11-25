@@ -33,3 +33,11 @@
 .review-point { fill: var(--review-line); }
 .review-bottom { fill: #f2f5f0; stroke: #101719; stroke-width: 1; }
 .review-target { stroke: #b8c2c3; stroke-width: 1; stroke-dasharray: 3 4; }
+
+.form-mark { color: var(--accent); font-size: 10px; white-space: nowrap; }
+.trunk-evidence[data-form="swing"] { color: var(--accent); }
+
+.trunk-recheck { padding: .8rem 1rem; border-left: 2px solid var(--accent); }
+.trunk-recheck h3, .trunk-recheck p { margin: 0 0 .35rem; }
+.trunk-recheck p:last-child { margin-bottom: 0; }
+.trunk-recheck[data-comparison="unavailable"] { border-color: var(--rule); }

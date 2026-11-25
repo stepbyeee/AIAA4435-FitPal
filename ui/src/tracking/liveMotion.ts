@@ -1,4 +1,4 @@
-import type { PoseFrame } from '../contract'
+import type { Landmark, PoseFrame } from '../contract'
 import type { Side, Limb } from './limbLandmarks'
 import { advanceArmTrails, emptyArmTrails, type ArmTrails } from './armTrails'
 
@@ -15,13 +15,13 @@ const sides = ['left', 'right'] as const
 
 export const emptyLiveMotion: LiveMotion = { trails: emptyArmTrails, angles: [] }
 
-export function advanceLiveMotion(previous: LiveMotion, frame: PoseFrame, limb: Limb = 'arm'): LiveMotion {
+export function advanceLiveMotion(previous: LiveMotion, frame: PoseFrame, limb: Limb = 'arm', display?: Landmark[] | null): LiveMotion {
   const { timestampMs } = frame
   const last = previous.angles.at(-1)
   if (!Number.isFinite(timestampMs)) return emptyLiveMotion
   if (last && timestampMs <= last.timestampMs) return previous
 
-  const trails = advanceArmTrails(previous.trails, frame, limb)
+  const trails = advanceArmTrails(previous.trails, frame, limb, display)
   const breaks = {
     left: previous.trails.left.length > 0 && trails.left.length === 1,
     right: previous.trails.right.length > 0 && trails.right.length === 1,

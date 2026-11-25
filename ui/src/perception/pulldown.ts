@@ -1,6 +1,7 @@
 import { IN_RANGE, type FrameState, type Phase, type PoseFrame, type RepResult, type SetSummary } from '../contract'
 import { MAX_REVIEW_REPS, recordAttempt, type RepReviewData, type RepTrace } from './repReview'
 import { createUpperArmTrack } from './pulldownUpperArm'
+import { createPulldownForm, readTrunk } from './pulldownForm'
 import { visibleArm, type ArmSide } from '../tracking/armLandmarks'
 
 export type Calibration = SetSummary['calibration'] & { side: ArmSide }
@@ -11,6 +12,7 @@ type ArmSample = ArmPosition & { shoulder: { x: number; y: number }; elbow: { x:
 type EndpointPair = Pick<Calibration, 'thetaTop' | 'thetaBottom'>
 type Attempt = {
   review?: ReturnType<typeof recordAttempt>
+  form?: ReturnType<ReturnType<typeof createPulldownForm>['start']>
   startedAt: number
   topAngle: number
   bottomAngle: number
@@ -56,7 +58,7 @@ function readArm(frame: PoseFrame, side: Side): ArmSample | null {
   }
 }
 
-function createSideTrack(side: Side, fixed?: Calibration) {
+function createSideTrack(side: Side, fixed?: Calibration, assessForm = false) {
   const endpoints: EndpointPair[] = []
   const reps: RepResult[] = []
   const traces: RepTrace[] = []
@@ -72,9 +74,11 @@ function createSideTrack(side: Side, fixed?: Calibration) {
   let verified = 0
   let previousArm: ArmSample | null = null
   let recentlyRaised: { arm: ArmSample; time: number } | null = null
+  const form = assessForm ? createPulldownForm() : null
 
   function loseTracking() {
     recent.length = 0
+    form?.reset()
     if (attempt) {
       attempt.interrupted = true
       attempt.review?.gap()
@@ -85,7 +89,8 @@ function createSideTrack(side: Side, fixed?: Calibration) {
     }
   }
 
-  function update(sample: ArmSample | null, timestampMs: number) {
+  function update(sample: ArmSample | null, timestampMs: number, frame?: PoseFrame) {
+    const trunk = form && frame ? readTrunk(frame, side) : null
     confidence = sample?.confidence ?? 0
     // A coherent jump of both anchors indicates a cut or change of tracked person.
     // Rotation about a stable elbow can move the shoulder during a genuine rep.
@@ -161,6 +166,7 @@ function createSideTrack(side: Side, fixed?: Calibration) {
         topReady = true
       }
       q = bounded((topAngle - angle) / swing, 0, 1)
+      form?.ready(timestampMs, trunk, q)
       if (angle >= topAngle - topTolerance) {
         if (fixed || (angle >= topAngle - 5 && Math.max(...angles) - Math.min(...angles) <= 7)) topReady = true
         if (topReady && (!topPose || angle > topPose.angle)) topPose = { angle, lift, normalizedLift }
@@ -169,6 +175,7 @@ function createSideTrack(side: Side, fixed?: Calibration) {
       if (!topPose || angle > topAngle - departure) return
       attempt = {
         review: fixed ? recordAttempt(timestampMs) : undefined,
+        form: form?.start(timestampMs),
         startedAt: timestampMs,
         topAngle,
         bottomAngle: angle,
@@ -181,6 +188,7 @@ function createSideTrack(side: Side, fixed?: Calibration) {
         turn: null,
       }
       attempt.review?.observe(timestampMs, angle, sample.wrist, true)
+      attempt.form?.observe(timestampMs, trunk, q)
       phase = 'pull'
       return
     }
@@ -189,6 +197,7 @@ function createSideTrack(side: Side, fixed?: Calibration) {
     current.lowestHeight = Math.min(current.lowestHeight, normalizedLift)
     current.review?.observe(timestampMs, angle, sample.wrist, !current.turn)
     q = bounded((current.topAngle - angle) / swing, 0, 1)
+    if (!current.turn) current.form?.observe(timestampMs, trunk, q)
     if (current.turn) {
       if (angle < current.turn.highestAngle - departure) {
         // A second descent before returning to the top cannot complete the prior cycle.
@@ -243,10 +252,12 @@ function createSideTrack(side: Side, fixed?: Calibration) {
     const returned = current.turn.frames >= 2 || current.interrupted
     if (excursion >= minimumPull && durationMs >= MIN_REP_MS && current.descentFrames >= 2 && returned) {
       if (fixed) {
+        const trunkForm = current.interrupted ? null : current.form?.finish()
         reps.push({
           status: current.interrupted ? 'cannot_verify' : 'verified',
           qMax: bounded(excursion / swing, 0, 1),
           durationMs,
+          ...(trunkForm ? { trunkForm } : {}),
         })
         if (current.review) {
           traces.push(current.review.finish(reps.length - 1, !current.interrupted))
@@ -287,9 +298,10 @@ function createSideTrack(side: Side, fixed?: Calibration) {
   }
 }
 
-export function createPulldown(calibration?: Calibration) {
+export function createPulldown(calibration?: Calibration, options: { assessForm?: boolean } = {}) {
   const fixed = calibration && { ...calibration }
-  const tracks = fixed ? [createSideTrack(fixed.side, fixed)] : [createSideTrack('left'), createSideTrack('right')]
+  const assessesTrunkForm = Boolean(fixed && fixed.basis !== 'upper-arm' && options.assessForm)
+  const tracks = fixed ? [createSideTrack(fixed.side, fixed, assessesTrunkForm)] : [createSideTrack('left'), createSideTrack('right')]
   const upperTracks = fixed
     ? (fixed.basis === 'upper-arm' ? [createUpperArmTrack(fixed.side, fixed)] : [])
     : [createUpperArmTrack('left'), createUpperArmTrack('right')]
@@ -312,7 +324,7 @@ export function createPulldown(calibration?: Calibration) {
       if (upper) {
         upper.update(frame)
       } else if (calibrated) {
-        active.update(readArm(frame, active.side), frame.timestampMs)
+        active.update(readArm(frame, active.side), frame.timestampMs, frame)
       } else {
         for (const track of tracks) track.update(readArm(frame, track.side), frame.timestampMs)
         const other = tracks.find((track) => track !== active)!
@@ -364,9 +376,11 @@ export function createPulldown(calibration?: Calibration) {
       const reps = (upper?.reps ?? active.reps).map((rep) => ({ ...rep }))
       const short = reps.flatMap((rep, i) => rep.status === 'verified' && rep.qMax !== null && rep.qMax < IN_RANGE ? [i] : [])
       const unseen = reps.flatMap((rep, i) => rep.status === 'cannot_verify' ? [i] : [])
+      const swing = reps.flatMap((rep, i) => rep.trunkForm?.status === 'swing' ? [i] : [])
       const issues: SetSummary['issues'] = []
       if (short.length) issues.push({ id: 'short_range', repIndexes: short })
       if (unseen.length || sustainedVisibilityLoss) issues.push({ id: 'out_of_view', repIndexes: unseen })
+      if (swing.length >= 2) issues.push({ id: 'trunk_swing', repIndexes: swing })
       return {
         exerciseId: 'lat-pulldown',
         calibration: {
@@ -376,6 +390,7 @@ export function createPulldown(calibration?: Calibration) {
         },
         reps,
         coverage: frameCount ? visibleCount / frameCount : 0,
+        ...(assessesTrunkForm ? { assessesTrunkForm } : {}),
         issues,
       }
     },

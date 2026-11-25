@@ -71,6 +71,7 @@ export function RepReview({ summary, review, mirrored = false }: {
   const detailId = useId()
   if (!summary.reps.length) return null
   const preferred = summary.issues.find(issue => issue.id === 'out_of_view')
+    ?? summary.issues.find(issue => issue.id === 'trunk_swing')
     ?? summary.issues.find(issue => issue.id === 'short_range')
   const selected = chosen !== null && summary.reps[chosen] ? chosen : preferred?.repIndexes[0] ?? 0
   const rep = summary.reps[selected]
@@ -83,13 +84,14 @@ export function RepReview({ summary, review, mirrored = false }: {
     <div className="review-choices" role="group" aria-label="选择要回顾的动作">
       {summary.reps.map((result, index) => <button type="button" key={index}
         aria-pressed={index === selected} aria-controls={detailId}
-        aria-label={`第 ${index + 1} 下，${statusText(result)}`}
+        aria-label={`第 ${index + 1} 下，${statusText(result)}${result.trunkForm?.status === 'swing' ? '，起拉后摆' : ''}`}
         data-status={result.status === 'cannot_verify' ? 'gap' : result.qMax === null ? 'count-only' : result.qMax < IN_RANGE ? 'short' : 'met'}
         onClick={() => choose(index)}>
         <span className="review-meter" aria-hidden="true">
           {result.status === 'verified' && result.qMax !== null ? <i style={{ height: `${result.qMax * 100}%` }} /> : '—'}
         </span>
         <small>{index + 1}</small>
+        {result.trunkForm?.status === 'swing' && <span className="form-mark" aria-hidden="true">后摆</span>}
       </button>)}
     </div>
     <div id={detailId} className="review-detail">
@@ -100,6 +102,11 @@ export function RepReview({ summary, review, mirrored = false }: {
       <p>{verified && rep.qMax === null ? '上臂完成了一次下拉和还原。腕部证据不足，无法计算个人幅度。' : verified
         ? `达到个人校准幅度的 ${percentage}%${trace?.bottom ? `，底部${joint}角 ${Math.round(trace.bottom.angle)}°` : ''}。`
         : '动作中途丢失关键点。这一下不评幅度，也不计 EXP。'}</p>
+      {summary.assessesTrunkForm && <p className="trunk-evidence" data-form={rep.trunkForm?.status ?? 'unavailable'}>
+        {rep.trunkForm?.status === 'swing'
+          ? `下拉阶段确认${rep.trunkForm.atMs < 0 ? '前' : '后'} ${(Math.abs(rep.trunkForm.atMs) / 1000).toFixed(2)} 秒，上身比稳定起点向后偏转约 ${rep.trunkForm.changeDeg}°（侧面投影）。`
+          : rep.trunkForm ? '起拉阶段未检测到明显后摆。' : '起拉后摆未评估。需要侧面固定机位，并看清肩、髋和起拉动作。'}
+      </p>}
       {verified && rep.qMax !== null && trace?.bottom && <p className="rep-timing">跟踪起点至底部 {(trace.bottom.ms / 1000).toFixed(1)} 秒 · 底部至确认返回 {((rep.durationMs - trace.bottom.ms) / 1000).toFixed(1)} 秒</p>}
       {summary.calibration.basis === 'upper-arm' || (verified && rep.qMax === null) ? null : trace
         ? <Traces trace={trace} calibration={summary.calibration} duration={rep.durationMs} mirrored={mirrored} squat={squat} />
