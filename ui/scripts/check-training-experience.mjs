@@ -7,8 +7,10 @@ import { writeFile, readFile } from 'node:fs/promises';
 const output = resolve(process.argv[2] ?? 'artifacts/training-experience') + '/';
 await mkdir(output, { recursive: true });
 const cpuOnly=process.env.FITPAL_CPU_ONLY==='1';
-const replayRate=Number(process.env.FITPAL_REPLAY_RATE ?? 1);
-assert([.25,.5,1].includes(replayRate),'Replay rate must be 0.25, 0.5 or 1');
+const scenario=process.env.FITPAL_SCENARIO ?? 'all';
+const replaySource=process.env.FITPAL_REPLAY_SOURCE ?? 'upload';
+assert(['upload','bundled'].includes(replaySource),'Unknown replay source');
+assert(['all','lat-pulldown','squat','camera'].includes(scenario),'Unknown scenario');
 const browser = await chromium.launch({ executablePath:process.env.FITPAL_CHROME, args:['--autoplay-policy=no-user-gesture-required', ...(cpuOnly ? ['--disable-webgl','--disable-gpu'] : [])] });
 const context = await browser.newContext({ viewport:{width:1440,height:1000}, acceptDownloads:true, reducedMotion:'reduce' });
 const page = await context.newPage();
@@ -35,21 +37,35 @@ try {
  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
  await page.screenshot({path:output+'experience-home-mobile.png',fullPage:true});
  await page.setViewportSize({width:1440,height:1000});
- for(const [clip,exercise,expected] of [['go4it-rear','lat-pulldown',4],['goblet-squat','squat',2]]) {
-  await page.goto(origin+'/?video='+clip+'#/session/'+exercise);
-  await page.getByLabel('录像分析速度').selectOption(String(replayRate));
+ for(const [clip,exercise,expected] of [['go4it-rear','lat-pulldown',4],['goblet-squat','squat',2]].filter(([,exercise])=>scenario==='all'||scenario===exercise)) {
+  if(replaySource==='upload'){
+   await page.goto(origin);
+   await page.getByText('录像回放',{exact:true}).click();
+   await page.getByLabel('录像中的动作').selectOption(exercise);
+   await page.locator('input[type=file]').setInputFiles(resolve('public/showcase',clip+'.mp4'));
+   await page.waitForURL('**/#/review/'+exercise);
+  }else await page.goto(origin+'/?video='+clip+'#/session/'+exercise);
   await page.getByRole('button',{name:'画中分析',exact:true}).click();
-  await page.locator('.live-panel-heading h2').filter({hasText:'第 1 组'}).waitFor({timeout:180000});
-  assert.equal(await page.locator('video.stage-video').evaluate(v=>v.playbackRate),replayRate);
+  await page.locator('.live-panel-heading h2').filter({hasText:'第 1 组'}).waitFor({timeout:300000});
+  assert(await page.getByRole('group',{name:'选择要回顾的动作'}).count()===0);
+  await page.getByLabel('录像分析进度').waitFor();
+  await page.waitForFunction(()=>Number(document.querySelector('.count-now')?.textContent)>=1,null,{timeout:180000});
   await page.screenshot({path:output+'experience-'+exercise+'-live.png',fullPage:true});
-  await page.locator('video.stage-video').evaluate(v=>v.pause());
+  await page.locator('.panel').screenshot({path:output+'experience-'+exercise+'-progress.png'});
+  await page.getByRole('button',{name:'暂停分析',exact:true}).click();
+  const heldTime=await page.locator('video.stage-video').evaluate(v=>v.currentTime);
   await page.getByText('等待清晰画面',{exact:true}).waitFor();
   assert.equal(await page.locator('.motion-live .motion-metric dd').nth(0).innerText(),'—');
-  await page.locator('video.stage-video').evaluate(v=>v.play());
-  await page.getByRole('region',{name:'本组训练趋势'}).waitFor({timeout:180000});
+  await page.waitForTimeout(500);
+  const pausedTime=await page.locator('video.stage-video').evaluate(v=>v.currentTime);
+  assert(Math.abs(pausedTime-heldTime)<0.00001,'Pause must hold the source position (allow decoder microsecond rounding)');
+  await page.getByRole('button',{name:'继续分析',exact:true}).click();
+  await page.getByRole('region',{name:'本组训练趋势'}).waitFor({timeout:300000});
   const choices=page.getByRole('group',{name:'选择要回顾的动作'}).getByRole('button');
   assert.equal(await choices.count(),expected);
   await choices.first().click();
+  await page.locator('.rep-review').screenshot({path:output+'experience-'+exercise+'-entries.png'});
+  await page.locator('.review-choices').screenshot({path:output+'experience-'+exercise+'-choices.png'});
   await page.getByRole('region',{name:'录像证据'}).waitFor();
   await page.getByRole('button',{name:'查看最低点',exact:true}).click();
   const at=await page.locator('.source-review video').evaluate(v=>v.currentTime);
@@ -69,6 +85,15 @@ try {
   assert.equal(report.sets[0].plan.returnSeconds,2.5);
   assert.equal(report.sets[0].result.exp.verifiedReps,expected);
   assert(report.sets[0].motion.summary.measuredReps>0);
+  assert.equal(report.sets[0].reps.length,expected);
+  if(exercise==='lat-pulldown'){
+   const windows=[[18.95,23.35],[25.05,29.05],[30.4,34.05],[35.85,39.55]];
+   report.sets[0].motion.reps.forEach((rep,i)=>{
+    assert.notEqual(rep.sourceStartMs,null);
+    const midpoint=(rep.sourceStartMs+rep.durationMs/2)/1000;
+    assert(midpoint>=windows[i][0]&&midpoint<=windows[i][1],`Rep ${i+1} must match its independently labelled source window`);
+   });
+  }
   assert.equal(await page.evaluate(()=>localStorage.getItem('fitpal.history.v3')),null);
   await writeFile(output+'experience-'+exercise+'-report.json',JSON.stringify(report,null,2));
   await page.locator('.stage').evaluate(e=>e.style.height='auto');
@@ -86,6 +111,7 @@ try {
  await page.getByRole('region',{name:'训练趋势'}).waitFor();
  assert((await page.locator('.history-metrics').innerText()).includes('2.60 s'));
  await page.screenshot({path:output+'experience-history.png',fullPage:true});
+ if(scenario==='all'||scenario==='camera'){
  const cameraContext=await browser.newContext({viewport:{width:1280,height:900}});
  const camera=await cameraContext.newPage();
  camera.on('pageerror',e=>errors.push(e.message));
@@ -128,9 +154,10 @@ try {
  reports.push({scenario:'simulated-camera-plan-and-storage-retry',sets:saved[0].sets});
  console.log(JSON.stringify(reports.at(-1)));
  await cameraContext.close();
+ }
  assert.deepEqual(errors,[]);
 } catch(error) {
  errors.push(String(error));
  await page.screenshot({path:output+'experience-failure.png',fullPage:true}).catch(()=>{});
  throw error;
-} finally {await writeFile(output+'experience-check.json',JSON.stringify({browser:browser.version(),cpuOnly,replayRate,reports,errors},null,2));await browser.close();}
+} finally {await writeFile(output+'experience-check.json',JSON.stringify({browser:browser.version(),cpuOnly,scenario,replaySource,analysisMode:'source-15hz',reports,errors},null,2));await browser.close();}

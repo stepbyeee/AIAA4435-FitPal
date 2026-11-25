@@ -1,3 +1,4 @@
+import { analyzeRecording, type RecordingAnalysis } from './recordedFrames'
 import { createArmOcclusionFilter } from './armOcclusion'
 import { cropBounds, mapLandmarks, type Focus } from './focus'
 import type { Landmark, PoseFrame } from '../contract'
@@ -38,10 +39,11 @@ export function trackPose(
   onReady?: () => void,
   focus: Focus = 'full',
   pulldown = false,
+  recording?: RecordingAnalysis,
 ): () => void {
   const armFilter = pulldown ? createArmOcclusionFilter() : null
   let stopped = false
-  const cropCanvas = focus === 'full' ? null : document.createElement('canvas')
+  const cropCanvas = focus === 'full' && !recording ? null : document.createElement('canvas')
   const ctx = cropCanvas?.getContext('2d', { alpha: false })
   const input = () => {
     if (!cropCanvas) return video
@@ -52,6 +54,7 @@ export function trackPose(
     ctx.drawImage(video, crop.x, 0, crop.width, video.videoHeight, 0, 0, crop.width, video.videoHeight)
     return cropCanvas
   }
+  const abort = new AbortController()
   let callback = 0
   let lastTime = -1
   let warmUp: (() => void) | null = null
@@ -61,6 +64,7 @@ export function trackPose(
   let release: (() => void) | null = null
   const fail = (error: unknown) => {
     stopped = true
+    abort.abort()
     release?.()
     release = null
     onError(error)
@@ -74,27 +78,30 @@ export function trackPose(
         ? video.requestVideoFrameCallback((_now, metadata) => tick(metadata.mediaTime))
         : requestAnimationFrame(() => tick(video.currentTime))
     }
+    const sample = (timestampMs: number, modelTimeMs: number) => {
+      const width = video.videoWidth, height = video.videoHeight
+      const started = performance.now()
+      const image = input()
+      const found = landmarker.detectForVideo(image, modelTimeMs).landmarks[0]
+      let landmarks: Landmark[] | null = null
+      if (found) {
+        landmarks = found.map(p => ({ x: p.x, y: p.y, visibility: p.visibility ?? 0 }))
+        if (armFilter) landmarks = armFilter.filter(landmarks, image, cropCanvas?.width ?? width, height, timestampMs)
+        if (cropCanvas && landmarks) landmarks = mapLandmarks(landmarks, cropBounds(focus, width, Boolean(video.srcObject)), width)
+      }
+      onFrame({ landmarks, width, height, timestampMs, inferenceMs: performance.now() - started })
+    }
+    if (recording && !video.srcObject) {
+      void analyzeRecording(video, ms => sample(ms, ms), recording, abort.signal)
+        .catch(error => { if (!stopped) fail(error) })
+      return
+    }
     const tick = (mediaTime: number) => {
       if (stopped) return
-      const width = video.videoWidth
-      const height = video.videoHeight
-      if (video.readyState >= 2 && width > 0 && height > 0 && mediaTime > lastTime) {
+      if (video.readyState >= 2 && video.videoWidth > 0 && video.videoHeight > 0 && mediaTime > lastTime) {
         lastTime = mediaTime
-        try {
-          const started = performance.now()
-          const image = input()
-          const found = landmarker.detectForVideo(image, started).landmarks[0]
-          let landmarks: Landmark[] | null = null
-          if (found) {
-            landmarks = found.map(p => ({ x: p.x, y: p.y, visibility: p.visibility ?? 0 }))
-            if (armFilter) landmarks = armFilter.filter(landmarks, image, cropCanvas?.width ?? width, height, mediaTime * 1000)
-            if (cropCanvas && landmarks) landmarks = mapLandmarks(landmarks, cropBounds(focus, width, Boolean(video.srcObject)), width)
-          }
-          onFrame({ landmarks, width, height, timestampMs: mediaTime * 1000, inferenceMs: performance.now() - started })
-        } catch (error) {
-          fail(error)
-          return
-        }
+        try { sample(mediaTime * 1000, performance.now()) }
+        catch (error) { fail(error); return }
       }
       if (!stopped) schedule()
     }
@@ -125,6 +132,7 @@ export function trackPose(
 
   return () => {
     stopped = true
+    abort.abort()
     release?.()
     release = null
     if (warmUp) video.removeEventListener('loadeddata', warmUp)

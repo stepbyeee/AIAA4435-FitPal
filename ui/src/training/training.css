@@ -39,3 +39,6 @@
 .stage:has(.set-review-stage) { flex-direction: column; }
 .stage:has(.set-review-stage) > .set-review-stage { flex-shrink: 0; }
 .stage:has(.set-review-stage) > .stage-foot { position: static; margin-top: 18px; flex-shrink: 0; }
+
+.recording-progress { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; color: var(--muted); font-size: 14px; }
+.recording-progress .pause-action { margin: 0; }

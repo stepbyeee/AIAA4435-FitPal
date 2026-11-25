@@ -1,6 +1,6 @@
 import { renderToStaticMarkup } from 'react-dom/server'
 import { expect, it } from 'vitest'
-import { TrainingSettings, ReplaySpeed } from './TrainingSettings'
+import { TrainingSettings } from './TrainingSettings'
 import { LiveMetrics, MotionReview } from './MotionPanels'
 import { DEFAULT_PLAN } from './plan'
 import { summarizeMotion } from '../analytics/motion'
@@ -10,12 +10,6 @@ it('exposes the complete plan without prescribing a load', () => {
   for (const label of ['计划组数', '每组目标次数', '观察重点', '负重', '左右配合观察']) expect(html).toContain(label)
 })
 
-it('offers slower video analysis while keeping original movement timing', () => {
-  const html = renderToStaticMarkup(<ReplaySpeed value={1} onChange={() => {}} />)
-  expect(html).toContain('录像分析速度')
-  expect(html).toContain('0.25')
-  expect(html).toContain('原录像计时')
-})
 it('clears live measurements when tracking is inactive', () => {
   const html = renderToStaticMarkup(<LiveMetrics active={false} live={{ left: 111, right: 112, leftSpeed: 113, rightSpeed: 114, frontal: true }} latest={null} plan={DEFAULT_PLAN} />)
   expect(html).not.toContain('111')

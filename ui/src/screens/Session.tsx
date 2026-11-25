@@ -28,7 +28,7 @@ import { createMotionRecorder, type SetMotion } from '../analytics/motion'
 import { DEFAULT_PLAN, focusNames, loadPlan, type TrainingPlan } from '../training/plan'
 import { settleTraining } from '../training/policy'
 import { LiveMetrics, MotionReview, TrainingCoach } from '../training/MotionPanels'
-import { TrainingSettings, ReplaySpeed } from '../training/TrainingSettings'
+import { TrainingSettings } from '../training/TrainingSettings'
 import { downloadReport, trainingReport } from '../training/report'
 
 const CALIBRATION_REPS = 3
@@ -86,7 +86,6 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
   })
   const [frame, setFrame] = useState<FrameState>(REST)
   const [paused, setPaused] = useState(false)
-  const [playbackRate, setPlaybackRate] = useState(1)
   const [idleMs, setIdleMs] = useState(0)
   const [analysis, setAnalysis] = useState(Boolean(videoFile) && !trial)
   const [overlay, setOverlay] = useState(false)
@@ -243,7 +242,7 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
     focus, side: squat ? side : 'both', pulldown: !squat,
     limb,
     file: videoFile,
-    playbackRate,
+    analyzeFile: !trial,
     live: live && !paused,
     onFrame: (sample) => {
       if (!paused) consume.current(videoFile ? sample : { ...sample, timestampMs: performance.now() })
@@ -344,7 +343,7 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
           {videoFile === '/showcase/go4it-rear.mp4' && <a className="clip-credit" href="/showcase/CREDITS.txt" target="_blank" rel="noreferrer">헬스티비 · CC BY 3.0</a>}
           {videoFile === '/showcase/goblet-squat.mp4' && <a className="clip-credit" href="/showcase/CREDITS.txt" target="_blank" rel="noreferrer">YMove</a>}
           <span className="demo">
-            {preview ? '角色预览' : videoFile ? '录像回放' : !paused && live && video.status === 'tracking' ? '本地姿态追踪' : null}
+            {preview ? '角色预览' : videoFile ? '录像分析 · 按原片计时' : !paused && live && video.status === 'tracking' ? '本地姿态追踪' : null}
           </span>
         </div>
       </section>
@@ -368,7 +367,10 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
               </>
             )}
             {!paused && calibrating && <p className={preview ? 'say' : 'live-instruction'}>{calibrationPrompt(video.status, preview, Boolean(videoFile), squat)}</p>}
-            {videoFile && !trial && <ReplaySpeed value={playbackRate} onChange={setPlaybackRate} />}
+            {videoFile && !trial && <div className="recording-progress" aria-label="录像分析进度">
+              <span>逐帧分析 · {Math.floor(video.recording.seconds)} / {Math.ceil(video.recording.duration)} 秒</span>
+              <button className="pause-action" disabled={video.status !== 'tracking'} onClick={video.toggleRecordingPause}>{video.recording.paused ? '继续分析' : '暂停分析'}</button>
+            </div>}
             {!paused && calibrating && !preview && video.status === 'tracking' && framing && (
               <section className="framing" aria-label="取景检查">
                 <h3>取景检查</h3>

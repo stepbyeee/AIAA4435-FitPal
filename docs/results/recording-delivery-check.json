@@ -1,0 +1,100 @@
+{
+  "clip": "go4it-rear.mp4",
+  "exercise": "lat-pulldown",
+  "expectedCalibrationRepetitions": 3,
+  "expectedFormalRepetitions": 4,
+  "environment": "CPU-only Chromium, real bundled video and local pose model",
+  "beforeCommit": "7738d51965b68a02bb437ec69ef86156307545f6",
+  "beforeDelivery": "Native advancing playback, instrumented application on development server; same captured frames replayed directly through production detector",
+  "before": [
+    {
+      "name": "normal",
+      "rate": 1,
+      "uiReps": 0,
+      "detectorReps": 0,
+      "calibratedAtMs": 33466.767,
+      "frames": 117,
+      "medianGapMs": 333.66699999999764,
+      "maxGapMs": 533.867,
+      "ends": []
+    },
+    {
+      "name": "slow",
+      "rate": 0.25,
+      "uiReps": 3,
+      "detectorReps": 3,
+      "calibratedAtMs": 16282.932999999999,
+      "frames": 523,
+      "medianGapMs": 66.73399999999674,
+      "maxGapMs": 133.46700000000055,
+      "ends": [
+        {
+          "start": 18318.3,
+          "end": 21821.8
+        },
+        {
+          "start": 24491.133,
+          "end": 27727.699999999997
+        },
+        {
+          "start": 29696.333,
+          "end": 32932.899999999994
+        }
+      ]
+    }
+  ],
+  "controlledDelivery": "Paused video, seek to fixed source positions, fresh model for each clock scale. No counter thresholds changed. The fixed control uses a canvas snapshot and no warm-up inference.",
+  "controls": [
+    {
+      "sourceSamplesPerSecond": 15,
+      "modelTimestampScale": 1,
+      "frames": 600,
+      "calibratedAtMs": 16266.666666666666,
+      "formalRepetitions": 4,
+      "sourceIntervalsMs": [
+        {
+          "start": 18333.333333333332,
+          "end": 21933.333333333332
+        },
+        {
+          "start": 24466.666666666668,
+          "end": 27666.666666666668
+        },
+        {
+          "start": 29666.666666666668,
+          "end": 33000.0
+        },
+        {
+          "start": 35133.333333333336,
+          "end": 38600.0
+        }
+      ]
+    },
+    {
+      "sourceSamplesPerSecond": 15,
+      "modelTimestampScale": 4,
+      "frames": 600,
+      "calibratedAtMs": 16266.666666666666,
+      "formalRepetitions": 4,
+      "sourceIntervalsMs": [
+        {
+          "start": 18333.333333333332,
+          "end": 21933.333333333332
+        },
+        {
+          "start": 24466.666666666668,
+          "end": 27600.0
+        },
+        {
+          "start": 29666.666666666668,
+          "end": 32933.333333333336
+        },
+        {
+          "start": 35133.333333333336,
+          "end": 38600.0
+        }
+      ]
+    }
+  ],
+  "interpretation": "The UI count matches direct detector output; at normal playback calibration is delayed by missing evidence. Both clock scales recover four when all scheduled source samples are processed. This supports fixing recorded-frame delivery; it does not establish live-camera throughput or accuracy on other clips."
+}

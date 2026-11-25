@@ -1,15 +1,6 @@
 import { focusNames, normalizePlan, type TrainingPlan } from './plan'
 import './training.css'
 
-export function ReplaySpeed({ value, onChange }: { value: number; onChange: (speed: number) => void }) {
-  return <label className="focus-select">录像分析速度
-    <select value={value} onChange={e => onChange(Number(e.target.value))}>
-      <option value="1">正常 · 1×</option><option value="0.5">慢速 · 0.5×</option><option value="0.25">精细 · 0.25×</option>
-    </select>
-    <small>处理较慢时可选择慢速。所有动作时长仍按原录像计时。</small>
-  </label>
-}
-
 export function TrainingSettings({ plan, onChange, betweenSets = false }: { plan: TrainingPlan; onChange: (plan: TrainingPlan) => void; betweenSets?: boolean }) {
   const change = (patch: Partial<TrainingPlan>) => onChange(normalizePlan({ ...plan, ...patch }))
   return <details className="training-settings" open={betweenSets || undefined}>
