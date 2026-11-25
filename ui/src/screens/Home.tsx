@@ -1,4 +1,6 @@
 import { useMemo, useState } from 'react'
+import { TrainingSettings } from '../training/TrainingSettings'
+import { loadPlan, savePlan } from '../training/plan'
 import { Figure, useDemoPull } from '../components/Figure'
 import type { CosmeticId } from '../data/collection'
 import { IN_RANGE } from '../contract'
@@ -30,6 +32,7 @@ function lastSetLine(last: LastSet | undefined) {
 }
 
 export function Home({ cosmetic, history, gear, onBuy, onStart }: Props) {
+  const [plan, setPlan] = useState(loadPlan)
   const [replayExercise, setReplayExercise] = useState('lat-pulldown')
   const [trying, setTrying] = useState<GearId | null>(null)
   const [pulling, setPulling] = useState(false)
@@ -82,6 +85,7 @@ export function Home({ cosmetic, history, gear, onBuy, onStart }: Props) {
 
       <div className="side">
         <h1 className="title">今天练什么</h1>
+        <TrainingSettings plan={plan} onChange={next => { setPlan(next); savePlan(next) }} />
 
         {today && (
           <section className="focus" onPointerEnter={() => setPulling(true)} onPointerLeave={() => setPulling(false)}>

@@ -21,6 +21,7 @@ export type StageVideo = {
   /** Stabilized coordinates for drawing the overlay. */
   displayLandmarks: Landmark[] | null
   motion: LiveMotion
+  fresh: boolean
   status: VideoStatus
 }
 
@@ -32,6 +33,7 @@ export function useStageVideo(options: {
   camera: boolean
   limb?: Limb
   file: string | null
+  playbackRate?: number
   live: boolean
   onFrame: (frame: TrackedFrame) => void
   onEnded: () => void
@@ -43,6 +45,7 @@ export function useStageVideo(options: {
   const [displayLandmarks, setDisplayLandmarks] = useState<Landmark[] | null>(null)
   const [motion, setMotion] = useState(emptyLiveMotion)
   const [status, setStatus] = useState<VideoStatus>('starting')
+  const [fresh, setFresh] = useState(false)
   const wantCamera = options.camera && !options.file && options.live
   const onFrame = useEffectEvent(options.onFrame)
   const onEnded = useEffectEvent(options.onEnded)
@@ -75,6 +78,10 @@ export function useStageVideo(options: {
   const active = source !== null && options.live
 
   useEffect(() => {
+    if (options.file && ref.current) ref.current.playbackRate = options.playbackRate ?? 1
+  }, [options.file, options.playbackRate, active])
+
+  useEffect(() => {
     const video = ref.current
     if (!video || !active) return
     let cancelled = false
@@ -84,6 +91,7 @@ export function useStageVideo(options: {
     setStatus('starting')
     const display = createPoseDisplay()
     const clearMotion = () => {
+      setFresh(false)
       display.reset()
       setDisplayLandmarks(null)
       setMotion(emptyLiveMotion)
@@ -124,6 +132,7 @@ export function useStageVideo(options: {
       const sample = { ...measured, landmarks: selectLandmarks(measured.landmarks, options.limb ?? 'arm', options.side ?? 'both') }
       const displayPoints = display.update(sample)
       setStatus('tracking')
+      setFresh(true)
       setLandmarks(sample.landmarks)
       setDisplayLandmarks(displayPoints)
       setMotion((previous) => advanceLiveMotion(previous, sample, options.limb, displayPoints))
@@ -159,5 +168,5 @@ export function useStageVideo(options: {
     }
   }, [active, stream, options.focus, options.file, options.limb, options.side, options.pulldown])
 
-  return { ref, source, frame, landmarks, displayLandmarks, motion, status }
+  return { ref, source, frame, landmarks, displayLandmarks, motion, status, fresh }
 }

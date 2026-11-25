@@ -11,7 +11,7 @@ export function setKeepSummaries(keep: boolean) {
 }
 
 export function progressKey(key: string) {
-  return ['fitpal.history.v3', 'fitpal.history.v2', 'fitpal.gear.v2', 'fitpal.gear.v1'].includes(key) || key.startsWith('fitpal.manual.v1.')
+  return ['fitpal.history.v3', 'fitpal.history.v2', 'fitpal.gear.v2', 'fitpal.gear.v1', 'fitpal.training-plan.v1'].includes(key) || key.startsWith('fitpal.manual.v1.')
 }
 
 /** Invoked only from the confirmed reset action in the history screen. */

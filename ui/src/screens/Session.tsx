@@ -24,16 +24,20 @@ import { compareTrunkSets } from '../feedback/trunkRecheck'
 import { createPulldown, type Calibration } from '../perception/pulldown'
 import { useStageVideo } from '../tracking/useStageVideo'
 import { initialSession, reduce } from '../session/session'
+import { createMotionRecorder, type SetMotion } from '../analytics/motion'
+import { DEFAULT_PLAN, focusNames, loadPlan, type TrainingPlan } from '../training/plan'
+import { settleTraining } from '../training/policy'
+import { LiveMetrics, MotionReview, TrainingCoach } from '../training/MotionPanels'
+import { TrainingSettings, ReplaySpeed } from '../training/TrainingSettings'
+import { downloadReport, trainingReport } from '../training/report'
 
-const TARGET_REPS = 10
 const CALIBRATION_REPS = 3
-const TOTAL_SETS = 3
 /** A visible top position held for this long ends a live set. */
 const IDLE_END_MS = 5000
 const phaseLabels: Record<FrameState['phase'], string> = { ready: '准备', pull: '下拉', bottom: '底部', return: '回程' }
 type EndTrigger = 'manual' | 'idle' | 'video-ended'
 
-type SettledSet = { summary: SetSummary; trigger: EndTrigger; review: RepReviewData }
+type SettledSet = { summary: SetSummary; trigger: EndTrigger; review: RepReviewData; motion: SetMotion; plan: TrainingPlan }
 const squatPhases: typeof phaseLabels = { ready: '站立', pull: '下蹲', bottom: '底部', return: '起身' }
 
 const REST: FrameState = { phase: 'ready', q: 0, visible: false, repCount: 0, landmarks: null }
@@ -59,6 +63,13 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
   const limb = squat ? 'leg' : 'arm'
   const sideName = (side: string) => (side === 'left' ? '左' : '右') + (squat ? '腿' : '臂')
   const [trial] = useState(() => parseCondition(new URLSearchParams(window.location.search).get('study')))
+  const [plan, setPlan] = useState(() => {
+    const selected = trial ? { ...DEFAULT_PLAN } : loadPlan()
+    return videoFile || trial ? { ...selected, sets: 1 } : selected
+  })
+  const planRef = useRef(plan)
+  planRef.current = plan
+  const recorder = useRef(createMotionRecorder(limb))
   const [trialCue, setTrialCue] = useState<{ text: string; target: boolean } | null>(null)
   const [trialContext] = useState<TrialContext>(() => {
     const params = new URLSearchParams(window.location.search)
@@ -71,10 +82,11 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
     const issueId = previous?.outstandingIssueId === undefined
       ? previous?.lastSet?.issue?.id
       : previous.outstandingIssueId
-    return initialSession(videoFile || trial ? 1 : TOTAL_SETS, issueId)
+    return initialSession(videoFile || trial ? 1 : plan.sets, issueId)
   })
   const [frame, setFrame] = useState<FrameState>(REST)
   const [paused, setPaused] = useState(false)
+  const [playbackRate, setPlaybackRate] = useState(1)
   const [idleMs, setIdleMs] = useState(0)
   const [analysis, setAnalysis] = useState(Boolean(videoFile) && !trial)
   const [overlay, setOverlay] = useState(false)
@@ -99,6 +111,9 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
     if (!calibrating && !calibrated) return
     const setCalibration = calibrating ? undefined : calibrated ?? undefined
     const perception = squat ? createSquat(setCalibration) : createPulldown(setCalibration, { assessForm: !trial && focus === 'full' })
+    const motionRecorder = createMotionRecorder(limb)
+    recorder.current = motionRecorder
+    const activePlan = { ...planRef.current }
     let previousPhase: FrameState['phase'] = 'ready'
     let previousAttempts = 0
     let firstTime: number | null = null
@@ -115,9 +130,12 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
       if (over || calibrating) return
       over = true
       const summary = perception.endSet()
-      setCompleted(sets => [...sets, { summary, trigger, review: perception.getRepReview() }])
+      const review = perception.getRepReview()
+      const motion = motionRecorder.finish(summary, review)
+      const current = { summary, trigger, review, motion, plan: activePlan }
+      const result = trial ? settle(summary, state.lastIssueId) : settleTraining(summary, state.lastIssueId)
+      setCompleted(sets => [...sets, current])
       chooseSet(null)
-      const result = settle(summary, state.lastIssueId)
       if (trial?.timing === 'set') logCue('set-cue', result.cue?.issueId ?? 'set_summary', lastFrameTime)
       setIdleMs(0)
       setPaused(false)
@@ -127,6 +145,7 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
     consume.current = (sample) => {
       if (over) return
       const result = perception.accept(sample)
+      if (!trial) motionRecorder.observe(sample, result.visible && result.phase === 'ready' && result.q <= .18)
       setFrame(result)
       if (calibrating) {
         const calibration = perception.getCalibration()
@@ -140,6 +159,7 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
       }
 
       firstTime ??= sample.timestampMs
+      if (!trial && previousPhase !== 'ready' && result.phase === 'ready') motionRecorder.capture(perception.endSet(), perception.getRepReview())
       if (trial?.timing === 'rep' && previousPhase !== 'ready' && result.phase === 'ready') {
         const reps = perception.endSet().reps
         if (reps.length > previousAttempts) {
@@ -168,6 +188,7 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
     finishRef.current = finish
     const anchor = topFrameRef.current
     topFrameRef.current = null
+    if (anchor && !calibrating && !trial) motionRecorder.observe(anchor, true)
     setFrame(anchor ? perception.accept(anchor) : REST)
     return () => {
       clearTimeout(cueTimer)
@@ -175,7 +196,7 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
       consume.current = () => {}
       finishRef.current = () => {}
     }
-  }, [live, preview, state.stage, state.setIndex, state.lastIssueId, videoFile, squat, trial, focus])
+  }, [live, preview, state.stage, state.setIndex, state.lastIssueId, videoFile, squat, limb, trial, focus])
 
   // The space bar is available when the user is standing at the machine.
   useEffect(() => {
@@ -192,6 +213,8 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
   // Save each settled set, so leaving during rest retains the earned result.
   const [sessionId] = useState(() => globalThis.crypto?.randomUUID?.() ?? `${Date.now()}-${Math.random()}`)
   const saved = useRef(0)
+  const [saveError, setSaveError] = useState(false)
+  const [saveRetry, retrySave] = useState(0)
   useEffect(() => {
     if (state.stage !== 'done' && state.stage !== 'rest') return
     if (saved.current >= state.results.length || videoFile || trial || !keepSummaries() || !state.results.some(r => r.exp.verifiedReps > 0)) return
@@ -199,11 +222,12 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
     const last = settled?.summary
     const issueId = state.results.at(-1)?.cue?.issueId
     const issue = last?.issues.find((candidate) => candidate.id === issueId)
-    void withProgressLock(() => saveSession({
+    void Promise.resolve().then(() => withProgressLock(() => saveSession({
         id: sessionId, date: today(),
         exerciseId: exercise.id,
         outstandingIssueId: state.lastIssueId,
-        sets: state.results.map((r) => ({ verified: r.exp.verifiedReps, quality: r.exp.qualityBonus, fixed: r.exp.fixedBonus })),
+        sets: state.results.map((r, i) => ({ verified: r.exp.verifiedReps, quality: r.exp.qualityBonus, fixed: r.exp.fixedBonus,
+          motion: completed[i]?.motion.summary, plan: completed[i]?.plan })),
         lastSet: last
           ? {
               depths: last.reps.map((r) => (r.status === 'verified' ? r.qMax : null)),
@@ -211,14 +235,15 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
               issue: issueId ? { id: issueId, count: issue?.repIndexes.length ?? 0 } : null,
             }
           : undefined,
-      })).then(onSaved)
-  }, [state.stage, state.results, state.lastIssueId, exercise.id, onSaved, settled, videoFile, trial, sessionId])
+      }))).then(rows => { setSaveError(false); onSaved(rows) }).catch(() => { saved.current = 0; setSaveError(true) })
+  }, [state.stage, state.results, state.lastIssueId, exercise.id, onSaved, settled, completed, videoFile, trial, sessionId, saveRetry])
 
   const video = useStageVideo({
     camera: useCamera,
     focus, side: squat ? side : 'both', pulldown: !squat,
     limb,
     file: videoFile,
+    playbackRate,
     live: live && !paused,
     onFrame: (sample) => {
       if (!paused) consume.current(videoFile ? sample : { ...sample, timestampMs: performance.now() })
@@ -289,9 +314,10 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
           <div className="camera-count"><span>{calibrating ? '个人校准' : '已确认'}</span>
             <strong>{frame.repCount}<small>{calibrating ? ' / 3' : ' 下'}</small></strong>
             {!calibrating && calibrationRef.current?.basis === 'upper-arm' && <span>上臂计数 · 幅度未评估</span>}
-            {!calibrating && calibrationRef.current?.basis !== 'upper-arm' && <span>当前幅度 <b>{frame.visible ? Math.round(frame.q * 100) + '%' : '—'}</b></span>}
+            {!calibrating && calibrationRef.current?.basis !== 'upper-arm' && <span>当前幅度 <b>{video.fresh && frame.visible ? Math.round(frame.q * 100) + '%' : '—'}</b></span>}
           </div>
           <ElbowTelemetry limb={limb} motion={video.motion} />
+          {!trial && <LiveMetrics active={video.fresh && video.status === 'tracking' && frame.visible} live={recorder.current.live} latest={recorder.current.latest} plan={plan} />}
         </div>}
         {reviewing && <section className="set-review-stage" aria-label="训练回顾">
           <header><h2>第 {reviewIndex + 1} 组回顾</h2>
@@ -300,11 +326,14 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
             </select>}
           </header>
           {reviewing.summary.reps.length > 0
-            ? <RepReview key={reviewIndex} summary={reviewing.summary} review={reviewing.review} mirrored={!videoFile} />
+            ? <RepReview key={reviewIndex} summary={reviewing.summary} review={reviewing.review} mirrored={!videoFile} videoFile={videoFile} metrics={reviewing.motion.reps} />
             : <p>这一组没有可回顾的完整动作。</p>}
           {reviewIndex > 0 && state.results[reviewIndex - 1]?.cue?.issueId === 'trunk_swing' &&
             <TrunkRecheck previous={completed[reviewIndex - 1].summary} current={reviewing.summary} />}
           <SetEvidence summary={reviewing.summary} trigger={reviewing.trigger} />
+          <MotionReview motion={reviewing.motion} plan={reviewing.plan} previous={completed[reviewIndex - 1]} />
+          <TrainingCoach key={`coach-${reviewIndex}`} summary={reviewing.summary} motion={reviewing.motion} plan={reviewing.plan} result={state.results[reviewIndex]} />
+          <button className="report-export" onClick={() => downloadReport(trainingReport(exercise.id, Boolean(videoFile), completed, state.results), `fitpal-${exercise.id}-report.json`)}>导出本次训练报告</button>
         </section>}
         {(preview || (!live && !reviewing)) && <Figure q={null} gear={gear} label="你的角色" />}
 
@@ -321,6 +350,7 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
       </section>
 
       <aside className={live && !preview ? 'panel panel-live' : 'panel'}>
+        {saveError && <div className="panel-body" role="alert"><p>本组记录未保存。请先导出本次报告，或重试保存。</p><button className="pause-action" onClick={() => retrySave(n => n + 1)}>重试保存记录</button></div>}
         {live && (
           <div className="panel-body live-panel">
             {!preview && (
@@ -333,16 +363,17 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
                 </div>
                 <div className="live-count num" aria-live="polite">
                   <span className="count-now">{frame.repCount}</span>
-                  <span className="count-of">/ {calibrating ? CALIBRATION_REPS : TARGET_REPS} 次</span>
+                  <span className="count-of">/ {calibrating ? CALIBRATION_REPS : plan.reps} 次</span>
                 </div>
               </>
             )}
             {!paused && calibrating && <p className={preview ? 'say' : 'live-instruction'}>{calibrationPrompt(video.status, preview, Boolean(videoFile), squat)}</p>}
+            {videoFile && !trial && <ReplaySpeed value={playbackRate} onChange={setPlaybackRate} />}
             {!paused && calibrating && !preview && video.status === 'tracking' && framing && (
               <section className="framing" aria-label="取景检查">
                 <h3>取景检查</h3>
                 <p>{squat ? '侧对镜头，站直和蹲下时，让同侧髋、膝和脚踝完整入镜。' : '双臂分别自动追踪。手举到最高时，尽量让肩、肘、腕留在画面内。'}</p>
-                  {!squat && !trial && <p>用侧面固定机位并让肩、髋入镜，可评估起拉时上身是否后摆。</p>}
+                  {!trial && <p>{plan.focus === 'coordination' ? '观察左右配合时，使用固定正面或背面机位，让两侧关节全程可见。' : !squat ? '用侧面固定机位并让肩、髋入镜，可评估起拉时上身是否后摆。' : '保持同一侧面机位，方便下一组比较。'}</p>}
                 <dl>{(['left', 'right'] as const).map(side => <div key={side} data-ready={framing[side] === '可用于校准'}>
                   <dt>{sideName(side)}</dt><dd>{framing[side]}</dd>
                 </div>)}</dl>
@@ -362,11 +393,13 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
               </section>
             )}
             {!calibrating && !preview && <p className="count-side">本组按{selectedSide}计数{calibrationRef.current?.basis === 'upper-arm' && ' · 腕部出画，仅记录次数'}</p>}
+            {!trial && !preview && <p className="plan-current">{plan.sets} 组 × {plan.reps} 次 · {focusNames[plan.focus]}{plan.focus === 'tempo' ? ` · 自选还原 ${plan.returnSeconds} 秒` : ''}{plan.loadKg !== null ? ` · 自填 ${plan.loadKg} kg` : ''}</p>}
             {trialCue && !calibrating && trial && <div className="trial-cue" role="status">
               {trialCue.text}
               {trialCue.target && calibrationRef.current && <TrialTarget format={trial.format} calibration={calibrationRef.current} exercise={exercise.id} />}
             </div>}
             {!paused && !preview && analysis && !overlay && <ElbowTelemetry limb={limb} motion={video.motion} />}
+            {!trial && !preview && analysis && !overlay && <LiveMetrics active={!paused && video.fresh && video.status === 'tracking' && frame.visible} live={recorder.current.live} latest={recorder.current.latest} plan={plan} />}
             {!videoFile && !preview && !trial && (paused || video.status === 'tracking') && (
               <button className="pause-action" onClick={togglePause}>{paused ? '继续训练' : '暂停训练'}</button>
             )}
@@ -400,6 +433,7 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
             {completed.length > 1 && <p className="count-side">第 {completed.length} 组反馈</p>}
             <LocalCue summary={settled?.summary} result={lastResult} fallback={cueText(lastResult)} />
             <Reward result={lastResult} />
+            <TrainingSettings betweenSets plan={plan} onChange={setPlan} />
             <button className="pill pill-wide" autoFocus onClick={() => dispatch({ type: 'nextSet' })}>
               开始第 {state.setIndex + 2} 组
             </button>
@@ -415,7 +449,7 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
               <TrialTarget format={trial.format} calibration={settled.summary.calibration} exercise={exercise.id} />}
             {trialContext.growth === 'visible' && <strong className="num">+{expOfResult(lastResult)} EXP</strong>}
             <PilotSurvey condition={trial} summary={settled.summary} playback={Boolean(videoFile)} onExit={onExit} cuesShown={cuesShown.current} events={studyEvents.current} context={trialContext} />
-          </div> : <Done summary={settled?.summary} results={state.results} startExp={startExp.current} last={lastResult} playback={Boolean(videoFile)} keeping={keepSummaries()} onExit={onExit} />
+          </div> : <Done summary={settled?.summary} results={state.results} startExp={startExp.current} last={lastResult} playback={Boolean(videoFile)} keeping={keepSummaries()} saveFailed={saveError} onExit={onExit} />
         )}
       </aside>
     </main>
@@ -490,11 +524,11 @@ function Reward({ result }: { result: SetResult }) {
         <dd className="num">+{verifiedReps}</dd>
       </div>
       <div className={qualityBonus ? undefined : 'reward-zero'}>
-        <dt>至少 8 下达到目标幅度，且占八成</dt>
+        <dt>{result.rewardReasons?.quality ?? '至少 8 下达到目标幅度，且占八成'}</dt>
         <dd className="num">+{qualityBonus}</dd>
       </div>
       <div className={fixedBonus ? undefined : 'reward-zero'}>
-        <dt>改掉上一组的问题</dt>
+        <dt>{result.rewardReasons?.improvement ?? '改掉上一组的问题'}</dt>
         <dd className="num">{result.hadIssueToFix ? `+${fixedBonus}` : '—'}</dd>
       </div>
       <div className="reward-total">
@@ -508,9 +542,10 @@ function Reward({ result }: { result: SetResult }) {
   )
 }
 
-function Done({ results, startExp, last, playback, summary, keeping, onExit }: {
+function Done({ results, startExp, last, playback, summary, keeping, saveFailed, onExit }: {
   summary?: SetSummary
   keeping: boolean
+  saveFailed: boolean
   results: SetResult[]
   startExp: number
   last: SetResult
@@ -531,12 +566,13 @@ function Done({ results, startExp, last, playback, summary, keeping, onExit }: {
       </div>
       {playback && <p className="note">回放结算，不计入你的训练记录。</p>}
       {!playback && !keeping && <p className="note">已关闭本地记录。EXP 仅作本组预览。</p>}
-      {!playback && keeping && levelsUp > 0 && (
+      {!playback && saveFailed && <p className="note">本次 EXP 尚未保存，请重试保存或导出报告。</p>}
+      {!playback && keeping && !saveFailed && levelsUp > 0 && (
         <p className="note">
           升到 Lv {level}，多了 {levelsUp * POINTS_PER_LEVEL} 点可以换装备。
         </p>
       )}
-      {!playback && keeping && <div className="level">
+      {!playback && keeping && !saveFailed && <div className="level">
         <div className="level-line">
           <span className="level-now num">Lv {level}</span>
           <span className="level-next num">

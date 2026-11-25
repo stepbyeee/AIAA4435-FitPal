@@ -6,6 +6,8 @@ FitPal tracks a workout on a laptop webcam. Its default coaching mode shows the 
 
 > Course project · AIAA4435 Interactive AI Systems · built from the midterm proposal below.
 
+The [interactive training experience](docs/interactive-training.md) adds personal goals, live motion metrics, source-linked repetition review, experimental bilateral timing, explanations of the existing EXP rules and compact history trends. Its calculations and interface have separate reproducible checks; bilateral observations remain descriptive and do not earn rewards.
+
 | | |
 |---|---|
 | **Team** | Jiaqi Li · Ray · Yueran Qiu | 

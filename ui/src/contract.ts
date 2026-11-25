@@ -84,6 +84,7 @@ export type SetSummary = {
 }
 
 export type SetResult = {
+  rewardReasons?: { quality: string; improvement: string }
   cue: { issueId: string; text: string } | null
   exp: { verifiedReps: number; qualityBonus: number; fixedBonus: number }
   /** True when there was an issue from the previous set to fix. */

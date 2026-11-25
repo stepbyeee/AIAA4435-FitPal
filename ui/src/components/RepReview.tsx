@@ -2,6 +2,8 @@ import { useId, useState } from 'react'
 import { IN_RANGE, type RepResult, type SetSummary } from '../contract'
 import type { RepReviewData, RepTrace, ReviewSample } from '../perception/repReview'
 import './rep-review.css'
+import { SourceReview } from '../training/SourceReview'
+import type { RepMetrics } from '../analytics/motion'
 
 type Point = { x: number; y: number }
 type Project = (sample: ReviewSample) => Point
@@ -62,8 +64,8 @@ function Traces({ trace, calibration, duration, mirrored, squat }: {
 const statusText = (rep: RepResult) => rep.status === 'cannot_verify'
   ? '未看清' : rep.qMax === null ? '已计数 · 幅度未评估' : rep.qMax < IN_RANGE ? '未达标' : '已达标'
 
-export function RepReview({ summary, review, mirrored = false }: {
-  summary: SetSummary; review: RepReviewData; mirrored?: boolean
+export function RepReview({ summary, review, mirrored = false, videoFile, metrics }: {
+  summary: SetSummary; review: RepReviewData; mirrored?: boolean; videoFile?: string | null; metrics?: RepMetrics[]
 }) {
   const squat = summary.exerciseId === 'squat'
   const joint = squat ? '膝' : '肘'
@@ -77,6 +79,8 @@ export function RepReview({ summary, review, mirrored = false }: {
   const rep = summary.reps[selected]
   const trace = review.traces.find(item => item.repIndex === selected)
   const verified = rep.status === 'verified'
+  const outboundMs = metrics ? metrics[selected]?.outboundMs ?? null : trace?.bottom?.ms ?? null
+  const returnMs = metrics ? metrics[selected]?.returnMs ?? null : trace?.bottom ? rep.durationMs - trace.bottom.ms : null
   const rounded = rep.qMax === null ? null : Math.round(rep.qMax * 100)
   const percentage = rep.qMax !== null && rep.qMax < IN_RANGE && rounded === IN_RANGE * 100 ? `<${rounded}` : String(rounded)
   return <section className="rep-review" aria-label="逐次动作回顾" data-side={review.side}>
@@ -107,10 +111,13 @@ export function RepReview({ summary, review, mirrored = false }: {
           ? `下拉阶段确认${rep.trunkForm.atMs < 0 ? '前' : '后'} ${(Math.abs(rep.trunkForm.atMs) / 1000).toFixed(2)} 秒，上身比稳定起点向后偏转约 ${rep.trunkForm.changeDeg}°（侧面投影）。`
           : rep.trunkForm ? '起拉阶段未检测到明显后摆。' : '起拉后摆未评估。需要侧面固定机位，并看清肩、髋和起拉动作。'}
       </p>}
-      {verified && rep.qMax !== null && trace?.bottom && <p className="rep-timing">跟踪起点至底部 {(trace.bottom.ms / 1000).toFixed(1)} 秒 · 底部至确认返回 {((rep.durationMs - trace.bottom.ms) / 1000).toFixed(1)} 秒</p>}
+      {verified && rep.qMax !== null && <p className="rep-timing">{outboundMs !== null && returnMs !== null ? <>跟踪起点至底部 {(outboundMs / 1000).toFixed(1)} 秒 · 底部至确认返回 {(returnMs / 1000).toFixed(1)} 秒</> : metrics ? '连续画面不足，暂不显示分段时间' : null}</p>}
       {summary.calibration.basis === 'upper-arm' || (verified && rep.qMax === null) ? null : trace
         ? <Traces trace={trace} calibration={summary.calibration} duration={rep.durationMs} mirrored={mirrored} squat={squat} />
         : <p>本组保留最近 32 下的详细轨迹。</p>}
+      {metrics?.[selected] && <p>左右配合：{metrics[selected].bilateralLagMs === null ? metrics[selected].bilateralReason : `右侧相对左侧还原中点 ${metrics[selected].bilateralLagMs} 毫秒 · 实验观察，不评分`}</p>}
+      {videoFile && trace && <SourceReview key={selected} source={videoFile} trace={trace} durationMs={rep.durationMs} />}
+      {!videoFile && metrics && <p className="motion-note">摄像头画面未录制；本次只保留动作曲线，离开后不保留逐帧数据。</p>}
     </div>
   </section>
 }

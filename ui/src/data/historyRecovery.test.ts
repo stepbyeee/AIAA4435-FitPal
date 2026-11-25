@@ -1,8 +1,42 @@
 import { afterEach, expect, it, vi } from 'vitest'
 import { loadHistory, totalExp } from './history'
 import { loadGear } from './gear'
+import { summarizeMotion } from '../analytics/motion'
+import { DEFAULT_PLAN } from '../training/plan'
 
 afterEach(() => vi.unstubAllGlobals())
+
+it('keeps validated training summaries and discards corrupt new metadata without losing EXP', () => {
+  const motion = summarizeMotion([], 1, null)
+  const base = { date: '2026-11-25', exerciseId: 'squat' }
+  vi.stubGlobal('localStorage', { getItem: () => JSON.stringify([
+    { ...base, sets: [{ verified: 3, quality: 0, fixed: 0, motion, plan: DEFAULT_PLAN }] },
+    { ...base, sets: [{ verified: 4, quality: 0, fixed: 0, motion: { ...motion, medianReturnMs: 'wrong' }, plan: { sets: -2 } }] },
+  ]) })
+  const rows = loadHistory()
+  expect(rows[0].sets[0].motion).toEqual(motion)
+  expect(rows[0].sets[0].plan).toEqual(DEFAULT_PLAN)
+  expect(rows[1].sets[0].motion).toBeUndefined()
+  expect(rows[1].sets[0].plan).toBeUndefined()
+  expect(totalExp(rows)).toBe(7)
+})
+
+it('reports a storage failure instead of returning unsaved progress as saved', async () => {
+  vi.stubGlobal('localStorage', { getItem: () => null, setItem: () => { throw new Error('quota') } })
+  const { saveSession } = await import('./history')
+  expect(() => saveSession({ date: '2026-11-25', exerciseId: 'squat', sets: [{ verified: 3, quality: 0, fixed: 0 }] })).toThrow('quota')
+})
+
+it('rejects contradictory measurements but retains the real count', () => {
+  const empty = summarizeMotion([], 1, null)
+  vi.stubGlobal('localStorage', { getItem: () => JSON.stringify([{ date: '2026-11-25', exerciseId: 'squat', sets: [
+    { verified: 1, quality: 0, fixed: 0, motion: { ...empty, medianReturnMs: 2000 } },
+    { verified: 1, quality: 0, fixed: 0, motion: { ...empty, measuredReps: 5, medianReturnMs: 2000 } },
+  ] }]) })
+  const sets = loadHistory()[0].sets
+  expect(sets.every(s => s.motion === undefined)).toBe(true)
+  expect(sets.map(s => s.verified)).toEqual([1, 1])
+})
 
 it('opens an older valid session and skips unreadable rows without losing its EXP', () => {
   const entry = { date:'2026-10-10', exerciseId:'lat-pulldown', sets:[{ verified:3,quality:0,fixed:0 }], lastSet:{ depths:'broken' } }

@@ -1,6 +1,9 @@
 import { EXERCISES, type Half } from './exercises'
+import type { MotionSummary } from '../analytics/motion'
+import type { TrainingPlan } from '../training/plan'
+import { readMotion, readPlan } from '../training/savedSummary'
 
-export type SetRecord = { verified: number; quality: number; fixed: number }
+export type SetRecord = { verified: number; quality: number; fixed: number; motion?: MotionSummary; plan?: TrainingPlan }
 
 /** The last set of a session, kept so the next visit can open on what was left to fix. */
 export type LastSet = {
@@ -49,7 +52,10 @@ export function loadHistory(): SessionRecord[] {
       if (!row || typeof row.date !== 'string' || typeof row.exerciseId !== 'string' || !Array.isArray(row.sets)) continue
       if (!row.sets.every((set: SetRecord | null) => set && [set.verified, set.quality, set.fixed].every(validCount))) continue
       const { lastSet, outstandingIssueId } = row
-      const record: SessionRecord = { date: row.date, exerciseId: row.exerciseId, sets: row.sets }
+      const record: SessionRecord = { date: row.date, exerciseId: row.exerciseId, sets: row.sets.map((s: SetRecord) => ({
+        verified: s.verified, quality: s.quality, fixed: s.fixed,
+        ...(readMotion(s.motion, s.verified) ? { motion: readMotion(s.motion, s.verified) } : {}), ...(readPlan(s.plan) ? { plan: readPlan(s.plan) } : {}),
+      })) }
       if (typeof row.id === 'string') record.id = row.id
       if (lastSet && Array.isArray(lastSet.depths) && lastSet.depths.every((d: unknown) =>
         d === null || (typeof d === 'number' && Number.isFinite(d) && d >= 0 && d <= 1)
@@ -76,11 +82,7 @@ export function saveSession(record: SessionRecord): SessionRecord[] {
   if (index < 0) next.push(record)
   else if (record.sets.length >= next[index].sets.length) next[index] = record
   else return next
-  try {
-    localStorage.setItem(KEY, JSON.stringify(next))
-  } catch {
-    // Nothing to do: the session is simply not kept.
-  }
+  localStorage.setItem(KEY, JSON.stringify(next))
   return next
 }
 

@@ -15,6 +15,7 @@ const origin = new URL(process.env.FITPAL_URL ?? 'http://127.0.0.1:5190').origin
 const output = values.artifacts && resolve(values.artifacts)
 if (output) await mkdir(output, { recursive: true })
 const args = ['--use-fake-device-for-media-stream', '--use-fake-ui-for-media-stream', '--autoplay-policy=no-user-gesture-required']
+if (process.env.FITPAL_CPU_ONLY === '1') args.push('--disable-webgl', '--disable-gpu')
 if (values.camera) args.push('--use-file-for-fake-video-capture=' + resolve(values.camera))
 const browser = await chromium.launch({ executablePath: process.env.FITPAL_CHROME, args })
 const results = []
