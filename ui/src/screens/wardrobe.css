@@ -1,0 +1,5 @@
+.wardrobe .panel { overflow-y: auto; }
+.wardrobe .wardrobe-actions { display: grid; gap: 8px; }
+.wardrobe .pill:disabled { opacity: .45; cursor: default; }
+.wardrobe .exercise { min-height: 56px; }
+.wardrobe .back { text-decoration: none; font-size: 25px; }

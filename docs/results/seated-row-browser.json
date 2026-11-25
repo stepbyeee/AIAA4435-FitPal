@@ -1,0 +1,26 @@
+{
+  "browser": "157.0.8103.79",
+  "demo": {
+    "count": 8,
+    "observedTimes": [
+      4.08,
+      8.43,
+      12.65,
+      16.51,
+      20.24,
+      24.59,
+      28.3,
+      32.5
+    ],
+    "observedBothArms": true
+  },
+  "localFile": {
+    "count": 2,
+    "blobUrlRevoked": true
+  },
+  "fakeCameraReleased": true,
+  "manualRoutePreserved": true,
+  "studyExcluded": true,
+  "storageUnchanged": true,
+  "pageErrors": []
+}

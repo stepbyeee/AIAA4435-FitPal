@@ -1,0 +1,72 @@
+import type { ArmTrails as Trails } from '../tracking/armTrails'
+
+import type { SideSelection } from '../tracking/sideSelection'
+import type { Limb } from '../tracking/limbLandmarks'
+
+type FrameSize = { width: number; height: number }
+
+const sides = ['left', 'right'] as const
+const armNames = { left: '左臂', right: '右臂' }
+const legNames = { left: '左腿', right: '右腿' }
+
+export function ArmTrails({ trails, frame, mirrored, limb = 'arm', selection = 'both' }: { trails: Trails; frame: FrameSize; mirrored: boolean; limb?: Limb; selection?: SideSelection }) {
+  const joints = limb === 'leg' ? ['proximal', 'joint'] as const : ['joint', 'distal'] as const
+  const names = limb === 'leg' ? legNames : armNames
+  const { width, height } = frame
+  const markerSize = Math.min(width, height) * 0.009
+  const labelScale = Math.min(width, height) / 540
+
+  return (
+    <>
+      <svg className={`stage-overlay arm-trails${mirrored ? ' stage-mirror' : ''}`} viewBox={`0 0 ${width} ${height}`} aria-hidden="true">
+        {sides.map((side) => {
+          const points = trails[side]
+          const latest = points.at(-1)
+          if (!latest) return null
+          const position = latest.draw ?? latest
+          const split = points.findIndex((point) => point.timestampMs >= latest.timestampMs - 420)
+          const labelX = Math.min(width - 27 * labelScale, Math.max(27 * labelScale,
+            position.joint.x * width + (side === 'left' ? -43 : 43) * labelScale))
+          const labelY = Math.max(17 * labelScale, position.joint.y * height - 21 * labelScale)
+          return (
+            <g key={side} className="arm-trail" data-side={side}>
+              <polyline
+                className="arm-segments"
+                points={[position.proximal, position.joint, position.distal].map((point) => `${point.x * width},${point.y * height}`).join(' ')}
+                strokeWidth="2"
+                vectorEffect="non-scaling-stroke"
+              />
+              {joints.map((joint) => {
+                const stroke = joint !== 'joint' ? 4 : 2.5
+                const trace = (start: number, end?: number) => points.slice(start, end)
+                  .map((point) => (point.draw ?? point)[joint])
+                  .map((point) => `${point.x * width},${point.y * height}`).join(' ')
+                const recent = trace(split)
+                return (
+                  <g key={joint}>
+                    {split > 0 && <polyline className="arm-tail" points={trace(0, split + 1)} strokeWidth={stroke} opacity="0.42" vectorEffect="non-scaling-stroke" />}
+                    {split < points.length - 1 && <polyline className="arm-tail" points={recent} strokeWidth={stroke} vectorEffect="non-scaling-stroke" />}
+                    <circle cx={position[joint].x * width} cy={position[joint].y * height} r={markerSize} className={`arm-marker arm-marker-${joint === 'joint' ? 'elbow' : 'wrist'}`} />
+                  </g>
+                )
+              })}
+              <g className="arm-angle-label" transform={`translate(${labelX} ${labelY}) scale(${mirrored ? -labelScale : labelScale} ${labelScale})`}>
+                <rect x="-25" y="-14" width="50" height="28" rx="8" />
+                <text textAnchor="middle" dominantBaseline="central">{Math.round(latest.angle)}°</text>
+              </g>
+            </g>
+          )
+        })}
+      </svg>
+      <div className="arm-legend" aria-label={limb === 'leg' ? '髋部和膝盖的动作轨迹' : '手腕和手肘的动作轨迹'}>
+        {sides.map((side) => (
+          <span key={side} data-side={side} data-visible={trails[side].length > 0}>
+            <span className="arm-legend-dot" aria-hidden="true" />
+            {names[side]}
+            <span className="arm-legend-state">{selection !== 'both' && selection !== side ? '已排除' : trails[side].length > 0 ? '清晰' : '未看清'}</span>
+          </span>
+        ))}
+      </div>
+    </>
+  )
+}

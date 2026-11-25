@@ -8,7 +8,10 @@
     "build": "tsc && vite build",
     "preview": "vite preview --port 4173 --strictPort",
     "test": "vitest run",
-    "setup:pose": "node scripts/setup-pose.mjs"
+    "setup:pose": "node scripts/setup-pose.mjs",
+    "setup:demos": "python3 scripts/fetch-replay-assets.py --app-only",
+    "test:browser": "node scripts/check-session.mjs",
+    "test:soak": "node scripts/soak-camera.mjs"
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.3.0",
@@ -20,6 +23,7 @@
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.3.0",
+    "playwright": "1.62.1",
     "typescript": "^7.0.2",
     "vite": "^8.3.8",
     "vitest": "^5.1.1"

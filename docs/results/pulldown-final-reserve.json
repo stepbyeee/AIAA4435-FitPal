@@ -1,0 +1,322 @@
+{
+  "protocol": {
+    "fps": 15,
+    "maxDimension": 640,
+    "delegate": "CPU",
+    "browser": "157.0.8103.79",
+    "manifestSha256": [
+      "3706351186e776e2fe701fb3a0e80c9d91b76f1858db2cfe1291c8e7b1d59622"
+    ],
+    "modelSha256": "5134a3aad27a58b93da0088d431f366da362b44e3ccfbe3462b3827a839011b1",
+    "sources": {
+      "before": {
+        "perception/pulldown": "613648f60cbf480809a568480a1f66746145037f977466db53098306eb2cc922",
+        "tracking/armLandmarks": "3c63a6e2844b632dd4282ce3d7ce4d3ebb36aeffb3409b5818c114aa4bf63095",
+        "tracking/limbLandmarks": "1ec36b043e06b8ecfd378b488611ea84fbbb468630725bd189bbe38128bee15e",
+        "tracking/armTrails": "e6d1948405c0897e4a4363cb98ed8d5acd0a1355f7cdfc596c86d6ad8c77dfb9",
+        "perception/repReview": "34c345f62b2f820b1599d92be451bfa5c7b10630db58c90d68c434ec03deed94",
+        "contract": "943a5c09dba2b580a8dd49547f22956c901ceca87f3153daf723262e49e468c4"
+      },
+      "after": {
+        "perception/pulldown": "be9f3911fb7263c482c60c948dcfb9e2cc4b06972efd9c0008577447876a57d4",
+        "tracking/armLandmarks": "3c63a6e2844b632dd4282ce3d7ce4d3ebb36aeffb3409b5818c114aa4bf63095",
+        "tracking/limbLandmarks": "1ec36b043e06b8ecfd378b488611ea84fbbb468630725bd189bbe38128bee15e",
+        "tracking/armTrails": "e6d1948405c0897e4a4363cb98ed8d5acd0a1355f7cdfc596c86d6ad8c77dfb9",
+        "perception/repReview": "34c345f62b2f820b1599d92be451bfa5c7b10630db58c90d68c434ec03deed94",
+        "contract": "9e2ea38d228b60f1fd9e676d3acb5bcb7c7b897d510dda1b62a9070088d47381",
+        "perception/pulldownUpperArm": "8593e6bff5f1fce23868ece1657c345d6622610b95c5ff159d0daf18a490f1fa",
+        "tracking/armOcclusion": "595d6f30aa7eb7a207aab39785ecb1e9b1491087a3b66b143afc174787fb92b7"
+      }
+    }
+  },
+  "clips": [
+    {
+      "file": "dynamic-dual-pulldown.mp4",
+      "sourceSha256": "8f1e94aeb249ce66adfcbcd6e9d706ba762a6cf91698be2984a265b0a1c08fac",
+      "windows": [
+        [
+          1.85,
+          3.73
+        ],
+        [
+          6.2,
+          8.03
+        ],
+        [
+          10.42,
+          12.31
+        ],
+        [
+          14.64,
+          16.58
+        ],
+        [
+          19.47,
+          21.63
+        ]
+      ],
+      "visualCycles": 5,
+      "decodedPngsSha256": "d7d35b8c0f3830b1f23d9662f48ad2e2f482d30cfe05bd15e0714646bcd9f200",
+      "before": {
+        "frames": 326,
+        "calibrationEvents": [
+          8.333,
+          12.6,
+          16.6
+        ],
+        "verifiedEvents": [
+          21.2
+        ],
+        "calibration": {
+          "side": "right",
+          "thetaTop": 172.50936448958234,
+          "thetaBottom": 37.17654632795124
+        },
+        "attempts": [
+          {
+            "status": "verified",
+            "qMax": 0.9833667463267065,
+            "durationMs": 3400
+          }
+        ],
+        "visibleFrames": {
+          "left": 325,
+          "right": 325
+        },
+        "p95ProcessingMs": 54.8
+      },
+      "after": {
+        "frames": 326,
+        "calibrationEvents": [
+          8.133,
+          12.467,
+          16.4
+        ],
+        "verifiedEvents": [
+          21.2
+        ],
+        "calibration": {
+          "side": "left",
+          "thetaTop": 172.50936448958234,
+          "thetaBottom": 37.17654632795124
+        },
+        "attempts": [
+          {
+            "status": "verified",
+            "qMax": 0.9833667463267065,
+            "durationMs": 3400
+          }
+        ],
+        "visibleFrames": {
+          "left": 325,
+          "right": 323
+        },
+        "p95ProcessingMs": 54.3
+      }
+    },
+    {
+      "file": "lifetime-neutral-grip.mp4",
+      "sourceSha256": "4a6572bfa2dc50f1672ccc0f4ca16a2ccd9926e00f0e78dda792239ba3242f5a",
+      "windows": [
+        [
+          1.76,
+          2.83
+        ],
+        [
+          5.02,
+          6.53
+        ],
+        [
+          8.52,
+          9.98
+        ],
+        [
+          11.94,
+          13.48
+        ],
+        [
+          15.18,
+          16.73
+        ]
+      ],
+      "visualCycles": 5,
+      "decodedPngsSha256": "9556293b512c682a0c9979b183077064bce3911259f6c7f41299ba89761034bd",
+      "before": {
+        "frames": 255,
+        "calibrationEvents": [],
+        "verifiedEvents": [],
+        "calibration": null,
+        "attempts": [],
+        "visibleFrames": {
+          "left": 182,
+          "right": 237
+        },
+        "p95ProcessingMs": 50.9
+      },
+      "after": {
+        "frames": 255,
+        "calibrationEvents": [],
+        "verifiedEvents": [],
+        "calibration": null,
+        "attempts": [],
+        "visibleFrames": {
+          "left": 182,
+          "right": 237
+        },
+        "p95ProcessingMs": 50.9
+      }
+    },
+    {
+      "file": "future-fitness-cable.mp4",
+      "sourceSha256": "631883ef52afaf762bb373d46314b002e103f102ec1cf69991ef6d0140570b7c",
+      "windows": [
+        [
+          2.45,
+          3.95
+        ],
+        [
+          6.21,
+          7.45
+        ],
+        [
+          10.07,
+          11.32
+        ],
+        [
+          13.7,
+          14.81
+        ],
+        [
+          17.13,
+          18.44
+        ]
+      ],
+      "visualCycles": 5,
+      "decodedPngsSha256": "999076c41a4a7fbac9ebdbed912adcca11b2c33834da0f4ff52df85c33872fe8",
+      "before": {
+        "frames": 287,
+        "calibrationEvents": [
+          4,
+          7.6,
+          11.533
+        ],
+        "verifiedEvents": [
+          14.933
+        ],
+        "calibration": {
+          "side": "right",
+          "thetaTop": 172.21113087128444,
+          "thetaBottom": 74.57224912887277
+        },
+        "attempts": [
+          {
+            "status": "verified",
+            "qMax": 0.9938818191870432,
+            "durationMs": 2000
+          },
+          {
+            "status": "cannot_verify",
+            "qMax": 1,
+            "durationMs": 2199.999999999998
+          }
+        ],
+        "visibleFrames": {
+          "left": 26,
+          "right": 286
+        },
+        "p95ProcessingMs": 43.4
+      },
+      "after": {
+        "frames": 287,
+        "calibrationEvents": [
+          3.867,
+          7.467,
+          11.467
+        ],
+        "verifiedEvents": [
+          14.867
+        ],
+        "calibration": {
+          "side": "right",
+          "thetaTop": 172.21113087128444,
+          "thetaBottom": 74.57224912887277
+        },
+        "attempts": [
+          {
+            "status": "verified",
+            "qMax": 0.9938818191870432,
+            "durationMs": 1933.3333333333321
+          },
+          {
+            "status": "cannot_verify",
+            "qMax": 1,
+            "durationMs": 1999.9999999999982
+          }
+        ],
+        "visibleFrames": {
+          "left": 26,
+          "right": 286
+        },
+        "p95ProcessingMs": 43.6
+      }
+    },
+    {
+      "file": "adelaide-parks.mp4",
+      "sourceSha256": "be0706c7075ad1c499ec1556cb792ff8df97e3761e339af0ef6bb09c88e74024",
+      "windows": [
+        [
+          2.73,
+          4.6
+        ],
+        [
+          6.42,
+          7.63
+        ],
+        [
+          9.37,
+          10.93
+        ],
+        [
+          12.49,
+          14.16
+        ],
+        [
+          15.75,
+          17.03
+        ]
+      ],
+      "visualCycles": 5,
+      "decodedPngsSha256": "306be96a344ed3ff0c46e10d23268d8d9765c8d4737cf2634c74814b63937304",
+      "before": {
+        "frames": 259,
+        "calibrationEvents": [
+          4.4,
+          17
+        ],
+        "verifiedEvents": [],
+        "calibration": null,
+        "attempts": [],
+        "visibleFrames": {
+          "left": 252,
+          "right": 244
+        },
+        "p95ProcessingMs": 42
+      },
+      "after": {
+        "frames": 259,
+        "calibrationEvents": [
+          4.133,
+          16.867
+        ],
+        "verifiedEvents": [],
+        "calibration": null,
+        "attempts": [],
+        "visibleFrames": {
+          "left": 248,
+          "right": 193
+        },
+        "p95ProcessingMs": 46.2
+      }
+    }
+  ]
+}

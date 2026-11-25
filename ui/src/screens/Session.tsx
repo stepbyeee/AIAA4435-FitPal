@@ -1,23 +1,42 @@
-import { useEffect, useReducer, useRef, useState } from 'react'
-import { Figure, useDemoPull } from '../components/Figure'
+import { useEffect, useLayoutEffect, useReducer, useRef, useState } from 'react'
+import { JointTarget, PilotSurvey } from '../components/PilotTrial'
+import { LocalCue } from '../components/LocalCue'
+import { RepReview } from '../components/RepReview'
+import type { RepReviewData } from '../perception/repReview'
+import { createSquat } from '../perception/squat'
+import { parseParticipant, parsePeriod } from '../study/assignment'
+import { parseCondition, repCue, type TrialContext, type TrialEvent } from '../study/pilot'
+import { cropBounds, focusLabels, parseFocus, type Focus } from '../tracking/focus'
+import { parseSide, type SideSelection } from '../tracking/sideSelection'
+import { describeFraming } from '../tracking/framing'
+import { ArmTrails } from '../components/ArmTrails'
+import { ElbowTelemetry } from '../components/ElbowTelemetry'
+import { Figure } from '../components/Figure'
 import { Skeleton } from '../components/Skeleton'
-import { expOfResult, IN_RANGE, type FrameState, type SetResult, type SetSummary } from '../contract'
+import { expOfResult, IN_RANGE, type FrameState, type PoseFrame, type SetResult, type SetSummary } from '../contract'
 import type { Exercise } from '../data/exercises'
 import { POINTS_PER_LEVEL, type GearId } from '../data/gear'
-import { levelOf, saveSession, today, totalExp, type SessionRecord } from '../data/history'
-import { settle } from '../mock/feedback'
-import { startMockSource, type Source } from '../mock/perception'
-import { FRAME } from '../pose'
+import { lastSessionOf, levelOf, saveSession, today, totalExp, type SessionRecord } from '../data/history'
+import { withProgressLock } from '../data/progressLock'
+import { keepSummaries } from '../data/privacy'
+import { settle } from '../feedback/settle'
+import { compareTrunkSets } from '../feedback/trunkRecheck'
+import { createPulldown, type Calibration } from '../perception/pulldown'
 import { useStageVideo } from '../tracking/useStageVideo'
 import { initialSession, reduce } from '../session/session'
 
 const TARGET_REPS = 10
 const CALIBRATION_REPS = 3
 const TOTAL_SETS = 3
-/** Back at the top and still for this long ends the set. Space ends it at once. */
+/** A visible top position held for this long ends a live set. */
 const IDLE_END_MS = 5000
+const phaseLabels: Record<FrameState['phase'], string> = { ready: '准备', pull: '下拉', bottom: '底部', return: '回程' }
+type EndTrigger = 'manual' | 'idle' | 'video-ended'
 
-const REST: FrameState = { phase: 'ready', q: 0, visible: true, repCount: 0, landmarks: null }
+type SettledSet = { summary: SetSummary; trigger: EndTrigger; review: RepReviewData }
+const squatPhases: typeof phaseLabels = { ready: '站立', pull: '下蹲', bottom: '底部', return: '起身' }
+
+const REST: FrameState = { phase: 'ready', q: 0, visible: false, repCount: 0, landmarks: null }
 
 type Props = {
   exercise: Exercise
@@ -28,123 +47,203 @@ type Props = {
   videoFile: string | null
   onSaved: (history: SessionRecord[]) => void
   onExit: () => void
+  onRetry: () => void
+  side: SideSelection
+  onSide: (side: SideSelection) => void
+  focus: Focus
+  onFocus: (focus: Focus) => void
 }
 
-export function Session({ exercise, history, gear, useCamera, videoFile, onSaved, onExit }: Props) {
-  const [state, dispatch] = useReducer(reduce, TOTAL_SETS, initialSession)
+export function Session({ exercise, history, gear, useCamera, videoFile, onSaved, onExit, onRetry, focus, onFocus, side, onSide }: Props) {
+  const squat = exercise.id === 'squat'
+  const limb = squat ? 'leg' : 'arm'
+  const sideName = (side: string) => (side === 'left' ? '左' : '右') + (squat ? '腿' : '臂')
+  const [trial] = useState(() => parseCondition(new URLSearchParams(window.location.search).get('study')))
+  const [trialCue, setTrialCue] = useState<{ text: string; target: boolean } | null>(null)
+  const [trialContext] = useState<TrialContext>(() => {
+    const params = new URLSearchParams(window.location.search)
+    return { participant: parseParticipant(params.get('participant')), period: parsePeriod(params.get('period')), growth: params.get('growth') === 'hidden' ? 'hidden' : 'visible' }
+  })
+  const studyEvents = useRef<TrialEvent[]>([])
+  const cuesShown = useRef(0)
+  const [state, dispatch] = useReducer(reduce, null, () => {
+    const previous = !videoFile && !trial ? lastSessionOf(history, exercise.id) : undefined
+    const issueId = previous?.outstandingIssueId === undefined
+      ? previous?.lastSet?.issue?.id
+      : previous.outstandingIssueId
+    return initialSession(videoFile || trial ? 1 : TOTAL_SETS, issueId)
+  })
   const [frame, setFrame] = useState<FrameState>(REST)
+  const [paused, setPaused] = useState(false)
   const [idleMs, setIdleMs] = useState(0)
-  const sourceRef = useRef<Source | null>(null)
-  const finishRef = useRef<() => void>(() => {})
-  const lastIssueRef = useRef<string | null>(null)
-  const lastSummaryRef = useRef<SetSummary | null>(null)
+  const [analysis, setAnalysis] = useState(Boolean(videoFile) && !trial)
+  const [overlay, setOverlay] = useState(false)
+  const [showBones, setShowBones] = useState(false)
+  const consume = useRef<(frame: PoseFrame) => void>(() => {})
+  const finishRef = useRef<(trigger: EndTrigger) => void>(() => {})
+  const calibrationRef = useRef<Calibration | null>(null)
+  const topFrameRef = useRef<PoseFrame | null>(null)
+  const [completed, setCompleted] = useState<SettledSet[]>([])
+  const settled = completed.at(-1) ?? null
+  const [chosenSet, chooseSet] = useState<number | null>(null)
   // EXP before this session, so the result does not depend on when the save lands.
   const startExp = useRef(totalExp(history))
-  lastIssueRef.current = state.lastIssueId
-
   const live = state.stage === 'calibrating' || state.stage === 'set'
+  const calibrating = state.stage === 'calibrating'
+  const preview = !useCamera && !videoFile
 
-  // Run the perception source while a set or the calibration is on.
-  useEffect(() => {
-    if (!live) return
+  useLayoutEffect(() => {
+    if (!live || preview) return
     const calibrating = state.stage === 'calibrating'
+    const calibrated = calibrationRef.current
+    if (!calibrating && !calibrated) return
+    const setCalibration = calibrating ? undefined : calibrated ?? undefined
+    const perception = squat ? createSquat(setCalibration) : createPulldown(setCalibration, { assessForm: !trial && focus === 'full' })
+    let previousPhase: FrameState['phase'] = 'ready'
+    let previousAttempts = 0
+    let firstTime: number | null = null
+    const logCue = (action: TrialEvent['action'], trigger: string, now: number | null) => {
+      cuesShown.current++
+      if (studyEvents.current.length < 256) studyEvents.current.push({ ms: Math.round((now ?? 0) - (firstTime ?? 0)), action, trigger })
+    }
+    let cueTimer: ReturnType<typeof setTimeout> | undefined
     let over = false
     let idleSince: number | null = null
+    let lastFrameTime: number | null = null
 
-    const finish = () => {
-      if (over) return
+    const finish = (trigger: EndTrigger) => {
+      if (over || calibrating) return
       over = true
-      const summary = source.endSet()
-      lastSummaryRef.current = summary
-      source.stop()
+      const summary = perception.endSet()
+      setCompleted(sets => [...sets, { summary, trigger, review: perception.getRepReview() }])
+      chooseSet(null)
+      const result = settle(summary, state.lastIssueId)
+      if (trial?.timing === 'set') logCue('set-cue', result.cue?.issueId ?? 'set_summary', lastFrameTime)
       setIdleMs(0)
-      dispatch({ type: 'setEnded', result: settle(summary, lastIssueRef.current) })
+      setPaused(false)
+      dispatch({ type: 'setEnded', result })
     }
 
-    const source = startMockSource(
-      { exerciseId: exercise.id, setIndex: state.setIndex, targetReps: calibrating ? CALIBRATION_REPS : TARGET_REPS, fullDepth: calibrating },
-      (f) => {
-        if (over) return
-        setFrame(f)
-        if (calibrating) {
-          if (f.repCount >= CALIBRATION_REPS) {
-            over = true
-            source.stop()
-            dispatch({ type: 'calibrated' })
-          }
-          return
+    consume.current = (sample) => {
+      if (over) return
+      const result = perception.accept(sample)
+      setFrame(result)
+      if (calibrating) {
+        const calibration = perception.getCalibration()
+        if (calibration) {
+          over = true
+          calibrationRef.current = calibration
+          topFrameRef.current = sample
+          dispatch({ type: 'calibrated' })
         }
-        if (f.phase === 'ready' && f.repCount > 0) {
-          const now = performance.now()
-          idleSince ??= now
-          setIdleMs(now - idleSince)
-          if (now - idleSince >= IDLE_END_MS) finish()
-        } else if (idleSince !== null) {
-          idleSince = null
-          setIdleMs(0)
+        return
+      }
+
+      firstTime ??= sample.timestampMs
+      if (trial?.timing === 'rep' && previousPhase !== 'ready' && result.phase === 'ready') {
+        const reps = perception.endSet().reps
+        if (reps.length > previousAttempts) {
+          const rep = reps[reps.length - 1]
+          setTrialCue({ text: repCue(rep), target: rep.status === 'verified' && rep.qMax !== null })
+          logCue('rep-cue', rep.status === 'cannot_verify' ? 'out_of_view' : rep.qMax === null ? 'count_only' : rep.qMax < IN_RANGE ? 'short_range' : 'in_range', sample.timestampMs)
+          previousAttempts = reps.length
+          clearTimeout(cueTimer)
+          cueTimer = setTimeout(() => setTrialCue(null), 2000)
         }
-      },
-    )
-    sourceRef.current = source
-    finishRef.current = calibrating ? () => {} : finish
-    setFrame(REST)
+      }
+      previousPhase = result.phase
+      const now = sample.timestampMs
+      const stalled = lastFrameTime !== null && now - lastFrameTime > 500
+      lastFrameTime = now
+      if (!videoFile && result.visible && result.phase === 'ready' && result.q <= 0.18 && result.repCount > 0) {
+        if (stalled) idleSince = null
+        idleSince ??= now
+        setIdleMs(now - idleSince)
+        if (now - idleSince >= IDLE_END_MS) finish('idle')
+      } else if (idleSince !== null) {
+        idleSince = null
+        setIdleMs(0)
+      }
+    }
+    finishRef.current = finish
+    const anchor = topFrameRef.current
+    topFrameRef.current = null
+    setFrame(anchor ? perception.accept(anchor) : REST)
     return () => {
+      clearTimeout(cueTimer)
       over = true
-      source.stop()
-      sourceRef.current = null
+      consume.current = () => {}
       finishRef.current = () => {}
     }
-  }, [live, state.stage, state.setIndex, exercise.id])
+  }, [live, preview, state.stage, state.setIndex, state.lastIssueId, videoFile, squat, trial, focus])
 
-  // Space ends the set by hand. V hides the user from the stand-in camera, to show that state.
+  // The space bar is available when the user is standing at the machine.
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.repeat || e.target instanceof HTMLButtonElement) return
-      if (e.code === 'Space') {
-        e.preventDefault()
-        finishRef.current()
-      } else if (e.code === 'KeyV') {
-        sourceRef.current?.toggleVisible()
-      }
+      if (state.stage !== 'set' || e.repeat || e.defaultPrevented || e.code !== 'Space') return
+      if (e.target instanceof Element && e.target.closest('button, a, input, select, textarea, summary, [contenteditable=true]')) return
+      e.preventDefault()
+      finishRef.current('manual')
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  }, [])
+  }, [state.stage])
 
-  // Keep the session once it is done.
-  const saved = useRef(false)
+  // Save each settled set, so leaving during rest retains the earned result.
+  const [sessionId] = useState(() => globalThis.crypto?.randomUUID?.() ?? `${Date.now()}-${Math.random()}`)
+  const saved = useRef(0)
   useEffect(() => {
-    if (state.stage !== 'done' || saved.current) return
-    saved.current = true
-    const last = lastSummaryRef.current
-    const issue = last?.issues[0]
-    onSaved(
-      saveSession({
-        date: today(),
+    if (state.stage !== 'done' && state.stage !== 'rest') return
+    if (saved.current >= state.results.length || videoFile || trial || !keepSummaries() || !state.results.some(r => r.exp.verifiedReps > 0)) return
+    saved.current = state.results.length
+    const last = settled?.summary
+    const issueId = state.results.at(-1)?.cue?.issueId
+    const issue = last?.issues.find((candidate) => candidate.id === issueId)
+    void withProgressLock(() => saveSession({
+        id: sessionId, date: today(),
         exerciseId: exercise.id,
+        outstandingIssueId: state.lastIssueId,
         sets: state.results.map((r) => ({ verified: r.exp.verifiedReps, quality: r.exp.qualityBonus, fixed: r.exp.fixedBonus })),
         lastSet: last
           ? {
               depths: last.reps.map((r) => (r.status === 'verified' ? r.qMax : null)),
-              issue: issue ? { id: issue.id, count: issue.repIndexes.length } : null,
+              countOnly: last.reps.flatMap((r, i) => r.status === 'verified' && r.qMax === null ? [i] : []),
+              issue: issueId ? { id: issueId, count: issue?.repIndexes.length ?? 0 } : null,
             }
           : undefined,
-      }),
-    )
-  }, [state.stage, state.results, exercise.id, onSaved])
+      })).then(onSaved)
+  }, [state.stage, state.results, state.lastIssueId, exercise.id, onSaved, settled, videoFile, trial, sessionId])
 
-  const video = useStageVideo({ camera: useCamera, file: videoFile })
+  const video = useStageVideo({
+    camera: useCamera,
+    focus, side: squat ? side : 'both', pulldown: !squat,
+    limb,
+    file: videoFile,
+    live: live && !paused,
+    onFrame: (sample) => {
+      if (!paused) consume.current(videoFile ? sample : { ...sample, timestampMs: performance.now() })
+    },
+    onEnded: () => finishRef.current('video-ended'),
+  })
+  const togglePause = () => {
+    if (!paused) {
+      consume.current({ landmarks: null, width: 0, height: 0, timestampMs: performance.now() })
+      setIdleMs(0)
+    }
+    setPaused(!paused)
+  }
   const lastResult = state.results[state.results.length - 1]
-  // Between sets the character shows the target for a range cue: the full pull, against the same gauge.
-  const showTarget = state.stage === 'rest' && lastResult?.cue?.issueId === 'short_range'
-  const targetQ = useDemoPull(showTarget)
-  const stageQ = live ? frame.q : targetQ
-  // Over a video the bones come from tracking that video. The stand-in landmarks describe the
-  // stand-in body, so they are only drawn when there is no video.
-  const standIn = live && !video.source ? frame.landmarks : null
+  const cameraHint = !calibrating && video.status === 'tracking' && !frame.visible
+    ? (squat ? '计数侧未看清，请让髋、膝和脚踝入镜。' : '计数侧未看清，请让肩、肘和腕入镜。')
+    : null
 
+  const framing = video.frame && describeFraming({ ...video.frame, landmarks: video.landmarks, timestampMs: 0 }, limb)
+  const bounds = video.frame && cropBounds(focus, video.frame.width, false)
+  const selectedSide = sideName(calibrationRef.current?.side ?? 'left')
+  const reviewIndex = chosenSet ?? completed.length - 1
+  const reviewing = !live && !trial ? completed[reviewIndex] : null
   return (
-    <main className="session">
+    <main className={analysis ? (overlay ? 'session analysis-view overlay-view' : 'session analysis-view') : 'session training-view'}>
       <header className="session-head">
         <button className="back" onClick={onExit} aria-label="返回首页">
           <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true">
@@ -152,88 +251,224 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
           </svg>
         </button>
         <h1 className="title">{exercise.name}</h1>
+        {live && !preview && !trial && <div className="view-switch" role="group" aria-label="镜头视图">
+          <button aria-pressed={!analysis} onClick={() => setAnalysis(false)}>训练</button>
+          <button aria-pressed={analysis && !overlay} onClick={() => { setAnalysis(true); setOverlay(false) }}>分析</button>
+          <button aria-pressed={analysis && overlay} onClick={() => { setAnalysis(true); setOverlay(true) }}>画中分析</button>
+        </div>}
       </header>
 
       <section className="stage" aria-label="镜头画面">
-        {video.source?.kind === 'camera' && <video className="stage-video stage-mirror" ref={video.ref} autoPlay muted playsInline />}
-        {video.source?.kind === 'file' && <video className="stage-video stage-whole" ref={video.ref} src={video.source.src} autoPlay muted loop playsInline />}
-        {video.source && video.frame && video.landmarks && (
+        {paused && <div className="pause-screen"><strong>训练已暂停</strong><span>摄像头已关闭</span></div>}
+        {!paused && live && video.source?.kind === 'camera' && <video className="stage-video stage-whole stage-mirror" ref={video.ref} muted playsInline />}
+        {live && video.source?.kind === 'file' && <video className="stage-video stage-whole" ref={video.ref} src={video.source.src} preload="auto" muted playsInline />}
+        {!paused && live && focus !== 'full' && bounds && video.frame && (
+          <svg className="stage-overlay focus-mask" viewBox={`0 0 ${video.frame.width} ${video.frame.height}`} aria-label="选中的人物区域" role="img">
+            <rect x="0" y="0" width={bounds.x} height={video.frame.height} />
+            <rect x={bounds.x + bounds.width} y="0" width={video.frame.width - bounds.x - bounds.width} height={video.frame.height} />
+            <rect className="focus-outline" x={bounds.x} y="0" width={bounds.width} height={video.frame.height} />
+          </svg>
+        )}
+        {!paused && analysis && showBones && live && video.source && video.frame && video.displayLandmarks && (
           <Skeleton
             className="stage-overlay"
-            landmarks={video.landmarks}
+            landmarks={video.displayLandmarks}
             frame={video.frame}
-            fit={video.source.kind === 'camera' ? 'slice' : 'meet'}
+            fit="meet"
             mirrored={video.source.kind === 'camera'}
             label="追踪到的身体"
           />
         )}
-        {standIn && <Skeleton className="figure" landmarks={standIn} frame={FRAME} skull label="追踪到的身体" />}
-        {!video.source && !live && <Figure q={stageQ} gear={gear} label={showTarget ? '目标动作：把横杆拉到锁骨' : '你的角色'} />}
-
-        {stageQ !== null && !video.source && (
-          <div className="range" aria-hidden="true">
-            <div className="range-fill" style={{ height: `${stageQ * 100}%` }} />
-            <div className="range-target" style={{ top: `${IN_RANGE * 100}%` }} />
-          </div>
+        {!paused && live && video.source && video.frame && video.status === 'tracking' && (
+          <>
+            <ArmTrails limb={limb} trails={video.motion.trails} selection={squat ? side : 'both'} frame={video.frame} mirrored={video.source.kind === 'camera'} />
+            {analysis && <button className="bone-toggle" aria-pressed={showBones} onClick={() => setShowBones((visible) => !visible)}>骨架</button>}
+          </>
         )}
+        {!paused && live && analysis && overlay && <div className="camera-stats" data-landscape={Boolean(video.frame && video.frame.width / video.frame.height >= 1.3)} aria-label="画中分析数据">
+          <div className="camera-count"><span>{calibrating ? '个人校准' : '已确认'}</span>
+            <strong>{frame.repCount}<small>{calibrating ? ' / 3' : ' 下'}</small></strong>
+            {!calibrating && calibrationRef.current?.basis === 'upper-arm' && <span>上臂计数 · 幅度未评估</span>}
+            {!calibrating && calibrationRef.current?.basis !== 'upper-arm' && <span>当前幅度 <b>{frame.visible ? Math.round(frame.q * 100) + '%' : '—'}</b></span>}
+          </div>
+          <ElbowTelemetry limb={limb} motion={video.motion} />
+        </div>}
+        {reviewing && <section className="set-review-stage" aria-label="训练回顾">
+          <header><h2>第 {reviewIndex + 1} 组回顾</h2>
+            {completed.length > 1 && <select aria-label="选择训练组" value={reviewIndex} onChange={e => chooseSet(Number(e.target.value))}>
+              {completed.map((_, i) => <option key={i} value={i}>第 {i + 1} 组</option>)}
+            </select>}
+          </header>
+          {reviewing.summary.reps.length > 0
+            ? <RepReview key={reviewIndex} summary={reviewing.summary} review={reviewing.review} mirrored={!videoFile} />
+            : <p>这一组没有可回顾的完整动作。</p>}
+          {reviewIndex > 0 && state.results[reviewIndex - 1]?.cue?.issueId === 'trunk_swing' &&
+            <TrunkRecheck previous={completed[reviewIndex - 1].summary} current={reviewing.summary} />}
+          <SetEvidence summary={reviewing.summary} trigger={reviewing.trigger} />
+        </section>}
+        {(preview || (!live && !reviewing)) && <Figure q={null} gear={gear} label="你的角色" />}
 
         <div className="stage-foot">
           <span className="lost" role="status">
-            {live && !frame.visible && '看不到你。往后站半步，让上半身入镜。'}
+            {live && !paused && !preview && cameraHint}
           </span>
-          <span className="demo">{video.trackingFailed ? '追踪没有启动' : video.source ? '次数是演示数据' : '演示数据'}</span>
+          {videoFile === '/showcase/go4it-rear.mp4' && <a className="clip-credit" href="/showcase/CREDITS.txt" target="_blank" rel="noreferrer">헬스티비 · CC BY 3.0</a>}
+          {videoFile === '/showcase/goblet-squat.mp4' && <a className="clip-credit" href="/showcase/CREDITS.txt" target="_blank" rel="noreferrer">YMove</a>}
+          <span className="demo">
+            {preview ? '角色预览' : videoFile ? '录像回放' : !paused && live && video.status === 'tracking' ? '本地姿态追踪' : null}
+          </span>
         </div>
       </section>
 
-      <aside className="panel">
-        {state.stage === 'calibrating' && (
-          <div className="panel-body">
-            <p className="say">先做 3 下，量一下你的活动范围。</p>
-            <div className={frame.visible ? 'count num' : 'count count-dim num'} aria-live="polite">
-              <span className="count-now">{frame.repCount}</span>
-              <span className="count-of">/ {CALIBRATION_REPS}</span>
-            </div>
-          </div>
-        )}
-
-        {state.stage === 'set' && (
-          <div className="panel-body">
-            <SetMarks total={state.totalSets} index={state.setIndex} />
-            <div className={frame.visible ? 'count num' : 'count count-dim num'} aria-live="polite">
-              <span className="count-now">{frame.repCount}</span>
-              <span className="count-of">/ {TARGET_REPS}</span>
-            </div>
-            <div className={idleMs > 600 ? 'idle idle-on' : 'idle'}>
-              <div className="track">
-                <div className="track-fill track-plain" style={{ width: `${Math.max(0, 1 - idleMs / IDLE_END_MS) * 100}%` }} />
+      <aside className={live && !preview ? 'panel panel-live' : 'panel'}>
+        {live && (
+          <div className="panel-body live-panel">
+            {!preview && (
+              <>
+                <div className="live-panel-heading">
+                  <h2>{calibrating ? '个人校准' : `第 ${state.setIndex + 1} 组`}</h2>
+                  <span className="live-phase" data-ready={!paused && video.status === 'tracking' && frame.visible}>
+                    {!paused && video.status === 'tracking' && frame.visible ? (squat ? squatPhases : phaseLabels)[frame.phase] : paused ? '暂停' : '等待关键点'}
+                  </span>
+                </div>
+                <div className="live-count num" aria-live="polite">
+                  <span className="count-now">{frame.repCount}</span>
+                  <span className="count-of">/ {calibrating ? CALIBRATION_REPS : TARGET_REPS} 次</span>
+                </div>
+              </>
+            )}
+            {!paused && calibrating && <p className={preview ? 'say' : 'live-instruction'}>{calibrationPrompt(video.status, preview, Boolean(videoFile), squat)}</p>}
+            {!paused && calibrating && !preview && video.status === 'tracking' && framing && (
+              <section className="framing" aria-label="取景检查">
+                <h3>取景检查</h3>
+                <p>{squat ? '侧对镜头，站直和蹲下时，让同侧髋、膝和脚踝完整入镜。' : '双臂分别自动追踪。手举到最高时，尽量让肩、肘、腕留在画面内。'}</p>
+                  {!squat && !trial && <p>用侧面固定机位并让肩、髋入镜，可评估起拉时上身是否后摆。</p>}
+                <dl>{(['left', 'right'] as const).map(side => <div key={side} data-ready={framing[side] === '可用于校准'}>
+                  <dt>{sideName(side)}</dt><dd>{framing[side]}</dd>
+                </div>)}</dl>
+                {!trial && analysis && squat && <label className="focus-select">可用的身体侧
+                  <select value={side} onChange={e=>onSide(parseSide(e.target.value))}>
+                    <option value="both">自动 · 左右分开追踪</option>
+                    <option value="left">仅左侧 · 右侧被遮挡</option><option value="right">仅右侧 · 左侧被遮挡</option>
+                  </select>
+                  <small>器械持续遮挡一侧时，选择清楚的一侧重新校准。</small>
+                </label>}
+                {!trial && <label className="focus-select">取景区域（实验）
+                  <select value={focus} onChange={e => onFocus(parseFocus(e.target.value))}>
+                    {Object.entries(focusLabels).map(([value, text]) => <option key={value} value={value}>{text}</option>)}
+                  </select>
+                  <small>旁人入镜时可缩小区域，更改后重新校准。</small>
+                </label>}
+              </section>
+            )}
+            {!calibrating && !preview && <p className="count-side">本组按{selectedSide}计数{calibrationRef.current?.basis === 'upper-arm' && ' · 腕部出画，仅记录次数'}</p>}
+            {trialCue && !calibrating && trial && <div className="trial-cue" role="status">
+              {trialCue.text}
+              {trialCue.target && calibrationRef.current && <TrialTarget format={trial.format} calibration={calibrationRef.current} exercise={exercise.id} />}
+            </div>}
+            {!paused && !preview && analysis && !overlay && <ElbowTelemetry limb={limb} motion={video.motion} />}
+            {!videoFile && !preview && !trial && (paused || video.status === 'tracking') && (
+              <button className="pause-action" onClick={togglePause}>{paused ? '继续训练' : '暂停训练'}</button>
+            )}
+            {calibrating && !preview && !videoFile && !trial && (video.status === 'unavailable' || video.status === 'tracking-error') &&
+              <a className="manual-start" href={`#/manual/${exercise.id}`}>改用手动记录</a>}
+            {calibrating ? (
+              (video.status === 'ended' || video.status === 'unavailable' || video.status === 'tracking-error') && (
+                <button className="pill pill-wide" onClick={onRetry}>重试</button>
+              )
+            ) : (
+              <div className="live-set-controls">
+                <SetMarks total={state.totalSets} index={state.setIndex} />
+                {idleMs > 600 && (
+                  <div className="idle">
+                    <div className="track">
+                      <div className="track-fill track-plain" style={{ width: `${Math.max(0, 1 - idleMs / IDLE_END_MS) * 100}%` }} />
+                    </div>
+                    <span className="num">{Math.ceil(Math.max(0, IDLE_END_MS - idleMs) / 1000)} 秒后结算这一组</span>
+                  </div>
+                )}
+                {(video.status === 'unavailable' || video.status === 'tracking-error') && <p className="note" role="status">追踪已中断。本组仅结算已确认的动作。</p>}
+                <button className="pill pill-wide" onClick={() => finishRef.current('manual')}>结束这一组</button>
               </div>
-              <span className="num">{Math.ceil(Math.max(0, IDLE_END_MS - idleMs) / 1000)} 秒后结算这一组</span>
-            </div>
+            )}
           </div>
         )}
 
         {state.stage === 'rest' && lastResult && (
           <div className="panel-body">
             <SetMarks total={state.totalSets} index={state.setIndex} done />
-            <p className="say">{cueText(lastResult)}</p>
+            {completed.length > 1 && <p className="count-side">第 {completed.length} 组反馈</p>}
+            <LocalCue summary={settled?.summary} result={lastResult} fallback={cueText(lastResult)} />
             <Reward result={lastResult} />
             <button className="pill pill-wide" autoFocus onClick={() => dispatch({ type: 'nextSet' })}>
               开始第 {state.setIndex + 2} 组
             </button>
+            <button className="pause-action" onClick={onExit}>结束本次训练</button>
           </div>
         )}
 
         {state.stage === 'done' && lastResult && (
-          <Done results={state.results} startExp={startExp.current} last={lastResult} onExit={onExit} />
+          trial && settled ? <div className="panel-body">
+            <p className="pilot-label">课堂试测 · 本轮独立结算</p>
+            <p className="say">{trial.timing === 'set' ? cueText(lastResult) : '这一组已结束。'}</p>
+            {trial.timing === 'set' && lastResult.exp.verifiedReps > 0 && lastResult.cue?.issueId !== 'out_of_view' &&
+              <TrialTarget format={trial.format} calibration={settled.summary.calibration} exercise={exercise.id} />}
+            {trialContext.growth === 'visible' && <strong className="num">+{expOfResult(lastResult)} EXP</strong>}
+            <PilotSurvey condition={trial} summary={settled.summary} playback={Boolean(videoFile)} onExit={onExit} cuesShown={cuesShown.current} events={studyEvents.current} context={trialContext} />
+          </div> : <Done summary={settled?.summary} results={state.results} startExp={startExp.current} last={lastResult} playback={Boolean(videoFile)} keeping={keepSummaries()} onExit={onExit} />
         )}
       </aside>
     </main>
   )
 }
 
+function TrialTarget({ format, calibration, exercise }: { format: 'text' | 'card'; calibration: SetSummary['calibration']; exercise: string }) {
+  if (calibration.basis === 'upper-arm') return <p className="note">已根据上臂动作计数。手腕全程入镜时才能校准肘角幅度。</p>
+  if (format === 'card') return <JointTarget calibration={calibration} exercise={exercise} />
+  const target = calibration.thetaTop - IN_RANGE * (calibration.thetaTop - calibration.thetaBottom)
+  return <p className="note">个人幅度达标线 · 投影{exercise === 'squat' ? '膝' : '肘'}角 {Math.round(target)}°</p>
+}
+
 function cueText(r: SetResult) {
   if (r.cue) return r.cue.text
-  return r.exp.fixedBonus > 0 ? '上一组的问题改掉了。' : '这一组很干净。'
+  if (r.exp.fixedBonus > 0) return '这一组看清的动作里，上一组的问题已经改善。'
+  return r.exp.verifiedReps ? `这一组确认了 ${r.exp.verifiedReps} 下。` : '这一组没有可确认的动作。'
+}
+
+function TrunkRecheck({ previous, current }: { previous: SetSummary; current: SetSummary }) {
+  const check = compareTrunkSets(previous, current)
+  const observation = check.status === 'lower' ? '这组明显后摆的比例下降。'
+    : check.status === 'higher' ? '这组明显后摆的比例上升。'
+      : '两组明显后摆的比例相同。'
+  return <section className="trunk-recheck" aria-label="起拉后摆复查" data-comparison={check.status}>
+    <h3>起拉后摆复查</h3>
+    <p>上组 {check.previous.swings}/{check.previous.assessed || '—'} · 本组 {check.current.swings}/{check.current.assessed || '—'}（后摆／可评估）</p>
+    <p>{check.status === 'unavailable' ? '两组的取景、可用动作或下拉幅度不足以直接比较。' : observation}</p>
+  </section>
+}
+
+function calibrationPrompt(status: ReturnType<typeof useStageVideo>['status'], preview: boolean, playback: boolean, squat: boolean) {
+  if (preview) return '角色预览。开启摄像头即可开始训练。'
+  if (status === 'ended') return `录像已结束。校准需要 3 次清晰的完整${squat ? '深蹲' : '下拉'}。`
+  if (status === 'unavailable') return playback ? '录像未能播放。' : '摄像头未开启。开启权限后重试。'
+  if (status === 'tracking-error') return '姿态模型未能启动。'
+  if (status === 'starting') return '正在启动姿态追踪。'
+  if (playback) return '正在用录像中的 3 次完整动作校准。校准完成后开始计数。'
+  const direction = squat ? '先站直，再做 3 次完整深蹲。' : '先伸展手臂，再做 3 次完整下拉。'
+  return `${direction}校准完成后开始计数。`
+}
+
+const SET_END_LABELS: Record<EndTrigger, string> = { manual: '手动结束', idle: '顶端停留 5 秒', 'video-ended': '录像结束' }
+
+function SetEvidence({ summary, trigger }: { summary: SetSummary; trigger: EndTrigger }) {
+  const { calibration, coverage } = summary
+  return (
+    <details className="evidence">
+      <summary>查看这一组的动作依据</summary>
+      <p>画面可用率 {Math.round(coverage * 100)}% · {SET_END_LABELS[trigger]}</p>
+      <p>校准时的{calibration.basis === 'upper-arm' ? '上臂相对竖直向下的角度' : summary.exerciseId === 'squat' ? '投影膝角' : '投影肘角'} {Math.round(calibration.thetaTop)}° → {Math.round(calibration.thetaBottom)}°</p>
+    </details>
+  )
 }
 
 function SetMarks({ total, index, done = false }: { total: number; index: number; done?: boolean }) {
@@ -255,7 +490,7 @@ function Reward({ result }: { result: SetResult }) {
         <dd className="num">+{verifiedReps}</dd>
       </div>
       <div className={qualityBonus ? undefined : 'reward-zero'}>
-        <dt>八成以上拉到位</dt>
+        <dt>至少 8 下达到目标幅度，且占八成</dt>
         <dd className="num">+{qualityBonus}</dd>
       </div>
       <div className={fixedBonus ? undefined : 'reward-zero'}>
@@ -273,24 +508,35 @@ function Reward({ result }: { result: SetResult }) {
   )
 }
 
-function Done({ results, startExp, last, onExit }: { results: SetResult[]; startExp: number; last: SetResult; onExit: () => void }) {
+function Done({ results, startExp, last, playback, summary, keeping, onExit }: {
+  summary?: SetSummary
+  keeping: boolean
+  results: SetResult[]
+  startExp: number
+  last: SetResult
+  playback: boolean
+  onExit: () => void
+}) {
   const gained = results.reduce((sum, r) => sum + expOfResult(r), 0)
   const { level, into, span, toNext } = levelOf(startExp + gained)
   const levelsUp = level - levelOf(startExp).level
   return (
     <div className="panel-body">
       <SetMarks total={results.length} index={results.length - 1} done />
-      <p className="say">{cueText(last)}</p>
+      {results.length > 1 && <p className="count-side">第 {results.length} 组反馈 · 下方为本次训练总 EXP</p>}
+      <LocalCue summary={summary} result={last} fallback={cueText(last)} />
       <div className="gain num">
         +{gained}
         <small> EXP</small>
       </div>
-      {levelsUp > 0 && (
+      {playback && <p className="note">回放结算，不计入你的训练记录。</p>}
+      {!playback && !keeping && <p className="note">已关闭本地记录。EXP 仅作本组预览。</p>}
+      {!playback && keeping && levelsUp > 0 && (
         <p className="note">
           升到 Lv {level}，多了 {levelsUp * POINTS_PER_LEVEL} 点可以换装备。
         </p>
       )}
-      <div className="level">
+      {!playback && keeping && <div className="level">
         <div className="level-line">
           <span className="level-now num">Lv {level}</span>
           <span className="level-next num">
@@ -300,7 +546,7 @@ function Done({ results, startExp, last, onExit }: { results: SetResult[]; start
         <div className="track">
           <div className="track-fill" style={{ width: `${(into / span) * 100}%` }} />
         </div>
-      </div>
+      </div>}
       <button className="pill pill-wide" autoFocus onClick={onExit}>
         完成
       </button>

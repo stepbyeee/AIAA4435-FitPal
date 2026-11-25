@@ -1,0 +1,121 @@
+[
+  {
+    "name": "overlay-side",
+    "pass": true,
+    "seconds": 3.513,
+    "frames": 82,
+    "callbackToNextAnimationFrameP95ms": 13.1
+  },
+  {
+    "name": "pulldown",
+    "pass": true,
+    "seconds": 18.988,
+    "frames": 416,
+    "callbackToNextAnimationFrameP95ms": 20.4
+  },
+  {
+    "name": "occlusion",
+    "pass": true,
+    "seconds": 11.874,
+    "frames": 650,
+    "callbackToNextAnimationFrameP95ms": 12.5
+  },
+  {
+    "name": "local-import",
+    "pass": true,
+    "seconds": 18.878,
+    "frames": 454,
+    "callbackToNextAnimationFrameP95ms": 13.2
+  },
+  {
+    "name": "exit-demo",
+    "pass": true,
+    "seconds": 0.845,
+    "frames": 0,
+    "callbackToNextAnimationFrameP95ms": null
+  },
+  {
+    "name": "manual-history",
+    "pass": true,
+    "seconds": 0.264,
+    "frames": 0,
+    "callbackToNextAnimationFrameP95ms": null
+  },
+  {
+    "name": "privacy",
+    "pass": true,
+    "seconds": 0.407,
+    "frames": 0,
+    "callbackToNextAnimationFrameP95ms": null
+  },
+  {
+    "name": "label-back",
+    "pass": true,
+    "seconds": 0.251,
+    "frames": 0,
+    "callbackToNextAnimationFrameP95ms": null
+  },
+  {
+    "name": "camera-denied",
+    "pass": true,
+    "seconds": 0.178,
+    "frames": 0,
+    "callbackToNextAnimationFrameP95ms": null
+  },
+  {
+    "name": "pilot-summary",
+    "pass": true,
+    "seconds": 0.17,
+    "frames": 0,
+    "callbackToNextAnimationFrameP95ms": null
+  },
+  {
+    "name": "facilitator",
+    "pass": true,
+    "seconds": 40.672,
+    "frames": 1198,
+    "callbackToNextAnimationFrameP95ms": 15.8
+  },
+  {
+    "name": "rep-text",
+    "pass": true,
+    "seconds": 19.132,
+    "frames": 385,
+    "callbackToNextAnimationFrameP95ms": 18.8
+  },
+  {
+    "name": "rep-card",
+    "pass": true,
+    "seconds": 19.091,
+    "frames": 433,
+    "callbackToNextAnimationFrameP95ms": 18.9
+  },
+  {
+    "name": "set-text",
+    "pass": true,
+    "seconds": 18.818,
+    "frames": 422,
+    "callbackToNextAnimationFrameP95ms": 19.3
+  },
+  {
+    "name": "set-card",
+    "pass": true,
+    "seconds": 18.867,
+    "frames": 421,
+    "callbackToNextAnimationFrameP95ms": 17.6
+  },
+  {
+    "name": "opt-out",
+    "pass": true,
+    "seconds": 14.507,
+    "frames": 346,
+    "callbackToNextAnimationFrameP95ms": 20.9
+  },
+  {
+    "name": "fake-camera",
+    "pass": true,
+    "seconds": 22.425,
+    "frames": 528,
+    "callbackToNextAnimationFrameP95ms": 20.5
+  }
+]

@@ -1,0 +1,420 @@
+{
+  "environment": {
+    "browser": "157.0.8103.79",
+    "platform": "darwin",
+    "release": "25.6.0",
+    "arch": "arm64",
+    "cpu": "Apple M5",
+    "origin": "http://127.0.0.1:5190"
+  },
+  "measurement": {
+    "annotations": "Human inspection of source frames. Endpoint timestamps are approximate.",
+    "playback": "Original WebMs, one pass at 1× with a fresh page, tracker and calibration per clip.",
+    "setupMs": "Wall time from starting the tracker until it signals playback ready, including file loading and paused-frame warm-up.",
+    "inferenceMs": "Synchronous detectForVideo and landmark mapping wall time reported on delivered playback frames; excludes tracker setup, warm-up, video decode, rendering and rep-state processing.",
+    "coverage": "Fractions of delivered inference frames. Side diagnostics check shoulder/elbow/wrist in frame with confidence ≥0.60 and both segment lengths ≥1.5% of the shorter image dimension, before any temporal smoothing.",
+    "matching": "One-to-one matching from each manually annotated bottom through 0.25 seconds after its near-full-extension frame. Offset is separately reported; negative values mean early completion relative to visual extension.",
+    "scope": "Both clips were used during tuning. The temporal holdout excludes those cycles from the calibration sequence, but these clips cannot provide independent validation of accuracy."
+  },
+  "clips": [
+    {
+      "name": "pulldown",
+      "annotations": {
+        "durationSec": 18.32,
+        "sourceFrames": 457,
+        "firstThreeEndSec": 11.16,
+        "cycles": [
+          {
+            "startSec": 0.04,
+            "bottomSec": 2.15,
+            "endSec": 4.1
+          },
+          {
+            "startSec": 4.1,
+            "bottomSec": 5.88,
+            "endSec": 7.6
+          },
+          {
+            "startSec": 7.6,
+            "bottomSec": 9.25,
+            "endSec": 11
+          },
+          {
+            "startSec": 11,
+            "bottomSec": 12.72,
+            "endSec": 14.7
+          },
+          {
+            "startSec": 14.7,
+            "bottomSec": 16.32,
+            "endSec": 18.27
+          }
+        ],
+        "segments": [
+          [
+            0,
+            11.16,
+            "calibration"
+          ],
+          [
+            11.16,
+            18.32,
+            "held out"
+          ]
+        ],
+        "note": "Fixed side profile with a clear near arm and substantial far-arm occlusion. The last two cycles are temporal holdout from the same clip and performer."
+      },
+      "video": {
+        "durationSec": 18.32,
+        "width": 720,
+        "height": 1280,
+        "totalVideoFrames": 457,
+        "droppedVideoFrames": 0,
+        "playbackWallMs": 18282.200000047684
+      },
+      "setupMs": 389.69999998807907,
+      "calibration": {
+        "side": "right",
+        "thetaTop": 171.38667237363472,
+        "thetaBottom": 13.983430829727638
+      },
+      "calibratedAtSec": 10.52,
+      "calibrationCycleTimesSec": [
+        3.76,
+        7.36,
+        10.52
+      ],
+      "verifiedRepTimesSec": [
+        14,
+        17.8
+      ],
+      "setSummary": {
+        "exerciseId": "lat-pulldown",
+        "calibration": {
+          "thetaTop": 171.38667237363472,
+          "thetaBottom": 13.983430829727638
+        },
+        "reps": [
+          {
+            "status": "verified",
+            "qMax": 0.9997806098328093,
+            "durationMs": 1800
+          },
+          {
+            "status": "verified",
+            "qMax": 0.996956126687129,
+            "durationMs": 2080
+          }
+        ],
+        "coverage": 1,
+        "issues": []
+      },
+      "processedFrames": 442,
+      "firstFrameSec": 0.08,
+      "lastFrameSec": 18.28,
+      "maxFrameGapMs": 80,
+      "poseFound": 1,
+      "engineVisible": 1,
+      "leftUsable": 0,
+      "rightUsable": 1,
+      "eitherUsable": 1,
+      "inferenceMs": {
+        "samples": 442,
+        "p50": 12,
+        "p95": 20.1,
+        "max": 25.9
+      },
+      "firstInferenceMs": 9.600000023841858,
+      "processedFractionOfSource": 0.9672,
+      "segments": [
+        {
+          "label": "calibration",
+          "startSec": 0,
+          "endSec": 11.16,
+          "processedFrames": 273,
+          "firstFrameSec": 0.08,
+          "lastFrameSec": 11.12,
+          "maxFrameGapMs": 80,
+          "poseFound": 1,
+          "engineVisible": 1,
+          "leftUsable": 0,
+          "rightUsable": 1,
+          "eitherUsable": 1,
+          "inferenceMs": {
+            "samples": 273,
+            "p50": 10.2,
+            "p95": 18,
+            "max": 24.7
+          }
+        },
+        {
+          "label": "held out",
+          "startSec": 11.16,
+          "endSec": 18.32,
+          "processedFrames": 169,
+          "firstFrameSec": 11.16,
+          "lastFrameSec": 18.28,
+          "maxFrameGapMs": 80,
+          "poseFound": 1,
+          "engineVisible": 1,
+          "leftUsable": 0,
+          "rightUsable": 1,
+          "eitherUsable": 1,
+          "inferenceMs": {
+            "samples": 169,
+            "p50": 12.9,
+            "p95": 21.2,
+            "max": 25.9
+          }
+        }
+      ],
+      "holdout": {
+        "scoreable": true,
+        "expectedSec": [
+          14.7,
+          18.27
+        ],
+        "observedSec": [
+          14,
+          17.8
+        ],
+        "calibrationMatch": {
+          "matched": [
+            {
+              "expectedSec": 4.1,
+              "observedSec": 3.76,
+              "offsetFromAnnotatedTopSec": -0.34
+            },
+            {
+              "expectedSec": 7.6,
+              "observedSec": 7.36,
+              "offsetFromAnnotatedTopSec": -0.24
+            },
+            {
+              "expectedSec": 11,
+              "observedSec": 10.52,
+              "offsetFromAnnotatedTopSec": -0.48
+            }
+          ],
+          "missedSec": [],
+          "unmatchedSec": []
+        },
+        "matched": [
+          {
+            "expectedSec": 14.7,
+            "observedSec": 14,
+            "offsetFromAnnotatedTopSec": -0.7
+          },
+          {
+            "expectedSec": 18.27,
+            "observedSec": 17.8,
+            "offsetFromAnnotatedTopSec": -0.47
+          }
+        ],
+        "missedSec": [],
+        "unmatchedSec": [],
+        "countError": 0
+      },
+      "assertions": {
+        "firstThreeCyclesCalibrate": true,
+        "bothHoldoutCyclesCounted": true
+      }
+    },
+    {
+      "name": "pulldown-mistakes",
+      "annotations": {
+        "durationSec": 10.944,
+        "sourceFrames": 652,
+        "firstThreeEndSec": null,
+        "cycles": [
+          {
+            "startSec": 7.9,
+            "bottomSec": 9.4,
+            "endSec": 10.86
+          }
+        ],
+        "segments": [
+          [
+            0,
+            1.835,
+            "rear, bottom of pull"
+          ],
+          [
+            1.835,
+            3.987,
+            "side, bottom of pull"
+          ],
+          [
+            3.987,
+            6.39,
+            "rear, bottom of pull"
+          ],
+          [
+            6.39,
+            7.9,
+            "rear oblique, partial return"
+          ],
+          [
+            7.9,
+            10.944,
+            "rear oblique, full cycle"
+          ]
+        ],
+        "note": "Three hard cuts and joint overlays. The final cycle demonstrates the corrected movement and starts after a cut-in partial return. Only one full cycle is present."
+      },
+      "video": {
+        "durationSec": 10.944,
+        "width": 1080,
+        "height": 1920,
+        "totalVideoFrames": 652,
+        "droppedVideoFrames": 0,
+        "playbackWallMs": 10981.399999976158
+      },
+      "setupMs": 346.9000000357628,
+      "calibration": null,
+      "calibratedAtSec": null,
+      "calibrationCycleTimesSec": [
+        10.845
+      ],
+      "verifiedRepTimesSec": [],
+      "setSummary": null,
+      "processedFrames": 606,
+      "firstFrameSec": 0.017,
+      "lastFrameSec": 10.861,
+      "maxFrameGapMs": 34,
+      "poseFound": 1,
+      "engineVisible": 1,
+      "leftUsable": 1,
+      "rightUsable": 0.6832,
+      "eitherUsable": 1,
+      "inferenceMs": {
+        "samples": 606,
+        "p50": 16.6,
+        "p95": 18.7,
+        "max": 21.9
+      },
+      "firstInferenceMs": 10.800000011920929,
+      "processedFractionOfSource": 0.9294,
+      "segments": [
+        {
+          "label": "rear, bottom of pull",
+          "startSec": 0,
+          "endSec": 1.835,
+          "processedFrames": 83,
+          "firstFrameSec": 0.017,
+          "lastFrameSec": 1.818,
+          "maxFrameGapMs": 34,
+          "poseFound": 1,
+          "engineVisible": 1,
+          "leftUsable": 1,
+          "rightUsable": 1,
+          "eitherUsable": 1,
+          "inferenceMs": {
+            "samples": 83,
+            "p50": 13.1,
+            "p95": 20.2,
+            "max": 21.9
+          }
+        },
+        {
+          "label": "side, bottom of pull",
+          "startSec": 1.835,
+          "endSec": 3.987,
+          "processedFrames": 117,
+          "firstFrameSec": 1.835,
+          "lastFrameSec": 3.971,
+          "maxFrameGapMs": 34,
+          "poseFound": 1,
+          "engineVisible": 1,
+          "leftUsable": 1,
+          "rightUsable": 0.0171,
+          "eitherUsable": 1,
+          "inferenceMs": {
+            "samples": 117,
+            "p50": 16.8,
+            "p95": 19.6,
+            "max": 21.2
+          }
+        },
+        {
+          "label": "rear, bottom of pull",
+          "startSec": 3.987,
+          "endSec": 6.39,
+          "processedFrames": 143,
+          "firstFrameSec": 3.987,
+          "lastFrameSec": 6.374,
+          "maxFrameGapMs": 33,
+          "poseFound": 1,
+          "engineVisible": 1,
+          "leftUsable": 1,
+          "rightUsable": 0.5175,
+          "eitherUsable": 1,
+          "inferenceMs": {
+            "samples": 143,
+            "p50": 16.6,
+            "p95": 17.7,
+            "max": 18.7
+          }
+        },
+        {
+          "label": "rear oblique, partial return",
+          "startSec": 6.39,
+          "endSec": 7.9,
+          "processedFrames": 90,
+          "firstFrameSec": 6.39,
+          "lastFrameSec": 7.892,
+          "maxFrameGapMs": 34,
+          "poseFound": 1,
+          "engineVisible": 1,
+          "leftUsable": 1,
+          "rightUsable": 0.9111,
+          "eitherUsable": 1,
+          "inferenceMs": {
+            "samples": 90,
+            "p50": 16.6,
+            "p95": 17.6,
+            "max": 18.1
+          }
+        },
+        {
+          "label": "rear oblique, full cycle",
+          "startSec": 7.9,
+          "endSec": 10.944,
+          "processedFrames": 173,
+          "firstFrameSec": 7.908,
+          "lastFrameSec": 10.861,
+          "maxFrameGapMs": 34,
+          "poseFound": 1,
+          "engineVisible": 1,
+          "leftUsable": 1,
+          "rightUsable": 1,
+          "eitherUsable": 1,
+          "inferenceMs": {
+            "samples": 173,
+            "p50": 16.8,
+            "p95": 18.6,
+            "max": 19.7
+          }
+        }
+      ],
+      "holdout": {
+        "scoreable": false,
+        "reason": "Only one visually complete cycle is present, so the clip cannot supply three calibration cycles and a holdout.",
+        "calibrationMatch": {
+          "matched": [
+            {
+              "expectedSec": 10.86,
+              "observedSec": 10.845,
+              "offsetFromAnnotatedTopSec": -0.015
+            }
+          ],
+          "missedSec": [],
+          "unmatchedSec": []
+        }
+      },
+      "assertions": {
+        "insufficientCyclesLeaveCalibrationIncomplete": true
+      }
+    }
+  ]
+}

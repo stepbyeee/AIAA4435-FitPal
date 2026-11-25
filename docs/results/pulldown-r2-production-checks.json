@@ -1,0 +1,37 @@
+[
+  {
+    "name": "overlay-side",
+    "pass": true,
+    "seconds": 5.016,
+    "frames": 104,
+    "callbackToNextAnimationFrameP95ms": 22.9
+  },
+  {
+    "name": "pulldown",
+    "pass": true,
+    "seconds": 20.105,
+    "frames": 388,
+    "callbackToNextAnimationFrameP95ms": 24.7
+  },
+  {
+    "name": "occlusion",
+    "pass": true,
+    "seconds": 12.551,
+    "frames": 489,
+    "callbackToNextAnimationFrameP95ms": 27.8
+  },
+  {
+    "name": "fake-camera",
+    "pass": true,
+    "seconds": 25.581,
+    "frames": 525,
+    "callbackToNextAnimationFrameP95ms": 24.1
+  },
+  {
+    "name": "cropped-recap",
+    "pass": true,
+    "seconds": 18.281,
+    "frames": 302,
+    "callbackToNextAnimationFrameP95ms": 24.9
+  }
+]

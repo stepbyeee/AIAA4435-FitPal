@@ -1,0 +1,171 @@
+{
+  "protocol": "Second blind cohort. Kept apart from the first-use five-video set examined during rule development. Source selection and manual completion windows frozen from RGB alone before either candidate is evaluated on these files. Four independent publishers and performers. Fixed normal gym front, rear and oblique views plus a separately identifiable edited outdoor machine case. Single reviewer, no independent adjudication. Reference windows [lowest handle, subsequent completed overhead return] in clip-relative seconds, observed at 4 Hz (6 Hz for Future Fitness). First three complete top-to-top reps are always calibration. Source IDs, titles, performers, rooms and file digests screened against the previous project and first-use cohort. Video-based frame differences and visual reviews found no repeated-playback loop in the selected windows. This is a small purposive cohort, not population-level accuracy. Do not tune using this cohort and report it separately if the first cohort prompted revisions.",
+  "screeningExclusions": [
+    "Workout-Vision public demo and iPhone MOV: both contain another system’s burned-in skeleton and rep counter, verified visually.",
+    "Salford Community Leisure and Castle Hill Fitness: too few contiguous complete cycles for post-calibration evaluation.",
+    "Umeda: split-screen two demonstrations. HOIST/RX: edited multishot montage with repeated exercise illustrations.",
+    "Montgomery College: close-view clip pans vertically until most of the body is outside the image; later views resemble earlier ones in reverse. Used no rep windows from it."
+  ],
+  "clips": [
+    {
+      "file": "dynamic-dual-pulldown.mp4",
+      "exercise": "lat-pulldown",
+      "appDemo": false,
+      "sha256": "8f1e94aeb249ce66adfcbcd6e9d706ba762a6cf91698be2984a265b0a1c08fac",
+      "durationSec": 21.7,
+      "author": "Dynamic Fitness",
+      "title": "Training Variation — Exercise Variability: Bilateral Independent Limb Pulldown",
+      "source": "https://www.mydynamicfitness.com/post/training-variation-exercise-variability",
+      "download": "https://video.wixstatic.com/video/466604_9a29820f1ab748f3b8c9ba35f0d13787/1080p/mp4/file.mp4",
+      "terms": "The publisher embeds the publicly accessible original MP4 on the cited page. No open media license identified; local evaluation and aggregate reporting only.",
+      "usage": "local-only",
+      "visualCycles": 5,
+      "windows": [
+        [
+          1.85,
+          3.73
+        ],
+        [
+          6.2,
+          8.03
+        ],
+        [
+          10.42,
+          12.31
+        ],
+        [
+          14.64,
+          16.58
+        ],
+        [
+          19.47,
+          21.63
+        ]
+      ],
+      "notes": "Single uninterrupted fixed frontal landscape camera, both independent handles visible. The last repetition reaches the overhead position in the final frames; the athlete is still seated. Five distinct pulls on source review."
+    },
+    {
+      "file": "lifetime-neutral-grip.mp4",
+      "exercise": "lat-pulldown",
+      "appDemo": false,
+      "sha256": "4a6572bfa2dc50f1672ccc0f4ca16a2ccd9926e00f0e78dda792239ba3242f5a",
+      "durationSec": 16.975292,
+      "author": "Life Time / Experience Life",
+      "title": "Your First Week of Workouts at Life Time — Neutral-Grip Cable Lat Pulldown",
+      "source": "https://experiencelife.lifetime.life/article/your-first-week-of-workouts-at-life-time/",
+      "download": "https://experiencelife.lifetime.life/wp-content/uploads/2023/01/Lat-Pull-1.mp4",
+      "terms": "The publisher embeds the publicly accessible original MP4 on the cited page. No open media license identified; local evaluation and aggregate reporting only.",
+      "usage": "local-only",
+      "visualCycles": 5,
+      "windows": [
+        [
+          1.76,
+          2.83
+        ],
+        [
+          5.02,
+          6.53
+        ],
+        [
+          8.52,
+          9.98
+        ],
+        [
+          11.94,
+          13.48
+        ],
+        [
+          15.18,
+          16.73
+        ]
+      ],
+      "notes": "Five consecutive real reps in a fixed rear camera showing both elbows and arms. Natural differences in pauses and range. Opening and ending at overhead. Hips out of frame; hands at the frame edge overhead."
+    },
+    {
+      "file": "future-fitness-cable.mp4",
+      "exercise": "lat-pulldown",
+      "appDemo": false,
+      "sha256": "631883ef52afaf762bb373d46314b002e103f102ec1cf69991ef6d0140570b7c",
+      "durationSec": 19.1,
+      "author": "Future Fitness",
+      "title": "Exercise Library — Lat Pull Down",
+      "source": "https://futurefitness.co.uk/exerciselibrary/",
+      "download": "https://futurefitness.co.uk/wp-content/uploads/sites/8/2025/08/LatPullDown.mp4",
+      "terms": "The publisher embeds the publicly accessible original MP4 on the cited page. No open media license identified; local evaluation and aggregate reporting only.",
+      "usage": "local-only",
+      "visualCycles": 5,
+      "windows": [
+        [
+          2.45,
+          3.95
+        ],
+        [
+          6.21,
+          7.45
+        ],
+        [
+          10.07,
+          11.32
+        ],
+        [
+          13.7,
+          14.81
+        ],
+        [
+          17.13,
+          18.44
+        ]
+      ],
+      "notes": "Five uninterrupted reps from one oblique side camera with original small inset, captions and margins retained. Text changes while the demonstrator maintains the same set and camera angle. Occasional natural far-arm overlap. The initial equipment explanation and dismount are outside the excerpt. Looked at enlarged source images for manual timing; benchmark uses the untouched frame composition.",
+      "sourceSpanSec": [
+        13.5,
+        32.6
+      ],
+      "sourceSha256": "c63e1a35364dd9918f6603d21c43c5b14b041bb800d7d432f3a5ea317ad03e6a",
+      "assetTransform": "Time-only excerpt, original spatial framing and timeline rate. FFmpeg 8.1 input seek, libx264 veryfast CRF 19, two encoder threads, yuv420p, omit audio, faststart."
+    },
+    {
+      "file": "adelaide-parks.mp4",
+      "exercise": "lat-pulldown",
+      "appDemo": false,
+      "sha256": "be0706c7075ad1c499ec1556cb792ff8df97e3761e339af0ef6bb09c88e74024",
+      "durationSec": 17.24,
+      "author": "City of Adelaide",
+      "title": "How to use the free City of Adelaide Park Lands fitness equipment (outdoor gym)",
+      "source": "https://commons.wikimedia.org/wiki/File:How_to_use_the_free_City_of_Adelaide_Park_Lands_fitness_equipment_(outdoor_gym).webm",
+      "download": "https://upload.wikimedia.org/wikipedia/commons/transcoded/3/39/How_to_use_the_free_City_of_Adelaide_Park_Lands_fitness_equipment_%28outdoor_gym%29.webm/How_to_use_the_free_City_of_Adelaide_Park_Lands_fitness_equipment_%28outdoor_gym%29.webm.480p.vp9.webm",
+      "terms": "Creative Commons Attribution 3.0 Unported as identified on the Commons file page: https://creativecommons.org/licenses/by/3.0/. Credit City of Adelaide and identify the excerpt or added overlays.",
+      "usage": "cc-by",
+      "visualCycles": 5,
+      "windows": [
+        [
+          2.73,
+          4.6
+        ],
+        [
+          6.42,
+          7.63
+        ],
+        [
+          9.37,
+          10.93
+        ],
+        [
+          12.49,
+          14.16
+        ],
+        [
+          15.75,
+          17.03
+        ]
+      ],
+      "notes": "Outdoor public lever machine. Wide oblique view for reps 1 and 3–5, closer frontal view for rep 2. The original edit switches angles at the overhead boundary; each scored full movement is visible within its shot. Count refers to five displayed complete cycles; edited views cannot establish uninterrupted physical set continuity. Stops before a further edited angle. Previously visually screened in source discovery, no previous scoring or matching scene in old manifests.",
+      "sourceSpanSec": [
+        62.5,
+        79.75
+      ],
+      "sourceSha256": "837e5acbe290144beb2e9cbd36ca6dee70967052217d3c2ce2df66052ccebe9e",
+      "assetTransform": "Time-only excerpt, original spatial framing and timeline rate. FFmpeg 8.1 input seek, libx264 veryfast CRF 19, two encoder threads, yuv420p, omit audio, faststart."
+    }
+  ]
+}

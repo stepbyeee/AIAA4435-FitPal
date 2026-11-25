@@ -1,0 +1,80 @@
+{
+  "clip": "pexels-35585697.mp4",
+  "sha256": "cadb3f11bc6e5ec282d58c8ac8ae1ac908bffef01a14c65f3555d58ea7f2e718",
+  "fps": 15,
+  "method": "Single visual reviewer. Twelve short windows chosen from raw RGB to cover front/three-quarter view, horizontal camera motion, edge crop and foreground equipment. Inspected all three source frames of each window before opening pose traces. Anatomical sides are the athlete’s own. Visible requires shoulder, elbow and wrist sufficiently in the picture. Cropped denotes a missing joint across an image boundary. Occluded denotes the image of the arm disappearing behind the foreground column; its wrist could also be outside the crop. Uncertain is excluded from scoring. Adjacent frames are not independent. No model tuning on this clip.",
+  "windows": [
+    {
+      "startFrame": 3,
+      "endFrame": 5,
+      "left": "visible",
+      "right": "cropped"
+    },
+    {
+      "startFrame": 31,
+      "endFrame": 33,
+      "left": "cropped",
+      "right": "visible"
+    },
+    {
+      "startFrame": 39,
+      "endFrame": 41,
+      "left": "uncertain",
+      "right": "visible"
+    },
+    {
+      "startFrame": 71,
+      "endFrame": 73,
+      "left": "occluded",
+      "right": "visible"
+    },
+    {
+      "startFrame": 77,
+      "endFrame": 79,
+      "left": "occluded",
+      "right": "visible"
+    },
+    {
+      "startFrame": 87,
+      "endFrame": 89,
+      "left": "uncertain",
+      "right": "visible"
+    },
+    {
+      "startFrame": 105,
+      "endFrame": 107,
+      "left": "cropped",
+      "right": "visible"
+    },
+    {
+      "startFrame": 136,
+      "endFrame": 138,
+      "left": "visible",
+      "right": "uncertain"
+    },
+    {
+      "startFrame": 150,
+      "endFrame": 152,
+      "left": "cropped",
+      "right": "visible"
+    },
+    {
+      "startFrame": 157,
+      "endFrame": 159,
+      "left": "cropped",
+      "right": "visible"
+    },
+    {
+      "startFrame": 189,
+      "endFrame": 191,
+      "left": "cropped",
+      "right": "visible"
+    },
+    {
+      "startFrame": 198,
+      "endFrame": 200,
+      "left": "visible",
+      "right": "visible"
+    }
+  ]
+}

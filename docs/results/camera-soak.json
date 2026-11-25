@@ -1,0 +1,275 @@
+{
+  "exercise": "lat-pulldown",
+  "source": "looped Y4M through Chromium simulated camera",
+  "browser": "157.0.8103.79",
+  "requestedSessions": 24,
+  "startedAt": "2026-11-22T15:44:33.179Z",
+  "sessions": [
+    {
+      "session": 1,
+      "sets": [
+        1,
+        1,
+        1
+      ],
+      "cameraOpens": 3,
+      "endedAt": "2026-11-22T15:44:59.659Z",
+      "jsHeapMB": 10
+    },
+    {
+      "session": 2,
+      "sets": [
+        1,
+        1,
+        1
+      ],
+      "cameraOpens": 6,
+      "endedAt": "2026-11-22T15:45:21.623Z",
+      "jsHeapMB": 9
+    },
+    {
+      "session": 3,
+      "sets": [
+        1,
+        1,
+        1
+      ],
+      "cameraOpens": 9,
+      "endedAt": "2026-11-22T15:45:43.473Z",
+      "jsHeapMB": 10
+    },
+    {
+      "session": 4,
+      "sets": [
+        1,
+        1,
+        1
+      ],
+      "cameraOpens": 12,
+      "endedAt": "2026-11-22T15:46:05.438Z",
+      "jsHeapMB": 9
+    },
+    {
+      "session": 5,
+      "sets": [
+        1,
+        1,
+        1
+      ],
+      "cameraOpens": 15,
+      "endedAt": "2026-11-22T15:46:27.380Z",
+      "jsHeapMB": 8
+    },
+    {
+      "session": 6,
+      "sets": [
+        1,
+        1,
+        1
+      ],
+      "cameraOpens": 18,
+      "endedAt": "2026-11-22T15:46:49.002Z",
+      "jsHeapMB": 9
+    },
+    {
+      "session": 7,
+      "sets": [
+        1,
+        1,
+        1
+      ],
+      "cameraOpens": 21,
+      "endedAt": "2026-11-22T15:47:14.570Z",
+      "jsHeapMB": 10
+    },
+    {
+      "session": 8,
+      "sets": [
+        1,
+        1,
+        1
+      ],
+      "cameraOpens": 24,
+      "endedAt": "2026-11-22T15:47:36.588Z",
+      "jsHeapMB": 9
+    },
+    {
+      "session": 9,
+      "sets": [
+        1,
+        1,
+        1
+      ],
+      "cameraOpens": 27,
+      "endedAt": "2026-11-22T15:47:58.550Z",
+      "jsHeapMB": 9
+    },
+    {
+      "session": 10,
+      "sets": [
+        1,
+        1,
+        1
+      ],
+      "cameraOpens": 30,
+      "endedAt": "2026-11-22T15:48:20.416Z",
+      "jsHeapMB": 11
+    },
+    {
+      "session": 11,
+      "sets": [
+        1,
+        1,
+        1
+      ],
+      "cameraOpens": 33,
+      "endedAt": "2026-11-22T15:48:42.384Z",
+      "jsHeapMB": 8
+    },
+    {
+      "session": 12,
+      "sets": [
+        1,
+        1,
+        1
+      ],
+      "cameraOpens": 36,
+      "endedAt": "2026-11-22T15:49:04.378Z",
+      "jsHeapMB": 9
+    },
+    {
+      "session": 13,
+      "sets": [
+        1,
+        1,
+        1
+      ],
+      "cameraOpens": 39,
+      "endedAt": "2026-11-22T15:49:26.330Z",
+      "jsHeapMB": 11
+    },
+    {
+      "session": 14,
+      "sets": [
+        1,
+        1,
+        1
+      ],
+      "cameraOpens": 42,
+      "endedAt": "2026-11-22T15:49:48.187Z",
+      "jsHeapMB": 9
+    },
+    {
+      "session": 15,
+      "sets": [
+        1,
+        1,
+        1
+      ],
+      "cameraOpens": 45,
+      "endedAt": "2026-11-22T15:50:10.128Z",
+      "jsHeapMB": 9
+    },
+    {
+      "session": 16,
+      "sets": [
+        1,
+        1,
+        1
+      ],
+      "cameraOpens": 48,
+      "endedAt": "2026-11-22T15:50:32.062Z",
+      "jsHeapMB": 9
+    },
+    {
+      "session": 17,
+      "sets": [
+        1,
+        1,
+        1
+      ],
+      "cameraOpens": 51,
+      "endedAt": "2026-11-22T15:50:54.127Z",
+      "jsHeapMB": 9
+    },
+    {
+      "session": 18,
+      "sets": [
+        1,
+        1,
+        1
+      ],
+      "cameraOpens": 54,
+      "endedAt": "2026-11-22T15:51:16.109Z",
+      "jsHeapMB": 9
+    },
+    {
+      "session": 19,
+      "sets": [
+        1,
+        1,
+        1
+      ],
+      "cameraOpens": 57,
+      "endedAt": "2026-11-22T15:51:37.942Z",
+      "jsHeapMB": 9
+    },
+    {
+      "session": 20,
+      "sets": [
+        1,
+        1,
+        1
+      ],
+      "cameraOpens": 60,
+      "endedAt": "2026-11-22T15:51:59.859Z",
+      "jsHeapMB": 9
+    },
+    {
+      "session": 21,
+      "sets": [
+        1,
+        1,
+        1
+      ],
+      "cameraOpens": 63,
+      "endedAt": "2026-11-22T15:52:21.725Z",
+      "jsHeapMB": 9
+    },
+    {
+      "session": 22,
+      "sets": [
+        1,
+        1,
+        1
+      ],
+      "cameraOpens": 66,
+      "endedAt": "2026-11-22T15:52:43.708Z",
+      "jsHeapMB": 8
+    },
+    {
+      "session": 23,
+      "sets": [
+        1,
+        1,
+        1
+      ],
+      "cameraOpens": 69,
+      "endedAt": "2026-11-22T15:53:05.689Z",
+      "jsHeapMB": 8
+    },
+    {
+      "session": 24,
+      "sets": [
+        1,
+        1,
+        1
+      ],
+      "cameraOpens": 72,
+      "endedAt": "2026-11-22T15:53:27.674Z",
+      "jsHeapMB": 9
+    }
+  ],
+  "errors": [],
+  "finishedAt": "2026-11-22T15:53:27.675Z"
+}

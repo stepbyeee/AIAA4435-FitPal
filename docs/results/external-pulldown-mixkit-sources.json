@@ -1,0 +1,20 @@
+{
+  "protocol": "After the original model comparison. Source selected by six or more completed unrepeated top-to-top cycles and permission for local use. A single reviewer marked the interval from each low handle position to the next overhead position from source video sampled at 4 Hz, before any inference on this source. Training references start with cycle four. Match once per cycle with the existing 0.35 s return margin; no human adjudication or ground-truth joint angles.",
+  "clips": [
+    {
+      "file": "mixkit-100523.mp4",
+      "appDemo": false,
+      "exercise": "lat-pulldown",
+      "sha256": "e39fd249826084f4da60c1ee964c353f96b27b456e9b273b775af4f353667835",
+      "durationSec": 15.432083,
+      "author": "Mixkit, individual creator unlisted on item page",
+      "title": "Woman using a gym machine for strength training",
+      "source": "https://mixkit.co/free-stock-video/woman-using-a-gym-machine-for-strength-training-100523/",
+      "download": "https://assets.mixkit.co/active_storage/video_items/100523/1725383056/100523-video-720.mp4",
+      "terms": "Mixkit Stock Video Free License as linked on the source page. Local evaluation. Media excluded from this repository.",
+      "visualCycles": 6,
+      "windows": [[1.1, 2.3], [3.45, 4.65], [5.8, 7.0], [8.1, 9.4], [10.6, 11.8], [13.05, 14.25]],
+      "notes": "Fixed rear-oblique close-up of one athlete on a dual-arm pulldown machine. At the opening both arms are already overhead. The handles and wrists exit the picture overhead. Returns remain visible from the proximal upper arms, shoulders and subsequent reversal. The last downstroke has no return before the video ends."
+    }
+  ]
+}

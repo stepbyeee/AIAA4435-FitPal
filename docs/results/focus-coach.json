@@ -1,0 +1,67 @@
+{
+  "clip": "go4it-coach.webm",
+  "variant": "trainer and athlete in one original shot",
+  "reference": [
+    [
+      3.8,
+      7.3
+    ],
+    [
+      9,
+      13
+    ],
+    [
+      16.1,
+      19.9
+    ],
+    [
+      23.4,
+      28
+    ],
+    [
+      30.8,
+      34.5
+    ],
+    [
+      37.1,
+      40.8
+    ]
+  ],
+  "protocol": "Selected after observing the multi-person failure; same Full model and rules throughout. Real-time browser playback, left/right halves or central 60% of the displayed frame. Observer times use displayed media clock.",
+  "runs": [
+    {
+      "focus": "full",
+      "cycles": {
+        "calibration": [
+          13.05,
+          18.18,
+          28.9
+        ],
+        "set": [
+          34.5,
+          41.33
+        ]
+      },
+      "status": "这一组确认了 2 下。"
+    },
+    {
+      "focus": "center",
+      "cycles": {
+        "calibration": [
+          18.19,
+          41.12
+        ],
+        "set": []
+      },
+      "status": "录像已结束。校准需要 3 次清晰的完整下拉。"
+    },
+    {
+      "focus": "left",
+      "cycles": {
+        "calibration": [],
+        "set": []
+      },
+      "status": "录像已结束。校准需要 3 次清晰的完整下拉。"
+    }
+  ]
+}

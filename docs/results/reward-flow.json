@@ -1,0 +1,304 @@
+{
+  "fixture": "Existing pulldown Y4M, 360×640 at 25 fps. First 457 frames kept byte-for-byte in YUV, removing only the appended 6 s still that ends a normal set after 5 s. Chrome loops the 18.28 s movement sequence.",
+  "sourceSha256": "5b2cbcb50de998bc6ca62c90f9bbe3c7cf472b383571872c495595ca8bb6573e",
+  "loopSha256": "79c07d8796029bd8013bbedb19b6b30c411342afc402f66d8c5b446f7de99f5e",
+  "scope": "Simulated-camera reward and purchase regression on a repeated known demonstrator.",
+  "startedAt": "2026-11-22T16:04:04.140Z",
+  "sets": [
+    {
+      "set": 1,
+      "confirmed": 10,
+      "inRange": 10,
+      "uncertain": 0,
+      "short": 0,
+      "seconds": 36.8,
+      "released": true,
+      "repeatCheck": {
+        "thumbnailCount": 112,
+        "offsetSec": 0.04,
+        "thumbnailMeanSquaredError": 1768.2,
+        "matches": [
+          {
+            "cameraTimeSec": 13.87,
+            "sourceLoopSec": 13.91,
+            "referenceCycle": 3
+          },
+          {
+            "cameraTimeSec": 17.62,
+            "sourceLoopSec": 17.66,
+            "referenceCycle": 4
+          },
+          {
+            "cameraTimeSec": 22.02,
+            "sourceLoopSec": 3.78,
+            "referenceCycle": 5
+          },
+          {
+            "cameraTimeSec": 25.47,
+            "sourceLoopSec": 7.23,
+            "referenceCycle": 6
+          },
+          {
+            "cameraTimeSec": 28.67,
+            "sourceLoopSec": 10.43,
+            "referenceCycle": 7
+          },
+          {
+            "cameraTimeSec": 32.27,
+            "sourceLoopSec": 14.03,
+            "referenceCycle": 8
+          },
+          {
+            "cameraTimeSec": 35.98,
+            "sourceLoopSec": 17.74,
+            "referenceCycle": 9
+          },
+          {
+            "cameraTimeSec": 40.27,
+            "sourceLoopSec": 3.75,
+            "referenceCycle": 10
+          },
+          {
+            "cameraTimeSec": 43.7,
+            "sourceLoopSec": 7.18,
+            "referenceCycle": 11
+          },
+          {
+            "cameraTimeSec": 47.1,
+            "sourceLoopSec": 10.58,
+            "referenceCycle": 12
+          }
+        ],
+        "unmatchedCompletions": 0,
+        "skippedReferenceCyclesBetweenFirstAndLast": 0
+      },
+      "reviewHeading": "第 1 组回顾"
+    },
+    {
+      "set": 2,
+      "confirmed": 10,
+      "inRange": 10,
+      "uncertain": 0,
+      "short": 0,
+      "seconds": 36.2,
+      "released": true,
+      "repeatCheck": {
+        "thumbnailCount": 85,
+        "offsetSec": 18.24,
+        "thumbnailMeanSquaredError": 1438.7,
+        "matches": [
+          {
+            "cameraTimeSec": 3.75,
+            "sourceLoopSec": 3.71,
+            "referenceCycle": 5
+          },
+          {
+            "cameraTimeSec": 7.27,
+            "sourceLoopSec": 7.23,
+            "referenceCycle": 6
+          },
+          {
+            "cameraTimeSec": 10.55,
+            "sourceLoopSec": 10.51,
+            "referenceCycle": 7
+          },
+          {
+            "cameraTimeSec": 13.95,
+            "sourceLoopSec": 13.91,
+            "referenceCycle": 8
+          },
+          {
+            "cameraTimeSec": 17.71,
+            "sourceLoopSec": 17.67,
+            "referenceCycle": 9
+          },
+          {
+            "cameraTimeSec": 22.03,
+            "sourceLoopSec": 3.71,
+            "referenceCycle": 10
+          },
+          {
+            "cameraTimeSec": 25.47,
+            "sourceLoopSec": 7.15,
+            "referenceCycle": 11
+          },
+          {
+            "cameraTimeSec": 28.87,
+            "sourceLoopSec": 10.55,
+            "referenceCycle": 12
+          },
+          {
+            "cameraTimeSec": 32.31,
+            "sourceLoopSec": 13.99,
+            "referenceCycle": 13
+          },
+          {
+            "cameraTimeSec": 36.03,
+            "sourceLoopSec": 17.71,
+            "referenceCycle": 14
+          }
+        ],
+        "unmatchedCompletions": 0,
+        "skippedReferenceCyclesBetweenFirstAndLast": 0
+      },
+      "reviewHeading": "第 2 组回顾"
+    },
+    {
+      "set": 3,
+      "confirmed": 10,
+      "inRange": 10,
+      "uncertain": 0,
+      "short": 0,
+      "seconds": 36.2,
+      "released": true,
+      "repeatCheck": {
+        "thumbnailCount": 85,
+        "offsetSec": 18.24,
+        "thumbnailMeanSquaredError": 1435.2,
+        "matches": [
+          {
+            "cameraTimeSec": 3.75,
+            "sourceLoopSec": 3.71,
+            "referenceCycle": 5
+          },
+          {
+            "cameraTimeSec": 7.26,
+            "sourceLoopSec": 7.22,
+            "referenceCycle": 6
+          },
+          {
+            "cameraTimeSec": 10.54,
+            "sourceLoopSec": 10.5,
+            "referenceCycle": 7
+          },
+          {
+            "cameraTimeSec": 13.95,
+            "sourceLoopSec": 13.91,
+            "referenceCycle": 8
+          },
+          {
+            "cameraTimeSec": 17.7,
+            "sourceLoopSec": 17.66,
+            "referenceCycle": 9
+          },
+          {
+            "cameraTimeSec": 22.04,
+            "sourceLoopSec": 3.72,
+            "referenceCycle": 10
+          },
+          {
+            "cameraTimeSec": 25.5,
+            "sourceLoopSec": 7.18,
+            "referenceCycle": 11
+          },
+          {
+            "cameraTimeSec": 28.87,
+            "sourceLoopSec": 10.55,
+            "referenceCycle": 12
+          },
+          {
+            "cameraTimeSec": 32.32,
+            "sourceLoopSec": 14,
+            "referenceCycle": 13
+          },
+          {
+            "cameraTimeSec": 36.02,
+            "sourceLoopSec": 17.7,
+            "referenceCycle": 14
+          }
+        ],
+        "unmatchedCompletions": 0,
+        "skippedReferenceCyclesBetweenFirstAndLast": 0
+      },
+      "reviewHeading": "第 3 组回顾"
+    }
+  ],
+  "errors": [],
+  "browser": "157.0.8103.79",
+  "origin": "http://127.0.0.1:8765",
+  "navigation": [
+    {
+      "elapsed": 0.1,
+      "route": ""
+    },
+    {
+      "elapsed": 0.2,
+      "route": "#/session/lat-pulldown"
+    },
+    {
+      "elapsed": 120.1,
+      "route": "#/"
+    },
+    {
+      "elapsed": 120.1,
+      "route": "#/"
+    },
+    {
+      "elapsed": 120.2,
+      "route": "#/wardrobe"
+    },
+    {
+      "elapsed": 120.3,
+      "route": "#/history"
+    },
+    {
+      "elapsed": 120.5,
+      "route": "#/"
+    },
+    {
+      "elapsed": 120.5,
+      "route": "#/session/lat-pulldown"
+    },
+    {
+      "elapsed": 142.5,
+      "route": "#/"
+    },
+    {
+      "elapsed": 142.6,
+      "route": "#/wardrobe"
+    }
+  ],
+  "summary": [
+    {
+      "verified": 10,
+      "quality": 5,
+      "fixed": 0
+    },
+    {
+      "verified": 10,
+      "quality": 5,
+      "fixed": 0
+    },
+    {
+      "verified": 10,
+      "quality": 5,
+      "fixed": 0
+    }
+  ],
+  "totalExp": 45,
+  "level": "Lv 2",
+  "beforePurchase": 2,
+  "afterPurchase": 1,
+  "afterReload": 1,
+  "gear": [
+    "headband"
+  ],
+  "workoutTicket": {
+    "earned": 1,
+    "afterDraw": 0,
+    "dailyClaimUsed": false,
+    "item": "穿戴星形徽章"
+  },
+  "optOut": {
+    "verified": [
+      1,
+      1,
+      1
+    ],
+    "newHistoryRows": 0,
+    "newTickets": 0,
+    "previousRows": 1
+  },
+  "pass": true,
+  "wallSeconds": 142.6
+}

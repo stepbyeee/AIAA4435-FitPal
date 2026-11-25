@@ -1,0 +1,430 @@
+{
+  "protocol": {
+    "fps": 15,
+    "maxDimension": 640,
+    "delegate": "CPU",
+    "browser": "157.0.8103.79",
+    "manifestSha256": [
+      "dd6c0522e78e1fbca7f4699d393227ffd836adcc7ebc010613eda61996a4a62a",
+      "dc61ff09359244175421a8faef55c344f9ac50fa6bd6ddeb59a8aa663963e61f"
+    ],
+    "modelSha256": "5134a3aad27a58b93da0088d431f366da362b44e3ccfbe3462b3827a839011b1",
+    "sources": {
+      "before": {
+        "perception/pulldown": "613648f60cbf480809a568480a1f66746145037f977466db53098306eb2cc922",
+        "tracking/armLandmarks": "3c63a6e2844b632dd4282ce3d7ce4d3ebb36aeffb3409b5818c114aa4bf63095",
+        "tracking/limbLandmarks": "1ec36b043e06b8ecfd378b488611ea84fbbb468630725bd189bbe38128bee15e",
+        "tracking/armTrails": "e6d1948405c0897e4a4363cb98ed8d5acd0a1355f7cdfc596c86d6ad8c77dfb9",
+        "perception/repReview": "34c345f62b2f820b1599d92be451bfa5c7b10630db58c90d68c434ec03deed94",
+        "contract": "943a5c09dba2b580a8dd49547f22956c901ceca87f3153daf723262e49e468c4"
+      },
+      "after": {
+        "perception/pulldown": "be9f3911fb7263c482c60c948dcfb9e2cc4b06972efd9c0008577447876a57d4",
+        "tracking/armLandmarks": "3c63a6e2844b632dd4282ce3d7ce4d3ebb36aeffb3409b5818c114aa4bf63095",
+        "tracking/limbLandmarks": "1ec36b043e06b8ecfd378b488611ea84fbbb468630725bd189bbe38128bee15e",
+        "tracking/armTrails": "e6d1948405c0897e4a4363cb98ed8d5acd0a1355f7cdfc596c86d6ad8c77dfb9",
+        "perception/repReview": "34c345f62b2f820b1599d92be451bfa5c7b10630db58c90d68c434ec03deed94",
+        "contract": "9e2ea38d228b60f1fd9e676d3acb5bcb7c7b897d510dda1b62a9070088d47381",
+        "perception/pulldownUpperArm": "8593e6bff5f1fce23868ece1657c345d6622610b95c5ff159d0daf18a490f1fa",
+        "tracking/armOcclusion": "595d6f30aa7eb7a207aab39785ecb1e9b1491087a3b66b143afc174787fb92b7"
+      }
+    }
+  },
+  "clips": [
+    {
+      "file": "mixkit-100523.mp4",
+      "sourceSha256": "e39fd249826084f4da60c1ee964c353f96b27b456e9b273b775af4f353667835",
+      "windows": [
+        [
+          1.1,
+          2.3
+        ],
+        [
+          3.45,
+          4.65
+        ],
+        [
+          5.8,
+          7
+        ],
+        [
+          8.1,
+          9.4
+        ],
+        [
+          10.6,
+          11.8
+        ],
+        [
+          13.05,
+          14.25
+        ]
+      ],
+      "visualCycles": 6,
+      "decodedPngsSha256": "be847d17bbde2e06743a152902dee9e2c3adf68928b5851e3c21f4bf6aed6743",
+      "before": {
+        "frames": 231,
+        "calibrationEvents": [],
+        "verifiedEvents": [],
+        "calibration": null,
+        "attempts": [],
+        "visibleFrames": {
+          "left": 10,
+          "right": 130
+        },
+        "p95ProcessingMs": 47.8
+      },
+      "after": {
+        "frames": 231,
+        "calibrationEvents": [
+          1.867,
+          4.333,
+          6.667
+        ],
+        "verifiedEvents": [
+          9.067,
+          11.6,
+          13.8
+        ],
+        "calibration": {
+          "basis": "upper-arm",
+          "side": "right",
+          "thetaTop": 155.50233981351687,
+          "thetaBottom": 39.710000058881306
+        },
+        "attempts": [
+          {
+            "status": "verified",
+            "qMax": null,
+            "durationMs": 2333.333333333333
+          },
+          {
+            "status": "verified",
+            "qMax": null,
+            "durationMs": 2533.333333333334
+          },
+          {
+            "status": "verified",
+            "qMax": null,
+            "durationMs": 2200
+          }
+        ],
+        "visibleFrames": {
+          "left": 10,
+          "right": 130
+        },
+        "p95ProcessingMs": 49.4
+      }
+    },
+    {
+      "file": "pulldown.webm",
+      "sourceSha256": "f6200b7691acc6e99b1b0ddee7783fea56da3a6e155c5b3020cdda958cd49e34",
+      "windows": [
+        [
+          2.15,
+          4.1
+        ],
+        [
+          5.88,
+          7.6
+        ],
+        [
+          9.25,
+          11
+        ],
+        [
+          12.72,
+          14.7
+        ],
+        [
+          16.32,
+          18.27
+        ]
+      ],
+      "visualCycles": 5,
+      "decodedPngsSha256": "2c2fa83bb4750fcc094353853227bd12f2a885da9d736d1113aabfbcd0b21118",
+      "before": {
+        "frames": 274,
+        "calibrationEvents": [
+          3.8,
+          7.267,
+          10.667
+        ],
+        "verifiedEvents": [
+          14.133,
+          17.8
+        ],
+        "calibration": {
+          "side": "right",
+          "thetaTop": 171.58509698910274,
+          "thetaBottom": 14.395441394497015
+        },
+        "attempts": [
+          {
+            "status": "verified",
+            "qMax": 0.9896224187767709,
+            "durationMs": 2000
+          },
+          {
+            "status": "verified",
+            "qMax": 0.992290556015055,
+            "durationMs": 2066.666666666666
+          }
+        ],
+        "visibleFrames": {
+          "left": 0,
+          "right": 274
+        },
+        "p95ProcessingMs": 50.3
+      },
+      "after": {
+        "frames": 274,
+        "calibrationEvents": [
+          3.2,
+          6.6,
+          9.933
+        ],
+        "verifiedEvents": [
+          13.467,
+          17.133
+        ],
+        "calibration": {
+          "side": "right",
+          "thetaTop": 171.58509698910274,
+          "thetaBottom": 14.395441394497015
+        },
+        "attempts": [
+          {
+            "status": "verified",
+            "qMax": 0.9896224187767709,
+            "durationMs": 1333.3333333333321
+          },
+          {
+            "status": "verified",
+            "qMax": 0.992290556015055,
+            "durationMs": 1399.9999999999982
+          }
+        ],
+        "visibleFrames": {
+          "left": 0,
+          "right": 274
+        },
+        "p95ProcessingMs": 49.5
+      }
+    },
+    {
+      "file": "go4it-rear.webm",
+      "sourceSha256": "8ef16f7b2cbd3d8cf9fc0e61bb85b293c1b74670f90d5cb9381e662a512c3c3b",
+      "windows": [
+        [
+          2.2,
+          5.75
+        ],
+        [
+          7.35,
+          11.35
+        ],
+        [
+          13.05,
+          17.35
+        ],
+        [
+          18.95,
+          23.35
+        ],
+        [
+          25.05,
+          29.05
+        ],
+        [
+          30.4,
+          34.05
+        ],
+        [
+          35.85,
+          39.55
+        ]
+      ],
+      "visualCycles": 7,
+      "decodedPngsSha256": "8625fce85fd1e186ec18190226d84fbdfb8c9a61c167c192531bf4ab1463eede",
+      "before": {
+        "frames": 600,
+        "calibrationEvents": [
+          5.8,
+          10.733,
+          16.4
+        ],
+        "verifiedEvents": [
+          23.067,
+          27.667,
+          33.133,
+          38.867
+        ],
+        "calibration": {
+          "side": "right",
+          "thetaTop": 169.06973081863433,
+          "thetaBottom": 49.86618659114677
+        },
+        "attempts": [
+          {
+            "status": "verified",
+            "qMax": 1,
+            "durationMs": 4866.666666666668
+          },
+          {
+            "status": "verified",
+            "qMax": 1,
+            "durationMs": 3200
+          },
+          {
+            "status": "verified",
+            "qMax": 0.9969558977358122,
+            "durationMs": 3533.3333333333358
+          },
+          {
+            "status": "verified",
+            "qMax": 0.9784499088215629,
+            "durationMs": 3866.6666666666642
+          }
+        ],
+        "visibleFrames": {
+          "left": 593,
+          "right": 590
+        },
+        "p95ProcessingMs": 52.9
+      },
+      "after": {
+        "frames": 600,
+        "calibrationEvents": [
+          4.8,
+          10.533,
+          16.2
+        ],
+        "verifiedEvents": [
+          21.867,
+          27.667,
+          33,
+          38.6
+        ],
+        "calibration": {
+          "side": "left",
+          "thetaTop": 159.7425598981672,
+          "thetaBottom": 55.96018236581824
+        },
+        "attempts": [
+          {
+            "status": "verified",
+            "qMax": 0.9945193240580128,
+            "durationMs": 3600
+          },
+          {
+            "status": "verified",
+            "qMax": 0.9742756226731959,
+            "durationMs": 3133.3333333333358
+          },
+          {
+            "status": "verified",
+            "qMax": 1,
+            "durationMs": 3333.333333333332
+          },
+          {
+            "status": "verified",
+            "qMax": 0.9884728848713473,
+            "durationMs": 3533.3333333333358
+          }
+        ],
+        "visibleFrames": {
+          "left": 590,
+          "right": 584
+        },
+        "p95ProcessingMs": 54.2
+      }
+    },
+    {
+      "file": "go4it-coach.webm",
+      "sourceSha256": "8ef16f7b2cbd3d8cf9fc0e61bb85b293c1b74670f90d5cb9381e662a512c3c3b",
+      "windows": [
+        [
+          3.8,
+          7.3
+        ],
+        [
+          9,
+          13
+        ],
+        [
+          16.1,
+          19.9
+        ],
+        [
+          23.4,
+          28
+        ],
+        [
+          30.8,
+          34.5
+        ],
+        [
+          37.1,
+          40.8
+        ]
+      ],
+      "visualCycles": 6,
+      "decodedPngsSha256": "4dfc3d1910700babac0fccc47fa08f93227af1fa57ac00d62a135d7b43953f37",
+      "before": {
+        "frames": 627,
+        "calibrationEvents": [
+          13.067,
+          28.867,
+          41.4
+        ],
+        "verifiedEvents": [],
+        "calibration": {
+          "side": "left",
+          "thetaTop": 160.63555860769165,
+          "thetaBottom": 49.56568952878036
+        },
+        "attempts": [],
+        "visibleFrames": {
+          "left": 624,
+          "right": 575
+        },
+        "p95ProcessingMs": 47.3
+      },
+      "after": {
+        "frames": 627,
+        "calibrationEvents": [
+          12.333,
+          19.8,
+          28.4
+        ],
+        "verifiedEvents": [
+          33.867,
+          40.667
+        ],
+        "calibration": {
+          "side": "left",
+          "thetaTop": 160.63555860769165,
+          "thetaBottom": 50.099648160436146
+        },
+        "attempts": [
+          {
+            "status": "verified",
+            "qMax": 1,
+            "durationMs": 3799.9999999999964
+          },
+          {
+            "status": "verified",
+            "qMax": 1,
+            "durationMs": 4466.666666666664
+          }
+        ],
+        "visibleFrames": {
+          "left": 622,
+          "right": 551
+        },
+        "p95ProcessingMs": 47.3
+      }
+    }
+  ]
+}

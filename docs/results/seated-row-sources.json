@@ -1,0 +1,115 @@
+{
+  "annotation": "Manual viewing before any pose inference; return-to-reach windows in seconds from clip start. One reviewer, 2 Hz inspection, no model-assisted labels.",
+  "clips": [
+    {
+      "id": "ymove-side",
+      "file": "ymove-seated-row.mp4",
+      "sha256": "957579876dc560f4a889ea2e9dcf2a302abaa484ffcde7b82f0615bb70bc9004",
+      "author": "YMove",
+      "source": "https://github.com/ymove-app/exercise-api/tree/main/free-videos",
+      "license": "YMove free-video terms",
+      "start": 0,
+      "duration": 4,
+      "returnWindows": [
+        [
+          2.2,
+          3.6
+        ]
+      ],
+      "notes": "One demonstration in first half; the second half repeats it and is excluded."
+    },
+    {
+      "id": "go4it-side",
+      "file": "go4it-240p.webm",
+      "sha256": "8ef16f7b2cbd3d8cf9fc0e61bb85b293c1b74670f90d5cb9381e662a512c3c3b",
+      "author": "헬스티비 (Health TV)",
+      "source": "https://commons.wikimedia.org/wiki/File:47%ED%9A%8C(%EB%93%B1%EC%9A%B4%EB%8F%99)%ED%8C%80GO4IT_%EB%8B%A4%EB%8B%88%EC%97%98,_%EB%B0%95%EC%86%8C%ED%9D%ACby%ED%97%AC%EC%8A%A4%ED%8B%B0%EB%B9%84.webm",
+      "license": "CC BY 3.0",
+      "start": 3231,
+      "duration": 34,
+      "returnWindows": [
+        [
+          2.4,
+          4.4
+        ],
+        [
+          7.3,
+          9.2
+        ],
+        [
+          11.3,
+          13.2
+        ],
+        [
+          15.2,
+          17.2
+        ],
+        [
+          19.2,
+          21.2
+        ],
+        [
+          23.2,
+          25.2
+        ],
+        [
+          27.2,
+          29.2
+        ],
+        [
+          31.2,
+          33.2
+        ]
+      ],
+      "notes": "Fixed oblique side view, eight successive repetitions by one performer, trainer stands behind."
+    },
+    {
+      "id": "dvids-band",
+      "file": "dvids-seated-band-row.mp4",
+      "sha256": "c63d45ecad8df0c54c1e5e5395ff35b5bb41a121d3f2729196fb4bef7593bc85",
+      "author": "Capt. Matthew Holfinger, U.S. Marine Corps",
+      "source": "https://www.dvidshub.net/video/640249/seated-band-row",
+      "download": "https://d34w7g4gy10iej.cloudfront.net/video/1811/DOD_106215241/DOD_106215241-1024x576-1769k.mp4",
+      "license": "Public domain, per DVIDS",
+      "start": 9.75,
+      "duration": 11.5,
+      "crop": "crop=iw/2:ih/2:iw/4:ih/2",
+      "returnWindows": [
+        [
+          1.6,
+          2.8
+        ],
+        [
+          3.5,
+          4.8
+        ],
+        [
+          5.65,
+          6.9
+        ],
+        [
+          7.65,
+          9.0
+        ],
+        [
+          9.9,
+          11.25
+        ]
+      ],
+      "notes": "Two simultaneous views. Lower side view preselected; five band row cycles, setup and teardown excluded."
+    },
+    {
+      "id": "pulldown-negative",
+      "file": "pulldown.webm",
+      "appDemo": true,
+      "sha256": "f6200b7691acc6e99b1b0ddee7783fea56da3a6e155c5b3020cdda958cd49e34",
+      "author": "Your Move",
+      "license": "Commons lists CC BY-SA 4.0; current deletion nomination questions uploader licensing authority. Public reference and local fixture only; review before reuse.",
+      "source": "https://commons.wikimedia.org/wiki/File:Lat_pulldown_exercise_demonstration.webm",
+      "start": 0,
+      "duration": 8,
+      "returnWindows": [],
+      "notes": "Wrong exercise: overhead vertical pulldown, no seated horizontal row."
+    }
+  ]
+}

@@ -1,14 +1,10 @@
-import { LANDMARK_COUNT, LM, type Landmark } from './contract'
-
 // The character's joints. Arms are solved from where the hands are, so one number, q,
-// poses the whole pull. The same joints feed the stand-in camera's landmarks.
+// poses the whole pull.
 
 export type Pt = { x: number; y: number }
 export type Side = -1 | 1
 /** One value per side: [image left, image right]. */
 export type Pair<T> = [T, T]
-
-export const FRAME = { width: 400, height: 640 }
 
 const UPPER = 88
 const FORE = 82
@@ -63,34 +59,4 @@ export function jointsFor(q: number | null): Joints {
     toe: pair((side) => ({ x: 200 + side * 64, y: 602 })),
     barY,
   }
-}
-
-/** The joints as camera landmarks. A person facing the camera has their left on the image's right. */
-export function landmarksFor(j: Joints): Landmark[] {
-  const out: Landmark[] = Array.from({ length: LANDMARK_COUNT }, () => ({ x: 0, y: 0, visibility: 0 }))
-  const put = (index: number, p: Pt) => {
-    out[index] = { x: p.x / FRAME.width, y: p.y / FRAME.height, visibility: 1 }
-  }
-  const beyond = (a: Pt, b: Pt, by: number): Pt => {
-    const d = Math.hypot(b.x - a.x, b.y - a.y) || 1
-    return { x: b.x + ((b.x - a.x) / d) * by, y: b.y + ((b.y - a.y) / d) * by }
-  }
-  put(LM.nose, { x: j.head.x, y: j.head.y + 10 })
-  put(LM.rightEar, { x: j.head.x - j.headRadius, y: j.head.y })
-  put(LM.leftEar, { x: j.head.x + j.headRadius, y: j.head.y })
-  const sides = [
-    [0, LM.rightShoulder, LM.rightElbow, LM.rightWrist, LM.rightIndex, LM.rightHip, LM.rightKnee, LM.rightAnkle, LM.rightFoot],
-    [1, LM.leftShoulder, LM.leftElbow, LM.leftWrist, LM.leftIndex, LM.leftHip, LM.leftKnee, LM.leftAnkle, LM.leftFoot],
-  ] as const
-  for (const [i, shoulder, elbow, wrist, index, hip, knee, ankle, foot] of sides) {
-    put(shoulder, j.shoulder[i])
-    put(elbow, j.elbow[i])
-    put(wrist, j.hand[i])
-    put(index, beyond(j.elbow[i], j.hand[i], 24))
-    put(hip, j.hip[i])
-    put(knee, j.knee[i])
-    put(ankle, j.ankle[i])
-    put(foot, j.toe[i])
-  }
-  return out
 }

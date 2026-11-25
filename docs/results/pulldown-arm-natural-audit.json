@@ -1,0 +1,198 @@
+{
+  "clip": "pexels-35585697.mp4",
+  "referenceSha256": "d460167c080ebecae08c59e2854ebb3a9faf18aa02b9bdcfe53c49b34455f4d3",
+  "traceSha256": "929ae919da9a4d9301909bfe37bb775264376cfc34287090f1daddd2a9a90d84",
+  "method": "True iff existing trail has a current visible shoulder/elbow/wrist sample for the labelled anatomical side. Presence does not measure pixel alignment.",
+  "byLabel": {
+    "visible": {
+      "armFrames": 39,
+      "beforeDrawn": 35,
+      "afterDrawn": 29
+    },
+    "cropped": {
+      "armFrames": 18,
+      "beforeDrawn": 2,
+      "afterDrawn": 2
+    },
+    "uncertain": {
+      "armFrames": 9,
+      "beforeDrawn": 8,
+      "afterDrawn": 6
+    },
+    "occluded": {
+      "armFrames": 6,
+      "beforeDrawn": 4,
+      "afterDrawn": 0
+    }
+  },
+  "windows": [
+    {
+      "startFrame": 3,
+      "endFrame": 5,
+      "left": {
+        "label": "visible",
+        "beforeDrawn": 1,
+        "afterDrawn": 1
+      },
+      "right": {
+        "label": "cropped",
+        "beforeDrawn": 1,
+        "afterDrawn": 1
+      }
+    },
+    {
+      "startFrame": 31,
+      "endFrame": 33,
+      "left": {
+        "label": "cropped",
+        "beforeDrawn": 1,
+        "afterDrawn": 1
+      },
+      "right": {
+        "label": "visible",
+        "beforeDrawn": 3,
+        "afterDrawn": 0
+      }
+    },
+    {
+      "startFrame": 39,
+      "endFrame": 41,
+      "left": {
+        "label": "uncertain",
+        "beforeDrawn": 3,
+        "afterDrawn": 3
+      },
+      "right": {
+        "label": "visible",
+        "beforeDrawn": 3,
+        "afterDrawn": 2
+      }
+    },
+    {
+      "startFrame": 71,
+      "endFrame": 73,
+      "left": {
+        "label": "occluded",
+        "beforeDrawn": 3,
+        "afterDrawn": 0
+      },
+      "right": {
+        "label": "visible",
+        "beforeDrawn": 3,
+        "afterDrawn": 3
+      }
+    },
+    {
+      "startFrame": 77,
+      "endFrame": 79,
+      "left": {
+        "label": "occluded",
+        "beforeDrawn": 1,
+        "afterDrawn": 0
+      },
+      "right": {
+        "label": "visible",
+        "beforeDrawn": 1,
+        "afterDrawn": 1
+      }
+    },
+    {
+      "startFrame": 87,
+      "endFrame": 89,
+      "left": {
+        "label": "uncertain",
+        "beforeDrawn": 2,
+        "afterDrawn": 0
+      },
+      "right": {
+        "label": "visible",
+        "beforeDrawn": 3,
+        "afterDrawn": 3
+      }
+    },
+    {
+      "startFrame": 105,
+      "endFrame": 107,
+      "left": {
+        "label": "cropped",
+        "beforeDrawn": 0,
+        "afterDrawn": 0
+      },
+      "right": {
+        "label": "visible",
+        "beforeDrawn": 3,
+        "afterDrawn": 3
+      }
+    },
+    {
+      "startFrame": 136,
+      "endFrame": 138,
+      "left": {
+        "label": "visible",
+        "beforeDrawn": 3,
+        "afterDrawn": 3
+      },
+      "right": {
+        "label": "uncertain",
+        "beforeDrawn": 3,
+        "afterDrawn": 3
+      }
+    },
+    {
+      "startFrame": 150,
+      "endFrame": 152,
+      "left": {
+        "label": "cropped",
+        "beforeDrawn": 0,
+        "afterDrawn": 0
+      },
+      "right": {
+        "label": "visible",
+        "beforeDrawn": 3,
+        "afterDrawn": 3
+      }
+    },
+    {
+      "startFrame": 157,
+      "endFrame": 159,
+      "left": {
+        "label": "cropped",
+        "beforeDrawn": 0,
+        "afterDrawn": 0
+      },
+      "right": {
+        "label": "visible",
+        "beforeDrawn": 3,
+        "afterDrawn": 3
+      }
+    },
+    {
+      "startFrame": 189,
+      "endFrame": 191,
+      "left": {
+        "label": "cropped",
+        "beforeDrawn": 0,
+        "afterDrawn": 0
+      },
+      "right": {
+        "label": "visible",
+        "beforeDrawn": 3,
+        "afterDrawn": 1
+      }
+    },
+    {
+      "startFrame": 198,
+      "endFrame": 200,
+      "left": {
+        "label": "visible",
+        "beforeDrawn": 3,
+        "afterDrawn": 3
+      },
+      "right": {
+        "label": "visible",
+        "beforeDrawn": 3,
+        "afterDrawn": 3
+      }
+    }
+  ]
+}

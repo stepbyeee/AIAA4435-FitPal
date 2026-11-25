@@ -1,0 +1,52 @@
+{
+  "clip": "pulldown.webm",
+  "variant": "static copy at left, real source moving at right",
+  "reference": [
+    [
+      2.15,
+      4.1
+    ],
+    [
+      5.88,
+      7.6
+    ],
+    [
+      9.25,
+      11
+    ],
+    [
+      12.72,
+      14.7
+    ],
+    [
+      16.32,
+      18.27
+    ]
+  ],
+  "protocol": "Selected after observing the multi-person failure; same Full model and rules throughout. Real-time browser playback, left/right halves or central 60% of the displayed frame. Observer times use displayed media clock.",
+  "runs": [
+    {
+      "focus": "left",
+      "cycles": {
+        "calibration": [],
+        "set": []
+      },
+      "status": "录像已结束。校准需要 3 次清晰的完整下拉。"
+    },
+    {
+      "focus": "right",
+      "cycles": {
+        "calibration": [
+          3.76,
+          7.19,
+          10.25
+        ],
+        "set": [
+          14,
+          17.73
+        ]
+      },
+      "status": "这一组确认了 2 下。"
+    }
+  ]
+}

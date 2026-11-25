@@ -1,0 +1,555 @@
+{
+  "protocol": "Reference windows [approximate bottom, return to top] in clip-relative seconds from visual inspection of source frames. New labels were reviewed by the coding agent, without pose predictions; they have not been adjudicated by independent human raters. Null means no reliable count label. Each fresh session requires three full calibration cycles before training.",
+  "clips": [
+    {
+      "file": "pulldown.webm",
+      "exercise": "lat-pulldown",
+      "appDemo": true,
+      "sha256": "f6200b7691acc6e99b1b0ddee7783fea56da3a6e155c5b3020cdda958cd49e34",
+      "durationSec": 18.32,
+      "author": "Your Move",
+      "terms": "Commons lists CC BY-SA 4.0; current deletion nomination questions uploader licensing authority. Public reference and local fixture only; review before reuse.",
+      "source": "https://commons.wikimedia.org/wiki/File:Lat_pulldown_exercise_demonstration.webm",
+      "download": "https://upload.wikimedia.org/wikipedia/commons/6/69/Lat_pulldown_exercise_demonstration.webm",
+      "windows": [
+        [
+          2.15,
+          4.1
+        ],
+        [
+          5.88,
+          7.6
+        ],
+        [
+          9.25,
+          11.0
+        ],
+        [
+          12.72,
+          14.7
+        ],
+        [
+          16.32,
+          18.27
+        ]
+      ],
+      "notes": "Previously used for tuning. Fixed side view.",
+      "visualCycles": 5
+    },
+    {
+      "file": "pulldown-mistakes.webm",
+      "exercise": "lat-pulldown",
+      "appDemo": true,
+      "sha256": "0765784da54e2bf0ec32bc0def3014a729b009b54d39533b135dc64a312efcf5",
+      "durationSec": 10.944,
+      "author": "Andrew Kwong",
+      "terms": "See file history and licensing discussion",
+      "source": "https://commons.wikimedia.org/wiki/File:Common_Lat_Pulldown_Mistakes.webm",
+      "download": "https://upload.wikimedia.org/wikipedia/commons/0/03/Common_Lat_Pulldown_Mistakes.webm",
+      "windows": [
+        [
+          9.4,
+          10.86
+        ]
+      ],
+      "notes": "View changes and initial partial pulls. Prior annotation from this project.",
+      "visualCycles": 1
+    },
+    {
+      "file": "squat-fitnessscape.webm",
+      "exercise": "squat",
+      "appDemo": false,
+      "sha256": "2440985661c3533a4ce78472b0f4577dbdf023aff3f8f9a225bbb5ff8071b1e9",
+      "durationSec": 7.1,
+      "author": "FitnessScape",
+      "terms": "CC BY 3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Squat_-_exercise_demonstration_video.webm",
+      "download": "https://upload.wikimedia.org/wikipedia/commons/5/5c/Squat_-_exercise_demonstration_video.webm",
+      "windows": [
+        [
+          2.0,
+          3.5
+        ],
+        [
+          5.2,
+          6.7
+        ]
+      ],
+      "notes": "Rear angled view with barbell and graphics.",
+      "visualCycles": 2
+    },
+    {
+      "file": "squat-criles.webm",
+      "exercise": "squat",
+      "appDemo": false,
+      "sha256": "d37c07d2ae87af305a7e74ad0dc41f71281e20a0eac5a15247e792d1d56a4b32",
+      "durationSec": 53.671,
+      "author": "CRiles23",
+      "terms": "CC BY-SA 3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Squats_Wikipedia.webm",
+      "download": "https://upload.wikimedia.org/wikipedia/commons/2/21/Squats_Wikipedia.webm",
+      "windows": null,
+      "notes": "Instructional montage, panning close-ups; no continuous sequence with a reliably visible hip-knee-ankle chain across three squats.",
+      "visualCycles": null
+    },
+    {
+      "file": "ymove-barbell-back-squat.mp4",
+      "exercise": "squat",
+      "appDemo": false,
+      "sha256": "e1619abcd21b0f97d83703b13f36c4a3f3261535417d92f50df99ffb7810d993",
+      "durationSec": 14.0,
+      "author": "YMove",
+      "terms": "YMove free-videos terms; no standalone library redistribution.",
+      "source": "https://github.com/ymove-app/exercise-api/tree/main/free-videos",
+      "download": "https://raw.githubusercontent.com/ymove-app/exercise-api/main/free-videos/barbell-back-squat.mp4",
+      "windows": [
+        [
+          1.4,
+          2.85
+        ],
+        [
+          5.15,
+          6.4
+        ],
+        [
+          8.65,
+          10.15
+        ],
+        [
+          12.35,
+          13.9
+        ]
+      ],
+      "notes": "Front oblique, barbell.",
+      "visualCycles": 4
+    },
+    {
+      "file": "ymove-dumbbell-goblet-squat-202e4f.mp4",
+      "exercise": "squat",
+      "appDemo": true,
+      "sha256": "b904f193848260c75d89c56cccf00237cbcbca1d15b27136f698853a1e5f6536",
+      "durationSec": 19.12,
+      "author": "YMove",
+      "terms": "YMove free-videos terms; no standalone library redistribution.",
+      "source": "https://github.com/ymove-app/exercise-api/tree/main/free-videos",
+      "download": "https://raw.githubusercontent.com/ymove-app/exercise-api/main/free-videos/dumbbell-goblet-squat-202e4f.mp4",
+      "windows": [
+        [
+          1.65,
+          3.0
+        ],
+        [
+          5.25,
+          6.65
+        ],
+        [
+          8.65,
+          10.1
+        ],
+        [
+          12.25,
+          13.7
+        ],
+        [
+          16.1,
+          17.7
+        ]
+      ],
+      "notes": "Fixed front-oblique view; featured development demo.",
+      "visualCycles": 5
+    },
+    {
+      "file": "ymove-goblet-squat-with-kettlebell.mp4",
+      "exercise": "squat",
+      "appDemo": false,
+      "sha256": "c161fa1de4a9a03d51d0561d54b2a43964e187b6b99b5c6865f768c4ce56051b",
+      "durationSec": 17.2,
+      "author": "YMove",
+      "terms": "YMove free-videos terms; no standalone library redistribution.",
+      "source": "https://github.com/ymove-app/exercise-api/tree/main/free-videos",
+      "download": "https://raw.githubusercontent.com/ymove-app/exercise-api/main/free-videos/goblet-squat-with-kettlebell.mp4",
+      "windows": [
+        [
+          1.6,
+          2.9
+        ],
+        [
+          4.85,
+          6.1
+        ],
+        [
+          8.3,
+          9.65
+        ],
+        [
+          11.8,
+          13.2
+        ],
+        [
+          15.55,
+          17.15
+        ]
+      ],
+      "notes": "Fixed front-oblique view, same studio, possible repeated performer. Last return checked at end.",
+      "visualCycles": 5
+    },
+    {
+      "file": "pexels-3209241.mp4",
+      "exercise": "lat-pulldown",
+      "appDemo": false,
+      "sha256": "01d1938612efe9d99984a22285da6e7b88aa8c30ba735367a7429f28fa838a35",
+      "durationSec": 13.76,
+      "author": "Pressmaster",
+      "terms": "Pexels License",
+      "source": "https://www.pexels.com/video/a-man-assisting-a-woman-in-using-the-flat-pulldown-weights-equipment-in-a-gym-3209241/",
+      "download": "https://videos.pexels.com/video-files/3209241/3209241-hd_1280_720_25fps.mp4",
+      "windows": null,
+      "notes": "Trainer holding the bar with athlete, overhead moving shot and occlusion; outside single-person scope.",
+      "visualCycles": null
+    },
+    {
+      "file": "pexels-3209802.mp4",
+      "exercise": "lat-pulldown",
+      "appDemo": false,
+      "sha256": "f260d0e78608c08766bfdb32452b35df26f1b8e57ac258758fe29d57fe232525",
+      "durationSec": 14.96,
+      "author": "Pressmaster",
+      "terms": "Pexels License",
+      "source": "https://www.pexels.com/video/a-man-lifting-weights-in-a-gym-using-a-lat-pulldown-3209802/",
+      "download": "https://videos.pexels.com/video-files/3209802/3209802-hd_1280_720_25fps.mp4",
+      "windows": null,
+      "notes": "Face and bar close-up; complete shoulder-elbow-wrist chain frequently cropped.",
+      "visualCycles": null
+    },
+    {
+      "file": "pexels-5983521.mp4",
+      "exercise": "lat-pulldown",
+      "appDemo": false,
+      "sha256": "36c08e1fac43d6777846e09fe0d6fea7794b30fbc95226dbf9bb04ecd14fd10a",
+      "durationSec": 10.7517,
+      "author": "thiha soe",
+      "terms": "Pexels License",
+      "source": "https://www.pexels.com/video/a-working-out-at-the-gym-5983521/",
+      "download": "https://videos.pexels.com/video-files/5983521/5983521-hd_1280_720_30fps.mp4",
+      "windows": [
+        [
+          6.0,
+          10.45
+        ]
+      ],
+      "notes": "One slow rear-view movement; insufficient for calibration.",
+      "visualCycles": 1
+    },
+    {
+      "file": "pexels-6892546.mp4",
+      "exercise": "lat-pulldown",
+      "appDemo": false,
+      "sha256": "3a912d39a53e68bc3870b040192cfd5705c5fd37555b7f9e966169294e3e432a",
+      "durationSec": 12.97,
+      "author": "Kampus Production",
+      "terms": "Pexels License",
+      "source": "https://www.pexels.com/video/elderly-man-doing-exercise-at-the-gym-6892546/",
+      "download": "https://videos.pexels.com/video-files/6892546/6892546-hd_720_1280_25fps.mp4",
+      "windows": null,
+      "notes": "Low-angle close-up, hands leave frame, starts and ends with bar low, insufficient clear complete cycles.",
+      "visualCycles": null
+    },
+    {
+      "file": "hf-lat-1.mp4",
+      "exercise": "lat-pulldown",
+      "appDemo": false,
+      "sha256": "9480b086255f005491b367d05d5ec8060daf618a727ee761aeed661b07bfea32",
+      "durationSec": 3.37,
+      "author": "34data uploader; original credits not verified",
+      "terms": "Dataset card gives no media license. Local evaluation only; do not redistribute.",
+      "source": "https://huggingface.co/datasets/34data/workout-vids/tree/f1c551e140fa3c8d1dc6b4dfa41caf4d994509b7",
+      "archive": "https://huggingface.co/datasets/34data/workout-vids/resolve/f1c551e140fa3c8d1dc6b4dfa41caf4d994509b7/videos.zip",
+      "member": "lat pulldown/lat pulldown_1.mp4",
+      "offset": 1410442883,
+      "compressedBytes": 430864,
+      "crc32": "2137301b",
+      "windows": [
+        [
+          2.0,
+          3.18
+        ]
+      ],
+      "notes": "Starts near bottom, ends near top; same gym or performer as 2 and 3.",
+      "visualCycles": 1
+    },
+    {
+      "file": "hf-lat-2.mp4",
+      "exercise": "lat-pulldown",
+      "appDemo": false,
+      "sha256": "05c348d0ee6edef95246d55dbeca5808fcd06410bfa4a31479a6ffdb8cd8d138",
+      "durationSec": 2.4691,
+      "author": "34data uploader; original credits not verified",
+      "terms": "Dataset card gives no media license. Local evaluation only; do not redistribute.",
+      "source": "https://huggingface.co/datasets/34data/workout-vids/tree/f1c551e140fa3c8d1dc6b4dfa41caf4d994509b7",
+      "archive": "https://huggingface.co/datasets/34data/workout-vids/resolve/f1c551e140fa3c8d1dc6b4dfa41caf4d994509b7/videos.zip",
+      "member": "lat pulldown/lat pulldown_2.mp4",
+      "offset": 1405958612,
+      "compressedBytes": 319662,
+      "crc32": "57eac674",
+      "windows": [
+        [
+          1.0,
+          2.29
+        ]
+      ],
+      "notes": "Rear oblique; one cycle.",
+      "visualCycles": 1
+    },
+    {
+      "file": "hf-lat-3.mp4",
+      "exercise": "lat-pulldown",
+      "appDemo": false,
+      "sha256": "3293236fdba8427474fd577e03ce0f545fcbdb09c9d7d0a91ad3cd9d065ff8a4",
+      "durationSec": 2.3023,
+      "author": "34data uploader; original credits not verified",
+      "terms": "Dataset card gives no media license. Local evaluation only; do not redistribute.",
+      "source": "https://huggingface.co/datasets/34data/workout-vids/tree/f1c551e140fa3c8d1dc6b4dfa41caf4d994509b7",
+      "archive": "https://huggingface.co/datasets/34data/workout-vids/resolve/f1c551e140fa3c8d1dc6b4dfa41caf4d994509b7/videos.zip",
+      "member": "lat pulldown/lat pulldown_3.mp4",
+      "offset": 1383452804,
+      "compressedBytes": 300822,
+      "crc32": "d1918205",
+      "windows": [
+        [
+          0.85,
+          2.18
+        ]
+      ],
+      "notes": "Strict side view; one cycle.",
+      "visualCycles": 1
+    },
+    {
+      "file": "hf-lat-27.mp4",
+      "exercise": "lat-pulldown",
+      "appDemo": false,
+      "sha256": "ed3278c77f3f6026832b114e7b3ef28c06e81a1dc2a712b5341d7460dd71a543",
+      "durationSec": 14.0,
+      "author": "34data uploader; original credits not verified",
+      "terms": "Dataset card gives no media license. Local evaluation only; do not redistribute.",
+      "source": "https://huggingface.co/datasets/34data/workout-vids/tree/f1c551e140fa3c8d1dc6b4dfa41caf4d994509b7",
+      "archive": "https://huggingface.co/datasets/34data/workout-vids/resolve/f1c551e140fa3c8d1dc6b4dfa41caf4d994509b7/videos.zip",
+      "member": "lat pulldown/lat pulldown_27.mp4",
+      "offset": 1389440232,
+      "compressedBytes": 10078056,
+      "crc32": "a7e2ee59",
+      "windows": [
+        [
+          5.9,
+          9.2
+        ]
+      ],
+      "notes": "Initial bottom hold; clip ends while arms are still flexed on the return of the second attempted cycle. Camera rolls.",
+      "visualCycles": 1
+    },
+    {
+      "file": "hf-lat-30.mp4",
+      "exercise": "lat-pulldown",
+      "appDemo": false,
+      "sha256": "54fd7be7a875be5bdbc144b321668c63e895aab17290b44562c7ecf6df89b4c7",
+      "durationSec": 8.7754,
+      "author": "34data uploader; original credits not verified",
+      "terms": "Dataset card gives no media license. Local evaluation only; do not redistribute.",
+      "source": "https://huggingface.co/datasets/34data/workout-vids/tree/f1c551e140fa3c8d1dc6b4dfa41caf4d994509b7",
+      "archive": "https://huggingface.co/datasets/34data/workout-vids/resolve/f1c551e140fa3c8d1dc6b4dfa41caf4d994509b7/videos.zip",
+      "member": "lat pulldown/lat pulldown_30.mp4",
+      "offset": 1377558633,
+      "compressedBytes": 5894109,
+      "crc32": "068df7f7",
+      "windows": [
+        [
+          0.9,
+          2.45
+        ],
+        [
+          3.65,
+          5.15
+        ],
+        [
+          6.15,
+          7.7
+        ]
+      ],
+      "notes": "Three visible top-to-top cycles; overlay appears during second cycle. Ends at bottom of fourth attempt.",
+      "visualCycles": 3
+    },
+    {
+      "file": "hf-lat-40.mp4",
+      "exercise": "lat-pulldown",
+      "appDemo": false,
+      "sha256": "02dff1e715388ffe34979b0c27ac1a57dfafc3a57764eded1f3b5f6cfd556348",
+      "durationSec": 10.01,
+      "author": "34data uploader; original credits not verified",
+      "terms": "Dataset card gives no media license. Local evaluation only; do not redistribute.",
+      "source": "https://huggingface.co/datasets/34data/workout-vids/tree/f1c551e140fa3c8d1dc6b4dfa41caf4d994509b7",
+      "archive": "https://huggingface.co/datasets/34data/workout-vids/resolve/f1c551e140fa3c8d1dc6b4dfa41caf4d994509b7/videos.zip",
+      "member": "lat pulldown/lat pulldown_40.mp4",
+      "offset": 1347414044,
+      "compressedBytes": 7151061,
+      "crc32": "30feebbc",
+      "windows": [
+        [
+          3.85,
+          6.85
+        ]
+      ],
+      "notes": "Top of the bar leaves frame; clip ends at bottom of next pull.",
+      "visualCycles": 1
+    },
+    {
+      "file": "hf-lat-45.mp4",
+      "exercise": "lat-pulldown",
+      "appDemo": false,
+      "sha256": "ae91e6da4d51e6fc615ae0e71c82269ece00f9f7a7b94790f446bcc6301886a5",
+      "durationSec": 7.4074,
+      "author": "34data uploader; original credits not verified",
+      "terms": "Dataset card gives no media license. Local evaluation only; do not redistribute.",
+      "source": "https://huggingface.co/datasets/34data/workout-vids/tree/f1c551e140fa3c8d1dc6b4dfa41caf4d994509b7",
+      "archive": "https://huggingface.co/datasets/34data/workout-vids/resolve/f1c551e140fa3c8d1dc6b4dfa41caf4d994509b7/videos.zip",
+      "member": "lat pulldown/lat pulldown_45.mp4",
+      "offset": 1328433950,
+      "compressedBytes": 5259313,
+      "crc32": "792c42fc",
+      "windows": [
+        [
+          1.15,
+          2.6
+        ],
+        [
+          4.05,
+          5.85
+        ]
+      ],
+      "notes": "Oblique front, ends partway through next pull.",
+      "visualCycles": 2
+    },
+    {
+      "file": "hf-lat-47.mp4",
+      "exercise": "lat-pulldown",
+      "appDemo": false,
+      "sha256": "da1af2c9e6fcc454bd678dc39ec323aebf53552197b32cb5cfa7ca48dbb7f9d3",
+      "durationSec": 2.9029,
+      "author": "34data uploader; original credits not verified",
+      "terms": "Dataset card gives no media license. Local evaluation only; do not redistribute.",
+      "source": "https://huggingface.co/datasets/34data/workout-vids/tree/f1c551e140fa3c8d1dc6b4dfa41caf4d994509b7",
+      "archive": "https://huggingface.co/datasets/34data/workout-vids/resolve/f1c551e140fa3c8d1dc6b4dfa41caf4d994509b7/videos.zip",
+      "member": "lat pulldown/lat pulldown_47.mp4",
+      "offset": 1318767925,
+      "compressedBytes": 2102888,
+      "crc32": "8fc744d6",
+      "windows": null,
+      "notes": "Clip starts mid-descent; upper endpoint ambiguous.",
+      "visualCycles": null
+    },
+    {
+      "file": "hf-lat-51.mp4",
+      "exercise": "lat-pulldown",
+      "appDemo": false,
+      "sha256": "4602ae5333fe326b8b64ee26725e55dfc6cc5b867d19934771c60fe0d41cd5d9",
+      "durationSec": 3.2115,
+      "author": "34data uploader; original credits not verified",
+      "terms": "Dataset card gives no media license. Local evaluation only; do not redistribute.",
+      "source": "https://huggingface.co/datasets/34data/workout-vids/tree/f1c551e140fa3c8d1dc6b4dfa41caf4d994509b7",
+      "archive": "https://huggingface.co/datasets/34data/workout-vids/resolve/f1c551e140fa3c8d1dc6b4dfa41caf4d994509b7/videos.zip",
+      "member": "lat pulldown/lat pulldown_51.mp4",
+      "offset": 1300631038,
+      "compressedBytes": 2359564,
+      "crc32": "ddba3c7a",
+      "windows": [],
+      "notes": "Starts at the bottom and ends at the next bottom; no complete top-bottom-top cycle.",
+      "visualCycles": 0
+    },
+    {
+      "file": "go4it-rear.webm",
+      "asset": "go4it-240p.webm",
+      "exercise": "lat-pulldown",
+      "appDemo": false,
+      "sha256": "8ef16f7b2cbd3d8cf9fc0e61bb85b293c1b74670f90d5cb9381e662a512c3c3b",
+      "durationSec": 40.0,
+      "startSec": 359.75,
+      "maxBytes": 135000000,
+      "author": "헬스티비 (Health TV)",
+      "terms": "CC BY 3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:47%ED%9A%8C(%EB%93%B1%EC%9A%B4%EB%8F%99)%ED%8C%80GO4IT_%EB%8B%A4%EB%8B%88%EC%97%98,_%EB%B0%95%EC%86%8C%ED%9D%ACby%ED%97%AC%EC%8A%A4%ED%8B%B0%EB%B9%84.webm",
+      "download": "https://upload.wikimedia.org/wikipedia/commons/transcoded/1/1c/47%ED%9A%8C%28%EB%93%B1%EC%9A%B4%EB%8F%99%29%ED%8C%80GO4IT_%EB%8B%A4%EB%8B%88%EC%97%98%2C_%EB%B0%95%EC%86%8C%ED%9D%ACby%ED%97%AC%EC%8A%A4%ED%8B%B0%EB%B9%84.webm/47%ED%9A%8C%28%EB%93%B1%EC%9A%B4%EB%8F%99%29%ED%8C%80GO4IT_%EB%8B%A4%EB%8B%88%EC%97%98%2C_%EB%B0%95%EC%86%8C%ED%9D%ACby%ED%97%AC%EC%8A%A4%ED%8B%B0%EB%B9%84.webm.240p.vp9.webm",
+      "windows": [
+        [
+          2.2,
+          5.75
+        ],
+        [
+          7.35,
+          11.35
+        ],
+        [
+          13.05,
+          17.35
+        ],
+        [
+          18.95,
+          23.35
+        ],
+        [
+          25.05,
+          29.05
+        ],
+        [
+          30.4,
+          34.05
+        ],
+        [
+          35.85,
+          39.55
+        ]
+      ],
+      "notes": "New performer, fixed rear-view close shot.",
+      "visualCycles": 7
+    },
+    {
+      "file": "go4it-coach.webm",
+      "asset": "go4it-240p.webm",
+      "exercise": "lat-pulldown",
+      "appDemo": false,
+      "sha256": "8ef16f7b2cbd3d8cf9fc0e61bb85b293c1b74670f90d5cb9381e662a512c3c3b",
+      "durationSec": 41.8,
+      "startSec": 571.0,
+      "maxBytes": 135000000,
+      "author": "헬스티비 (Health TV)",
+      "terms": "CC BY 3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:47%ED%9A%8C(%EB%93%B1%EC%9A%B4%EB%8F%99)%ED%8C%80GO4IT_%EB%8B%A4%EB%8B%88%EC%97%98,_%EB%B0%95%EC%86%8C%ED%9D%ACby%ED%97%AC%EC%8A%A4%ED%8B%B0%EB%B9%84.webm",
+      "download": "https://upload.wikimedia.org/wikipedia/commons/transcoded/1/1c/47%ED%9A%8C%28%EB%93%B1%EC%9A%B4%EB%8F%99%29%ED%8C%80GO4IT_%EB%8B%A4%EB%8B%88%EC%97%98%2C_%EB%B0%95%EC%86%8C%ED%9D%ACby%ED%97%AC%EC%8A%A4%ED%8B%B0%EB%B9%84.webm/47%ED%9A%8C%28%EB%93%B1%EC%9A%B4%EB%8F%99%29%ED%8C%80GO4IT_%EB%8B%A4%EB%8B%88%EC%97%98%2C_%EB%B0%95%EC%86%8C%ED%9D%ACby%ED%97%AC%EC%8A%A4%ED%8B%B0%EB%B9%84.webm.240p.vp9.webm",
+      "windows": [
+        [
+          3.8,
+          7.3
+        ],
+        [
+          9.0,
+          13.0
+        ],
+        [
+          16.1,
+          19.9
+        ],
+        [
+          23.4,
+          28.0
+        ],
+        [
+          30.8,
+          34.5
+        ],
+        [
+          37.1,
+          40.8
+        ]
+      ],
+      "notes": "Same performer in a different set; a trainer in the foreground moves, occludes the subject and mimics the motion. Multi-person stress case.",
+      "visualCycles": 6
+    }
+  ]
+}

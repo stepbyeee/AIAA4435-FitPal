@@ -1,0 +1,47 @@
+{
+  "annotation": "After freezing initial analyzer hash 2976cba9, reviewer inspected frames at 2 Hz before any pose run on these three sources. Empty windows on unscorable footage request abstention; physical repetition totals are unknown.",
+  "clips": [
+    {
+      "id": "pexels-4367635",
+      "file": "pexels-row-4367635.mp4",
+      "sha256": "99ac222b0a3cd04514462b9c30099e5ff2b63e4fb1350f6d69458c777b67e321",
+      "author": "Pavel Danilyuk",
+      "source": "https://www.pexels.com/video/a-man-doing-a-seated-cable-row-4367635/",
+      "download": "https://videos.pexels.com/video-files/4367635/4367635-hd_1920_1080_30fps.mp4",
+      "license": "Pexels License",
+      "start": 0,
+      "duration": 14.848,
+      "returnWindows": [],
+      "category": "unscorable",
+      "notes": "Tight shot of handle, hands and part of the chest. Neither full shoulder–elbow–wrist chain can be visually verified."
+    },
+    {
+      "id": "pexels-35585654",
+      "file": "pexels-row-35585654.mp4",
+      "sha256": "f62c682de401488d25df8105e4fa467e503f508e2600551ea2f2b1bb779e11ec",
+      "author": "khezez | خزاز",
+      "source": "https://www.pexels.com/video/man-exercising-on-cable-machine-in-gym-35585654/",
+      "download": "https://videos.pexels.com/video-files/35585654/15079810_1080_1920_30fps.mp4",
+      "license": "Pexels License",
+      "start": 0,
+      "duration": 11.533,
+      "returnWindows": [],
+      "category": "unscorable",
+      "notes": "Rear camera moves and is occluded near the end; forward wrist and both endpoints not reliably visible."
+    },
+    {
+      "id": "pexels-30916502",
+      "file": "pexels-row-30916502.mp4",
+      "sha256": "1e873c9a8b03da0ead1f41df73e24a592ee66cab83f3981e406e6abe4d91abe7",
+      "author": "Markofit Production",
+      "source": "https://www.pexels.com/video/intense-gym-workout-with-cable-machine-30916502/",
+      "download": "https://videos.pexels.com/video-files/30916502/13218522_1920_1080_30fps.mp4",
+      "license": "Pexels License",
+      "start": 0,
+      "duration": 11.166,
+      "returnWindows": [],
+      "category": "different-motion",
+      "notes": "A visible athlete repeatedly brings hands to forehead level with elbows held up front. This is outside the horizontal pull-to-trunk goal despite publisher tags."
+    }
+  ]
+}

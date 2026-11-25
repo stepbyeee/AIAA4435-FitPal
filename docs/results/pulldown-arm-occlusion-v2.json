@@ -1,0 +1,231 @@
+{
+  "method": "Same decoded 640px 15 Hz PNG frames, CPU Full, one fresh tracker per condition, same raw detections for before/after. Source seconds 13–34, gray covers left then right as in original UI test. Wall uses opaque textured wall crops from a decoded source frame, on the opposite sides. Interior excludes 0.4 s at each end. Controlled transformations of one person. Wrist-match proxy uses the same image time in the clear control, with both wrists distinct; success requires the visible wrist within 10% of image height. Boundary delay uses two consecutive observations of a gap or recovery; null means not observed before the next boundary or 2 s after mask removal.",
+  "source": "public/showcase/go4it-rear.mp4",
+  "sha256": "04b1050fffcbc236314ad79290d7501db77cc592b36ba723e26b44bdcde5dacc",
+  "filterSha256": "595d6f30aa7eb7a207aab39785ecb1e9b1491087a3b66b143afc174787fb92b7",
+  "fps": 15,
+  "variants": [
+    {
+      "variant": "control",
+      "frames": 315,
+      "clear": {
+        "frames": 141,
+        "before": {
+          "left": 141,
+          "right": 141
+        },
+        "after": {
+          "left": 140,
+          "right": 139
+        }
+      },
+      "filterP95ms": 0.2,
+      "windows": [
+        {
+          "start": 17,
+          "end": 22,
+          "side": "left",
+          "interior": {
+            "frames": 63,
+            "before": {
+              "left": 63,
+              "right": 63
+            },
+            "after": {
+              "left": 63,
+              "right": 63
+            }
+          },
+          "visibleWristWithin10pctHeight": {
+            "referenceFrames": 63,
+            "before": 63,
+            "after": 63
+          },
+          "transitionDelay": null
+        },
+        {
+          "start": 27,
+          "end": 32,
+          "side": "right",
+          "interior": {
+            "frames": 63,
+            "before": {
+              "left": 63,
+              "right": 62
+            },
+            "after": {
+              "left": 61,
+              "right": 59
+            }
+          },
+          "visibleWristWithin10pctHeight": {
+            "referenceFrames": 60,
+            "before": 60,
+            "after": 60
+          },
+          "transitionDelay": null
+        }
+      ]
+    },
+    {
+      "variant": "gray",
+      "frames": 315,
+      "clear": {
+        "frames": 141,
+        "before": {
+          "left": 117,
+          "right": 140
+        },
+        "after": {
+          "left": 139,
+          "right": 116
+        }
+      },
+      "filterP95ms": 0.2,
+      "windows": [
+        {
+          "start": 17,
+          "end": 22,
+          "side": "left",
+          "interior": {
+            "frames": 63,
+            "before": {
+              "left": 34,
+              "right": 16
+            },
+            "after": {
+              "left": 0,
+              "right": 30
+            }
+          },
+          "visibleWristWithin10pctHeight": {
+            "referenceFrames": 63,
+            "before": 0,
+            "after": 5
+          },
+          "transitionDelay": {
+            "before": {
+              "breakSec": 0.8,
+              "reacquireSec": null
+            },
+            "after": {
+              "breakSec": 0,
+              "reacquireSec": 0.467
+            }
+          }
+        },
+        {
+          "start": 27,
+          "end": 32,
+          "side": "right",
+          "interior": {
+            "frames": 63,
+            "before": {
+              "left": 34,
+              "right": 30
+            },
+            "after": {
+              "left": 52,
+              "right": 0
+            }
+          },
+          "visibleWristWithin10pctHeight": {
+            "referenceFrames": 60,
+            "before": 28,
+            "after": 39
+          },
+          "transitionDelay": {
+            "before": {
+              "breakSec": 2.533,
+              "reacquireSec": 0.467
+            },
+            "after": {
+              "breakSec": 0,
+              "reacquireSec": 0.467
+            }
+          }
+        }
+      ]
+    },
+    {
+      "variant": "wall",
+      "frames": 315,
+      "clear": {
+        "frames": 141,
+        "before": {
+          "left": 138,
+          "right": 139
+        },
+        "after": {
+          "left": 138,
+          "right": 134
+        }
+      },
+      "filterP95ms": 1.2,
+      "windows": [
+        {
+          "start": 17,
+          "end": 22,
+          "side": "right",
+          "interior": {
+            "frames": 63,
+            "before": {
+              "left": 63,
+              "right": 1
+            },
+            "after": {
+              "left": 62,
+              "right": 0
+            }
+          },
+          "visibleWristWithin10pctHeight": {
+            "referenceFrames": 63,
+            "before": 61,
+            "after": 61
+          },
+          "transitionDelay": {
+            "before": {
+              "breakSec": 0.467,
+              "reacquireSec": 0.533
+            },
+            "after": {
+              "breakSec": 0,
+              "reacquireSec": 0.533
+            }
+          }
+        },
+        {
+          "start": 27,
+          "end": 32,
+          "side": "left",
+          "interior": {
+            "frames": 63,
+            "before": {
+              "left": 11,
+              "right": 32
+            },
+            "after": {
+              "left": 0,
+              "right": 25
+            }
+          },
+          "visibleWristWithin10pctHeight": {
+            "referenceFrames": 60,
+            "before": 15,
+            "after": 15
+          },
+          "transitionDelay": {
+            "before": {
+              "breakSec": 0.467,
+              "reacquireSec": 0.133
+            },
+            "after": {
+              "breakSec": 0,
+              "reacquireSec": 0.133
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -8,6 +8,13 @@ export type Phase = 'ready' | 'pull' | 'bottom' | 'return'
 /** One pose landmark, normalised to the camera frame: x and y run 0 to 1 from the top left. */
 export type Landmark = { x: number; y: number; visibility: number }
 
+export type PoseFrame = {
+  landmarks: Landmark[] | null
+  width: number
+  height: number
+  timestampMs: number
+}
+
 /** Indices into FrameState.landmarks. The order is MediaPipe Pose's 33 landmarks. */
 export const LM = {
   nose: 0,
@@ -35,7 +42,7 @@ export const LANDMARK_COUNT = 33
 
 export type FrameState = {
   phase: Phase
-  /** Normalised elbow angle: 0 = top of the user's range, 1 = bottom. */
+  /** Progress on the active measured signal, 0 at the top and 1 at the bottom. */
   q: number
   /** False when the joint cannot be seen clearly. No judgment is made then. */
   visible: boolean
@@ -48,18 +55,31 @@ export type FrameState = {
 /** A rep counts as in range when its deepest q reaches this. */
 export const IN_RANGE = 0.85
 
+export type TrunkForm = {
+  status: 'steady' | 'swing'
+  changeDeg: number
+  /** Peak relative to the arm-based pull phase trigger; may precede it. */
+  atMs: number
+  view: { side: 'left' | 'right'; direction: 1 | -1; hipX: number; hipY: number; scale: number }
+}
+
 export type RepResult = {
   status: 'verified' | 'cannot_verify'
-  qMax: number
+  /** Null for a counted upper-arm cycle when wrist visibility prevented measuring elbow range. */
+  qMax: number | null
   durationMs: number
+  /** Present only when the side view supported a form assessment. */
+  trunkForm?: TrunkForm
 }
 
 export type SetSummary = {
   exerciseId: string
-  calibration: { thetaTop: number; thetaBottom: number }
+  calibration: { thetaTop: number; thetaBottom: number; basis?: 'upper-arm' }
   reps: RepResult[]
   /** Share of frames in which the joint was visible, 0 to 1. */
   coverage: number
+  /** The form detector was enabled. An assessed rep carries its own evidence. */
+  assessesTrunkForm?: boolean
   issues: { id: string; repIndexes: number[] }[]
 }
 

@@ -4,7 +4,7 @@ import { expOfResult } from '../contract'
 import { IN_RANGE } from '../contract'
 import { balanceOf, GEAR, gearState, pointsEarned, SAMPLE_GEAR } from '../data/gear'
 import { levelOf, repsByHalf, SAMPLE_HISTORY, sessionExp, threshold, totalExp } from '../data/history'
-import { settle } from '../mock/feedback'
+import { settle } from '../feedback/settle'
 import { initialSession, reduce } from './session'
 
 const result = (issueId: string | null): SetResult => ({
@@ -36,8 +36,14 @@ describe('session flow', () => {
     expect(reduce(s, { type: 'setEnded', result: result(null) })).toBe(s)
   })
 
-  // Ray: the camera loses the user halfway through a set. Void the set, pause it, or keep counting?
-  it.todo('decides what happens to a set when visibility drops mid-set')
+  it('remembers a form issue through an inconclusive set or framing cue', () => {
+    const active = reduce(initialSession(3, 'short_range'), { type: 'calibrated' })
+    expect(reduce(active, { type: 'setEnded', result: result(null) }).lastIssueId).toBe('short_range')
+    expect(reduce(active, { type: 'setEnded', result: result('out_of_view') }).lastIssueId).toBe('short_range')
+    const fixed = result(null)
+    fixed.exp.fixedBonus = 5
+    expect(reduce(active, { type: 'setEnded', result: fixed }).lastIssueId).toBeNull()
+  })
 })
 
 describe('reward', () => {

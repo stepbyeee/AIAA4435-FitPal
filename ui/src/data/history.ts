@@ -4,14 +4,23 @@ export type SetRecord = { verified: number; quality: number; fixed: number }
 
 /** The last set of a session, kept so the next visit can open on what was left to fix. */
 export type LastSet = {
-  /** Deepest q of each rep; null for a rep the camera could not verify. */
+  /** Deepest q of each rep; null when depth was unavailable. */
   depths: (number | null)[]
+  /** Indices of verified reps whose range could not be measured. */
+  countOnly?: number[]
   issue: { id: string; count: number } | null
 }
 
-export type SessionRecord = { date: string; exerciseId: string; sets: SetRecord[]; lastSet?: LastSet }
+export type SessionRecord = {
+  id?: string
+  date: string
+  exerciseId: string
+  sets: SetRecord[]
+  lastSet?: LastSet
+  outstandingIssueId?: string | null
+}
 
-// Sample history so the home screen is seen with data. Replaced by real sessions as they are saved.
+// Sample history for the explicit character preview.
 export const SAMPLE_HISTORY: SessionRecord[] = [
   { date: '2026-11-08', exerciseId: 'lat-pulldown', sets: [{ verified: 8, quality: 0, fixed: 0 }, { verified: 9, quality: 0, fixed: 0 }, { verified: 8, quality: 0, fixed: 0 }] },
   { date: '2026-11-10', exerciseId: 'lat-pulldown', sets: [{ verified: 9, quality: 0, fixed: 0 }, { verified: 10, quality: 5, fixed: 0 }, { verified: 8, quality: 0, fixed: 0 }] },
@@ -25,20 +34,48 @@ export const SAMPLE_HISTORY: SessionRecord[] = [
   },
 ]
 
-const KEY = 'fitpal.history.v2'
+// The UI shell used v2 for simulated sets. Real sessions begin in a new store.
+const KEY = 'fitpal.history.v3'
 
 export function loadHistory(): SessionRecord[] {
   try {
     const raw = localStorage.getItem(KEY)
-    if (raw) return JSON.parse(raw) as SessionRecord[]
+    if (!raw) return []
+    const rows = JSON.parse(raw)
+    if (!Array.isArray(rows)) return []
+    const validCount = (n: unknown) => typeof n === 'number' && Number.isSafeInteger(n) && n >= 0
+    const valid: SessionRecord[] = []
+    for (const row of rows) {
+      if (!row || typeof row.date !== 'string' || typeof row.exerciseId !== 'string' || !Array.isArray(row.sets)) continue
+      if (!row.sets.every((set: SetRecord | null) => set && [set.verified, set.quality, set.fixed].every(validCount))) continue
+      const { lastSet, outstandingIssueId } = row
+      const record: SessionRecord = { date: row.date, exerciseId: row.exerciseId, sets: row.sets }
+      if (typeof row.id === 'string') record.id = row.id
+      if (lastSet && Array.isArray(lastSet.depths) && lastSet.depths.every((d: unknown) =>
+        d === null || (typeof d === 'number' && Number.isFinite(d) && d >= 0 && d <= 1)
+      ) && (lastSet.issue === null || (typeof lastSet.issue?.id === 'string' && validCount(lastSet.issue.count)))) {
+        record.lastSet = { depths: lastSet.depths, issue: lastSet.issue }
+        if (Array.isArray(lastSet.countOnly)) {
+          record.lastSet.countOnly = [...new Set<number>(lastSet.countOnly.filter((i: number) =>
+            validCount(i) && i < lastSet.depths.length && lastSet.depths[i] === null))]
+        }
+      }
+      if (outstandingIssueId === null || typeof outstandingIssueId === 'string') record.outstandingIssueId = outstandingIssueId
+      valid.push(record)
+    }
+    return valid
   } catch {
-    // Storage can be unavailable; the sample still renders.
+    // Storage can be unavailable. The session can still run.
   }
-  return SAMPLE_HISTORY
+  return []
 }
 
 export function saveSession(record: SessionRecord): SessionRecord[] {
-  const next = [...loadHistory(), record]
+  const next = loadHistory()
+  const index = record.id ? next.findIndex(s => s.id === record.id) : -1
+  if (index < 0) next.push(record)
+  else if (record.sets.length >= next[index].sets.length) next[index] = record
+  else return next
   try {
     localStorage.setItem(KEY, JSON.stringify(next))
   } catch {

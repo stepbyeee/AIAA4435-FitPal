@@ -1,0 +1,50 @@
+{
+  "protocol": {
+    "fps": 15,
+    "maxDimension": 640,
+    "format": "PNG",
+    "delegate": "CPU",
+    "browser": "157.0.8103.79",
+    "ffmpeg": "ffmpeg version 8.1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "platform": "darwin",
+    "cpu": "Apple M5",
+    "runtime": "1.2.3",
+    "manifestSha256": "dd6c0522e78e1fbca7f4699d393227ffd836adcc7ebc010613eda61996a4a62a",
+    "modelSha256": {
+      "full": "5134a3aad27a58b93da0088d431f366da362b44e3ccfbe3462b3827a839011b1"
+    },
+    "perceptionSha256": {
+      "src/perception/pulldown.ts": "613648f60cbf480809a568480a1f66746145037f977466db53098306eb2cc922",
+      "src/perception/squat.ts": "3e0fc590af819a04f4d39dbd4f7a721302428fad7d873de9a05c4db2c5b0c283",
+      "src/tracking/limbLandmarks.ts": "1ec36b043e06b8ecfd378b488611ea84fbbb468630725bd189bbe38128bee15e",
+      "src/tracking/armLandmarks.ts": "3c63a6e2844b632dd4282ce3d7ce4d3ebb36aeffb3409b5818c114aa4bf63095",
+      "src/perception/repReview.ts": "34c345f62b2f820b1599d92be451bfa5c7b10630db58c90d68c434ec03deed94",
+      "src/contract.ts": "943a5c09dba2b580a8dd49547f22956c901ceca87f3153daf723262e49e468c4"
+    }
+  },
+  "runs": [
+    {
+      "clip": "mixkit-100523.mp4",
+      "sourceSha256": "e39fd249826084f4da60c1ee964c353f96b27b456e9b273b775af4f353667835",
+      "startSec": 0,
+      "durationSec": 15.432083,
+      "model": "full",
+      "frames": 231,
+      "coverage": {
+        "left": 0.0433,
+        "right": 0.5628,
+        "either": 0.6061,
+        "engine": 0.6061
+      },
+      "calibrationEvents": [],
+      "verifiedEvents": [],
+      "chosenSide": null,
+      "warmInferenceMs": {
+        "p50": 24.5,
+        "p95": 27.2
+      },
+      "firstInferenceMs": 105.4,
+      "attempts": []
+    }
+  ]
+}

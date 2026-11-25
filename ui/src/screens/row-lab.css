@@ -1,0 +1,16 @@
+.row-lab { box-sizing: border-box; padding: 0 16px 28px; }
+.row-lab h1 { display: flex; align-items: center; gap: 12px; margin: 6px 0 18px; }
+.row-lab h1 small { font-size: .52em; padding: 3px 8px; background: var(--surface); color: var(--muted); border-radius: 8px; }
+.row-lab-back { color: var(--muted); cursor: pointer; padding: 12px 0; border: 0; background: transparent; }
+.row-lab .row-lab-inputs { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin: 22px 0; }
+.row-lab-inputs label { display: grid; gap: 7px; font-size: .9em; }
+.row-lab-inputs input { max-width: 100%; color: var(--text); }
+.row-lab .row-lab-note, .row-lab .row-lab-credit { color: var(--muted); font-size: .86em; }
+.row-lab .row-lab-credit { margin: 16px 0; }
+.row-lab .row-lab-credit a { text-decoration: underline; }
+.row-lab-stage { position: relative; width: 100%; aspect-ratio: 16/9; max-height: 64vh; overflow: hidden; background: #10181d; border-radius: 18px; }
+.row-lab-counter { position: absolute; bottom: .6em; right: .6em; padding: .25em .75em; border-radius: 12px; background: rgb(12 20 24 / .9); color: #fff; }
+.row-lab-counter strong { font-size: 2em; font-variant-numeric: tabular-nums; }
+.row-lab .row-lab-cue { margin: 16px 0 6px; font-weight: 650; }
+.row-run > button { margin-top: 14px; }
+.row-lab-result { border-radius: 14px; padding: 16px; background: var(--surface); margin-bottom: 18px; }

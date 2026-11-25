@@ -1,0 +1,107 @@
+{
+  "method": "Ordinary 1× browser playback of both bundled files with real local Pose Landmarker Full. Separate pages, no webcam and no user history. A count mismatch is retained. Playwright WebKit is not the Safari application.",
+  "runs": [
+    {
+      "engine": "chromium",
+      "cases": [
+        {
+          "clip": "goblet-squat",
+          "exercise": "squat",
+          "reference": 2,
+          "attempted": 2,
+          "verified": 2,
+          "outcome": "这一组确认了 2 下。",
+          "persistentHistory": false,
+          "blockedByApp": [
+            "https://odml.pa.googleapis.com/v1/log"
+          ],
+          "errors": [],
+          "externalRequests": []
+        },
+        {
+          "clip": "go4it-rear",
+          "exercise": "lat-pulldown",
+          "reference": 4,
+          "attempted": 4,
+          "verified": 4,
+          "outcome": "这一组确认了 4 下。",
+          "persistentHistory": false,
+          "blockedByApp": [
+            "https://odml.pa.googleapis.com/v1/log"
+          ],
+          "errors": [],
+          "externalRequests": []
+        }
+      ],
+      "version": "157.0.8103.79"
+    },
+    {
+      "engine": "webkit",
+      "cases": [
+        {
+          "clip": "goblet-squat",
+          "exercise": "squat",
+          "reference": 2,
+          "attempted": 2,
+          "verified": 2,
+          "outcome": "这一组确认了 2 下。",
+          "persistentHistory": false,
+          "blockedByApp": [
+            "https://odml.pa.googleapis.com/v1/log"
+          ],
+          "errors": [],
+          "externalRequests": []
+        },
+        {
+          "clip": "go4it-rear",
+          "exercise": "lat-pulldown",
+          "reference": 4,
+          "attempted": 4,
+          "verified": 4,
+          "outcome": "这一组确认了 4 下。",
+          "persistentHistory": false,
+          "blockedByApp": [
+            "https://odml.pa.googleapis.com/v1/log"
+          ],
+          "errors": [],
+          "externalRequests": []
+        }
+      ],
+      "version": "26.5"
+    },
+    {
+      "engine": "firefox",
+      "cases": [
+        {
+          "clip": "goblet-squat",
+          "exercise": "squat",
+          "reference": 2,
+          "attempted": 2,
+          "verified": 2,
+          "outcome": "这一组确认了 2 下。",
+          "persistentHistory": false,
+          "blockedByApp": [
+            "https://odml.pa.googleapis.com/v1/log"
+          ],
+          "errors": [],
+          "externalRequests": []
+        },
+        {
+          "clip": "go4it-rear",
+          "exercise": "lat-pulldown",
+          "reference": 4,
+          "attempted": 4,
+          "verified": 4,
+          "outcome": "这一组确认了 4 下。",
+          "persistentHistory": false,
+          "blockedByApp": [
+            "https://odml.pa.googleapis.com/v1/log"
+          ],
+          "errors": [],
+          "externalRequests": []
+        }
+      ],
+      "version": "153.0"
+    }
+  ]
+}

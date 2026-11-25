@@ -1,0 +1,56 @@
+{
+  "fixture": "synthetic post-set summaries",
+  "cases": [
+    {
+      "name": "pulldown-one-short",
+      "selectedIssue": "short_range",
+      "matched": true,
+      "calls": 1,
+      "wallMs": 245,
+      "text": "这组有 1 下低于个人幅度目标 85%。下一组下拉时，对照个人校准时的底部位置。"
+    },
+    {
+      "name": "squat-two-short",
+      "selectedIssue": "short_range",
+      "matched": true,
+      "calls": 1,
+      "wallMs": 230,
+      "text": "这组有 2 下低于个人幅度目标 85%。下一组下蹲时，对照个人校准时的底部位置。"
+    },
+    {
+      "name": "occlusion-precedes-range",
+      "selectedIssue": "out_of_view",
+      "matched": true,
+      "calls": 1,
+      "wallMs": 221,
+      "text": "这组有 1 下没看清，幅度无法确认。下一组调整取景，让同一侧的肩、肘和手腕全程入镜。"
+    },
+    {
+      "name": "squat-no-visible-cycle",
+      "selectedIssue": "out_of_view",
+      "matched": true,
+      "calls": 1,
+      "wallMs": 195,
+      "text": "这组的画面不足以确认完整动作。下一组调整取景，让同一侧的髋、膝和脚踝全程入镜。"
+    },
+    {
+      "name": "clean-set",
+      "selectedIssue": null,
+      "matched": true,
+      "calls": 0,
+      "wallMs": 0,
+      "text": null
+    }
+  ],
+  "playback": {
+    "source": "original pulldown with 12.40–13.00s artificially blacked out",
+    "reviewOutcomes": [
+      "cannot_verify",
+      "verified_in_range"
+    ],
+    "cuesRequested": 1,
+    "text": "这组有 1 下没看清，幅度无法确认。下一组调整取景，让同一侧的肩、肘和手腕全程入镜。",
+    "exp": 1,
+    "wroteHistory": false
+  }
+}
