@@ -1,11 +1,11 @@
-.training-settings { border: 0; border-radius: var(--radius-card); padding: var(--pad); margin: 0; background: var(--surface); }
+.training-settings { border: 0; border-radius: var(--radius-card); padding: 26px; margin: 0; background: var(--surface); }
 .home .side { overflow-y: auto; }.home .focus { flex: 1 0 auto; }.home .training-settings { flex-shrink: 0; }
-.training-settings summary { cursor: pointer; font-weight: 600; }
-.training-settings summary span { display: block; margin: 7px 0 0; font-size: 12px; color: var(--muted); font-weight: 400; }
+.training-settings summary { cursor: pointer; font-size: 17px; line-height: 26px; font-weight: 600; }
+.training-settings summary span { display: block; margin: 8px 0 0; font-size: 17px; line-height: 26px; color: var(--muted); font-weight: 400; }
 .plan-fields { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; margin-top: 18px; }
-.plan-fields label { display: grid; gap: 7px; font-size: 12px; color: var(--muted); }
-.plan-fields input,.plan-fields select { width: 100%; min-width: 0; padding: 10px; color: var(--text); background: var(--raised); border: 1px solid var(--rule); border-radius: 8px; font: inherit; }
-.training-settings p,.motion-note { color: var(--muted); font-size: 12px; line-height: 1.7; }
+.plan-fields label { display: grid; gap: 8px; font-size: 15px; line-height: 22px; color: var(--muted); }
+.plan-fields input,.plan-fields select { width: 100%; min-width: 0; padding: 10px; color: var(--text); background: var(--raised); border: 1px solid var(--rule); border-radius: 8px; font: inherit; font-size: 17px; line-height: 24px; }
+.motion-note { color: var(--muted); font-size: 12px; line-height: 1.7; }
 .motion-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
 .motion-heading h3,.training-coach h3 { font-size: 14px; margin: 0; }
 .motion-heading span { color: var(--muted); font-size: 11px; }
@@ -34,6 +34,8 @@
   .camera-stats[data-landscape='true'] .motion-live { display: none; }
 }
 
-.training-settings .plan-purpose { margin-top: 14px; }
-.training-settings .plan-focus-note { margin-top: 12px; color: var(--text); }
-.training-settings .plan-limits { margin-top: 8px; }
+.training-settings .plan-focus-note { margin-top: 16px; color: var(--muted); font-size: 15px; line-height: 24px; }
+
+.stage:has(.set-review-stage) { flex-direction: column; }
+.stage:has(.set-review-stage) > .set-review-stage { flex-shrink: 0; }
+.stage:has(.set-review-stage) > .stage-foot { position: static; margin-top: 18px; flex-shrink: 0; }

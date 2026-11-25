@@ -20,7 +20,7 @@ try {
  await page.locator('.training-settings summary').click();
  await page.getByLabel('计划组数').fill('4');
  await page.getByLabel('每组目标次数').fill('12');
- await page.getByLabel('这一组主要想观察什么').selectOption('tempo');
+ await page.getByLabel('观察重点').selectOption('tempo');
  await page.getByLabel('自选还原目标').fill('2.5');
  await page.getByLabel('负重').fill('35');
  await page.screenshot({path:output+'experience-home.png',fullPage:true});
@@ -102,7 +102,7 @@ try {
  await camera.locator('.training-settings summary').click();
  await camera.getByLabel('计划组数').fill('2');
  await camera.getByLabel('每组目标次数').fill('1');
- await camera.getByLabel('这一组主要想观察什么').selectOption('tempo');
+ await camera.getByLabel('观察重点').selectOption('tempo');
  await camera.getByRole('button',{name:'开始',exact:true}).click();
  for(let set=1;set<=2;set++){
   await camera.locator('.live-panel-heading h2').filter({hasText:'第 '+set+' 组'}).waitFor({timeout:65000});
@@ -112,7 +112,7 @@ try {
   await camera.getByRole('region',{name:'本组训练趋势'}).waitFor();
   if(set===1){
    await camera.waitForFunction(()=>JSON.parse(localStorage.getItem('fitpal.history.v3')??'[]')[0]?.sets.length===1);
-   await camera.getByLabel('这一组主要想观察什么').selectOption('coordination');
+   await camera.getByLabel('观察重点').selectOption('coordination');
    await camera.getByRole('button',{name:'开始第 2 组',exact:true}).click();
   }
  }

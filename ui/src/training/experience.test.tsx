@@ -7,7 +7,7 @@ import { summarizeMotion } from '../analytics/motion'
 
 it('exposes the complete plan without prescribing a load', () => {
   const html = renderToStaticMarkup(<TrainingSettings plan={DEFAULT_PLAN} onChange={() => {}} />)
-  for (const label of ['计划组数', '每组目标次数', '这一组主要想观察什么', '负重', '左右配合观察']) expect(html).toContain(label)
+  for (const label of ['计划组数', '每组目标次数', '观察重点', '负重', '左右配合观察']) expect(html).toContain(label)
 })
 
 it('offers slower video analysis while keeping original movement timing', () => {

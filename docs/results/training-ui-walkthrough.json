@@ -1,0 +1,21 @@
+[
+  {
+    "scenario": "plan",
+    "title": "17px",
+    "exercise": "17px",
+    "label": "15px",
+    "body": "15px",
+    "input": "17px",
+    "button": "17px",
+    "notes": 1,
+    "persistence": true,
+    "mobileOverflow": false
+  },
+  {
+    "version": "after",
+    "realVideo": true,
+    "replayRate": 0.25,
+    "observedReps": 3,
+    "errors": []
+  }
+]
