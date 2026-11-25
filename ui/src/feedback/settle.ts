@@ -14,7 +14,8 @@ export function settle(summary: SetSummary, lastIssueId: string | null): SetResu
   let cue: SetResult['cue'] = null
   if (outOfView || (verified.length === 0 && !hasCoverage)) {
     const count = outOfView?.repIndexes.length ?? unverifiedCount
-    const observation = count > 0 ? `有 ${count} 下镜头没看清。` : '这组镜头没看清。'
+    const observation = count > 0 ? `有 ${count} 下镜头没看清。`
+      : outOfView ? '这组有一段画面没看清。' : '这组镜头没看清。'
     cue = { issueId: 'out_of_view', text: `${observation}下一组调整镜头，让${squat ? '髋、膝和脚踝' : '手肘'}始终在画面里。` }
   } else if (shortRange) {
     cue = {

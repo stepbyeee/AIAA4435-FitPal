@@ -28,6 +28,7 @@ const MIN_CALIBRATION_SWING = 24
 const MIN_REP_MS = 550
 const MAX_REP_MS = 12_000
 const MAX_FRAME_GAP_MS = 500
+const SUSTAINED_VISIBILITY_LOSS_MS = 1500
 const ASSUMED_SWING = 50
 const MIN_LIFT_TOLERANCE = 0.012
 const LIFT_TOLERANCE_FRACTION = 0.18
@@ -298,11 +299,14 @@ export function createPulldown(calibration?: Calibration) {
   let frameCount = 0
   let visibleCount = 0
   let lastTime = -Infinity
+  let invisibleSince: number | null = null
+  let sustainedVisibilityLoss = false
   let frameState: FrameState = { phase: 'ready', q: 0, visible: false, repCount: 0, landmarks: null }
 
   return {
     accept(frame: PoseFrame): FrameState {
       if (!Number.isFinite(frame.timestampMs) || frame.timestampMs <= lastTime) return frameState
+      if (frame.timestampMs - lastTime > MAX_FRAME_GAP_MS) invisibleSince = null
       lastTime = frame.timestampMs
 
       if (upper) {
@@ -331,6 +335,13 @@ export function createPulldown(calibration?: Calibration) {
       frameCount++
       const visible = upper ? upper.visible : active.confidence > 0
       if (visible) visibleCount++
+      // A paused or stalled camera cannot provide evidence of a continuous loss.
+      if (visible || !(frame.width > 0 && frame.height > 0)) {
+        invisibleSince = null
+      } else if (fixed) {
+        invisibleSince ??= frame.timestampMs
+        if (frame.timestampMs - invisibleSince >= SUSTAINED_VISIBILITY_LOSS_MS) sustainedVisibilityLoss = true
+      }
       frameState = {
         phase: upper?.phase ?? active.phase,
         q: upper?.q ?? active.q,
@@ -355,7 +366,7 @@ export function createPulldown(calibration?: Calibration) {
       const unseen = reps.flatMap((rep, i) => rep.status === 'cannot_verify' ? [i] : [])
       const issues: SetSummary['issues'] = []
       if (short.length) issues.push({ id: 'short_range', repIndexes: short })
-      if (unseen.length) issues.push({ id: 'out_of_view', repIndexes: unseen })
+      if (unseen.length || sustainedVisibilityLoss) issues.push({ id: 'out_of_view', repIndexes: unseen })
       return {
         exerciseId: 'lat-pulldown',
         calibration: {

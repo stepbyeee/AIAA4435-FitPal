@@ -108,6 +108,24 @@ describe('pulldown calibration', () => {
 })
 
 describe('calibrated pulldowns', () => {
+  it('reports a sustained loss before a rep without inventing a rep attempt', () => {
+    const track = input(calibration)
+    track.hold(160)
+    for (let i = 0; i < 20; i++) track.frame(null)
+    expect(track.cycle(160, 80).repCount).toBe(1)
+    const result = track.endSet()
+    expect(result.reps.map(rep => rep.status)).toEqual(['verified'])
+    expect(result.issues).toEqual([{ id: 'out_of_view', repIndexes: [] }])
+  })
+
+  it('keeps brief visibility losses separate across a pause', () => {
+    const track = createPulldown(calibration)
+    for (const timestampMs of [0, 300, 600, 2400, 2700, 3000]) {
+      track.accept({ landmarks: null, width: WIDTH, height: HEIGHT, timestampMs })
+    }
+    expect(track.endSet().issues).toEqual([])
+  })
+
   it('count the rep only after returning to the top', () => {
     const track = input(calibration)
     expect(track.hold(160).phase).toBe('ready')

@@ -45,6 +45,12 @@ describe('post-set feedback', () => {
     expect(result.cue?.text).not.toMatch(/\d+ 下/)
   })
 
+  it('describes a tracking gap without estimating how many reps it hid', () => {
+    const result = settle(summary([1], [{ id: 'out_of_view', repIndexes: [] }]), 'out_of_view')
+    expect(result.cue?.text).toBe('这组有一段画面没看清。下一组调整镜头，让手肘始终在画面里。')
+    expect(result.exp).toEqual({ verifiedReps: 1, qualityBonus: 0, fixedBonus: 0 })
+  })
+
   it('returns no cue for an unsupported issue', () => {
     expect(settle(summary([1], [{ id: 'unknown', repIndexes: [0] }]), null).cue).toBeNull()
   })
