@@ -42,3 +42,12 @@
 
 .recording-progress { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; color: var(--muted); font-size: 14px; }
 .recording-progress .pause-action { margin: 0; }
+
+.next-set-settings { margin: 12px 0 20px; }
+.next-set-settings label, .next-set-settings > div > span:first-child { color: var(--muted); }
+.next-set-settings strong { font-size: inherit; font-weight: 600; }
+.next-set-settings input, .next-set-settings select { font: inherit; font-weight: 600; color: var(--text); background: transparent; border: 0; border-bottom: 1px solid var(--rule); padding: 4px 0; text-align: right; border-radius: 0; }
+.next-set-settings input { width: 58px; }
+.next-set-settings select { max-width: 65%; }
+.next-set-settings option { background: var(--surface); }
+.next-set-settings input:focus-visible, .next-set-settings select:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }

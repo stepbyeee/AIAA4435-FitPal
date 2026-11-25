@@ -1,0 +1,764 @@
+[
+  {
+    "index": 0,
+    "file": "dynamic-dual-pulldown.mp4",
+    "exercise": "lat-pulldown",
+    "author": "Dynamic Fitness",
+    "title": "Training Variation — Exercise Variability: Bilateral Independent Limb Pulldown",
+    "source": "https://www.mydynamicfitness.com/post/training-variation-exercise-variability",
+    "download": "https://video.wixstatic.com/video/466604_9a29820f1ab748f3b8c9ba35f0d13787/1080p/mp4/file.mp4",
+    "terms": "The publisher embeds the publicly accessible original MP4 on the cited page. No open media license identified; local evaluation and aggregate reporting only.",
+    "preparedFile": "prepared-0.mp4",
+    "preparedSha256": "8f1e94aeb249ce66adfcbcd6e9d706ba762a6cf91698be2984a265b0a1c08fac",
+    "windows": [
+      [
+        1.85,
+        3.73
+      ],
+      [
+        6.2,
+        8.03
+      ],
+      [
+        10.42,
+        12.31
+      ],
+      [
+        14.64,
+        16.58
+      ],
+      [
+        19.47,
+        21.63
+      ]
+    ],
+    "group": 0,
+    "control": false,
+    "sourceSha256": "8f1e94aeb249ce66adfcbcd6e9d706ba762a6cf91698be2984a265b0a1c08fac",
+    "sourceBytes": 16737949,
+    "referenceOrigin": "pulldown-r3-reserve-sources.json",
+    "referenceStatus": "Existing project single-review/agent windows; not independently human-validated.",
+    "sceneNotes": "Single uninterrupted fixed frontal landscape camera, both independent handles visible. The last repetition reaches the overhead position in the final frames; the athlete is still seated. Five distinct pulls on source review.",
+    "preparation": {
+      "method": "Existing acquired file copied without further transformation"
+    }
+  },
+  {
+    "index": 1,
+    "file": "lifetime-neutral-grip.mp4",
+    "exercise": "lat-pulldown",
+    "author": "Life Time / Experience Life",
+    "title": "Your First Week of Workouts at Life Time — Neutral-Grip Cable Lat Pulldown",
+    "source": "https://experiencelife.lifetime.life/article/your-first-week-of-workouts-at-life-time/",
+    "download": "https://experiencelife.lifetime.life/wp-content/uploads/2023/01/Lat-Pull-1.mp4",
+    "terms": "The publisher embeds the publicly accessible original MP4 on the cited page. No open media license identified; local evaluation and aggregate reporting only.",
+    "preparedFile": "prepared-1.mp4",
+    "preparedSha256": "4a6572bfa2dc50f1672ccc0f4ca16a2ccd9926e00f0e78dda792239ba3242f5a",
+    "windows": [
+      [
+        1.76,
+        2.83
+      ],
+      [
+        5.02,
+        6.53
+      ],
+      [
+        8.52,
+        9.98
+      ],
+      [
+        11.94,
+        13.48
+      ],
+      [
+        15.18,
+        16.73
+      ]
+    ],
+    "group": 1,
+    "control": false,
+    "sourceSha256": "4a6572bfa2dc50f1672ccc0f4ca16a2ccd9926e00f0e78dda792239ba3242f5a",
+    "sourceBytes": 11225900,
+    "referenceOrigin": "pulldown-r3-reserve-sources.json",
+    "referenceStatus": "Existing project single-review/agent windows; not independently human-validated.",
+    "sceneNotes": "Five consecutive real reps in a fixed rear camera showing both elbows and arms. Natural differences in pauses and range. Opening and ending at overhead. Hips out of frame; hands at the frame edge overhead.",
+    "preparation": {
+      "method": "Existing acquired file copied without further transformation"
+    }
+  },
+  {
+    "index": 2,
+    "file": "future-fitness-cable.mp4",
+    "exercise": "lat-pulldown",
+    "author": "Future Fitness",
+    "title": "Exercise Library — Lat Pull Down",
+    "source": "https://futurefitness.co.uk/exerciselibrary/",
+    "download": "https://futurefitness.co.uk/wp-content/uploads/sites/8/2025/08/LatPullDown.mp4",
+    "terms": "The publisher embeds the publicly accessible original MP4 on the cited page. No open media license identified; local evaluation and aggregate reporting only.",
+    "preparedFile": "prepared-2.mp4",
+    "preparedSha256": "b1dfeff8a1f43cbcf1fb9a390e051e98db720a50b6f1c47831bea1cfa9125166",
+    "windows": [
+      [
+        2.45,
+        3.95
+      ],
+      [
+        6.21,
+        7.45
+      ],
+      [
+        10.07,
+        11.32
+      ],
+      [
+        13.7,
+        14.81
+      ],
+      [
+        17.13,
+        18.44
+      ]
+    ],
+    "group": 2,
+    "control": false,
+    "sourceSha256": "c63e1a35364dd9918f6603d21c43c5b14b041bb800d7d432f3a5ea317ad03e6a",
+    "sourceBytes": 74137321,
+    "referenceOrigin": "pulldown-r3-reserve-sources.json",
+    "referenceStatus": "Existing project single-review/agent windows; not independently human-validated.",
+    "sceneNotes": "Five uninterrupted reps from one oblique side camera with original small inset, captions and margins retained. Text changes while the demonstrator maintains the same set and camera angle. Occasional natural far-arm overlap. The initial equipment explanation and dismount are outside the excerpt. Looked at enlarged source images for manual timing; benchmark uses the untouched frame composition.",
+    "preparation": {
+      "startSec": 13.5,
+      "durationSec": 19.1,
+      "tool": "FFmpeg 7.0.2",
+      "options": "input -ss, -t, video stream 0, no audio, libx264, threads 1, veryfast, crf 19, yuv420p, faststart",
+      "spatialResize": false
+    }
+  },
+  {
+    "index": 3,
+    "file": "adelaide-parks.mp4",
+    "exercise": "lat-pulldown",
+    "author": "City of Adelaide",
+    "title": "How to use the free City of Adelaide Park Lands fitness equipment (outdoor gym)",
+    "source": "https://commons.wikimedia.org/wiki/File:How_to_use_the_free_City_of_Adelaide_Park_Lands_fitness_equipment_(outdoor_gym).webm",
+    "download": "https://upload.wikimedia.org/wikipedia/commons/transcoded/3/39/How_to_use_the_free_City_of_Adelaide_Park_Lands_fitness_equipment_%28outdoor_gym%29.webm/How_to_use_the_free_City_of_Adelaide_Park_Lands_fitness_equipment_%28outdoor_gym%29.webm.480p.vp9.webm",
+    "terms": "Creative Commons Attribution 3.0 Unported as identified on the Commons file page: https://creativecommons.org/licenses/by/3.0/. Credit City of Adelaide and identify the excerpt or added overlays.",
+    "preparedFile": "prepared-3.mp4",
+    "preparedSha256": "e956dea635646bba422c8239f3ce7c5291863dc9a3b45ab350dd9456050cae2b",
+    "windows": [
+      [
+        2.73,
+        4.6
+      ],
+      [
+        6.42,
+        7.63
+      ],
+      [
+        9.37,
+        10.93
+      ],
+      [
+        12.49,
+        14.16
+      ],
+      [
+        15.75,
+        17.03
+      ]
+    ],
+    "group": 3,
+    "control": false,
+    "sourceSha256": "837e5acbe290144beb2e9cbd36ca6dee70967052217d3c2ce2df66052ccebe9e",
+    "sourceBytes": 17231699,
+    "referenceOrigin": "pulldown-r3-reserve-sources.json",
+    "referenceStatus": "Existing project single-review/agent windows; not independently human-validated.",
+    "sceneNotes": "Outdoor public lever machine. Wide oblique view for reps 1 and 3–5, closer frontal view for rep 2. The original edit switches angles at the overhead boundary; each scored full movement is visible within its shot. Count refers to five displayed complete cycles; edited views cannot establish uninterrupted physical set continuity. Stops before a further edited angle.",
+    "preparation": {
+      "startSec": 62.5,
+      "durationSec": 17.25,
+      "tool": "FFmpeg 7.0.2",
+      "options": "input -ss, -t, video stream 0, no audio, libx264, threads 1, veryfast, crf 19, yuv420p, faststart",
+      "spatialResize": false
+    }
+  },
+  {
+    "index": 4,
+    "file": "mixkit-100549.mp4",
+    "exercise": "lat-pulldown",
+    "author": "Mixkit, contributor unlisted on item page",
+    "title": "Man working out on a lat pulldown machine",
+    "source": "https://mixkit.co/free-stock-video/man-working-out-on-a-lat-pulldown-machine-100549/",
+    "download": "https://assets.mixkit.co/active_storage/video_items/100549/1725385782/100549-video-720.mp4",
+    "terms": "Item links to the Mixkit Stock Video Free License. Source attribution retained; underlying media excluded from repository.",
+    "preparedFile": "prepared-4.mp4",
+    "preparedSha256": "9a51060a0d0ee20cdbc16cb2480e1b5adf6b9a8786eea3854661b637da861e16",
+    "windows": [
+      [
+        3.28,
+        4.87
+      ],
+      [
+        6.45,
+        8.06
+      ],
+      [
+        9.56,
+        11.02
+      ],
+      [
+        12.28,
+        13.64
+      ],
+      [
+        15.1,
+        16.49
+      ]
+    ],
+    "group": 0,
+    "control": false,
+    "sourceSha256": "9a51060a0d0ee20cdbc16cb2480e1b5adf6b9a8786eea3854661b637da861e16",
+    "sourceBytes": 6597098,
+    "referenceOrigin": "pulldown-r2-unseen-sources.json",
+    "referenceStatus": "Existing project single-review/agent windows; not independently human-validated.",
+    "sceneNotes": "Fixed high rear view. Opening starts at the bottom and final cycle ends at the bottom: both partial cycles excluded.",
+    "preparation": {
+      "method": "Existing acquired file copied without further transformation"
+    }
+  },
+  {
+    "index": 5,
+    "file": "pexels-7934717.mp4",
+    "exercise": "lat-pulldown",
+    "author": "Ojyrai Films",
+    "title": "A Woman Doing a Pull Down Exercise",
+    "source": "https://www.pexels.com/video/a-woman-doing-a-pull-down-exercise-7934717/",
+    "download": "https://videos.pexels.com/video-files/7934717/7934717-hd_1280_720_25fps.mp4",
+    "terms": "Pexels License https://www.pexels.com/license/. Underlying media excluded from repository.",
+    "preparedFile": "prepared-5.mp4",
+    "preparedSha256": "33803f148fcb8b88eb3821d5fcb9474bf5b1fb24e5fc1b7492db25bc13ef90b9",
+    "windows": [
+      [
+        2.22,
+        3.65
+      ],
+      [
+        5.2,
+        6.7
+      ],
+      [
+        8.08,
+        9.6
+      ]
+    ],
+    "group": 1,
+    "control": false,
+    "sourceSha256": "33803f148fcb8b88eb3821d5fcb9474bf5b1fb24e5fc1b7492db25bc13ef90b9",
+    "sourceBytes": 3964653,
+    "referenceOrigin": "pulldown-r2-unseen-sources.json",
+    "referenceStatus": "Existing project single-review/agent windows; not independently human-validated.",
+    "sceneNotes": "Continuous warm-lit close-up with the head, wrists and/or elbows cropped in most frames. Uneven cadence and gradual framing change. Opening and closing partial cycles excluded. Three complete cycles only; this clip tests calibration and false positives and contributes zero post-calibration reference reps.",
+    "preparation": {
+      "method": "Existing acquired file copied without further transformation"
+    }
+  },
+  {
+    "index": 6,
+    "file": "pexels-35585697.mp4",
+    "exercise": "lat-pulldown",
+    "author": "khezez | خزاز",
+    "title": "Intense Gym Workout with Lat Pulldown",
+    "source": "https://www.pexels.com/video/intense-gym-workout-with-lat-pulldown-35585697/",
+    "download": "https://videos.pexels.com/video-files/35585697/15079855_1080_1920_30fps.mp4",
+    "terms": "Pexels License https://www.pexels.com/license/. No source files in repository.",
+    "preparedFile": "prepared-6.mp4",
+    "preparedSha256": "cadb3f11bc6e5ec282d58c8ac8ae1ac908bffef01a14c65f3555d58ea7f2e718",
+    "windows": [
+      [
+        4.84,
+        5.52
+      ],
+      [
+        6.18,
+        6.88
+      ],
+      [
+        7.44,
+        8.1
+      ],
+      [
+        8.75,
+        9.34
+      ],
+      [
+        10.07,
+        10.74
+      ],
+      [
+        11.41,
+        12.06
+      ],
+      [
+        12.72,
+        13.42
+      ],
+      [
+        14.04,
+        14.64
+      ]
+    ],
+    "group": 2,
+    "control": false,
+    "sourceSha256": "cadb3f11bc6e5ec282d58c8ac8ae1ac908bffef01a14c65f3555d58ea7f2e718",
+    "sourceBytes": 9547409,
+    "referenceOrigin": "pulldown-r2-unseen-stock-sources.json",
+    "referenceStatus": "Existing project single-review/agent windows; not independently human-validated.",
+    "sceneNotes": "Continuous tall front-oblique portrait shot. Athlete initially grips the wide bar overhead; small overhead setup movements do not reach chest and are excluded. Lower to the chest, then extend to overhead on eight occasions. Real uninterrupted unlooped footage: torso, expression, bar and camera position evolve. A cable-machine upright enters from the left at the beginning of the set; far elbow or hand clipped by portrait framing at times. Creator also posted back-view 35585699, which was not included because the session/athlete may overlap.",
+    "preparation": {
+      "method": "Existing acquired file copied without further transformation"
+    }
+  },
+  {
+    "index": 7,
+    "file": "pulldown.webm",
+    "exercise": "lat-pulldown",
+    "author": "Your Move",
+    "source": "https://commons.wikimedia.org/wiki/File:Lat_pulldown_exercise_demonstration.webm",
+    "download": "https://upload.wikimedia.org/wikipedia/commons/6/69/Lat_pulldown_exercise_demonstration.webm",
+    "terms": "Commons lists CC BY-SA 4.0; current deletion nomination questions uploader licensing authority. Public reference and local fixture only; review before reuse.",
+    "preparedFile": "prepared-7.webm",
+    "preparedSha256": "f6200b7691acc6e99b1b0ddee7783fea56da3a6e155c5b3020cdda958cd49e34",
+    "windows": [
+      [
+        2.15,
+        4.1
+      ],
+      [
+        5.88,
+        7.6
+      ],
+      [
+        9.25,
+        11.0
+      ],
+      [
+        12.72,
+        14.7
+      ],
+      [
+        16.32,
+        18.27
+      ]
+    ],
+    "group": 3,
+    "control": false,
+    "sourceSha256": "f6200b7691acc6e99b1b0ddee7783fea56da3a6e155c5b3020cdda958cd49e34",
+    "sourceBytes": 1900707,
+    "referenceOrigin": "replay-sources.json",
+    "referenceStatus": "Existing project single-review/agent windows; not independently human-validated.",
+    "sceneNotes": "Previously used for tuning. Fixed side view.",
+    "preparation": {
+      "method": "Existing acquired file copied without further transformation"
+    }
+  },
+  {
+    "index": 8,
+    "file": "pulldown-mistakes.webm",
+    "exercise": "lat-pulldown",
+    "author": "Andrew Kwong",
+    "source": "https://commons.wikimedia.org/wiki/File:Common_Lat_Pulldown_Mistakes.webm",
+    "download": "https://upload.wikimedia.org/wikipedia/commons/0/03/Common_Lat_Pulldown_Mistakes.webm",
+    "terms": "See file history and licensing discussion",
+    "preparedFile": "prepared-8.webm",
+    "preparedSha256": "0765784da54e2bf0ec32bc0def3014a729b009b54d39533b135dc64a312efcf5",
+    "windows": [
+      [
+        9.4,
+        10.86
+      ]
+    ],
+    "group": 0,
+    "control": false,
+    "sourceSha256": "0765784da54e2bf0ec32bc0def3014a729b009b54d39533b135dc64a312efcf5",
+    "sourceBytes": 3713960,
+    "referenceOrigin": "replay-sources.json",
+    "referenceStatus": "Existing project single-review/agent windows; not independently human-validated.",
+    "sceneNotes": "View changes and initial partial pulls. Prior annotation from this project.",
+    "preparation": {
+      "method": "Existing acquired file copied without further transformation"
+    }
+  },
+  {
+    "index": 9,
+    "file": "squat-fitnessscape.webm",
+    "exercise": "squat",
+    "author": "FitnessScape",
+    "source": "https://commons.wikimedia.org/wiki/File:Squat_-_exercise_demonstration_video.webm",
+    "download": "https://upload.wikimedia.org/wikipedia/commons/5/5c/Squat_-_exercise_demonstration_video.webm",
+    "terms": "CC BY 3.0",
+    "preparedFile": "prepared-9.webm",
+    "preparedSha256": "2440985661c3533a4ce78472b0f4577dbdf023aff3f8f9a225bbb5ff8071b1e9",
+    "windows": [
+      [
+        2.0,
+        3.5
+      ],
+      [
+        5.2,
+        6.7
+      ]
+    ],
+    "group": 1,
+    "control": false,
+    "sourceSha256": "2440985661c3533a4ce78472b0f4577dbdf023aff3f8f9a225bbb5ff8071b1e9",
+    "sourceBytes": 564942,
+    "referenceOrigin": "replay-sources.json",
+    "referenceStatus": "Existing project single-review/agent windows; not independently human-validated.",
+    "sceneNotes": "Rear angled view with barbell and graphics.",
+    "preparation": {
+      "method": "Existing acquired file copied without further transformation"
+    }
+  },
+  {
+    "index": 10,
+    "file": "ymove-barbell-back-squat.mp4",
+    "exercise": "squat",
+    "author": "YMove",
+    "source": "https://github.com/ymove-app/exercise-api/tree/main/free-videos",
+    "download": "https://raw.githubusercontent.com/ymove-app/exercise-api/main/free-videos/barbell-back-squat.mp4",
+    "terms": "YMove free-videos terms; no standalone library redistribution.",
+    "preparedFile": "prepared-10.mp4",
+    "preparedSha256": "e1619abcd21b0f97d83703b13f36c4a3f3261535417d92f50df99ffb7810d993",
+    "windows": [
+      [
+        1.4,
+        2.85
+      ],
+      [
+        5.15,
+        6.4
+      ],
+      [
+        8.65,
+        10.15
+      ],
+      [
+        12.35,
+        13.9
+      ]
+    ],
+    "group": 2,
+    "control": false,
+    "sourceSha256": "e1619abcd21b0f97d83703b13f36c4a3f3261535417d92f50df99ffb7810d993",
+    "sourceBytes": 1756362,
+    "referenceOrigin": "replay-sources.json",
+    "referenceStatus": "Existing project single-review/agent windows; not independently human-validated.",
+    "sceneNotes": "Front oblique, barbell.",
+    "preparation": {
+      "method": "Existing acquired file copied without further transformation"
+    }
+  },
+  {
+    "index": 11,
+    "file": "ymove-goblet-squat-with-kettlebell.mp4",
+    "exercise": "squat",
+    "author": "YMove",
+    "source": "https://github.com/ymove-app/exercise-api/tree/main/free-videos",
+    "download": "https://raw.githubusercontent.com/ymove-app/exercise-api/main/free-videos/goblet-squat-with-kettlebell.mp4",
+    "terms": "YMove free-videos terms; no standalone library redistribution.",
+    "preparedFile": "prepared-11.mp4",
+    "preparedSha256": "c161fa1de4a9a03d51d0561d54b2a43964e187b6b99b5c6865f768c4ce56051b",
+    "windows": [
+      [
+        1.6,
+        2.9
+      ],
+      [
+        4.85,
+        6.1
+      ],
+      [
+        8.3,
+        9.65
+      ],
+      [
+        11.8,
+        13.2
+      ],
+      [
+        15.55,
+        17.15
+      ]
+    ],
+    "group": 3,
+    "control": false,
+    "sourceSha256": "c161fa1de4a9a03d51d0561d54b2a43964e187b6b99b5c6865f768c4ce56051b",
+    "sourceBytes": 1702959,
+    "referenceOrigin": "replay-sources.json",
+    "referenceStatus": "Existing project single-review/agent windows; not independently human-validated.",
+    "sceneNotes": "Fixed front-oblique view, same studio, possible repeated performer. Last return checked at end.",
+    "preparation": {
+      "method": "Existing acquired file copied without further transformation"
+    }
+  },
+  {
+    "index": 12,
+    "file": "pexels-3209802.mp4",
+    "exercise": "lat-pulldown",
+    "author": "Pressmaster",
+    "source": "https://www.pexels.com/video/a-man-lifting-weights-in-a-gym-using-a-lat-pulldown-3209802/",
+    "download": "https://videos.pexels.com/video-files/3209802/3209802-hd_1280_720_25fps.mp4",
+    "terms": "Pexels License",
+    "preparedFile": "prepared-12.mp4",
+    "preparedSha256": "f260d0e78608c08766bfdb32452b35df26f1b8e57ac258758fe29d57fe232525",
+    "windows": null,
+    "group": 0,
+    "control": false,
+    "sourceSha256": "f260d0e78608c08766bfdb32452b35df26f1b8e57ac258758fe29d57fe232525",
+    "sourceBytes": 4161489,
+    "referenceOrigin": "replay-sources.json",
+    "referenceStatus": "Existing project single-review/agent windows; not independently human-validated.",
+    "sceneNotes": "Face and bar close-up; complete shoulder-elbow-wrist chain frequently cropped.",
+    "preparation": {
+      "method": "Existing acquired file copied without further transformation"
+    }
+  },
+  {
+    "index": 13,
+    "file": "pexels-5983521.mp4",
+    "exercise": "lat-pulldown",
+    "author": "thiha soe",
+    "source": "https://www.pexels.com/video/a-working-out-at-the-gym-5983521/",
+    "download": "https://videos.pexels.com/video-files/5983521/5983521-hd_1280_720_30fps.mp4",
+    "terms": "Pexels License",
+    "preparedFile": "prepared-13.mp4",
+    "preparedSha256": "36c08e1fac43d6777846e09fe0d6fea7794b30fbc95226dbf9bb04ecd14fd10a",
+    "windows": [
+      [
+        6.0,
+        10.45
+      ]
+    ],
+    "group": 1,
+    "control": false,
+    "sourceSha256": "36c08e1fac43d6777846e09fe0d6fea7794b30fbc95226dbf9bb04ecd14fd10a",
+    "sourceBytes": 2189112,
+    "referenceOrigin": "replay-sources.json",
+    "referenceStatus": "Existing project single-review/agent windows; not independently human-validated.",
+    "sceneNotes": "One slow rear-view movement; insufficient for calibration.",
+    "preparation": {
+      "method": "Existing acquired file copied without further transformation"
+    }
+  },
+  {
+    "index": 14,
+    "file": "szat-front.webm",
+    "exercise": "squat",
+    "author": "Szatstrength",
+    "source": "https://commons.wikimedia.org/wiki/File:How_to_build_massive_Legs_ft_Mike_Israetel_from_Renaissance_Periodization_2_%28Full_leg_workout%29.webm",
+    "download": "https://upload.wikimedia.org/wikipedia/commons/2/26/How_to_build_massive_Legs_ft_Mike_Israetel_from_Renaissance_Periodization_2_%28Full_leg_workout%29.webm",
+    "terms": "CC BY 3.0",
+    "preparedFile": "prepared-14.mp4",
+    "preparedSha256": "dfe48449484d5de067adbca059b20158b027e092e945bfee4c33578055140156",
+    "windows": [
+      [
+        6.3,
+        8.5
+      ],
+      [
+        11.1,
+        13.25
+      ],
+      [
+        15.8,
+        17.9
+      ],
+      [
+        20.4,
+        22.3
+      ],
+      [
+        24.8,
+        27.0
+      ],
+      [
+        29.9,
+        31.8
+      ],
+      [
+        34.4,
+        36.8
+      ]
+    ],
+    "group": 2,
+    "control": false,
+    "sourceSha256": "8e65d343541f2aadf7ba3dec061567d1be88fc0763b911c86703e03c85fc941a",
+    "sourceBytes": 36922883,
+    "referenceOrigin": "squat-supplement-sources.json",
+    "referenceStatus": "Existing project single-review/agent windows; not independently human-validated.",
+    "sceneNotes": "Fixed low front oblique; black outfit, spotter adjacent and athlete near left, shin partly overlapped.",
+    "preparation": {
+      "startSec": 348.0,
+      "durationSec": 37.25,
+      "tool": "FFmpeg 7.0.2",
+      "options": "input -ss, -t, video stream 0, no audio, libx264, threads 1, veryfast, crf 19, yuv420p, faststart",
+      "spatialResize": false
+    }
+  },
+  {
+    "index": 15,
+    "file": "szat-side.webm",
+    "exercise": "squat",
+    "author": "Szatstrength",
+    "source": "https://commons.wikimedia.org/wiki/File:How_to_build_massive_Legs_ft_Mike_Israetel_from_Renaissance_Periodization_2_%28Full_leg_workout%29.webm",
+    "download": "https://upload.wikimedia.org/wikipedia/commons/2/26/How_to_build_massive_Legs_ft_Mike_Israetel_from_Renaissance_Periodization_2_%28Full_leg_workout%29.webm",
+    "terms": "CC BY 3.0",
+    "preparedFile": "prepared-15.mp4",
+    "preparedSha256": "db9917c7bec60dafab7814e12a545a0cc8f026c0ba1f4e7e1992d21451d2e921",
+    "windows": [
+      [
+        4.6,
+        6.1
+      ],
+      [
+        7.8,
+        9.15
+      ],
+      [
+        10.75,
+        12.2
+      ],
+      [
+        13.6,
+        15.2
+      ],
+      [
+        16.55,
+        18.2
+      ],
+      [
+        19.8,
+        21.2
+      ],
+      [
+        22.5,
+        24.3
+      ],
+      [
+        27.9,
+        29.8
+      ],
+      [
+        32.3,
+        34.7
+      ]
+    ],
+    "group": 3,
+    "control": false,
+    "sourceSha256": "8e65d343541f2aadf7ba3dec061567d1be88fc0763b911c86703e03c85fc941a",
+    "sourceBytes": 36922883,
+    "referenceOrigin": "squat-supplement-sources.json",
+    "referenceStatus": "Existing project single-review/agent windows; not independently human-validated.",
+    "sceneNotes": "Fixed side view, green shirt; moving bar partly occludes hip. No cut inside window.",
+    "preparation": {
+      "startSec": 386.0,
+      "durationSec": 35.2,
+      "tool": "FFmpeg 7.0.2",
+      "options": "input -ss, -t, video stream 0, no audio, libx264, threads 1, veryfast, crf 19, yuv420p, faststart",
+      "spatialResize": false
+    }
+  },
+  {
+    "index": 16,
+    "file": "go4it-rear.mp4",
+    "exercise": "lat-pulldown",
+    "preparedFile": "prepared-16.mp4",
+    "preparedSha256": "04b1050fffcbc236314ad79290d7501db77cc592b36ba723e26b44bdcde5dacc",
+    "windows": [
+      [
+        2.2,
+        5.75
+      ],
+      [
+        7.35,
+        11.35
+      ],
+      [
+        13.05,
+        17.35
+      ],
+      [
+        18.95,
+        23.35
+      ],
+      [
+        25.05,
+        29.05
+      ],
+      [
+        30.4,
+        34.05
+      ],
+      [
+        35.85,
+        39.55
+      ]
+    ],
+    "group": 0,
+    "control": true,
+    "sourceSha256": "04b1050fffcbc236314ad79290d7501db77cc592b36ba723e26b44bdcde5dacc",
+    "sourceBytes": 1718179,
+    "referenceOrigin": "existing packaged-clip project reference",
+    "referenceStatus": "Existing project single-review/agent windows; not independently human-validated.",
+    "preparation": {
+      "method": "Existing acquired file copied without further transformation"
+    },
+    "author": "Health TV (헬스티비)",
+    "source": "https://commons.wikimedia.org/wiki/Special:Redirect/page/61802622",
+    "terms": "CC BY 3.0; see packaged CREDITS.txt",
+    "sceneNotes": "Existing packaged rear-view excerpt, about 359.75–399.75 seconds in the original; no further clipping this run."
+  },
+  {
+    "index": 17,
+    "file": "goblet-squat.mp4",
+    "exercise": "squat",
+    "preparedFile": "prepared-17.mp4",
+    "preparedSha256": "b904f193848260c75d89c56cccf00237cbcbca1d15b27136f698853a1e5f6536",
+    "windows": [
+      [
+        1.65,
+        3
+      ],
+      [
+        5.25,
+        6.65
+      ],
+      [
+        8.65,
+        10.1
+      ],
+      [
+        12.25,
+        13.7
+      ],
+      [
+        16.1,
+        17.7
+      ]
+    ],
+    "group": 1,
+    "control": true,
+    "sourceSha256": "b904f193848260c75d89c56cccf00237cbcbca1d15b27136f698853a1e5f6536",
+    "sourceBytes": 1875528,
+    "referenceOrigin": "existing packaged-clip project reference",
+    "referenceStatus": "Existing project single-review/agent windows; not independently human-validated.",
+    "preparation": {
+      "method": "Existing acquired file copied without further transformation"
+    },
+    "author": "YMove",
+    "source": "https://github.com/ymove-app/exercise-api/tree/main/free-videos",
+    "download": "https://raw.githubusercontent.com/ymove-app/exercise-api/main/free-videos/dumbbell-goblet-squat-202e4f.mp4",
+    "terms": "YMove free-video terms; no standalone library redistribution."
+  }
+]

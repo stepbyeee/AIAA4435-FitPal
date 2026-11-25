@@ -924,7 +924,8 @@ button.pill:active {
   flex-direction: column;
 }
 
-.reward > div {
+.reward > div,
+.next-set-settings > div {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
@@ -933,7 +934,8 @@ button.pill:active {
   font-size: 16px;
 }
 
-.reward > div + div {
+.reward > div + div,
+.next-set-settings > div + div {
   border-top: 1px solid var(--rule);
 }
 

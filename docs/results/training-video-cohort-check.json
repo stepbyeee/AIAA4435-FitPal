@@ -1,0 +1,2737 @@
+{
+  "date": "2026-11-25",
+  "baseCommit": "b63f86fad81c398a0f75a1a888b079f3f809bd44",
+  "method": "Replay the actual application-captured pose frames through the unchanged counter, preserving the calibration anchor. Assert identical UI counts before matching source completion timestamps to reference windows. No pose rerun or threshold changes.",
+  "sampling": "Fixed 15 Hz source positions; CPU-only pose model, original acquired framing; time-only excerpts where declared.",
+  "referenceLimit": "Existing project single-review/agent windows, not independently human-validated; first three reference cycles reserved for calibration. Matching completion in [bottom, return+.35 seconds], one-to-one.",
+  "selectionLimit": "Known project sources selected before this run. Not a new independent held-out cohort; two excerpts share one original and studio clips may share performers.",
+  "codeSnapshotNote": "Groups 0 and 1 did not embed source hashes. Later groups recorded the unchanged perception/analytics sources; post-run replay through the counter hashes below reproduced all 18 UI counts. Final reward-copy shortening was validated separately and is not part of the cohort Session hash.",
+  "counterSourceHashes": {
+    "perception/pulldown.ts": "5f0a55b2f06933039a36fd8b2da87164ee8836756b417c80af01e25d36e7edf8",
+    "perception/pulldownUpperArm.ts": "8593e6bff5f1fce23868ece1657c345d6622610b95c5ff159d0daf18a490f1fa",
+    "perception/pulldownForm.ts": "70283e89e3eff80093c255b2caf10e8ec2c9ba8a33e5cc34cc3970ed260b01ab",
+    "perception/squat.ts": "737da2ea4426080f5189f738385fe816ebe1155966f31446568c8a017e6d84bc",
+    "tracking/armLandmarks.ts": "3c63a6e2844b632dd4282ce3d7ce4d3ebb36aeffb3409b5818c114aa4bf63095"
+  },
+  "groupSourceHashes": [
+    null,
+    null,
+    {
+      "tracking/poseTracker.ts": "edf2e7fc311dcbc581f2dfb29cd1df9fb52d9b6fcb919e9a735a59fee9a2a16f",
+      "tracking/recordedFrames.ts": "6dd04d2eaa8f0fb810f655094a3a0864ec296255123dc2bd917e042660011930",
+      "perception/pulldown.ts": "5f0a55b2f06933039a36fd8b2da87164ee8836756b417c80af01e25d36e7edf8",
+      "perception/squat.ts": "737da2ea4426080f5189f738385fe816ebe1155966f31446568c8a017e6d84bc",
+      "analytics/motion.ts": "027631076bd63003d00e9b27e19b682b2bcd191cb23fcff9fad1bf01fff8c0bd",
+      "screens/Session.tsx": "5b518385cfd6d2eab72a9322a307574e9437db37f557a26a251b88bfa9928ed4"
+    },
+    {
+      "tracking/poseTracker.ts": "edf2e7fc311dcbc581f2dfb29cd1df9fb52d9b6fcb919e9a735a59fee9a2a16f",
+      "tracking/recordedFrames.ts": "6dd04d2eaa8f0fb810f655094a3a0864ec296255123dc2bd917e042660011930",
+      "perception/pulldown.ts": "5f0a55b2f06933039a36fd8b2da87164ee8836756b417c80af01e25d36e7edf8",
+      "perception/squat.ts": "737da2ea4426080f5189f738385fe816ebe1155966f31446568c8a017e6d84bc",
+      "analytics/motion.ts": "027631076bd63003d00e9b27e19b682b2bcd191cb23fcff9fad1bf01fff8c0bd",
+      "screens/Session.tsx": "5b518385cfd6d2eab72a9322a307574e9437db37f557a26a251b88bfa9928ed4"
+    }
+  ],
+  "browser": "151.0.7922.34",
+  "aggregate": {
+    "clips": 18,
+    "pulldownClips": 12,
+    "squatClips": 6,
+    "existingControlClips": 2,
+    "additionalKnownSourceClips": 16,
+    "calibratedClips": 9,
+    "calibrationIncompleteClips": 9,
+    "clipsWithFormalReference": 13,
+    "clipsWithZeroFormalReference": 4,
+    "unscorableClips": 1,
+    "formalReferenceReps": 36,
+    "matchedReps": 18,
+    "missedReps": 18,
+    "unmatchedConfirmedReps": 0,
+    "confirmedReps": 18,
+    "measuredReps": 18,
+    "bilateralMeasuredReps": 3,
+    "clipsWithBilateralMeasurements": [
+      "go4it-rear.mp4"
+    ],
+    "runtimeErrors": 0,
+    "terminalUiChecks": 18,
+    "setReportAndCoachChecks": 9,
+    "sourceReviewChecks": 8
+  },
+  "results": [
+    {
+      "index": 0,
+      "file": "dynamic-dual-pulldown.mp4",
+      "exercise": "lat-pulldown",
+      "control": false,
+      "preparedSha256": "8f1e94aeb249ce66adfcbcd6e9d706ba762a6cf91698be2984a265b0a1c08fac",
+      "referenceWindows": [
+        [
+          1.85,
+          3.73
+        ],
+        [
+          6.2,
+          8.03
+        ],
+        [
+          10.42,
+          12.31
+        ],
+        [
+          14.64,
+          16.58
+        ],
+        [
+          19.47,
+          21.63
+        ]
+      ],
+      "errors": [],
+      "frames": 326,
+      "sourceSpanMs": [
+        0,
+        21666.666666666668
+      ],
+      "maxSourceGapMs": 66.66666666666788,
+      "calibrated": true,
+      "reviewEntries": 1,
+      "verified": 0,
+      "metrics": {
+        "measuredReps": 0,
+        "medianDurationMs": null,
+        "medianReturnMs": null,
+        "returnVariation": null,
+        "medianRange": null,
+        "pairedReps": 0,
+        "medianLagMs": null,
+        "coverage": 0.9875,
+        "view": {
+          "x": 0.5518051981925964,
+          "y": 0.7119773328304291,
+          "scale": 0.3227107382606954,
+          "orientation": 0.5568365765437042
+        }
+      },
+      "repetitions": [
+        {
+          "repIndex": 0,
+          "sourceStartMs": 17800,
+          "durationMs": 3800,
+          "verified": false,
+          "range": null,
+          "outboundMs": null,
+          "returnMs": null,
+          "bottomHoldMs": null,
+          "minAngle": null,
+          "maxAngle": null,
+          "excursionDeg": null,
+          "bilateralLagMs": null,
+          "bilateralReason": "需要两侧全程清晰、正面或背面固定机位",
+          "pairedCoverage": 0.9482758620689655
+        }
+      ],
+      "exp": {
+        "verifiedReps": 0,
+        "qualityBonus": 0,
+        "fixedBonus": 0
+      },
+      "cue": {
+        "issueId": "out_of_view",
+        "text": "有 1 下镜头没看清。下一组调整镜头，让手肘始终在画面里。"
+      },
+      "sourceReviewChecked": true,
+      "uiChecksPassed": true,
+      "pageErrors": [],
+      "traceBasedCountCheck": {
+        "expected": 2,
+        "matched": 0,
+        "missed": 2,
+        "extra": 0,
+        "matches": [],
+        "misses": [
+          [
+            14.64,
+            16.58
+          ],
+          [
+            19.47,
+            21.63
+          ]
+        ],
+        "extraTimes": []
+      },
+      "countAudit": {
+        "index": 0,
+        "file": "dynamic-dual-pulldown.mp4",
+        "calibration": {
+          "side": "right",
+          "thetaTop": 172.3228911380884,
+          "thetaBottom": 38.94459743707071
+        },
+        "calibrationEndSec": 16.4,
+        "calibrationEvents": [
+          8.066666666666666,
+          12.466666666666667,
+          16.4
+        ],
+        "calibrationCycles": 3,
+        "calibrationVisibleFraction": 0.9352226720647774,
+        "formalEvents": [],
+        "verified": 0,
+        "countCheck": {
+          "expected": 2,
+          "matched": 0,
+          "missed": 2,
+          "unmatched": 0,
+          "matches": [],
+          "misses": [
+            [
+              14.64,
+              16.58
+            ],
+            [
+              19.47,
+              21.63
+            ]
+          ],
+          "unmatchedTimes": []
+        }
+      },
+      "countCheck": {
+        "expected": 2,
+        "matched": 0,
+        "missed": 2,
+        "unmatched": 0,
+        "matches": [],
+        "misses": [
+          [
+            14.64,
+            16.58
+          ],
+          [
+            19.47,
+            21.63
+          ]
+        ],
+        "unmatchedTimes": []
+      }
+    },
+    {
+      "index": 1,
+      "file": "lifetime-neutral-grip.mp4",
+      "exercise": "lat-pulldown",
+      "control": false,
+      "preparedSha256": "4a6572bfa2dc50f1672ccc0f4ca16a2ccd9926e00f0e78dda792239ba3242f5a",
+      "referenceWindows": [
+        [
+          1.76,
+          2.83
+        ],
+        [
+          5.02,
+          6.53
+        ],
+        [
+          8.52,
+          9.98
+        ],
+        [
+          11.94,
+          13.48
+        ],
+        [
+          15.18,
+          16.73
+        ]
+      ],
+      "errors": [],
+      "frames": 255,
+      "sourceSpanMs": [
+        0,
+        16933.333333333332
+      ],
+      "maxSourceGapMs": 66.66666666666788,
+      "calibrated": false,
+      "verified": 0,
+      "reviewEntries": 0,
+      "metrics": null,
+      "repetitions": [],
+      "uiChecksPassed": true,
+      "pageErrors": [],
+      "traceBasedCountCheck": {
+        "expected": 2,
+        "matched": 0,
+        "missed": 2,
+        "extra": 0,
+        "matches": [],
+        "misses": [
+          [
+            11.94,
+            13.48
+          ],
+          [
+            15.18,
+            16.73
+          ]
+        ],
+        "extraTimes": []
+      },
+      "countAudit": {
+        "index": 1,
+        "file": "lifetime-neutral-grip.mp4",
+        "calibration": null,
+        "calibrationEndSec": null,
+        "calibrationEvents": [
+          2.7333333333333334,
+          9.666666666666666
+        ],
+        "calibrationCycles": 2,
+        "calibrationVisibleFraction": 0.9686274509803922,
+        "formalEvents": [],
+        "verified": 0,
+        "countCheck": {
+          "expected": 2,
+          "matched": 0,
+          "missed": 2,
+          "unmatched": 0,
+          "matches": [],
+          "misses": [
+            [
+              11.94,
+              13.48
+            ],
+            [
+              15.18,
+              16.73
+            ]
+          ],
+          "unmatchedTimes": []
+        }
+      },
+      "countCheck": {
+        "expected": 2,
+        "matched": 0,
+        "missed": 2,
+        "unmatched": 0,
+        "matches": [],
+        "misses": [
+          [
+            11.94,
+            13.48
+          ],
+          [
+            15.18,
+            16.73
+          ]
+        ],
+        "unmatchedTimes": []
+      }
+    },
+    {
+      "index": 2,
+      "file": "future-fitness-cable.mp4",
+      "exercise": "lat-pulldown",
+      "control": false,
+      "preparedSha256": "b1dfeff8a1f43cbcf1fb9a390e051e98db720a50b6f1c47831bea1cfa9125166",
+      "referenceWindows": [
+        [
+          2.45,
+          3.95
+        ],
+        [
+          6.21,
+          7.45
+        ],
+        [
+          10.07,
+          11.32
+        ],
+        [
+          13.7,
+          14.81
+        ],
+        [
+          17.13,
+          18.44
+        ]
+      ],
+      "errors": [],
+      "frames": 287,
+      "sourceSpanMs": [
+        0,
+        19066.666666666668
+      ],
+      "maxSourceGapMs": 66.66666666666788,
+      "calibrated": true,
+      "reviewEntries": 2,
+      "verified": 1,
+      "metrics": {
+        "measuredReps": 1,
+        "medianDurationMs": 1933.3333333333321,
+        "medianReturnMs": 1400,
+        "returnVariation": null,
+        "medianRange": 0.9907083183623258,
+        "pairedReps": 0,
+        "medianLagMs": null,
+        "coverage": 0.991304347826087,
+        "view": {
+          "x": 0.27791793644428253,
+          "y": 0.5187248587608337,
+          "scale": 0.1424904469909758,
+          "orientation": 0.4137048305842853
+        }
+      },
+      "repetitions": [
+        {
+          "repIndex": 0,
+          "sourceStartMs": 12933.333333333334,
+          "durationMs": 1933.3333333333321,
+          "verified": true,
+          "range": 0.9907083183623258,
+          "outboundMs": 533.3333333333321,
+          "returnMs": 1400,
+          "bottomHoldMs": 733.3333333333339,
+          "minAngle": 74.28829198956993,
+          "maxAngle": 154.37752384760873,
+          "excursionDeg": 80.0892318580388,
+          "bilateralLagMs": null,
+          "bilateralReason": "需要两侧全程清晰、正面或背面固定机位",
+          "pairedCoverage": 0
+        },
+        {
+          "repIndex": 1,
+          "sourceStartMs": 16333.333333333334,
+          "durationMs": 2066.666666666666,
+          "verified": false,
+          "range": null,
+          "outboundMs": null,
+          "returnMs": null,
+          "bottomHoldMs": null,
+          "minAngle": null,
+          "maxAngle": null,
+          "excursionDeg": null,
+          "bilateralLagMs": null,
+          "bilateralReason": "需要两侧全程清晰、正面或背面固定机位",
+          "pairedCoverage": 0
+        }
+      ],
+      "exp": {
+        "verifiedReps": 1,
+        "qualityBonus": 0,
+        "fixedBonus": 0
+      },
+      "cue": {
+        "issueId": "out_of_view",
+        "text": "有 1 下镜头没看清。下一组调整镜头，让手肘始终在画面里。"
+      },
+      "sourceReviewChecked": true,
+      "unlocatedVerified": 0,
+      "uiChecksPassed": true,
+      "pageErrors": [],
+      "traceBasedCountCheck": {
+        "expected": 2,
+        "matched": 1,
+        "missed": 1,
+        "extra": 0,
+        "matches": [
+          {
+            "window": [
+              13.7,
+              14.81
+            ],
+            "event": 14.866666666666665
+          }
+        ],
+        "misses": [
+          [
+            17.13,
+            18.44
+          ]
+        ],
+        "extraTimes": []
+      },
+      "countAudit": {
+        "index": 2,
+        "file": "future-fitness-cable.mp4",
+        "calibration": {
+          "side": "right",
+          "thetaTop": 171.31262197891246,
+          "thetaBottom": 73.37831761198535
+        },
+        "calibrationEndSec": 11.466666666666667,
+        "calibrationEvents": [
+          3.8666666666666667,
+          7.466666666666667,
+          11.466666666666667
+        ],
+        "calibrationCycles": 3,
+        "calibrationVisibleFraction": 1,
+        "formalEvents": [
+          14.866666666666665
+        ],
+        "verified": 1,
+        "countCheck": {
+          "expected": 2,
+          "matched": 1,
+          "missed": 1,
+          "unmatched": 0,
+          "matches": [
+            {
+              "window": [
+                13.7,
+                14.81
+              ],
+              "event": 14.866666666666665
+            }
+          ],
+          "misses": [
+            [
+              17.13,
+              18.44
+            ]
+          ],
+          "unmatchedTimes": []
+        }
+      },
+      "countCheck": {
+        "expected": 2,
+        "matched": 1,
+        "missed": 1,
+        "unmatched": 0,
+        "matches": [
+          {
+            "window": [
+              13.7,
+              14.81
+            ],
+            "event": 14.866666666666665
+          }
+        ],
+        "misses": [
+          [
+            17.13,
+            18.44
+          ]
+        ],
+        "unmatchedTimes": []
+      }
+    },
+    {
+      "index": 3,
+      "file": "adelaide-parks.mp4",
+      "exercise": "lat-pulldown",
+      "control": false,
+      "preparedSha256": "e956dea635646bba422c8239f3ce7c5291863dc9a3b45ab350dd9456050cae2b",
+      "referenceWindows": [
+        [
+          2.73,
+          4.6
+        ],
+        [
+          6.42,
+          7.63
+        ],
+        [
+          9.37,
+          10.93
+        ],
+        [
+          12.49,
+          14.16
+        ],
+        [
+          15.75,
+          17.03
+        ]
+      ],
+      "errors": [],
+      "frames": 260,
+      "sourceSpanMs": [
+        0,
+        17266.666666666668
+      ],
+      "maxSourceGapMs": 66.66666666666788,
+      "calibrated": false,
+      "verified": 0,
+      "reviewEntries": 0,
+      "metrics": null,
+      "repetitions": [],
+      "unlocatedVerified": 0,
+      "uiChecksPassed": true,
+      "pageErrors": [],
+      "traceBasedCountCheck": {
+        "expected": 2,
+        "matched": 0,
+        "missed": 2,
+        "extra": 0,
+        "matches": [],
+        "misses": [
+          [
+            12.49,
+            14.16
+          ],
+          [
+            15.75,
+            17.03
+          ]
+        ],
+        "extraTimes": []
+      },
+      "countAudit": {
+        "index": 3,
+        "file": "adelaide-parks.mp4",
+        "calibration": null,
+        "calibrationEndSec": null,
+        "calibrationEvents": [
+          4.2,
+          13.933333333333334
+        ],
+        "calibrationCycles": 2,
+        "calibrationVisibleFraction": 0.9807692307692307,
+        "formalEvents": [],
+        "verified": 0,
+        "countCheck": {
+          "expected": 2,
+          "matched": 0,
+          "missed": 2,
+          "unmatched": 0,
+          "matches": [],
+          "misses": [
+            [
+              12.49,
+              14.16
+            ],
+            [
+              15.75,
+              17.03
+            ]
+          ],
+          "unmatchedTimes": []
+        }
+      },
+      "countCheck": {
+        "expected": 2,
+        "matched": 0,
+        "missed": 2,
+        "unmatched": 0,
+        "matches": [],
+        "misses": [
+          [
+            12.49,
+            14.16
+          ],
+          [
+            15.75,
+            17.03
+          ]
+        ],
+        "unmatchedTimes": []
+      }
+    },
+    {
+      "index": 4,
+      "file": "mixkit-100549.mp4",
+      "exercise": "lat-pulldown",
+      "control": false,
+      "preparedSha256": "9a51060a0d0ee20cdbc16cb2480e1b5adf6b9a8786eea3854661b637da861e16",
+      "referenceWindows": [
+        [
+          3.28,
+          4.87
+        ],
+        [
+          6.45,
+          8.06
+        ],
+        [
+          9.56,
+          11.02
+        ],
+        [
+          12.28,
+          13.64
+        ],
+        [
+          15.1,
+          16.49
+        ]
+      ],
+      "errors": [],
+      "frames": 265,
+      "sourceSpanMs": [
+        0,
+        17600
+      ],
+      "maxSourceGapMs": 66.66666666666788,
+      "calibrated": false,
+      "verified": 0,
+      "reviewEntries": 0,
+      "metrics": null,
+      "repetitions": [],
+      "uiChecksPassed": true,
+      "pageErrors": [],
+      "traceBasedCountCheck": {
+        "expected": 2,
+        "matched": 0,
+        "missed": 2,
+        "extra": 0,
+        "matches": [],
+        "misses": [
+          [
+            12.28,
+            13.64
+          ],
+          [
+            15.1,
+            16.49
+          ]
+        ],
+        "extraTimes": []
+      },
+      "countAudit": {
+        "index": 4,
+        "file": "mixkit-100549.mp4",
+        "calibration": null,
+        "calibrationEndSec": null,
+        "calibrationEvents": [],
+        "calibrationCycles": 0,
+        "calibrationVisibleFraction": 0.16226415094339622,
+        "formalEvents": [],
+        "verified": 0,
+        "countCheck": {
+          "expected": 2,
+          "matched": 0,
+          "missed": 2,
+          "unmatched": 0,
+          "matches": [],
+          "misses": [
+            [
+              12.28,
+              13.64
+            ],
+            [
+              15.1,
+              16.49
+            ]
+          ],
+          "unmatchedTimes": []
+        }
+      },
+      "countCheck": {
+        "expected": 2,
+        "matched": 0,
+        "missed": 2,
+        "unmatched": 0,
+        "matches": [],
+        "misses": [
+          [
+            12.28,
+            13.64
+          ],
+          [
+            15.1,
+            16.49
+          ]
+        ],
+        "unmatchedTimes": []
+      }
+    },
+    {
+      "index": 5,
+      "file": "pexels-7934717.mp4",
+      "exercise": "lat-pulldown",
+      "control": false,
+      "preparedSha256": "33803f148fcb8b88eb3821d5fcb9474bf5b1fb24e5fc1b7492db25bc13ef90b9",
+      "referenceWindows": [
+        [
+          2.22,
+          3.65
+        ],
+        [
+          5.2,
+          6.7
+        ],
+        [
+          8.08,
+          9.6
+        ]
+      ],
+      "errors": [],
+      "frames": 170,
+      "sourceSpanMs": [
+        0,
+        11266.666666666666
+      ],
+      "maxSourceGapMs": 66.66666666666788,
+      "calibrated": false,
+      "verified": 0,
+      "reviewEntries": 0,
+      "metrics": null,
+      "repetitions": [],
+      "uiChecksPassed": true,
+      "pageErrors": [],
+      "traceBasedCountCheck": {
+        "expected": 0,
+        "matched": 0,
+        "missed": 0,
+        "extra": 0,
+        "matches": [],
+        "misses": [],
+        "extraTimes": []
+      },
+      "countAudit": {
+        "index": 5,
+        "file": "pexels-7934717.mp4",
+        "calibration": null,
+        "calibrationEndSec": null,
+        "calibrationEvents": [],
+        "calibrationCycles": 0,
+        "calibrationVisibleFraction": 0.15294117647058825,
+        "formalEvents": [],
+        "verified": 0,
+        "countCheck": {
+          "expected": 0,
+          "matched": 0,
+          "missed": 0,
+          "unmatched": 0,
+          "matches": [],
+          "misses": [],
+          "unmatchedTimes": []
+        }
+      },
+      "countCheck": {
+        "expected": 0,
+        "matched": 0,
+        "missed": 0,
+        "unmatched": 0,
+        "matches": [],
+        "misses": [],
+        "unmatchedTimes": []
+      }
+    },
+    {
+      "index": 6,
+      "file": "pexels-35585697.mp4",
+      "exercise": "lat-pulldown",
+      "control": false,
+      "preparedSha256": "cadb3f11bc6e5ec282d58c8ac8ae1ac908bffef01a14c65f3555d58ea7f2e718",
+      "referenceWindows": [
+        [
+          4.84,
+          5.52
+        ],
+        [
+          6.18,
+          6.88
+        ],
+        [
+          7.44,
+          8.1
+        ],
+        [
+          8.75,
+          9.34
+        ],
+        [
+          10.07,
+          10.74
+        ],
+        [
+          11.41,
+          12.06
+        ],
+        [
+          12.72,
+          13.42
+        ],
+        [
+          14.04,
+          14.64
+        ]
+      ],
+      "errors": [],
+      "frames": 224,
+      "sourceSpanMs": [
+        0,
+        14866.666666666666
+      ],
+      "maxSourceGapMs": 66.66666666666788,
+      "calibrated": true,
+      "reviewEntries": 0,
+      "verified": 0,
+      "metrics": {
+        "measuredReps": 0,
+        "medianDurationMs": null,
+        "medianReturnMs": null,
+        "returnVariation": null,
+        "medianRange": null,
+        "pairedReps": 0,
+        "medianLagMs": null,
+        "coverage": 1,
+        "view": null
+      },
+      "repetitions": [],
+      "exp": {
+        "verifiedReps": 0,
+        "qualityBonus": 0,
+        "fixedBonus": 0
+      },
+      "cue": null,
+      "unlocatedVerified": 0,
+      "uiChecksPassed": true,
+      "pageErrors": [],
+      "traceBasedCountCheck": {
+        "expected": 5,
+        "matched": 0,
+        "missed": 5,
+        "extra": 0,
+        "matches": [],
+        "misses": [
+          [
+            8.75,
+            9.34
+          ],
+          [
+            10.07,
+            10.74
+          ],
+          [
+            11.41,
+            12.06
+          ],
+          [
+            12.72,
+            13.42
+          ],
+          [
+            14.04,
+            14.64
+          ]
+        ],
+        "extraTimes": []
+      },
+      "countAudit": {
+        "index": 6,
+        "file": "pexels-35585697.mp4",
+        "calibration": {
+          "side": "right",
+          "thetaTop": 165.45775008202082,
+          "thetaBottom": 62.260270798689014
+        },
+        "calibrationEndSec": 14.6,
+        "calibrationEvents": [
+          8.066666666666666,
+          10.666666666666666,
+          14.6
+        ],
+        "calibrationCycles": 3,
+        "calibrationVisibleFraction": 0.9181818181818182,
+        "formalEvents": [],
+        "verified": 0,
+        "countCheck": {
+          "expected": 5,
+          "matched": 0,
+          "missed": 5,
+          "unmatched": 0,
+          "matches": [],
+          "misses": [
+            [
+              8.75,
+              9.34
+            ],
+            [
+              10.07,
+              10.74
+            ],
+            [
+              11.41,
+              12.06
+            ],
+            [
+              12.72,
+              13.42
+            ],
+            [
+              14.04,
+              14.64
+            ]
+          ],
+          "unmatchedTimes": []
+        }
+      },
+      "countCheck": {
+        "expected": 5,
+        "matched": 0,
+        "missed": 5,
+        "unmatched": 0,
+        "matches": [],
+        "misses": [
+          [
+            8.75,
+            9.34
+          ],
+          [
+            10.07,
+            10.74
+          ],
+          [
+            11.41,
+            12.06
+          ],
+          [
+            12.72,
+            13.42
+          ],
+          [
+            14.04,
+            14.64
+          ]
+        ],
+        "unmatchedTimes": []
+      }
+    },
+    {
+      "index": 7,
+      "file": "pulldown.webm",
+      "exercise": "lat-pulldown",
+      "control": false,
+      "preparedSha256": "f6200b7691acc6e99b1b0ddee7783fea56da3a6e155c5b3020cdda958cd49e34",
+      "referenceWindows": [
+        [
+          2.15,
+          4.1
+        ],
+        [
+          5.88,
+          7.6
+        ],
+        [
+          9.25,
+          11
+        ],
+        [
+          12.72,
+          14.7
+        ],
+        [
+          16.32,
+          18.27
+        ]
+      ],
+      "errors": [],
+      "frames": 275,
+      "sourceSpanMs": [
+        0,
+        18266.666666666668
+      ],
+      "maxSourceGapMs": 66.66666666666788,
+      "calibrated": true,
+      "reviewEntries": 2,
+      "verified": 2,
+      "metrics": {
+        "measuredReps": 2,
+        "medianDurationMs": 1400,
+        "medianReturnMs": 700,
+        "returnVariation": null,
+        "medianRange": 0.9898560357831985,
+        "pairedReps": 0,
+        "medianLagMs": null,
+        "coverage": 1,
+        "view": {
+          "x": 0.41830162703990936,
+          "y": 0.5324161201715469,
+          "scale": 0.18594153756271464,
+          "orientation": 0.1087162709153787
+        }
+      },
+      "repetitions": [
+        {
+          "repIndex": 0,
+          "sourceStartMs": 12200,
+          "durationMs": 1333.333333333334,
+          "verified": true,
+          "range": 0.9881020641567191,
+          "outboundMs": 666.6666666666661,
+          "returnMs": 666.6666666666679,
+          "bottomHoldMs": 333.33333333333394,
+          "minAngle": 15.106832024305039,
+          "maxAngle": 152.40793263283817,
+          "excursionDeg": 137.30110060853312,
+          "bilateralLagMs": null,
+          "bilateralReason": "需要两侧全程清晰、正面或背面固定机位",
+          "pairedCoverage": 0
+        },
+        {
+          "repIndex": 1,
+          "sourceStartMs": 15666.666666666666,
+          "durationMs": 1466.666666666666,
+          "verified": true,
+          "range": 0.9916100074096779,
+          "outboundMs": 733.3333333333339,
+          "returnMs": 733.3333333333321,
+          "bottomHoldMs": 333.33333333333394,
+          "minAngle": 14.546487108485755,
+          "maxAngle": 152.8156024272059,
+          "excursionDeg": 138.26911531872014,
+          "bilateralLagMs": null,
+          "bilateralReason": "需要两侧全程清晰、正面或背面固定机位",
+          "pairedCoverage": 0
+        }
+      ],
+      "exp": {
+        "verifiedReps": 2,
+        "qualityBonus": 0,
+        "fixedBonus": 0
+      },
+      "cue": null,
+      "sourceReviewChecked": true,
+      "unlocatedVerified": 0,
+      "uiChecksPassed": true,
+      "pageErrors": [],
+      "traceBasedCountCheck": {
+        "expected": 2,
+        "matched": 2,
+        "missed": 0,
+        "extra": 0,
+        "matches": [
+          {
+            "window": [
+              12.72,
+              14.7
+            ],
+            "event": 13.533333333333333
+          },
+          {
+            "window": [
+              16.32,
+              18.27
+            ],
+            "event": 17.133333333333333
+          }
+        ],
+        "misses": [],
+        "extraTimes": []
+      },
+      "countAudit": {
+        "index": 7,
+        "file": "pulldown.webm",
+        "calibration": {
+          "side": "right",
+          "thetaTop": 172.94232936131425,
+          "thetaBottom": 13.206303031168355
+        },
+        "calibrationEndSec": 10,
+        "calibrationEvents": [
+          3.2,
+          6.666666666666667,
+          10
+        ],
+        "calibrationCycles": 3,
+        "calibrationVisibleFraction": 1,
+        "formalEvents": [
+          13.533333333333333,
+          17.133333333333333
+        ],
+        "verified": 2,
+        "countCheck": {
+          "expected": 2,
+          "matched": 2,
+          "missed": 0,
+          "unmatched": 0,
+          "matches": [
+            {
+              "window": [
+                12.72,
+                14.7
+              ],
+              "event": 13.533333333333333
+            },
+            {
+              "window": [
+                16.32,
+                18.27
+              ],
+              "event": 17.133333333333333
+            }
+          ],
+          "misses": [],
+          "unmatchedTimes": []
+        }
+      },
+      "countCheck": {
+        "expected": 2,
+        "matched": 2,
+        "missed": 0,
+        "unmatched": 0,
+        "matches": [
+          {
+            "window": [
+              12.72,
+              14.7
+            ],
+            "event": 13.533333333333333
+          },
+          {
+            "window": [
+              16.32,
+              18.27
+            ],
+            "event": 17.133333333333333
+          }
+        ],
+        "misses": [],
+        "unmatchedTimes": []
+      }
+    },
+    {
+      "index": 8,
+      "file": "pulldown-mistakes.webm",
+      "exercise": "lat-pulldown",
+      "control": false,
+      "preparedSha256": "0765784da54e2bf0ec32bc0def3014a729b009b54d39533b135dc64a312efcf5",
+      "referenceWindows": [
+        [
+          9.4,
+          10.86
+        ]
+      ],
+      "errors": [],
+      "frames": 165,
+      "sourceSpanMs": [
+        0,
+        10933.333333333334
+      ],
+      "maxSourceGapMs": 66.66666666666788,
+      "calibrated": false,
+      "verified": 0,
+      "reviewEntries": 0,
+      "metrics": null,
+      "repetitions": [],
+      "uiChecksPassed": true,
+      "pageErrors": [],
+      "traceBasedCountCheck": {
+        "expected": 0,
+        "matched": 0,
+        "missed": 0,
+        "extra": 0,
+        "matches": [],
+        "misses": [],
+        "extraTimes": []
+      },
+      "countAudit": {
+        "index": 8,
+        "file": "pulldown-mistakes.webm",
+        "calibration": null,
+        "calibrationEndSec": null,
+        "calibrationEvents": [
+          10.8
+        ],
+        "calibrationCycles": 1,
+        "calibrationVisibleFraction": 0.806060606060606,
+        "formalEvents": [],
+        "verified": 0,
+        "countCheck": {
+          "expected": 0,
+          "matched": 0,
+          "missed": 0,
+          "unmatched": 0,
+          "matches": [],
+          "misses": [],
+          "unmatchedTimes": []
+        }
+      },
+      "countCheck": {
+        "expected": 0,
+        "matched": 0,
+        "missed": 0,
+        "unmatched": 0,
+        "matches": [],
+        "misses": [],
+        "unmatchedTimes": []
+      }
+    },
+    {
+      "index": 9,
+      "file": "squat-fitnessscape.webm",
+      "exercise": "squat",
+      "control": false,
+      "preparedSha256": "2440985661c3533a4ce78472b0f4577dbdf023aff3f8f9a225bbb5ff8071b1e9",
+      "referenceWindows": [
+        [
+          2,
+          3.5
+        ],
+        [
+          5.2,
+          6.7
+        ]
+      ],
+      "errors": [],
+      "frames": 107,
+      "sourceSpanMs": [
+        0,
+        7066.666666666667
+      ],
+      "maxSourceGapMs": 66.66666666666697,
+      "calibrated": false,
+      "verified": 0,
+      "reviewEntries": 0,
+      "metrics": null,
+      "repetitions": [],
+      "uiChecksPassed": true,
+      "pageErrors": [],
+      "traceBasedCountCheck": {
+        "expected": 0,
+        "matched": 0,
+        "missed": 0,
+        "extra": 0,
+        "matches": [],
+        "misses": [],
+        "extraTimes": []
+      },
+      "countAudit": {
+        "index": 9,
+        "file": "squat-fitnessscape.webm",
+        "calibration": null,
+        "calibrationEndSec": null,
+        "calibrationEvents": [
+          3.4666666666666663
+        ],
+        "calibrationCycles": 1,
+        "calibrationVisibleFraction": 0.9626168224299065,
+        "formalEvents": [],
+        "verified": 0,
+        "countCheck": {
+          "expected": 0,
+          "matched": 0,
+          "missed": 0,
+          "unmatched": 0,
+          "matches": [],
+          "misses": [],
+          "unmatchedTimes": []
+        }
+      },
+      "countCheck": {
+        "expected": 0,
+        "matched": 0,
+        "missed": 0,
+        "unmatched": 0,
+        "matches": [],
+        "misses": [],
+        "unmatchedTimes": []
+      }
+    },
+    {
+      "index": 10,
+      "file": "ymove-barbell-back-squat.mp4",
+      "exercise": "squat",
+      "control": false,
+      "preparedSha256": "e1619abcd21b0f97d83703b13f36c4a3f3261535417d92f50df99ffb7810d993",
+      "referenceWindows": [
+        [
+          1.4,
+          2.85
+        ],
+        [
+          5.15,
+          6.4
+        ],
+        [
+          8.65,
+          10.15
+        ],
+        [
+          12.35,
+          13.9
+        ]
+      ],
+      "errors": [],
+      "frames": 210,
+      "sourceSpanMs": [
+        0,
+        13933.333333333334
+      ],
+      "maxSourceGapMs": 66.66666666666788,
+      "calibrated": true,
+      "reviewEntries": 1,
+      "verified": 1,
+      "metrics": {
+        "measuredReps": 1,
+        "medianDurationMs": 1933.333333333334,
+        "medianReturnMs": 1200,
+        "returnVariation": null,
+        "medianRange": 0.9941823779664435,
+        "pairedReps": 0,
+        "medianLagMs": null,
+        "coverage": 1,
+        "view": {
+          "x": 0.4644850194454193,
+          "y": 0.2719624564051628,
+          "scale": 0.1738125588353695,
+          "orientation": 0.36126420838191586
+        }
+      },
+      "repetitions": [
+        {
+          "repIndex": 0,
+          "sourceStartMs": 11666.666666666666,
+          "durationMs": 1933.333333333334,
+          "verified": true,
+          "range": 0.9941823779664435,
+          "outboundMs": 733.3333333333339,
+          "returnMs": 1200,
+          "bottomHoldMs": 133.33333333333212,
+          "minAngle": 52.93828327669415,
+          "maxAngle": 164.93952583724186,
+          "excursionDeg": 112.00124256054771,
+          "bilateralLagMs": null,
+          "bilateralReason": "需要两侧全程清晰、正面或背面固定机位",
+          "pairedCoverage": 0.26666666666666666
+        }
+      ],
+      "exp": {
+        "verifiedReps": 1,
+        "qualityBonus": 0,
+        "fixedBonus": 0
+      },
+      "cue": null,
+      "sourceReviewChecked": true,
+      "unlocatedVerified": 0,
+      "uiChecksPassed": true,
+      "pageErrors": [],
+      "traceBasedCountCheck": {
+        "expected": 1,
+        "matched": 1,
+        "missed": 0,
+        "extra": 0,
+        "matches": [
+          {
+            "window": [
+              12.35,
+              13.9
+            ],
+            "event": 13.6
+          }
+        ],
+        "misses": [],
+        "extraTimes": []
+      },
+      "countAudit": {
+        "index": 10,
+        "file": "ymove-barbell-back-squat.mp4",
+        "calibration": {
+          "side": "left",
+          "thetaTop": 176.31999602466337,
+          "thetaBottom": 52.21629485029623
+        },
+        "calibrationEndSec": 9.933333333333334,
+        "calibrationEvents": [
+          2.6666666666666665,
+          6.266666666666667,
+          9.933333333333334
+        ],
+        "calibrationCycles": 3,
+        "calibrationVisibleFraction": 1,
+        "formalEvents": [
+          13.6
+        ],
+        "verified": 1,
+        "countCheck": {
+          "expected": 1,
+          "matched": 1,
+          "missed": 0,
+          "unmatched": 0,
+          "matches": [
+            {
+              "window": [
+                12.35,
+                13.9
+              ],
+              "event": 13.6
+            }
+          ],
+          "misses": [],
+          "unmatchedTimes": []
+        }
+      },
+      "countCheck": {
+        "expected": 1,
+        "matched": 1,
+        "missed": 0,
+        "unmatched": 0,
+        "matches": [
+          {
+            "window": [
+              12.35,
+              13.9
+            ],
+            "event": 13.6
+          }
+        ],
+        "misses": [],
+        "unmatchedTimes": []
+      }
+    },
+    {
+      "index": 11,
+      "file": "ymove-goblet-squat-with-kettlebell.mp4",
+      "exercise": "squat",
+      "control": false,
+      "preparedSha256": "c161fa1de4a9a03d51d0561d54b2a43964e187b6b99b5c6865f768c4ce56051b",
+      "referenceWindows": [
+        [
+          1.6,
+          2.9
+        ],
+        [
+          4.85,
+          6.1
+        ],
+        [
+          8.3,
+          9.65
+        ],
+        [
+          11.8,
+          13.2
+        ],
+        [
+          15.55,
+          17.15
+        ]
+      ],
+      "errors": [],
+      "frames": 258,
+      "sourceSpanMs": [
+        0,
+        17133.333333333332
+      ],
+      "maxSourceGapMs": 66.66666666666788,
+      "calibrated": true,
+      "reviewEntries": 2,
+      "verified": 2,
+      "metrics": {
+        "measuredReps": 2,
+        "medianDurationMs": 2266.666666666667,
+        "medianReturnMs": 1133.333333333334,
+        "returnVariation": null,
+        "medianRange": 0.940696527677902,
+        "pairedReps": 0,
+        "medianLagMs": null,
+        "coverage": 1,
+        "view": {
+          "x": 0.5304166674613953,
+          "y": 0.2916753590106964,
+          "scale": 0.19183006509508474,
+          "orientation": 0.5121887717125332
+        }
+      },
+      "repetitions": [
+        {
+          "repIndex": 0,
+          "sourceStartMs": 11000,
+          "durationMs": 2200,
+          "verified": true,
+          "range": 0.9499102089344744,
+          "outboundMs": 1133.333333333334,
+          "returnMs": 1066.666666666666,
+          "bottomHoldMs": 466.6666666666679,
+          "minAngle": 66.59447823898695,
+          "maxAngle": 166.44831221292148,
+          "excursionDeg": 99.85383397393453,
+          "bilateralLagMs": null,
+          "bilateralReason": "需要两侧全程清晰、正面或背面固定机位",
+          "pairedCoverage": 1
+        },
+        {
+          "repIndex": 1,
+          "sourceStartMs": 14733.333333333334,
+          "durationMs": 2333.333333333334,
+          "verified": true,
+          "range": 0.9314828464213295,
+          "outboundMs": 1133.3333333333321,
+          "returnMs": 1200.0000000000018,
+          "bottomHoldMs": 466.6666666666679,
+          "minAngle": 68.73446668098414,
+          "maxAngle": 166.26713252714725,
+          "excursionDeg": 97.53266584616311,
+          "bilateralLagMs": null,
+          "bilateralReason": "需要两侧全程清晰、正面或背面固定机位",
+          "pairedCoverage": 0.9722222222222222
+        }
+      ],
+      "exp": {
+        "verifiedReps": 2,
+        "qualityBonus": 0,
+        "fixedBonus": 0
+      },
+      "cue": null,
+      "sourceReviewChecked": true,
+      "unlocatedVerified": 0,
+      "uiChecksPassed": true,
+      "pageErrors": [],
+      "traceBasedCountCheck": {
+        "expected": 2,
+        "matched": 2,
+        "missed": 0,
+        "extra": 0,
+        "matches": [
+          {
+            "window": [
+              11.8,
+              13.2
+            ],
+            "event": 13.2
+          },
+          {
+            "window": [
+              15.55,
+              17.15
+            ],
+            "event": 17.066666666666666
+          }
+        ],
+        "misses": [],
+        "extraTimes": []
+      },
+      "countAudit": {
+        "index": 11,
+        "file": "ymove-goblet-squat-with-kettlebell.mp4",
+        "calibration": {
+          "side": "right",
+          "thetaTop": 176.90852164074022,
+          "thetaBottom": 60.77749960920121
+        },
+        "calibrationEndSec": 9.6,
+        "calibrationEvents": [
+          2.9333333333333336,
+          6.066666666666667,
+          9.6
+        ],
+        "calibrationCycles": 3,
+        "calibrationVisibleFraction": 1,
+        "formalEvents": [
+          13.2,
+          17.066666666666666
+        ],
+        "verified": 2,
+        "countCheck": {
+          "expected": 2,
+          "matched": 2,
+          "missed": 0,
+          "unmatched": 0,
+          "matches": [
+            {
+              "window": [
+                11.8,
+                13.2
+              ],
+              "event": 13.2
+            },
+            {
+              "window": [
+                15.55,
+                17.15
+              ],
+              "event": 17.066666666666666
+            }
+          ],
+          "misses": [],
+          "unmatchedTimes": []
+        }
+      },
+      "countCheck": {
+        "expected": 2,
+        "matched": 2,
+        "missed": 0,
+        "unmatched": 0,
+        "matches": [
+          {
+            "window": [
+              11.8,
+              13.2
+            ],
+            "event": 13.2
+          },
+          {
+            "window": [
+              15.55,
+              17.15
+            ],
+            "event": 17.066666666666666
+          }
+        ],
+        "misses": [],
+        "unmatchedTimes": []
+      }
+    },
+    {
+      "index": 12,
+      "file": "pexels-3209802.mp4",
+      "exercise": "lat-pulldown",
+      "control": false,
+      "preparedSha256": "f260d0e78608c08766bfdb32452b35df26f1b8e57ac258758fe29d57fe232525",
+      "referenceWindows": null,
+      "errors": [],
+      "frames": 225,
+      "sourceSpanMs": [
+        0,
+        14933.333333333334
+      ],
+      "maxSourceGapMs": 66.66666666666788,
+      "calibrated": false,
+      "verified": 0,
+      "reviewEntries": 0,
+      "metrics": null,
+      "repetitions": [],
+      "uiChecksPassed": true,
+      "pageErrors": [],
+      "traceBasedCountCheck": null,
+      "countAudit": {
+        "index": 12,
+        "file": "pexels-3209802.mp4",
+        "calibration": null,
+        "calibrationEndSec": null,
+        "calibrationEvents": [],
+        "calibrationCycles": 0,
+        "calibrationVisibleFraction": 0.013333333333333334,
+        "formalEvents": [],
+        "verified": 0,
+        "countCheck": null
+      },
+      "countCheck": null
+    },
+    {
+      "index": 13,
+      "file": "pexels-5983521.mp4",
+      "exercise": "lat-pulldown",
+      "control": false,
+      "preparedSha256": "36c08e1fac43d6777846e09fe0d6fea7794b30fbc95226dbf9bb04ecd14fd10a",
+      "referenceWindows": [
+        [
+          6,
+          10.45
+        ]
+      ],
+      "errors": [],
+      "frames": 162,
+      "sourceSpanMs": [
+        0,
+        10733.333333333334
+      ],
+      "maxSourceGapMs": 66.66666666666788,
+      "calibrated": false,
+      "verified": 0,
+      "reviewEntries": 0,
+      "metrics": null,
+      "repetitions": [],
+      "uiChecksPassed": true,
+      "pageErrors": [],
+      "traceBasedCountCheck": {
+        "expected": 0,
+        "matched": 0,
+        "missed": 0,
+        "extra": 0,
+        "matches": [],
+        "misses": [],
+        "extraTimes": []
+      },
+      "countAudit": {
+        "index": 13,
+        "file": "pexels-5983521.mp4",
+        "calibration": null,
+        "calibrationEndSec": null,
+        "calibrationEvents": [
+          9.933333333333334
+        ],
+        "calibrationCycles": 1,
+        "calibrationVisibleFraction": 1,
+        "formalEvents": [],
+        "verified": 0,
+        "countCheck": {
+          "expected": 0,
+          "matched": 0,
+          "missed": 0,
+          "unmatched": 0,
+          "matches": [],
+          "misses": [],
+          "unmatchedTimes": []
+        }
+      },
+      "countCheck": {
+        "expected": 0,
+        "matched": 0,
+        "missed": 0,
+        "unmatched": 0,
+        "matches": [],
+        "misses": [],
+        "unmatchedTimes": []
+      }
+    },
+    {
+      "index": 14,
+      "file": "szat-front.webm",
+      "exercise": "squat",
+      "control": false,
+      "preparedSha256": "dfe48449484d5de067adbca059b20158b027e092e945bfee4c33578055140156",
+      "referenceWindows": [
+        [
+          6.3,
+          8.5
+        ],
+        [
+          11.1,
+          13.25
+        ],
+        [
+          15.8,
+          17.9
+        ],
+        [
+          20.4,
+          22.3
+        ],
+        [
+          24.8,
+          27
+        ],
+        [
+          29.9,
+          31.8
+        ],
+        [
+          34.4,
+          36.8
+        ]
+      ],
+      "errors": [],
+      "frames": 560,
+      "sourceSpanMs": [
+        0,
+        37266.666666666664
+      ],
+      "maxSourceGapMs": 66.66666666667152,
+      "calibrated": false,
+      "verified": 0,
+      "reviewEntries": 0,
+      "metrics": null,
+      "repetitions": [],
+      "unlocatedVerified": 0,
+      "uiChecksPassed": true,
+      "pageErrors": [],
+      "traceBasedCountCheck": {
+        "expected": 4,
+        "matched": 0,
+        "missed": 4,
+        "extra": 0,
+        "matches": [],
+        "misses": [
+          [
+            20.4,
+            22.3
+          ],
+          [
+            24.8,
+            27
+          ],
+          [
+            29.9,
+            31.8
+          ],
+          [
+            34.4,
+            36.8
+          ]
+        ],
+        "extraTimes": []
+      },
+      "countAudit": {
+        "index": 14,
+        "file": "szat-front.webm",
+        "calibration": null,
+        "calibrationEndSec": null,
+        "calibrationEvents": [
+          13.666666666666666
+        ],
+        "calibrationCycles": 1,
+        "calibrationVisibleFraction": 0.9053571428571429,
+        "formalEvents": [],
+        "verified": 0,
+        "countCheck": {
+          "expected": 4,
+          "matched": 0,
+          "missed": 4,
+          "unmatched": 0,
+          "matches": [],
+          "misses": [
+            [
+              20.4,
+              22.3
+            ],
+            [
+              24.8,
+              27
+            ],
+            [
+              29.9,
+              31.8
+            ],
+            [
+              34.4,
+              36.8
+            ]
+          ],
+          "unmatchedTimes": []
+        }
+      },
+      "countCheck": {
+        "expected": 4,
+        "matched": 0,
+        "missed": 4,
+        "unmatched": 0,
+        "matches": [],
+        "misses": [
+          [
+            20.4,
+            22.3
+          ],
+          [
+            24.8,
+            27
+          ],
+          [
+            29.9,
+            31.8
+          ],
+          [
+            34.4,
+            36.8
+          ]
+        ],
+        "unmatchedTimes": []
+      }
+    },
+    {
+      "index": 15,
+      "file": "szat-side.webm",
+      "exercise": "squat",
+      "control": false,
+      "preparedSha256": "db9917c7bec60dafab7814e12a545a0cc8f026c0ba1f4e7e1992d21451d2e921",
+      "referenceWindows": [
+        [
+          4.6,
+          6.1
+        ],
+        [
+          7.8,
+          9.15
+        ],
+        [
+          10.75,
+          12.2
+        ],
+        [
+          13.6,
+          15.2
+        ],
+        [
+          16.55,
+          18.2
+        ],
+        [
+          19.8,
+          21.2
+        ],
+        [
+          22.5,
+          24.3
+        ],
+        [
+          27.9,
+          29.8
+        ],
+        [
+          32.3,
+          34.7
+        ]
+      ],
+      "errors": [],
+      "frames": 529,
+      "sourceSpanMs": [
+        0,
+        35200
+      ],
+      "maxSourceGapMs": 66.66666666667152,
+      "calibrated": true,
+      "reviewEntries": 6,
+      "verified": 6,
+      "metrics": {
+        "measuredReps": 6,
+        "medianDurationMs": 2733.333333333334,
+        "medianReturnMs": 1400,
+        "returnVariation": 0,
+        "medianRange": 1,
+        "pairedReps": 0,
+        "medianLagMs": null,
+        "coverage": 1,
+        "view": null
+      },
+      "repetitions": [
+        {
+          "repIndex": 0,
+          "sourceStartMs": 12466.666666666666,
+          "durationMs": 2666.666666666668,
+          "verified": true,
+          "range": 1,
+          "outboundMs": 1266.6666666666679,
+          "returnMs": 1400,
+          "bottomHoldMs": 466.66666666666606,
+          "minAngle": 40.633469059506275,
+          "maxAngle": 172.90084905299085,
+          "excursionDeg": 132.26737999348458,
+          "bilateralLagMs": null,
+          "bilateralReason": "需要两侧全程清晰、正面或背面固定机位",
+          "pairedCoverage": 0
+        },
+        {
+          "repIndex": 1,
+          "sourceStartMs": 15466.666666666666,
+          "durationMs": 2666.666666666666,
+          "verified": true,
+          "range": 1,
+          "outboundMs": 1266.666666666666,
+          "returnMs": 1400,
+          "bottomHoldMs": 266.6666666666679,
+          "minAngle": 40.43333560172417,
+          "maxAngle": 168.2160628397559,
+          "excursionDeg": 127.78272723803173,
+          "bilateralLagMs": null,
+          "bilateralReason": "需要两侧全程清晰、正面或背面固定机位",
+          "pairedCoverage": 0
+        },
+        {
+          "repIndex": 2,
+          "sourceStartMs": 18466.666666666668,
+          "durationMs": 2666.6666666666642,
+          "verified": true,
+          "range": 1,
+          "outboundMs": 1266.6666666666642,
+          "returnMs": 1400,
+          "bottomHoldMs": 133.33333333333576,
+          "minAngle": 42.788120590287065,
+          "maxAngle": 177.36423124557896,
+          "excursionDeg": 134.5761106552919,
+          "bilateralLagMs": null,
+          "bilateralReason": "需要两侧全程清晰、正面或背面固定机位",
+          "pairedCoverage": 0
+        },
+        {
+          "repIndex": 3,
+          "sourceStartMs": 21400,
+          "durationMs": 2800,
+          "verified": true,
+          "range": 0.9965689233653056,
+          "outboundMs": 1333.3333333333321,
+          "returnMs": 1466.6666666666679,
+          "bottomHoldMs": 400,
+          "minAngle": 44.243409226301964,
+          "maxAngle": 166.6018103528079,
+          "excursionDeg": 122.35840112650592,
+          "bilateralLagMs": null,
+          "bilateralReason": "需要两侧全程清晰、正面或背面固定机位",
+          "pairedCoverage": 0
+        },
+        {
+          "repIndex": 4,
+          "sourceStartMs": 26733.333333333332,
+          "durationMs": 2866.666666666668,
+          "verified": true,
+          "range": 1,
+          "outboundMs": 1466.6666666666679,
+          "returnMs": 1400,
+          "bottomHoldMs": 466.66666666666424,
+          "minAngle": 41.890841266873586,
+          "maxAngle": 166.7308246705979,
+          "excursionDeg": 124.83998340372432,
+          "bilateralLagMs": null,
+          "bilateralReason": "需要两侧全程清晰、正面或背面固定机位",
+          "pairedCoverage": 0
+        },
+        {
+          "repIndex": 5,
+          "sourceStartMs": 30933.333333333332,
+          "durationMs": 3533.333333333332,
+          "verified": true,
+          "range": 1,
+          "outboundMs": 1866.6666666666679,
+          "returnMs": 1666.6666666666642,
+          "bottomHoldMs": 466.6666666666679,
+          "minAngle": 38.50559813764308,
+          "maxAngle": 174.21710459506525,
+          "excursionDeg": 135.71150645742216,
+          "bilateralLagMs": null,
+          "bilateralReason": "需要两侧全程清晰、正面或背面固定机位",
+          "pairedCoverage": 0
+        }
+      ],
+      "exp": {
+        "verifiedReps": 6,
+        "qualityBonus": 0,
+        "fixedBonus": 0
+      },
+      "cue": null,
+      "sourceReviewChecked": true,
+      "unlocatedVerified": 0,
+      "uiChecksPassed": true,
+      "pageErrors": [],
+      "traceBasedCountCheck": {
+        "expected": 6,
+        "matched": 6,
+        "missed": 0,
+        "extra": 0,
+        "matches": [
+          {
+            "window": [
+              13.6,
+              15.2
+            ],
+            "event": 15.133333333333335
+          },
+          {
+            "window": [
+              16.55,
+              18.2
+            ],
+            "event": 18.133333333333333
+          },
+          {
+            "window": [
+              19.8,
+              21.2
+            ],
+            "event": 21.133333333333333
+          },
+          {
+            "window": [
+              22.5,
+              24.3
+            ],
+            "event": 24.2
+          },
+          {
+            "window": [
+              27.9,
+              29.8
+            ],
+            "event": 29.6
+          },
+          {
+            "window": [
+              32.3,
+              34.7
+            ],
+            "event": 34.46666666666666
+          }
+        ],
+        "misses": [],
+        "extraTimes": []
+      },
+      "countAudit": {
+        "index": 15,
+        "file": "szat-side.webm",
+        "calibration": {
+          "side": "right",
+          "thetaTop": 175.70606165708162,
+          "thetaBottom": 43.79079784688325
+        },
+        "calibrationEndSec": 12.2,
+        "calibrationEvents": [
+          6.266666666666667,
+          9.333333333333334,
+          12.2
+        ],
+        "calibrationCycles": 3,
+        "calibrationVisibleFraction": 1,
+        "formalEvents": [
+          15.133333333333335,
+          18.133333333333333,
+          21.133333333333333,
+          24.2,
+          29.6,
+          34.46666666666666
+        ],
+        "verified": 6,
+        "countCheck": {
+          "expected": 6,
+          "matched": 6,
+          "missed": 0,
+          "unmatched": 0,
+          "matches": [
+            {
+              "window": [
+                13.6,
+                15.2
+              ],
+              "event": 15.133333333333335
+            },
+            {
+              "window": [
+                16.55,
+                18.2
+              ],
+              "event": 18.133333333333333
+            },
+            {
+              "window": [
+                19.8,
+                21.2
+              ],
+              "event": 21.133333333333333
+            },
+            {
+              "window": [
+                22.5,
+                24.3
+              ],
+              "event": 24.2
+            },
+            {
+              "window": [
+                27.9,
+                29.8
+              ],
+              "event": 29.6
+            },
+            {
+              "window": [
+                32.3,
+                34.7
+              ],
+              "event": 34.46666666666666
+            }
+          ],
+          "misses": [],
+          "unmatchedTimes": []
+        }
+      },
+      "countCheck": {
+        "expected": 6,
+        "matched": 6,
+        "missed": 0,
+        "unmatched": 0,
+        "matches": [
+          {
+            "window": [
+              13.6,
+              15.2
+            ],
+            "event": 15.133333333333335
+          },
+          {
+            "window": [
+              16.55,
+              18.2
+            ],
+            "event": 18.133333333333333
+          },
+          {
+            "window": [
+              19.8,
+              21.2
+            ],
+            "event": 21.133333333333333
+          },
+          {
+            "window": [
+              22.5,
+              24.3
+            ],
+            "event": 24.2
+          },
+          {
+            "window": [
+              27.9,
+              29.8
+            ],
+            "event": 29.6
+          },
+          {
+            "window": [
+              32.3,
+              34.7
+            ],
+            "event": 34.46666666666666
+          }
+        ],
+        "misses": [],
+        "unmatchedTimes": []
+      }
+    },
+    {
+      "index": 16,
+      "file": "go4it-rear.mp4",
+      "exercise": "lat-pulldown",
+      "control": true,
+      "preparedSha256": "04b1050fffcbc236314ad79290d7501db77cc592b36ba723e26b44bdcde5dacc",
+      "referenceWindows": [
+        [
+          2.2,
+          5.75
+        ],
+        [
+          7.35,
+          11.35
+        ],
+        [
+          13.05,
+          17.35
+        ],
+        [
+          18.95,
+          23.35
+        ],
+        [
+          25.05,
+          29.05
+        ],
+        [
+          30.4,
+          34.05
+        ],
+        [
+          35.85,
+          39.55
+        ]
+      ],
+      "errors": [],
+      "frames": 601,
+      "sourceSpanMs": [
+        0,
+        40000
+      ],
+      "maxSourceGapMs": 66.66666666667152,
+      "calibrated": true,
+      "reviewEntries": 4,
+      "verified": 4,
+      "metrics": {
+        "measuredReps": 4,
+        "medianDurationMs": 3399.999999999998,
+        "medianReturnMs": 2700,
+        "returnVariation": 0.06172839506172817,
+        "medianRange": 0.9876118725701386,
+        "pairedReps": 3,
+        "medianLagMs": -39,
+        "coverage": 0.9748603351955307,
+        "view": null
+      },
+      "repetitions": [
+        {
+          "repIndex": 0,
+          "sourceStartMs": 18333.333333333332,
+          "durationMs": 3533.3333333333358,
+          "verified": true,
+          "range": 0.9935329807401411,
+          "outboundMs": 600,
+          "returnMs": 2933.3333333333358,
+          "bottomHoldMs": 533.3333333333321,
+          "minAngle": 56.271920624727066,
+          "maxAngle": 135.4783707371949,
+          "excursionDeg": 79.20645011246782,
+          "bilateralLagMs": -120,
+          "bilateralReason": "右侧减左侧的还原中点时间；实验观察值，不用于评分",
+          "pairedCoverage": 1
+        },
+        {
+          "repIndex": 1,
+          "sourceStartMs": 24533.333333333332,
+          "durationMs": 3066.666666666668,
+          "verified": true,
+          "range": 0.9785477660421578,
+          "outboundMs": 600,
+          "returnMs": 2466.666666666668,
+          "bottomHoldMs": 533.3333333333321,
+          "minAngle": 57.837132872721796,
+          "maxAngle": 137.03661103350714,
+          "excursionDeg": 79.19947816078535,
+          "bilateralLagMs": -5,
+          "bilateralReason": "右侧减左侧的还原中点时间；实验观察值，不用于评分",
+          "pairedCoverage": 1
+        },
+        {
+          "repIndex": 2,
+          "sourceStartMs": 29666.666666666668,
+          "durationMs": 3333.333333333332,
+          "verified": true,
+          "range": 1,
+          "outboundMs": 733.3333333333321,
+          "returnMs": 2600,
+          "bottomHoldMs": 333.33333333333576,
+          "minAngle": 55.02686993832411,
+          "maxAngle": 136.80899990212237,
+          "excursionDeg": 81.78212996379825,
+          "bilateralLagMs": -39,
+          "bilateralReason": "右侧减左侧的还原中点时间；实验观察值，不用于评分",
+          "pairedCoverage": 1
+        },
+        {
+          "repIndex": 3,
+          "sourceStartMs": 35133.333333333336,
+          "durationMs": 3466.6666666666642,
+          "verified": true,
+          "range": 0.9816907644001363,
+          "outboundMs": 666.6666666666642,
+          "returnMs": 2800,
+          "bottomHoldMs": 466.66666666666424,
+          "minAngle": 57.50884531565414,
+          "maxAngle": 135.92198355411662,
+          "excursionDeg": 78.41313823846248,
+          "bilateralLagMs": null,
+          "bilateralReason": "需要两侧全程清晰、正面或背面固定机位",
+          "pairedCoverage": 0.6792452830188679
+        }
+      ],
+      "exp": {
+        "verifiedReps": 4,
+        "qualityBonus": 0,
+        "fixedBonus": 0
+      },
+      "cue": null,
+      "sourceReviewChecked": true,
+      "uiChecksPassed": true,
+      "pageErrors": [],
+      "traceBasedCountCheck": {
+        "expected": 4,
+        "matched": 4,
+        "missed": 0,
+        "extra": 0,
+        "matches": [
+          {
+            "window": [
+              18.95,
+              23.35
+            ],
+            "event": 21.866666666666667
+          },
+          {
+            "window": [
+              25.05,
+              29.05
+            ],
+            "event": 27.6
+          },
+          {
+            "window": [
+              30.4,
+              34.05
+            ],
+            "event": 33
+          },
+          {
+            "window": [
+              35.85,
+              39.55
+            ],
+            "event": 38.6
+          }
+        ],
+        "misses": [],
+        "extraTimes": []
+      },
+      "countAudit": {
+        "index": 16,
+        "file": "go4it-rear.mp4",
+        "calibration": {
+          "side": "left",
+          "thetaTop": 160.04687624484643,
+          "thetaBottom": 55.59643762648138
+        },
+        "calibrationEndSec": 16.2,
+        "calibrationEvents": [
+          5,
+          10.333333333333334,
+          16.2
+        ],
+        "calibrationCycles": 3,
+        "calibrationVisibleFraction": 1,
+        "formalEvents": [
+          21.866666666666667,
+          27.6,
+          33,
+          38.6
+        ],
+        "verified": 4,
+        "countCheck": {
+          "expected": 4,
+          "matched": 4,
+          "missed": 0,
+          "unmatched": 0,
+          "matches": [
+            {
+              "window": [
+                18.95,
+                23.35
+              ],
+              "event": 21.866666666666667
+            },
+            {
+              "window": [
+                25.05,
+                29.05
+              ],
+              "event": 27.6
+            },
+            {
+              "window": [
+                30.4,
+                34.05
+              ],
+              "event": 33
+            },
+            {
+              "window": [
+                35.85,
+                39.55
+              ],
+              "event": 38.6
+            }
+          ],
+          "misses": [],
+          "unmatchedTimes": []
+        }
+      },
+      "countCheck": {
+        "expected": 4,
+        "matched": 4,
+        "missed": 0,
+        "unmatched": 0,
+        "matches": [
+          {
+            "window": [
+              18.95,
+              23.35
+            ],
+            "event": 21.866666666666667
+          },
+          {
+            "window": [
+              25.05,
+              29.05
+            ],
+            "event": 27.6
+          },
+          {
+            "window": [
+              30.4,
+              34.05
+            ],
+            "event": 33
+          },
+          {
+            "window": [
+              35.85,
+              39.55
+            ],
+            "event": 38.6
+          }
+        ],
+        "misses": [],
+        "unmatchedTimes": []
+      }
+    },
+    {
+      "index": 17,
+      "file": "goblet-squat.mp4",
+      "exercise": "squat",
+      "control": true,
+      "preparedSha256": "b904f193848260c75d89c56cccf00237cbcbca1d15b27136f698853a1e5f6536",
+      "referenceWindows": [
+        [
+          1.65,
+          3
+        ],
+        [
+          5.25,
+          6.65
+        ],
+        [
+          8.65,
+          10.1
+        ],
+        [
+          12.25,
+          13.7
+        ],
+        [
+          16.1,
+          17.7
+        ]
+      ],
+      "errors": [],
+      "frames": 287,
+      "sourceSpanMs": [
+        0,
+        19066.666666666668
+      ],
+      "maxSourceGapMs": 66.66666666666788,
+      "calibrated": true,
+      "reviewEntries": 2,
+      "verified": 2,
+      "metrics": {
+        "measuredReps": 2,
+        "medianDurationMs": 2166.666666666666,
+        "medianReturnMs": 1299.999999999999,
+        "returnVariation": null,
+        "medianRange": 0.9828618903945749,
+        "pairedReps": 0,
+        "medianLagMs": null,
+        "coverage": 1,
+        "view": {
+          "x": 0.5213250368833542,
+          "y": 0.32462313771247864,
+          "scale": 0.21420089070886797,
+          "orientation": 0.44206599601396984
+        }
+      },
+      "repetitions": [
+        {
+          "repIndex": 0,
+          "sourceStartMs": 11466.666666666666,
+          "durationMs": 2133.333333333334,
+          "verified": true,
+          "range": 0.9665731911362044,
+          "outboundMs": 866.6666666666679,
+          "returnMs": 1266.666666666666,
+          "bottomHoldMs": 66.66666666666606,
+          "minAngle": 85.66098409518371,
+          "maxAngle": 166.66603704008708,
+          "excursionDeg": 81.00505294490337,
+          "bilateralLagMs": null,
+          "bilateralReason": "需要两侧全程清晰、正面或背面固定机位",
+          "pairedCoverage": 0.8484848484848485
+        },
+        {
+          "repIndex": 1,
+          "sourceStartMs": 15133.333333333334,
+          "durationMs": 2199.999999999998,
+          "verified": true,
+          "range": 0.9991505896529453,
+          "outboundMs": 866.6666666666661,
+          "returnMs": 1333.3333333333321,
+          "bottomHoldMs": 466.6666666666679,
+          "minAngle": 82.53013136752661,
+          "maxAngle": 165.7706952641488,
+          "excursionDeg": 83.24056389662219,
+          "bilateralLagMs": null,
+          "bilateralReason": "需要两侧全程清晰、正面或背面固定机位",
+          "pairedCoverage": 0.8823529411764706
+        }
+      ],
+      "exp": {
+        "verifiedReps": 2,
+        "qualityBonus": 0,
+        "fixedBonus": 0
+      },
+      "cue": null,
+      "sourceReviewChecked": true,
+      "uiChecksPassed": true,
+      "pageErrors": [],
+      "traceBasedCountCheck": {
+        "expected": 2,
+        "matched": 2,
+        "missed": 0,
+        "extra": 0,
+        "matches": [
+          {
+            "window": [
+              12.25,
+              13.7
+            ],
+            "event": 13.6
+          },
+          {
+            "window": [
+              16.1,
+              17.7
+            ],
+            "event": 17.333333333333332
+          }
+        ],
+        "misses": [],
+        "extraTimes": []
+      },
+      "countAudit": {
+        "index": 17,
+        "file": "goblet-squat.mp4",
+        "calibration": {
+          "side": "right",
+          "thetaTop": 178.55355531734284,
+          "thetaBottom": 82.44849873806389
+        },
+        "calibrationEndSec": 10,
+        "calibrationEvents": [
+          3,
+          6.466666666666667,
+          10
+        ],
+        "calibrationCycles": 3,
+        "calibrationVisibleFraction": 1,
+        "formalEvents": [
+          13.6,
+          17.333333333333332
+        ],
+        "verified": 2,
+        "countCheck": {
+          "expected": 2,
+          "matched": 2,
+          "missed": 0,
+          "unmatched": 0,
+          "matches": [
+            {
+              "window": [
+                12.25,
+                13.7
+              ],
+              "event": 13.6
+            },
+            {
+              "window": [
+                16.1,
+                17.7
+              ],
+              "event": 17.333333333333332
+            }
+          ],
+          "misses": [],
+          "unmatchedTimes": []
+        }
+      },
+      "countCheck": {
+        "expected": 2,
+        "matched": 2,
+        "missed": 0,
+        "unmatched": 0,
+        "matches": [
+          {
+            "window": [
+              12.25,
+              13.7
+            ],
+            "event": 13.6
+          },
+          {
+            "window": [
+              16.1,
+              17.7
+            ],
+            "event": 17.333333333333332
+          }
+        ],
+        "misses": [],
+        "unmatchedTimes": []
+      }
+    }
+  ]
+}

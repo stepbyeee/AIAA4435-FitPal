@@ -395,7 +395,7 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
               </section>
             )}
             {!calibrating && !preview && <p className="count-side">本组按{selectedSide}计数{calibrationRef.current?.basis === 'upper-arm' && ' · 腕部出画，仅记录次数'}</p>}
-            {!trial && !preview && <p className="plan-current">{plan.sets} 组 × {plan.reps} 次 · {focusNames[plan.focus]}{plan.focus === 'tempo' ? ` · 自选还原 ${plan.returnSeconds} 秒` : ''}{plan.loadKg !== null ? ` · 自填 ${plan.loadKg} kg` : ''}</p>}
+            {!trial && !preview && <p className="plan-current">第 {state.setIndex + 1} / {state.totalSets} 组 · 目标 {plan.reps} 次 · {focusNames[plan.focus]}{plan.focus === 'tempo' ? ` · 自选还原 ${plan.returnSeconds} 秒` : ''}{plan.loadKg !== null ? ` · 自填 ${plan.loadKg} kg` : ''}</p>}
             {trialCue && !calibrating && trial && <div className="trial-cue" role="status">
               {trialCue.text}
               {trialCue.target && calibrationRef.current && <TrialTarget format={trial.format} calibration={calibrationRef.current} exercise={exercise.id} />}
@@ -435,7 +435,7 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
             {completed.length > 1 && <p className="count-side">第 {completed.length} 组反馈</p>}
             <LocalCue summary={settled?.summary} result={lastResult} fallback={cueText(lastResult)} />
             <Reward result={lastResult} />
-            <TrainingSettings betweenSets plan={plan} onChange={setPlan} />
+            <TrainingSettings nextSet={state.setIndex + 2} exerciseName={exercise.name} plan={plan} onChange={setPlan} />
             <button className="pill pill-wide" autoFocus onClick={() => dispatch({ type: 'nextSet' })}>
               开始第 {state.setIndex + 2} 组
             </button>
@@ -526,11 +526,11 @@ function Reward({ result }: { result: SetResult }) {
         <dd className="num">+{verifiedReps}</dd>
       </div>
       <div className={qualityBonus ? undefined : 'reward-zero'}>
-        <dt>{result.rewardReasons?.quality ?? '至少 8 下达到目标幅度，且占八成'}</dt>
+        <dt>至少 8 下达到目标幅度，且占八成</dt>
         <dd className="num">+{qualityBonus}</dd>
       </div>
       <div className={fixedBonus ? undefined : 'reward-zero'}>
-        <dt>{result.rewardReasons?.improvement ?? '改掉上一组的问题'}</dt>
+        <dt>改掉上一组的问题</dt>
         <dd className="num">{result.hadIssueToFix ? `+${fixedBonus}` : '—'}</dd>
       </div>
       <div className="reward-total">
