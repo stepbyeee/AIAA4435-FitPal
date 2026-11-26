@@ -14,11 +14,11 @@ try{
   const actual=await page.evaluate(async({frames,exercise})=>{
    const {createPulldown}=await import('/src/perception/pulldown.ts');const {createSquat}=await import('/src/perception/squat.ts');
    const {createLiveTrends,trendPath}=await import('/src/analytics/liveTrends.ts');const {createMotionRecorder}=await import('/src/analytics/motion.ts');const {settle}=await import('/src/feedback/settle.ts');
-   const limb=exercise==='squat'?'leg':'arm',create=c=>limb==='leg'?createSquat(c):createPulldown(c,{assessForm:true});
+   const limb=exercise==='squat'?'leg':'arm',create=(c,confirmedTop)=>limb==='leg'?createSquat(c):createPulldown(c,{assessForm:true,confirmedTop});
    let engine=create(),calibration=null,trends=createLiveTrends(limb),motion=createMotionRecorder(limb),phase='ready',samples=0,rangeSamples=0,tiltSamples=0,maxBuffer=0,invalidPaths=0;let lastAt=null;
    for(const frame of frames){
     const state=engine.accept(frame);
-    if(!calibration){const found=engine.getCalibration();if(found){calibration=found;engine=create(found);engine.accept(frame);trends=createLiveTrends(limb,found);motion=createMotionRecorder(limb);motion.observe(frame,true);}continue;}
+    if(!calibration){const found=engine.getCalibration();if(found){calibration=found;engine=create(found,frame);engine.accept(frame);trends=createLiveTrends(limb,found);motion=createMotionRecorder(limb);motion.observe(frame,true);}continue;}
     trends.observe(frame,state);motion.observe(frame,state.visible&&state.phase==='ready'&&state.q<=.18);
     if(phase!=='ready'&&state.phase==='ready')motion.capture(engine.endSet(),engine.getRepReview());phase=state.phase;
     const current=trends.samples.at(-1);if(current&&current.atMs!==lastAt){samples++;if(current.range!==null)rangeSamples++;if(current.tilt!==null)tiltSamples++;lastAt=current.atMs;}

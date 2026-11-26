@@ -29,7 +29,7 @@ try{
    await page.getByLabel('录像中的动作').selectOption(clip.exercise);
    await page.locator('input[type=file]').setInputFiles(media+'/'+clip.preparedFile);
    await page.getByRole('button',{name:'画中分析',exact:true}).click();
-   await page.waitForFunction(()=>document.querySelector('.set-review-stage')||document.body.innerText.includes('录像已结束。校准需要')||document.body.innerText.includes('姿态模型未能启动。'),null,{timeout:360000});
+   await page.waitForFunction(()=>document.querySelector('.set-review-stage')||document.body.innerText.includes('录像已结束。校准需要')||document.body.innerText.includes('姿态模型未能启动。'),null,{timeout:900000});
    const frames=await page.evaluate(()=>window.fpSamples);
    await writeFile(dir+'/frames.json',JSON.stringify(frames));
    record.frames=frames.length;

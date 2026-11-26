@@ -26,9 +26,19 @@ async function run(name, scenario) {
   const context = await browser.newContext({ viewport: { width: 1280, height: 820 }, acceptDownloads: true, reducedMotion: 'reduce' })
   if (values.fixtures) {
     for (const file of ['pulldown.webm','pulldown-mistakes.webm']) {
-      await context.route(origin + '/demo/' + file, route => route.fulfill({
-        path:resolve('public/demo',file),contentType:'video/webm',
-      }))
+      const bytes = await readFile(resolve('public/demo', file))
+      await context.route(origin + '/demo/' + file, route => {
+        // Recorded analysis seeks through the file. A full 200 response for every
+        // range request can make WebM repeatedly decode its first frame.
+        const range = /^bytes=(\d+)-(\d*)$/.exec(route.request().headers().range ?? '')
+        if (!range) return route.fulfill({ contentType: 'video/webm', body: bytes,
+          headers: { 'Accept-Ranges': 'bytes' } })
+        const start = Number(range[1]), end = Math.min(bytes.length - 1, range[2] ? Number(range[2]) : bytes.length - 1)
+        if (start > end || start >= bytes.length) return route.fulfill({ status: 416,
+          headers: { 'Content-Range': `bytes */${bytes.length}` }, body: '' })
+        return route.fulfill({ status: 206, contentType: 'video/webm', body: bytes.subarray(start, end + 1),
+          headers: { 'Accept-Ranges': 'bytes', 'Content-Range': `bytes ${start}-${end}/${bytes.length}` } })
+      })
     }
   }
   const page = await context.newPage()
@@ -243,7 +253,7 @@ try {
       await button(page,'开始第 1 轮').click()
       const params = new URL(page.url()).searchParams
       assert.equal(params.get('growth'),'hidden')
-      await expectVisible(page.getByRole('heading',{name:'本轮体验'}), 65000)
+      await expectVisible(page.getByRole('heading',{name:'本轮体验'}), 600000)
       assert.equal(await page.getByText(/^\+\d+ EXP$/).count(),0)
       for (const select of await page.locator('.pilot-survey select').all()) await select.selectOption('5')
       const exported = page.waitForEvent('download')
@@ -264,10 +274,10 @@ try {
         await openUrl(page, 'video=pulldown&study=' + condition)
         const survey = page.getByRole('heading', {name:'本轮体验'})
         if (condition.startsWith('rep')) {
-          await expectVisible(page.locator('.trial-cue'))
+          await expectVisible(page.locator('.trial-cue'), 600000)
           assert.equal(await page.locator('.trial-cue .joint-target').count(),condition.endsWith('card') ? 1 : 0)
         }
-        await expectVisible(survey)
+        await expectVisible(survey, 600000)
         assert.equal(await page.locator('.joint-target').count(), condition === 'set-card' ? 1 : 0)
         assert.equal(await button(page,'导出本轮记录').isDisabled(), true)
         for (const select of await page.locator('.pilot-survey select').all()) await select.selectOption('4')

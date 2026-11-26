@@ -113,6 +113,8 @@ Video is processed on device. The optional language model receives permitted obs
 
 ## Evaluation
 
+The latest [calibration/counting repair and held-out evaluation](docs/recognition-reliability.md) improved the fixed development cohort from 18/36 to 20/36 matched formal repetitions. Six additional source groups remained at 2/10 in both versions. General recognition reliability remains unresolved; these provisional matches do not establish the gates below.
+
 **Technical gates** — the system does not advance to the user study until these pass:
 
 | Gate | Target |

@@ -1,0 +1,203 @@
+{
+  "sourceHashes": {
+    "perception/pulldown.ts": "281a885631bec4c514cab6cf192862683666026a25836167634eb288a60d5d09",
+    "perception/pulldownUpperArm.ts": "a9608ccd6b96ed02f6b1b21edfc62a66fca069f5d93990ac28ef6b621ea1b6b5",
+    "perception/pulldownForm.ts": "70283e89e3eff80093c255b2caf10e8ec2c9ba8a33e5cc34cc3970ed260b01ab",
+    "perception/squat.ts": "e8da0ccf10415389ed1c5d84810c82662c534da7328c37750f4ca6f10d516700",
+    "tracking/armLandmarks.ts": "3c63a6e2844b632dd4282ce3d7ce4d3ebb36aeffb3409b5818c114aa4bf63095"
+  },
+  "method": "Replay the actual application-captured pose frames through the unchanged counter, preserving the calibration anchor. Assert identical UI counts before matching source completion timestamps to reference windows. No pose rerun or threshold changes.",
+  "results": [
+    {
+      "index": 0,
+      "file": "anil-pulldown.mp4",
+      "calibration": null,
+      "calibrationEndSec": null,
+      "calibrationEvents": [
+        8.933333333333334
+      ],
+      "calibrationCycles": 1,
+      "calibrationVisibleFraction": 0.8902439024390244,
+      "formalEvents": [],
+      "verified": 0,
+      "countCheck": {
+        "expected": 0,
+        "matched": 0,
+        "missed": 0,
+        "unmatched": 0,
+        "matches": [],
+        "misses": [],
+        "unmatchedTimes": []
+      }
+    },
+    {
+      "index": 1,
+      "file": "gaurav-pulldown.mp4",
+      "calibration": {
+        "side": "right",
+        "thetaTop": 170.7414652471987,
+        "thetaBottom": 57.196976842384665
+      },
+      "calibrationEndSec": 18,
+      "calibrationEvents": [
+        11.533333333333333,
+        15.8,
+        18
+      ],
+      "calibrationCycles": 3,
+      "calibrationVisibleFraction": 0.8929889298892989,
+      "formalEvents": [
+        20.2,
+        22.46666666666667
+      ],
+      "verified": 2,
+      "countCheck": {
+        "expected": 3,
+        "matched": 2,
+        "missed": 1,
+        "unmatched": 0,
+        "matches": [
+          {
+            "window": [
+              19,
+              20.25
+            ],
+            "event": 20.2
+          },
+          {
+            "window": [
+              21.25,
+              22.5
+            ],
+            "event": 22.46666666666667
+          }
+        ],
+        "misses": [
+          [
+            16.75,
+            18
+          ]
+        ],
+        "unmatchedTimes": []
+      }
+    },
+    {
+      "index": 2,
+      "file": "ketut-squat.mp4",
+      "calibration": null,
+      "calibrationEndSec": null,
+      "calibrationEvents": [],
+      "calibrationCycles": 0,
+      "calibrationVisibleFraction": 0,
+      "formalEvents": [],
+      "verified": 0,
+      "countCheck": {
+        "expected": 0,
+        "matched": 0,
+        "missed": 0,
+        "unmatched": 0,
+        "matches": [],
+        "misses": [],
+        "unmatchedTimes": []
+      }
+    },
+    {
+      "index": 3,
+      "file": "mit-squat.mp4",
+      "calibration": {
+        "side": "left",
+        "thetaTop": 179.42132767835201,
+        "thetaBottom": 75.41729340274007
+      },
+      "calibrationEndSec": 30.2,
+      "calibrationEvents": [
+        19.53333333333333,
+        25,
+        30.2
+      ],
+      "calibrationCycles": 3,
+      "calibrationVisibleFraction": 1,
+      "formalEvents": [],
+      "verified": 0,
+      "countCheck": {
+        "expected": 0,
+        "matched": 0,
+        "missed": 0,
+        "unmatched": 0,
+        "matches": [],
+        "misses": [],
+        "unmatchedTimes": []
+      }
+    },
+    {
+      "index": 4,
+      "file": "cottonbro-squat.mp4",
+      "calibration": null,
+      "calibrationEndSec": null,
+      "calibrationEvents": [],
+      "calibrationCycles": 0,
+      "calibrationVisibleFraction": 0.2912621359223301,
+      "formalEvents": [],
+      "verified": 0,
+      "countCheck": {
+        "expected": 5,
+        "matched": 0,
+        "missed": 5,
+        "unmatched": 0,
+        "matches": [],
+        "misses": [
+          [
+            10.25,
+            11.25
+          ],
+          [
+            12.75,
+            14
+          ],
+          [
+            15.25,
+            16
+          ],
+          [
+            17,
+            18
+          ],
+          [
+            19.25,
+            20.5
+          ]
+        ],
+        "unmatchedTimes": []
+      }
+    },
+    {
+      "index": 5,
+      "file": "mart-squat.mp4",
+      "calibration": null,
+      "calibrationEndSec": null,
+      "calibrationEvents": [],
+      "calibrationCycles": 0,
+      "calibrationVisibleFraction": 0.21483375959079284,
+      "formalEvents": [],
+      "verified": 0,
+      "countCheck": {
+        "expected": 2,
+        "matched": 0,
+        "missed": 2,
+        "unmatched": 0,
+        "matches": [],
+        "misses": [
+          [
+            17,
+            18
+          ],
+          [
+            21,
+            22
+          ]
+        ],
+        "unmatchedTimes": []
+      }
+    }
+  ]
+}

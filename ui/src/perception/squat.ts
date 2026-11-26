@@ -42,6 +42,7 @@ function legTrack(side: LegSide, fixed?: SquatCalibration) {
   let confidence = 0
   let verified = 0
   let previousAnkle: Point | null = null
+  let calibrationAnchor: Point | null = null
 
   function finishRep(rep: RepResult) {
     reps.push(rep)
@@ -60,10 +61,13 @@ function legTrack(side: LegSide, fixed?: SquatCalibration) {
   }
 
   function update(sample: LegSample | null, time: number) {
-    const cameraJump = sample && previousAnkle && Math.hypot(
-      sample.ankle.x - previousAnkle.x, sample.ankle.y - previousAnkle.y,
+    const priorPosition = fixed ? previousAnkle : calibrationAnchor
+    const cameraJump = sample && priorPosition && Math.hypot(
+      sample.ankle.x - priorPosition.x, sample.ankle.y - priorPosition.y,
     ) > 0.15
     const gap = time - lastTime > MAX_GAP_MS || cameraJump
+    if (cameraJump && !fixed) endpoints.length = 0
+    if (!fixed && sample) calibrationAnchor = sample.ankle
     previousAnkle = sample?.ankle ?? null
     const swing = fixed ? fixed.thetaTop - fixed.thetaBottom : 65
     const minimumSwing = fixed ? Math.max(24, swing * 0.32) : 35

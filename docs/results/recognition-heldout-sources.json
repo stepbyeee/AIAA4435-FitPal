@@ -1,0 +1,218 @@
+[
+  {
+    "index": 0,
+    "file": "anil-pulldown.mp4",
+    "preparedFile": "anil-pulldown.mp4",
+    "exercise": "lat-pulldown",
+    "author": "Anil Sharma",
+    "source": "https://www.pexels.com/video/young-woman-exercising-on-lat-pulldown-machine-36871349/",
+    "sourceSha256": "dc352526ce521f3befc6a74d9c4e1a1a53b9dd616f62fb4bc8f2daf277496890",
+    "preparedSha256": "dc352526ce521f3befc6a74d9c4e1a1a53b9dd616f62fb4bc8f2daf277496890",
+    "windows": [
+      [
+        6.5,
+        9.25
+      ],
+      [
+        11.5,
+        14.5
+      ]
+    ],
+    "sceneNotes": "Initial and final partial movements excluded. Two complete repetitions; insufficient calibration cycles.",
+    "preparation": "Complete original source; no looping, temporal clipping, or spatial crop.",
+    "referenceStatus": "Agent visual annotation at 0.25-second intervals before detector evaluation; provisional, not independent human ground truth.",
+    "split": "source-held-out",
+    "frozenBeforeEvaluation": true,
+    "download": "https://videos.pexels.com/video-files/36871349/15620300_1080_1920_50fps.mp4"
+  },
+  {
+    "index": 1,
+    "file": "gaurav-pulldown.mp4",
+    "preparedFile": "gaurav-pulldown.mp4",
+    "exercise": "lat-pulldown",
+    "author": "Gaurav Kumar",
+    "source": "https://www.pexels.com/video/intense-gym-workout-with-pull-down-machine-32115660/",
+    "sourceSha256": "d8988b793c9a36e859bbc79012fa530e77692fac4181f10d5cd72ab13db1acb4",
+    "preparedSha256": "d8988b793c9a36e859bbc79012fa530e77692fac4181f10d5cd72ab13db1acb4",
+    "windows": [
+      [
+        10.5,
+        11.75
+      ],
+      [
+        12.75,
+        13.75
+      ],
+      [
+        14.75,
+        16
+      ],
+      [
+        16.75,
+        18
+      ],
+      [
+        19,
+        20.25
+      ],
+      [
+        21.25,
+        22.5
+      ]
+    ],
+    "sceneNotes": "Initial mounting/grip adjustment and final release excluded. Fixed rear view.",
+    "preparation": "Complete original source; no looping, temporal clipping, or spatial crop.",
+    "referenceStatus": "Agent visual annotation at 0.25-second intervals before detector evaluation; provisional, not independent human ground truth.",
+    "split": "source-held-out",
+    "frozenBeforeEvaluation": true,
+    "download": "https://videos.pexels.com/video-files/32115660/13691997_1920_1080_24fps.mp4"
+  },
+  {
+    "index": 2,
+    "file": "ketut-squat.mp4",
+    "preparedFile": "ketut-squat.mp4",
+    "exercise": "squat",
+    "author": "Ketut Subiyanto",
+    "source": "https://www.pexels.com/video/woman-working-out-at-the-gym-4859751/",
+    "sourceSha256": "3da6993c5b82a43f3400d33867c78b3d4bd7bdb8b55c57ec5641552beea5d100",
+    "preparedSha256": "3da6993c5b82a43f3400d33867c78b3d4bd7bdb8b55c57ec5641552beea5d100",
+    "windows": [
+      [
+        8,
+        9.75
+      ],
+      [
+        12.25,
+        13.5
+      ],
+      [
+        16.25,
+        17.75
+      ]
+    ],
+    "sceneNotes": "Lower legs outside frame. Three visible body cycles; final partial descent excluded. No formal repetitions expected.",
+    "preparation": "Complete original source; no looping, temporal clipping, or spatial crop.",
+    "referenceStatus": "Agent visual annotation at 0.25-second intervals before detector evaluation; provisional, not independent human ground truth.",
+    "split": "source-held-out",
+    "frozenBeforeEvaluation": true,
+    "download": "https://videos.pexels.com/video-files/4859751/4859751-uhd_3840_2160_25fps.mp4"
+  },
+  {
+    "index": 3,
+    "file": "mit-squat.mp4",
+    "preparedFile": "mit-squat.mp4",
+    "exercise": "squat",
+    "author": "MIT OpenCourseWare",
+    "source": "https://ocw.mit.edu/courses/pe-720-weight-training-spring-2006/pages/video/",
+    "sourceSha256": "4cac8ede022aa71070ff0169d59c5fe330d588d52a2c46330296b5023acafbeb",
+    "preparedSha256": "4cac8ede022aa71070ff0169d59c5fe330d588d52a2c46330296b5023acafbeb",
+    "windows": [
+      [
+        18,
+        19.75
+      ],
+      [
+        23.5,
+        25
+      ],
+      [
+        28.5,
+        30
+      ]
+    ],
+    "sceneNotes": "Three complete squats after setup; switch of people after final repetition. No formal repetitions expected.",
+    "preparation": "Complete original source; no looping, temporal clipping, or spatial crop.",
+    "referenceStatus": "Agent visual annotation at 0.25-second intervals before detector evaluation; provisional, not independent human ground truth.",
+    "split": "source-held-out",
+    "frozenBeforeEvaluation": true,
+    "download": "https://archive.org/download/MITPE.720S06/squat_first_view-220k.mp4"
+  },
+  {
+    "index": 4,
+    "file": "cottonbro-squat.mp4",
+    "preparedFile": "cottonbro-squat.mp4",
+    "exercise": "squat",
+    "author": "cottonbro studio",
+    "source": "https://www.pexels.com/video/a-man-doing-squats-5319965/",
+    "sourceSha256": "137609353171f2b015101cd4018f1c6514d1e62096ad4bdd56b02a49f7d65d5a",
+    "preparedSha256": "137609353171f2b015101cd4018f1c6514d1e62096ad4bdd56b02a49f7d65d5a",
+    "windows": [
+      [
+        3.5,
+        4.5
+      ],
+      [
+        5.75,
+        6.75
+      ],
+      [
+        8,
+        9
+      ],
+      [
+        10.25,
+        11.25
+      ],
+      [
+        12.75,
+        14
+      ],
+      [
+        15.25,
+        16
+      ],
+      [
+        17,
+        18
+      ],
+      [
+        19.25,
+        20.5
+      ]
+    ],
+    "sceneNotes": "Eight bodyweight squats. Camera tilts upward after 11 s, progressively cropping lower legs; retain these difficult repetitions.",
+    "preparation": "Complete original source; no looping, temporal clipping, or spatial crop.",
+    "referenceStatus": "Agent visual annotation at 0.25-second intervals before detector evaluation; provisional, not independent human ground truth.",
+    "split": "source-held-out",
+    "frozenBeforeEvaluation": true,
+    "download": "https://videos.pexels.com/video-files/5319965/5319965-uhd_3840_2160_25fps.mp4"
+  },
+  {
+    "index": 5,
+    "file": "mart-squat.mp4",
+    "preparedFile": "mart-squat.mp4",
+    "exercise": "squat",
+    "author": "MART PRODUCTION",
+    "source": "https://www.pexels.com/video/woman-using-resistance-band-8837108/",
+    "sourceSha256": "6dd866c63d4fca8bf28b47c83a542203c1932182315eaf3b0120dde5b2c8b6ec",
+    "preparedSha256": "6dd866c63d4fca8bf28b47c83a542203c1932182315eaf3b0120dde5b2c8b6ec",
+    "windows": [
+      [
+        4.5,
+        5.5
+      ],
+      [
+        8.75,
+        9.75
+      ],
+      [
+        13,
+        14
+      ],
+      [
+        17,
+        18
+      ],
+      [
+        21,
+        22
+      ]
+    ],
+    "sceneNotes": "Five complete band squats with side steps between repetitions. Initial incomplete return excluded.",
+    "preparation": "Complete original source; no looping, temporal clipping, or spatial crop.",
+    "referenceStatus": "Agent visual annotation at 0.25-second intervals before detector evaluation; provisional, not independent human ground truth.",
+    "split": "source-held-out",
+    "frozenBeforeEvaluation": true,
+    "download": "https://videos.pexels.com/video-files/8837108/8837108-uhd_4096_2160_25fps.mp4"
+  }
+]

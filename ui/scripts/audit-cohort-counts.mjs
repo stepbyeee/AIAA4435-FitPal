@@ -17,7 +17,7 @@ try{
   const frames=JSON.parse(await readFile(dir+'/'+c.index+'/frames.json','utf8'));
   const audit=await page.evaluate(async({frames,exercise})=>{
    const {createPulldown}=await import('/src/perception/pulldown.ts');const {createSquat}=await import('/src/perception/squat.ts');
-   const create=c=>exercise==='squat'?createSquat(c):createPulldown(c,{assessForm:true});
+   const create=(c,confirmedTop)=>exercise==='squat'?createSquat(c):createPulldown(c,{assessForm:true,confirmedTop});
    let engine=create(),calibration=null,calibrationEndSec=null,previous=0,calCount=0,calVisible=0,calFrames=0;const calibrationEvents=[],events=[];
    for(const f of frames){
     const state=engine.accept(f);
@@ -25,7 +25,7 @@ try{
      calFrames++;if(state.visible)calVisible++;
      if(state.repCount>calCount)calibrationEvents.push(f.timestampMs/1000);calCount=state.repCount;
      const found=engine.getCalibration();
-     if(found){calibration=found;calibrationEndSec=f.timestampMs/1000;engine=create(found);engine.accept(f);}
+     if(found){calibration=found;calibrationEndSec=f.timestampMs/1000;engine=create(found,f);engine.accept(f);}
     }else{
      while(previous<state.repCount){events.push(f.timestampMs/1000);previous++;}
     }

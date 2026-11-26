@@ -81,6 +81,20 @@ function input(initial?: Calibration) {
 }
 
 describe('pulldown calibration', () => {
+  it.each([false, true])('does not combine calibration cycles across a camera cut (gap: %s)', gap => {
+    const track = input()
+    track.cycle(160, 80); track.cycle(160, 80)
+    if (gap) track.frame(null)
+    const send = (a:number) => {
+      const p=pose(a,'left');for(const point of p) point.x+=0.22;return track.frame(p)
+    }
+    const cycle = () => {
+      for(const a of [160,160,160,160,145,130,115,100,85,80,80,80,95,110,125,140,155,160,160,160]) send(a)
+    }
+    cycle(); expect(track.getCalibration()).toBeNull()
+    cycle(); expect(track.getCalibration()).toBeNull()
+    cycle(); expect(track.getCalibration()).not.toBeNull()
+  })
   it('measures a 2D elbow angle in camera pixels', () => {
     const track = input(calibration)
     const result = track.hold(120)
@@ -348,6 +362,15 @@ describe('repeated overhead wrist crop', () => {
   }
   const upper: Calibration = { side: 'left', basis: 'upper-arm', thetaTop: 145, thetaBottom: 48 }
 
+  it.each([false, true])('requires three fresh upper-arm cycles after a camera cut (gap: %s)', gap => {
+    const track=input();consume(track,cycle);consume(track,cycle)
+    if (gap) track.frame(null)
+    const shifted=()=>{for(const a of cycle){const p=croppedPose(a);for(const point of p)point.x+=0.22;track.frame(p)}}
+    shifted();expect(track.getCalibration()).toBeNull()
+    shifted();expect(track.getCalibration()).toBeNull()
+    shifted();expect(track.getCalibration()).toMatchObject({basis:'upper-arm'})
+  })
+
   it('calibrates with observed upper-arm elevation and counts without producing an elbow ROM grade', () => {
     const calibrating = input()
     for (let i = 0; i < 3; i++) consume(calibrating, cycle)
@@ -389,9 +412,65 @@ describe('repeated overhead wrist crop', () => {
     consume(live, [...cycle.slice(0, 10), 96, 102, 102, 96, 70, 50])
     expect(live.endSet().reps).toHaveLength(0)
   })
+
+  it('uses a continuously visible upper arm when only the wrist is intermittently unobservable inside the image', () => {
+    const track = input()
+    const sendCycle = (target = track) => {
+      for (const elevation of cycle) {
+        const p = croppedPose(elevation)
+        // Everything stays in the image. Only the wrist observation is lost on
+        // the raised/middle part; the lowered elbow bend is directly observed.
+        for (const point of p) point.y += 0.2
+        if (elevation >= 90) p[LM.leftWrist].visibility = 0
+        target.frame(p)
+      }
+    }
+    sendCycle(); sendCycle(); sendCycle()
+    expect(track.getCalibration()).toMatchObject({ basis: 'upper-arm' })
+    expect(track.endSet().reps).toEqual([])
+    const live = input(track.getCalibration()!)
+    sendCycle(live)
+    expect(live.endSet().reps).toMatchObject([{status:'verified',qMax:null}])
+  })
+
+  it('does not substitute unobserved elbow flexion with a visible upper-arm rise', () => {
+    const track = input()
+    for (let i = 0; i < 4; i++) for (const elevation of cycle) {
+      const p = croppedPose(elevation)
+      for (const point of p) point.y += 0.2
+      p[LM.leftWrist].visibility = 0
+      track.frame(p)
+    }
+    expect(track.getCalibration()).toBeNull()
+  })
 })
 
 describe('top recovery', () => {
+  it('carries a confirmed calibration return into the first continuous formal repetition', () => {
+    const anchor: PoseFrame = { landmarks: pose(145, 'left'), width: WIDTH, height: HEIGHT, timestampMs: 0 }
+    const run = (trusted: boolean) => {
+      const track = createPulldown(calibration, trusted ? { confirmedTop: anchor } : {})
+      track.accept(anchor)
+      let time = 0
+      for (const a of [140, 130, 115, 100, 85, 80, 80, 85, 100, 120, 140, 150, 160, 160]) {
+        time += 100
+        track.accept({ landmarks: pose(a, 'left'), width: WIDTH, height: HEIGHT, timestampMs: time })
+      }
+      return track.endSet().reps
+    }
+    expect(run(true)).toMatchObject([{ status: 'verified' }])
+    expect(run(false)).toEqual([])
+  })
+
+  it('does not accept an anchor outside the confirmed return band', () => {
+    const anchor: PoseFrame = { landmarks: pose(120, 'left'), width: WIDTH, height: HEIGHT, timestampMs: 0 }
+    const track = createPulldown(calibration, { confirmedTop: anchor })
+    for (const [i,a] of [120, 110, 100, 90, 80, 80, 100, 120, 140, 160, 160, 160].entries()) {
+      track.accept({ ...anchor, landmarks: pose(a,'left'), timestampMs:i*100 })
+    }
+    expect(track.endSet().reps).toEqual([])
+  })
+
   function reacquire(firstVisibleAngle: number) {
     const track = createPulldown()
     let timestampMs = 0
@@ -444,6 +523,35 @@ function overheadPose(flexion: number, zoom = 1): Landmark[] {
 
 describe('pulldown with continuously moving overhead turns', () => {
   const stroke = [139, 115, 92, 74, 62, 71, 92, 119, 144, 156]
+
+  it('recognizes a directly reacquired overhead start before a stable three-frame hold was established', () => {
+    const track = input()
+    track.frame(overheadPose(160))
+    track.frame(null)
+    track.frame(overheadPose(156, 0.75))
+    for (const angle of [...stroke, 156, 156]) track.frame(overheadPose(angle, 0.75))
+    expect(track.frame(overheadPose(156, 0.75)).repCount).toBe(1)
+  })
+
+  it('does not use a reacquired mid-stroke pose or a moved person as an overhead start', () => {
+    for (const moved of [false, true]) {
+      const track = input()
+      track.frame(overheadPose(160)); track.frame(null)
+      const point = overheadPose(moved ? 156 : 110)
+      if (moved) for (const p of point) p.x += 0.2
+      track.frame(point)
+      for (const angle of [...stroke.slice(1), 156, 156]) {
+        const p = overheadPose(angle)
+        if (moved) for (const joint of p) joint.x += 0.2
+        track.frame(p)
+      }
+      expect(track.getCalibration()).toBeNull()
+      expect(track.endSet().reps).toEqual([])
+      const p = overheadPose(156)
+      if (moved) for (const joint of p) joint.x += 0.2
+      expect(track.frame(p).repCount).toBe(0)
+    }
+  })
 
   it('calibrates on physically raised extended arms without stationary top holds', () => {
     const track = input()

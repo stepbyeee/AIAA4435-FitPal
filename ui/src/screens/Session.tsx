@@ -112,7 +112,9 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
     const calibrated = calibrationRef.current
     if (!calibrating && !calibrated) return
     const setCalibration = calibrating ? undefined : calibrated ?? undefined
-    const perception = squat ? createSquat(setCalibration) : createPulldown(setCalibration, { assessForm: !trial && focus === 'full' })
+    const perception = squat ? createSquat(setCalibration) : createPulldown(setCalibration, {
+      assessForm: !trial && focus === 'full', confirmedTop: !calibrating ? topFrameRef.current ?? undefined : undefined,
+    })
     const motionRecorder = createMotionRecorder(limb)
     recorder.current = motionRecorder
     const liveTrends = createLiveTrends(limb, setCalibration)
@@ -248,7 +250,8 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
     focus, side: squat ? side : 'both', pulldown: !squat,
     limb,
     file: videoFile,
-    analyzeFile: !trial,
+    // Recorded classroom previews need the same complete source sampling as replay.
+    analyzeFile: true,
     live: live && !paused,
     onFrame: (sample) => {
       if (!paused) consume.current(videoFile ? sample : { ...sample, timestampMs: performance.now() })
@@ -400,7 +403,7 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
                 </label>}
               </section>
             )}
-            {!calibrating && !preview && <p className="count-side">本组按{selectedSide}计数{calibrationRef.current?.basis === 'upper-arm' && ' · 腕部出画，仅记录次数'}</p>}
+            {!calibrating && !preview && <p className="count-side">本组按{selectedSide}计数{calibrationRef.current?.basis === 'upper-arm' && ' · 腕部证据不足，仅记录次数'}</p>}
             {!trial && !preview && <p className="plan-current">第 {state.setIndex + 1} / {state.totalSets} 组 · 目标 {plan.reps} 次 · {focusNames[plan.focus]}{plan.focus === 'tempo' ? ` · 自选还原 ${plan.returnSeconds} 秒` : ''}{plan.loadKg !== null ? ` · 自填 ${plan.loadKg} kg` : ''}</p>}
             {trialCue && !calibrating && trial && <div className="trial-cue" role="status">
               {trialCue.text}

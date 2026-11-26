@@ -31,6 +31,16 @@ function harness(initial?: SquatCalibration, side: LegSide = 'left') {
 }
 
 describe('squat perception', () => {
+  it.each([false, true])('does not combine calibration cycles across a camera cut (gap: %s)', gap => {
+    const h=harness();h.cycle();h.cycle()
+    if (gap) h.send(null)
+    const cycle=()=>{for(const a of [170,170,170,170,155,140,125,110,95,80,80,80,95,110,125,140,155,170,170,170]){
+      const p=pose(a);for(const point of p)point.x+=0.26;h.send(p)
+    }}
+    cycle();expect(h.detector.getCalibration()).toBeNull()
+    cycle();expect(h.detector.getCalibration()).toBeNull()
+    cycle();expect(h.detector.getCalibration()).not.toBeNull()
+  })
   it('measures a pixel-correct knee angle and rejects out-of-frame or collapsed geometry', () => {
     const sample = (landmarks: Landmark[]) => visibleLeg({ landmarks, width, height, timestampMs: 0 }, 'left')
     const points = pose(115)
