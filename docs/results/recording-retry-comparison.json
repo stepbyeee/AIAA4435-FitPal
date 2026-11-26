@@ -1,0 +1,1541 @@
+{
+  "date": "2026-11-26",
+  "baselineCommit": "71c4bfd98514cc96d6e452fbe95032ddfda0f537",
+  "environment": "CPU-only Chromium on allocated HPC compute nodes; full original source sampling at 15 Hz. No local inference.",
+  "matching": "First three complete reference cycles reserved for calibration; completion matched once within bottom-to-return plus 0.35 seconds. References are provisional agent/single-review annotations.",
+  "development": {
+    "before": {
+      "clips": 18,
+      "calibratedClips": 9,
+      "expected": 36,
+      "matched": 20,
+      "missed": 16,
+      "unmatched": 0,
+      "eligibleClips": 13
+    },
+    "after": {
+      "clips": 18,
+      "calibratedClips": 9,
+      "expected": 36,
+      "matched": 22,
+      "missed": 14,
+      "unmatched": 0,
+      "eligibleClips": 13
+    },
+    "clips": [
+      {
+        "index": 0,
+        "file": "dynamic-dual-pulldown.mp4",
+        "before": {
+          "calibration": {
+            "side": "right",
+            "thetaTop": 172.3228911380884,
+            "thetaBottom": 38.94459743707071
+          },
+          "calibrationEndSec": 16.4,
+          "countCheck": {
+            "expected": 2,
+            "matched": 0,
+            "missed": 2,
+            "unmatched": 0,
+            "matches": [],
+            "misses": [
+              [
+                14.64,
+                16.58
+              ],
+              [
+                19.47,
+                21.63
+              ]
+            ],
+            "unmatchedTimes": []
+          }
+        },
+        "after": {
+          "calibration": {
+            "side": "left",
+            "thetaTop": 175.15849836682423,
+            "thetaBottom": 35.48333931243784
+          },
+          "calibrationEndSec": 12.533333333333333,
+          "countCheck": {
+            "expected": 2,
+            "matched": 1,
+            "missed": 1,
+            "unmatched": 0,
+            "matches": [
+              {
+                "window": [
+                  14.64,
+                  16.58
+                ],
+                "event": 16.46666666666667
+              }
+            ],
+            "misses": [
+              [
+                19.47,
+                21.63
+              ]
+            ],
+            "unmatchedTimes": []
+          }
+        },
+        "lostPreviouslyMatchedWindows": [],
+        "gainedWindows": [
+          [
+            14.64,
+            16.58
+          ]
+        ]
+      },
+      {
+        "index": 1,
+        "file": "lifetime-neutral-grip.mp4",
+        "before": {
+          "calibration": {
+            "basis": "upper-arm",
+            "side": "left",
+            "thetaTop": 173.09326500526055,
+            "thetaBottom": 12.35757820337181
+          },
+          "calibrationEndSec": 9.933333333333334,
+          "countCheck": {
+            "expected": 2,
+            "matched": 2,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [
+              {
+                "window": [
+                  11.94,
+                  13.48
+                ],
+                "event": 13.4
+              },
+              {
+                "window": [
+                  15.18,
+                  16.73
+                ],
+                "event": 16.53333333333333
+              }
+            ],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        "after": {
+          "calibration": {
+            "basis": "upper-arm",
+            "side": "left",
+            "thetaTop": 173.09326500526055,
+            "thetaBottom": 12.35757820337181
+          },
+          "calibrationEndSec": 9.933333333333334,
+          "countCheck": {
+            "expected": 2,
+            "matched": 2,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [
+              {
+                "window": [
+                  11.94,
+                  13.48
+                ],
+                "event": 13.4
+              },
+              {
+                "window": [
+                  15.18,
+                  16.73
+                ],
+                "event": 16.53333333333333
+              }
+            ],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        "lostPreviouslyMatchedWindows": [],
+        "gainedWindows": []
+      },
+      {
+        "index": 2,
+        "file": "future-fitness-cable.mp4",
+        "before": {
+          "calibration": {
+            "side": "right",
+            "thetaTop": 171.31262197891246,
+            "thetaBottom": 73.37831761198535
+          },
+          "calibrationEndSec": 11.466666666666667,
+          "countCheck": {
+            "expected": 2,
+            "matched": 1,
+            "missed": 1,
+            "unmatched": 0,
+            "matches": [
+              {
+                "window": [
+                  13.7,
+                  14.81
+                ],
+                "event": 14.866666666666665
+              }
+            ],
+            "misses": [
+              [
+                17.13,
+                18.44
+              ]
+            ],
+            "unmatchedTimes": []
+          }
+        },
+        "after": {
+          "calibration": {
+            "side": "right",
+            "thetaTop": 171.31262197891246,
+            "thetaBottom": 73.37831761198535
+          },
+          "calibrationEndSec": 11.466666666666667,
+          "countCheck": {
+            "expected": 2,
+            "matched": 2,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [
+              {
+                "window": [
+                  13.7,
+                  14.81
+                ],
+                "event": 14.866666666666665
+              },
+              {
+                "window": [
+                  17.13,
+                  18.44
+                ],
+                "event": 18.4
+              }
+            ],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        "lostPreviouslyMatchedWindows": [],
+        "gainedWindows": [
+          [
+            17.13,
+            18.44
+          ]
+        ]
+      },
+      {
+        "index": 3,
+        "file": "adelaide-parks.mp4",
+        "before": {
+          "calibration": null,
+          "calibrationEndSec": null,
+          "countCheck": {
+            "expected": 2,
+            "matched": 0,
+            "missed": 2,
+            "unmatched": 0,
+            "matches": [],
+            "misses": [
+              [
+                12.49,
+                14.16
+              ],
+              [
+                15.75,
+                17.03
+              ]
+            ],
+            "unmatchedTimes": []
+          }
+        },
+        "after": {
+          "calibration": null,
+          "calibrationEndSec": null,
+          "countCheck": {
+            "expected": 2,
+            "matched": 0,
+            "missed": 2,
+            "unmatched": 0,
+            "matches": [],
+            "misses": [
+              [
+                12.49,
+                14.16
+              ],
+              [
+                15.75,
+                17.03
+              ]
+            ],
+            "unmatchedTimes": []
+          }
+        },
+        "lostPreviouslyMatchedWindows": [],
+        "gainedWindows": []
+      },
+      {
+        "index": 4,
+        "file": "mixkit-100549.mp4",
+        "before": {
+          "calibration": null,
+          "calibrationEndSec": null,
+          "countCheck": {
+            "expected": 2,
+            "matched": 0,
+            "missed": 2,
+            "unmatched": 0,
+            "matches": [],
+            "misses": [
+              [
+                12.28,
+                13.64
+              ],
+              [
+                15.1,
+                16.49
+              ]
+            ],
+            "unmatchedTimes": []
+          }
+        },
+        "after": {
+          "calibration": null,
+          "calibrationEndSec": null,
+          "countCheck": {
+            "expected": 2,
+            "matched": 0,
+            "missed": 2,
+            "unmatched": 0,
+            "matches": [],
+            "misses": [
+              [
+                12.28,
+                13.64
+              ],
+              [
+                15.1,
+                16.49
+              ]
+            ],
+            "unmatchedTimes": []
+          }
+        },
+        "lostPreviouslyMatchedWindows": [],
+        "gainedWindows": []
+      },
+      {
+        "index": 5,
+        "file": "pexels-7934717.mp4",
+        "before": {
+          "calibration": null,
+          "calibrationEndSec": null,
+          "countCheck": {
+            "expected": 0,
+            "matched": 0,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        "after": {
+          "calibration": null,
+          "calibrationEndSec": null,
+          "countCheck": {
+            "expected": 0,
+            "matched": 0,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        "lostPreviouslyMatchedWindows": [],
+        "gainedWindows": []
+      },
+      {
+        "index": 6,
+        "file": "pexels-35585697.mp4",
+        "before": {
+          "calibration": null,
+          "calibrationEndSec": null,
+          "countCheck": {
+            "expected": 5,
+            "matched": 0,
+            "missed": 5,
+            "unmatched": 0,
+            "matches": [],
+            "misses": [
+              [
+                8.75,
+                9.34
+              ],
+              [
+                10.07,
+                10.74
+              ],
+              [
+                11.41,
+                12.06
+              ],
+              [
+                12.72,
+                13.42
+              ],
+              [
+                14.04,
+                14.64
+              ]
+            ],
+            "unmatchedTimes": []
+          }
+        },
+        "after": {
+          "calibration": null,
+          "calibrationEndSec": null,
+          "countCheck": {
+            "expected": 5,
+            "matched": 0,
+            "missed": 5,
+            "unmatched": 0,
+            "matches": [],
+            "misses": [
+              [
+                8.75,
+                9.34
+              ],
+              [
+                10.07,
+                10.74
+              ],
+              [
+                11.41,
+                12.06
+              ],
+              [
+                12.72,
+                13.42
+              ],
+              [
+                14.04,
+                14.64
+              ]
+            ],
+            "unmatchedTimes": []
+          }
+        },
+        "lostPreviouslyMatchedWindows": [],
+        "gainedWindows": []
+      },
+      {
+        "index": 7,
+        "file": "pulldown.webm",
+        "before": {
+          "calibration": {
+            "side": "right",
+            "thetaTop": 172.94232936131425,
+            "thetaBottom": 13.206303031168355
+          },
+          "calibrationEndSec": 10,
+          "countCheck": {
+            "expected": 2,
+            "matched": 2,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [
+              {
+                "window": [
+                  12.72,
+                  14.7
+                ],
+                "event": 13.533333333333333
+              },
+              {
+                "window": [
+                  16.32,
+                  18.27
+                ],
+                "event": 17.133333333333333
+              }
+            ],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        "after": {
+          "calibration": {
+            "side": "right",
+            "thetaTop": 172.94232936131425,
+            "thetaBottom": 13.206303031168355
+          },
+          "calibrationEndSec": 10,
+          "countCheck": {
+            "expected": 2,
+            "matched": 2,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [
+              {
+                "window": [
+                  12.72,
+                  14.7
+                ],
+                "event": 13.533333333333333
+              },
+              {
+                "window": [
+                  16.32,
+                  18.27
+                ],
+                "event": 17.133333333333333
+              }
+            ],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        "lostPreviouslyMatchedWindows": [],
+        "gainedWindows": []
+      },
+      {
+        "index": 8,
+        "file": "pulldown-mistakes.webm",
+        "before": {
+          "calibration": null,
+          "calibrationEndSec": null,
+          "countCheck": {
+            "expected": 0,
+            "matched": 0,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        "after": {
+          "calibration": null,
+          "calibrationEndSec": null,
+          "countCheck": {
+            "expected": 0,
+            "matched": 0,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        "lostPreviouslyMatchedWindows": [],
+        "gainedWindows": []
+      },
+      {
+        "index": 9,
+        "file": "squat-fitnessscape.webm",
+        "before": {
+          "calibration": null,
+          "calibrationEndSec": null,
+          "countCheck": {
+            "expected": 0,
+            "matched": 0,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        "after": {
+          "calibration": null,
+          "calibrationEndSec": null,
+          "countCheck": {
+            "expected": 0,
+            "matched": 0,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        "lostPreviouslyMatchedWindows": [],
+        "gainedWindows": []
+      },
+      {
+        "index": 10,
+        "file": "ymove-barbell-back-squat.mp4",
+        "before": {
+          "calibration": {
+            "side": "left",
+            "thetaTop": 176.31999602466337,
+            "thetaBottom": 52.21629485029623
+          },
+          "calibrationEndSec": 9.933333333333334,
+          "countCheck": {
+            "expected": 1,
+            "matched": 1,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [
+              {
+                "window": [
+                  12.35,
+                  13.9
+                ],
+                "event": 13.6
+              }
+            ],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        "after": {
+          "calibration": {
+            "side": "left",
+            "thetaTop": 176.31999602466337,
+            "thetaBottom": 52.21629485029623
+          },
+          "calibrationEndSec": 9.933333333333334,
+          "countCheck": {
+            "expected": 1,
+            "matched": 1,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [
+              {
+                "window": [
+                  12.35,
+                  13.9
+                ],
+                "event": 13.6
+              }
+            ],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        "lostPreviouslyMatchedWindows": [],
+        "gainedWindows": []
+      },
+      {
+        "index": 11,
+        "file": "ymove-goblet-squat-with-kettlebell.mp4",
+        "before": {
+          "calibration": {
+            "side": "right",
+            "thetaTop": 176.90852164074022,
+            "thetaBottom": 60.77749960920121
+          },
+          "calibrationEndSec": 9.6,
+          "countCheck": {
+            "expected": 2,
+            "matched": 2,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [
+              {
+                "window": [
+                  11.8,
+                  13.2
+                ],
+                "event": 13.2
+              },
+              {
+                "window": [
+                  15.55,
+                  17.15
+                ],
+                "event": 17.066666666666666
+              }
+            ],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        "after": {
+          "calibration": {
+            "side": "right",
+            "thetaTop": 176.90852164074022,
+            "thetaBottom": 60.77749960920121
+          },
+          "calibrationEndSec": 9.6,
+          "countCheck": {
+            "expected": 2,
+            "matched": 2,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [
+              {
+                "window": [
+                  11.8,
+                  13.2
+                ],
+                "event": 13.2
+              },
+              {
+                "window": [
+                  15.55,
+                  17.15
+                ],
+                "event": 17.066666666666666
+              }
+            ],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        "lostPreviouslyMatchedWindows": [],
+        "gainedWindows": []
+      },
+      {
+        "index": 12,
+        "file": "pexels-3209802.mp4",
+        "before": {
+          "calibration": null,
+          "calibrationEndSec": null,
+          "countCheck": null
+        },
+        "after": {
+          "calibration": null,
+          "calibrationEndSec": null,
+          "countCheck": null
+        },
+        "lostPreviouslyMatchedWindows": [],
+        "gainedWindows": []
+      },
+      {
+        "index": 13,
+        "file": "pexels-5983521.mp4",
+        "before": {
+          "calibration": null,
+          "calibrationEndSec": null,
+          "countCheck": {
+            "expected": 0,
+            "matched": 0,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        "after": {
+          "calibration": null,
+          "calibrationEndSec": null,
+          "countCheck": {
+            "expected": 0,
+            "matched": 0,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        "lostPreviouslyMatchedWindows": [],
+        "gainedWindows": []
+      },
+      {
+        "index": 14,
+        "file": "szat-front.webm",
+        "before": {
+          "calibration": null,
+          "calibrationEndSec": null,
+          "countCheck": {
+            "expected": 4,
+            "matched": 0,
+            "missed": 4,
+            "unmatched": 0,
+            "matches": [],
+            "misses": [
+              [
+                20.4,
+                22.3
+              ],
+              [
+                24.8,
+                27
+              ],
+              [
+                29.9,
+                31.8
+              ],
+              [
+                34.4,
+                36.8
+              ]
+            ],
+            "unmatchedTimes": []
+          }
+        },
+        "after": {
+          "calibration": null,
+          "calibrationEndSec": null,
+          "countCheck": {
+            "expected": 4,
+            "matched": 0,
+            "missed": 4,
+            "unmatched": 0,
+            "matches": [],
+            "misses": [
+              [
+                20.4,
+                22.3
+              ],
+              [
+                24.8,
+                27
+              ],
+              [
+                29.9,
+                31.8
+              ],
+              [
+                34.4,
+                36.8
+              ]
+            ],
+            "unmatchedTimes": []
+          }
+        },
+        "lostPreviouslyMatchedWindows": [],
+        "gainedWindows": []
+      },
+      {
+        "index": 15,
+        "file": "szat-side.webm",
+        "before": {
+          "calibration": {
+            "side": "right",
+            "thetaTop": 175.70606165708162,
+            "thetaBottom": 43.79079784688325
+          },
+          "calibrationEndSec": 12.2,
+          "countCheck": {
+            "expected": 6,
+            "matched": 6,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [
+              {
+                "window": [
+                  13.6,
+                  15.2
+                ],
+                "event": 15.133333333333335
+              },
+              {
+                "window": [
+                  16.55,
+                  18.2
+                ],
+                "event": 18.133333333333333
+              },
+              {
+                "window": [
+                  19.8,
+                  21.2
+                ],
+                "event": 21.133333333333333
+              },
+              {
+                "window": [
+                  22.5,
+                  24.3
+                ],
+                "event": 24.2
+              },
+              {
+                "window": [
+                  27.9,
+                  29.8
+                ],
+                "event": 29.6
+              },
+              {
+                "window": [
+                  32.3,
+                  34.7
+                ],
+                "event": 34.46666666666666
+              }
+            ],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        "after": {
+          "calibration": {
+            "side": "right",
+            "thetaTop": 175.70606165708162,
+            "thetaBottom": 43.79079784688325
+          },
+          "calibrationEndSec": 12.2,
+          "countCheck": {
+            "expected": 6,
+            "matched": 6,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [
+              {
+                "window": [
+                  13.6,
+                  15.2
+                ],
+                "event": 15.133333333333335
+              },
+              {
+                "window": [
+                  16.55,
+                  18.2
+                ],
+                "event": 18.133333333333333
+              },
+              {
+                "window": [
+                  19.8,
+                  21.2
+                ],
+                "event": 21.133333333333333
+              },
+              {
+                "window": [
+                  22.5,
+                  24.3
+                ],
+                "event": 24.2
+              },
+              {
+                "window": [
+                  27.9,
+                  29.8
+                ],
+                "event": 29.6
+              },
+              {
+                "window": [
+                  32.3,
+                  34.7
+                ],
+                "event": 34.46666666666666
+              }
+            ],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        "lostPreviouslyMatchedWindows": [],
+        "gainedWindows": []
+      },
+      {
+        "index": 16,
+        "file": "go4it-rear.mp4",
+        "before": {
+          "calibration": {
+            "side": "left",
+            "thetaTop": 160.04687624484643,
+            "thetaBottom": 55.59643762648138
+          },
+          "calibrationEndSec": 16.2,
+          "countCheck": {
+            "expected": 4,
+            "matched": 4,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [
+              {
+                "window": [
+                  18.95,
+                  23.35
+                ],
+                "event": 21.866666666666667
+              },
+              {
+                "window": [
+                  25.05,
+                  29.05
+                ],
+                "event": 27.6
+              },
+              {
+                "window": [
+                  30.4,
+                  34.05
+                ],
+                "event": 33
+              },
+              {
+                "window": [
+                  35.85,
+                  39.55
+                ],
+                "event": 38.6
+              }
+            ],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        "after": {
+          "calibration": {
+            "side": "left",
+            "thetaTop": 160.04687624484643,
+            "thetaBottom": 55.59643762648138
+          },
+          "calibrationEndSec": 16.2,
+          "countCheck": {
+            "expected": 4,
+            "matched": 4,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [
+              {
+                "window": [
+                  18.95,
+                  23.35
+                ],
+                "event": 21.866666666666667
+              },
+              {
+                "window": [
+                  25.05,
+                  29.05
+                ],
+                "event": 27.6
+              },
+              {
+                "window": [
+                  30.4,
+                  34.05
+                ],
+                "event": 33
+              },
+              {
+                "window": [
+                  35.85,
+                  39.55
+                ],
+                "event": 38.6
+              }
+            ],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        "lostPreviouslyMatchedWindows": [],
+        "gainedWindows": []
+      },
+      {
+        "index": 17,
+        "file": "goblet-squat.mp4",
+        "before": {
+          "calibration": {
+            "side": "right",
+            "thetaTop": 178.55355531734284,
+            "thetaBottom": 82.44849873806389
+          },
+          "calibrationEndSec": 10,
+          "countCheck": {
+            "expected": 2,
+            "matched": 2,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [
+              {
+                "window": [
+                  12.25,
+                  13.7
+                ],
+                "event": 13.6
+              },
+              {
+                "window": [
+                  16.1,
+                  17.7
+                ],
+                "event": 17.333333333333332
+              }
+            ],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        "after": {
+          "calibration": {
+            "side": "right",
+            "thetaTop": 178.55355531734284,
+            "thetaBottom": 82.44849873806389
+          },
+          "calibrationEndSec": 10,
+          "countCheck": {
+            "expected": 2,
+            "matched": 2,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [
+              {
+                "window": [
+                  12.25,
+                  13.7
+                ],
+                "event": 13.6
+              },
+              {
+                "window": [
+                  16.1,
+                  17.7
+                ],
+                "event": 17.333333333333332
+              }
+            ],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        "lostPreviouslyMatchedWindows": [],
+        "gainedWindows": []
+      }
+    ]
+  },
+  "heldout": {
+    "before": {
+      "clips": 4,
+      "calibratedClips": 2,
+      "expected": 12,
+      "matched": 12,
+      "missed": 0,
+      "unmatched": 0,
+      "eligibleClips": 2
+    },
+    "after": {
+      "clips": 4,
+      "calibratedClips": 2,
+      "expected": 12,
+      "matched": 12,
+      "missed": 0,
+      "unmatched": 0,
+      "eligibleClips": 2
+    },
+    "clips": [
+      {
+        "index": 0,
+        "file": "tuti-pulldown.mp4",
+        "before": {
+          "calibration": {
+            "side": "right",
+            "thetaTop": 148.2577686468978,
+            "thetaBottom": 45.47492639104668
+          },
+          "calibrationEndSec": 5,
+          "countCheck": {
+            "expected": 8,
+            "matched": 8,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [
+              {
+                "window": [
+                  5.75,
+                  6.5
+                ],
+                "event": 6.533333333333333
+              },
+              {
+                "window": [
+                  7.25,
+                  8.25
+                ],
+                "event": 8.133333333333333
+              },
+              {
+                "window": [
+                  9,
+                  9.75
+                ],
+                "event": 9.666666666666666
+              },
+              {
+                "window": [
+                  10.5,
+                  11.25
+                ],
+                "event": 11.266666666666666
+              },
+              {
+                "window": [
+                  12,
+                  13
+                ],
+                "event": 12.866666666666665
+              },
+              {
+                "window": [
+                  13.75,
+                  14.75
+                ],
+                "event": 14.4
+              },
+              {
+                "window": [
+                  15.5,
+                  16.25
+                ],
+                "event": 16.133333333333333
+              },
+              {
+                "window": [
+                  17,
+                  17.75
+                ],
+                "event": 17.8
+              }
+            ],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        "after": {
+          "calibration": {
+            "side": "right",
+            "thetaTop": 148.2577686468978,
+            "thetaBottom": 45.47492639104668
+          },
+          "calibrationEndSec": 5,
+          "countCheck": {
+            "expected": 8,
+            "matched": 8,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [
+              {
+                "window": [
+                  5.75,
+                  6.5
+                ],
+                "event": 6.533333333333333
+              },
+              {
+                "window": [
+                  7.25,
+                  8.25
+                ],
+                "event": 8.133333333333333
+              },
+              {
+                "window": [
+                  9,
+                  9.75
+                ],
+                "event": 9.666666666666666
+              },
+              {
+                "window": [
+                  10.5,
+                  11.25
+                ],
+                "event": 11.266666666666666
+              },
+              {
+                "window": [
+                  12,
+                  13
+                ],
+                "event": 12.866666666666665
+              },
+              {
+                "window": [
+                  13.75,
+                  14.75
+                ],
+                "event": 14.4
+              },
+              {
+                "window": [
+                  15.5,
+                  16.25
+                ],
+                "event": 16.133333333333333
+              },
+              {
+                "window": [
+                  17,
+                  17.75
+                ],
+                "event": 17.8
+              }
+            ],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        "lostPreviouslyMatchedWindows": [],
+        "gainedWindows": []
+      },
+      {
+        "index": 1,
+        "file": "jullian-pulldown.mp4",
+        "before": {
+          "calibration": {
+            "side": "left",
+            "thetaTop": 173.09258133055474,
+            "thetaBottom": 30.36340179695444
+          },
+          "calibrationEndSec": 6.666666666666667,
+          "countCheck": {
+            "expected": 4,
+            "matched": 4,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [
+              {
+                "window": [
+                  7.5,
+                  8.5
+                ],
+                "event": 8.4
+              },
+              {
+                "window": [
+                  9.25,
+                  10
+                ],
+                "event": 10
+              },
+              {
+                "window": [
+                  11,
+                  11.75
+                ],
+                "event": 11.666666666666666
+              },
+              {
+                "window": [
+                  12.5,
+                  13.5
+                ],
+                "event": 13.466666666666667
+              }
+            ],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        "after": {
+          "calibration": {
+            "side": "left",
+            "thetaTop": 173.09258133055474,
+            "thetaBottom": 30.36340179695444
+          },
+          "calibrationEndSec": 6.666666666666667,
+          "countCheck": {
+            "expected": 4,
+            "matched": 4,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [
+              {
+                "window": [
+                  7.5,
+                  8.5
+                ],
+                "event": 8.4
+              },
+              {
+                "window": [
+                  9.25,
+                  10
+                ],
+                "event": 10
+              },
+              {
+                "window": [
+                  11,
+                  11.75
+                ],
+                "event": 11.666666666666666
+              },
+              {
+                "window": [
+                  12.5,
+                  13.5
+                ],
+                "event": 13.466666666666667
+              }
+            ],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        "lostPreviouslyMatchedWindows": [],
+        "gainedWindows": []
+      },
+      {
+        "index": 2,
+        "file": "jill-squat.mp4",
+        "before": {
+          "calibration": null,
+          "calibrationEndSec": null,
+          "countCheck": {
+            "expected": 0,
+            "matched": 0,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        "after": {
+          "calibration": null,
+          "calibrationEndSec": null,
+          "countCheck": {
+            "expected": 0,
+            "matched": 0,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        "lostPreviouslyMatchedWindows": [],
+        "gainedWindows": []
+      },
+      {
+        "index": 3,
+        "file": "harvey-squat.mp4",
+        "before": {
+          "calibration": null,
+          "calibrationEndSec": null,
+          "countCheck": {
+            "expected": 0,
+            "matched": 0,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        "after": {
+          "calibration": null,
+          "calibrationEndSec": null,
+          "countCheck": {
+            "expected": 0,
+            "matched": 0,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        "lostPreviouslyMatchedWindows": [],
+        "gainedWindows": []
+      }
+    ]
+  },
+  "developmentReplication": {
+    "before": {
+      "clips": 1,
+      "calibratedClips": 1,
+      "expected": 2,
+      "matched": 0,
+      "missed": 2,
+      "unmatched": 0,
+      "eligibleClips": 1
+    },
+    "after": {
+      "clips": 1,
+      "calibratedClips": 1,
+      "expected": 2,
+      "matched": 1,
+      "missed": 1,
+      "unmatched": 0,
+      "eligibleClips": 1
+    },
+    "clips": [
+      {
+        "index": 0,
+        "file": "dynamic-dual-pulldown.mp4",
+        "before": {
+          "calibration": {
+            "side": "right",
+            "thetaTop": 172.3228911380884,
+            "thetaBottom": 38.94459743707071
+          },
+          "calibrationEndSec": 16.4,
+          "countCheck": {
+            "expected": 2,
+            "matched": 0,
+            "missed": 2,
+            "unmatched": 0,
+            "matches": [],
+            "misses": [
+              [
+                14.64,
+                16.58
+              ],
+              [
+                19.47,
+                21.63
+              ]
+            ],
+            "unmatchedTimes": []
+          }
+        },
+        "after": {
+          "calibration": {
+            "side": "left",
+            "thetaTop": 175.15849836682423,
+            "thetaBottom": 35.48333931243784
+          },
+          "calibrationEndSec": 12.533333333333333,
+          "countCheck": {
+            "expected": 2,
+            "matched": 1,
+            "missed": 1,
+            "unmatched": 0,
+            "matches": [
+              {
+                "window": [
+                  14.64,
+                  16.58
+                ],
+                "event": 16.46666666666667
+              }
+            ],
+            "misses": [
+              [
+                19.47,
+                21.63
+              ]
+            ],
+            "unmatchedTimes": []
+          }
+        },
+        "lostPreviouslyMatchedWindows": [],
+        "gainedWindows": [
+          [
+            14.64,
+            16.58
+          ]
+        ]
+      }
+    ]
+  }
+}

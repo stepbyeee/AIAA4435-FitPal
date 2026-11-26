@@ -1,5 +1,7 @@
 # Calibration and repetition-count repair
 
+This report preserves the earlier 71c4bfd repair and its six-source check. The subsequent [recorded-pose recovery](recording-recovery.md) improved the same development cohort to 22/36 and adds a separate four-source comparison; the earlier six sources were not rerun in that follow-up.
+
 The fixed eighteen-clip development cohort changed from **18 of 36** matched formal reference repetitions to **20 of 36**, with **16 missed** and **0 unmatched confirmed events** after the repair. All previously matched reference windows were retained. The six additional source-held-out recordings changed from **2 of 10** to **2 of 10**, with **0 unmatched confirmed events** in the candidate. These are provisional source-window matches, not population accuracy or proof that all calibration failures are resolved.
 
 ## What changed in actual use

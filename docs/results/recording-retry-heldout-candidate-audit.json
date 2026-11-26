@@ -1,0 +1,212 @@
+{
+  "sourceHashes": {
+    "perception/pulldown.ts": "281a885631bec4c514cab6cf192862683666026a25836167634eb288a60d5d09",
+    "perception/pulldownUpperArm.ts": "a9608ccd6b96ed02f6b1b21edfc62a66fca069f5d93990ac28ef6b621ea1b6b5",
+    "perception/pulldownForm.ts": "70283e89e3eff80093c255b2caf10e8ec2c9ba8a33e5cc34cc3970ed260b01ab",
+    "perception/squat.ts": "e8da0ccf10415389ed1c5d84810c82662c534da7328c37750f4ca6f10d516700",
+    "tracking/armLandmarks.ts": "3c63a6e2844b632dd4282ce3d7ce4d3ebb36aeffb3409b5818c114aa4bf63095"
+  },
+  "method": "Replay the actual application-captured pose frames through the unchanged counter, preserving the calibration anchor. Assert identical UI counts before matching source completion timestamps to reference windows. No pose rerun or threshold changes.",
+  "results": [
+    {
+      "index": 0,
+      "file": "tuti-pulldown.mp4",
+      "calibration": {
+        "side": "right",
+        "thetaTop": 148.2577686468978,
+        "thetaBottom": 45.47492639104668
+      },
+      "calibrationEndSec": 5,
+      "calibrationEvents": [
+        1.7333333333333332,
+        3.3333333333333335,
+        5
+      ],
+      "calibrationCycles": 3,
+      "calibrationVisibleFraction": 1,
+      "formalEvents": [
+        6.533333333333333,
+        8.133333333333333,
+        9.666666666666666,
+        11.266666666666666,
+        12.866666666666665,
+        14.4,
+        16.133333333333333,
+        17.8
+      ],
+      "verified": 8,
+      "countCheck": {
+        "expected": 8,
+        "matched": 8,
+        "missed": 0,
+        "unmatched": 0,
+        "matches": [
+          {
+            "window": [
+              5.75,
+              6.5
+            ],
+            "event": 6.533333333333333
+          },
+          {
+            "window": [
+              7.25,
+              8.25
+            ],
+            "event": 8.133333333333333
+          },
+          {
+            "window": [
+              9,
+              9.75
+            ],
+            "event": 9.666666666666666
+          },
+          {
+            "window": [
+              10.5,
+              11.25
+            ],
+            "event": 11.266666666666666
+          },
+          {
+            "window": [
+              12,
+              13
+            ],
+            "event": 12.866666666666665
+          },
+          {
+            "window": [
+              13.75,
+              14.75
+            ],
+            "event": 14.4
+          },
+          {
+            "window": [
+              15.5,
+              16.25
+            ],
+            "event": 16.133333333333333
+          },
+          {
+            "window": [
+              17,
+              17.75
+            ],
+            "event": 17.8
+          }
+        ],
+        "misses": [],
+        "unmatchedTimes": []
+      }
+    },
+    {
+      "index": 1,
+      "file": "jullian-pulldown.mp4",
+      "calibration": {
+        "side": "left",
+        "thetaTop": 173.09258133055474,
+        "thetaBottom": 30.36340179695444
+      },
+      "calibrationEndSec": 6.666666666666667,
+      "calibrationEvents": [
+        3.2,
+        5,
+        6.666666666666667
+      ],
+      "calibrationCycles": 3,
+      "calibrationVisibleFraction": 0.9405940594059405,
+      "formalEvents": [
+        8.4,
+        10,
+        11.666666666666666,
+        13.466666666666667
+      ],
+      "verified": 4,
+      "countCheck": {
+        "expected": 4,
+        "matched": 4,
+        "missed": 0,
+        "unmatched": 0,
+        "matches": [
+          {
+            "window": [
+              7.5,
+              8.5
+            ],
+            "event": 8.4
+          },
+          {
+            "window": [
+              9.25,
+              10
+            ],
+            "event": 10
+          },
+          {
+            "window": [
+              11,
+              11.75
+            ],
+            "event": 11.666666666666666
+          },
+          {
+            "window": [
+              12.5,
+              13.5
+            ],
+            "event": 13.466666666666667
+          }
+        ],
+        "misses": [],
+        "unmatchedTimes": []
+      }
+    },
+    {
+      "index": 2,
+      "file": "jill-squat.mp4",
+      "calibration": null,
+      "calibrationEndSec": null,
+      "calibrationEvents": [
+        5.2
+      ],
+      "calibrationCycles": 1,
+      "calibrationVisibleFraction": 0.34195402298850575,
+      "formalEvents": [],
+      "verified": 0,
+      "countCheck": {
+        "expected": 0,
+        "matched": 0,
+        "missed": 0,
+        "unmatched": 0,
+        "matches": [],
+        "misses": [],
+        "unmatchedTimes": []
+      }
+    },
+    {
+      "index": 3,
+      "file": "harvey-squat.mp4",
+      "calibration": null,
+      "calibrationEndSec": null,
+      "calibrationEvents": [
+        7.066666666666667
+      ],
+      "calibrationCycles": 1,
+      "calibrationVisibleFraction": 0.38596491228070173,
+      "formalEvents": [],
+      "verified": 0,
+      "countCheck": {
+        "expected": 0,
+        "matched": 0,
+        "missed": 0,
+        "unmatched": 0,
+        "matches": [],
+        "misses": [],
+        "unmatchedTimes": []
+      }
+    }
+  ]
+}

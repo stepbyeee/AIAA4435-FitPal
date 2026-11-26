@@ -113,7 +113,7 @@ Video is processed on device. The optional language model receives permitted obs
 
 ## Evaluation
 
-The latest [calibration/counting repair and held-out evaluation](docs/recognition-reliability.md) improved the fixed development cohort from 18/36 to 20/36 matched formal repetitions. Six additional source groups remained at 2/10 in both versions. General recognition reliability remains unresolved; these provisional matches do not establish the gates below.
+The latest [recorded-pose recovery and source-held-out check](docs/recording-recovery.md) improved the fixed development cohort from 20/36 to 22/36 matched formal repetitions, with no previously matched windows lost. Four new source groups matched 12/12 in both versions; only their two pulldown clips supply formal references. The [earlier calibration repair](docs/recognition-reliability.md) changed development matching from 18/36 to 20/36, while its separate six-source check remained 2/10. Those six sources were not rerun for the latest candidate. General recognition reliability remains unresolved; these provisional matches do not establish the gates below.
 
 **Technical gates** — the system does not advance to the user study until these pass:
 

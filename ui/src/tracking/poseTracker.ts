@@ -82,7 +82,12 @@ export function trackPose(
       const width = video.videoWidth, height = video.videoHeight
       const started = performance.now()
       const image = input()
-      const found = landmarker.detectForVideo(image, modelTimeMs).landmarks[0]
+      let found = landmarker.detectForVideo(image, modelTimeMs).landmarks[0]
+      // A paused recording keeps these exact pixels; retry an empty result once,
+      // preserving source time. Live video cannot promise the same image.
+      if (!found && recording && !video.srcObject) {
+        found = landmarker.detectForVideo(image, modelTimeMs + 1).landmarks[0]
+      }
       let landmarks: Landmark[] | null = null
       if (found) {
         landmarks = found.map(p => ({ x: p.x, y: p.y, visibility: p.visibility ?? 0 }))

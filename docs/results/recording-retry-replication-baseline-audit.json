@@ -1,0 +1,49 @@
+{
+  "sourceHashes": {
+    "perception/pulldown.ts": "281a885631bec4c514cab6cf192862683666026a25836167634eb288a60d5d09",
+    "perception/pulldownUpperArm.ts": "a9608ccd6b96ed02f6b1b21edfc62a66fca069f5d93990ac28ef6b621ea1b6b5",
+    "perception/pulldownForm.ts": "70283e89e3eff80093c255b2caf10e8ec2c9ba8a33e5cc34cc3970ed260b01ab",
+    "perception/squat.ts": "e8da0ccf10415389ed1c5d84810c82662c534da7328c37750f4ca6f10d516700",
+    "tracking/armLandmarks.ts": "3c63a6e2844b632dd4282ce3d7ce4d3ebb36aeffb3409b5818c114aa4bf63095"
+  },
+  "method": "Replay the actual application-captured pose frames through the unchanged counter, preserving the calibration anchor. Assert identical UI counts before matching source completion timestamps to reference windows. No pose rerun or threshold changes.",
+  "results": [
+    {
+      "index": 0,
+      "file": "dynamic-dual-pulldown.mp4",
+      "calibration": {
+        "side": "right",
+        "thetaTop": 172.3228911380884,
+        "thetaBottom": 38.94459743707071
+      },
+      "calibrationEndSec": 16.4,
+      "calibrationEvents": [
+        8,
+        12.466666666666667,
+        16.4
+      ],
+      "calibrationCycles": 3,
+      "calibrationVisibleFraction": 0.9352226720647774,
+      "formalEvents": [],
+      "verified": 0,
+      "countCheck": {
+        "expected": 2,
+        "matched": 0,
+        "missed": 2,
+        "unmatched": 0,
+        "matches": [],
+        "misses": [
+          [
+            14.64,
+            16.58
+          ],
+          [
+            19.47,
+            21.63
+          ]
+        ],
+        "unmatchedTimes": []
+      }
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # Expanded recorded-video validation
 
-This report preserves the pre-repair result. The subsequent [recognition repair and six-source held-out check](recognition-reliability.md) recovered two development repetitions (20/36) but did not improve held-out matching (2/10 in both versions).
+This report preserves the pre-repair result. The latest [recorded-pose recovery](recording-recovery.md) reaches 22/36 on the same development cohort and reports a separate four-source comparison. The subsequent [recognition repair and six-source held-out check](recognition-reliability.md) recovered two development repetitions (20/36) but did not improve held-out matching (2/10 in both versions).
 
 The application processed all 18 declared recordings without a runtime/UI-check error, but matched only 18 of 36 post-calibration reference repetitions. This is evidence of substantial recognition failure, not a broad accuracy claim. Nine clips entered set review; nine ended before completing calibration. Four of those nine contain at most three reference cycles and cannot supply formal training repetitions; one close-up has no reliable count reference. The remaining failures are retained in the scored denominator.
 
