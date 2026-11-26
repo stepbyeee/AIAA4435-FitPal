@@ -57,8 +57,12 @@ try{
  for(const name of ['这组哪里可以改进？','每一下的节奏稳定吗？','下一组先做什么？','怎么确认有进步？']){await page.getByRole('button',{name,exact:true}).click();assert((await page.locator('.coach-answer').innerText()).length>15);}
  await page.getByRole('button',{name:'这组哪里可以改进？',exact:true}).click();
  await strip.locator('.review-choices').screenshot({path:output+'/review-bars.png'});
+ await page.getByRole('button',{name:'查看最低点',exact:true}).click();
+ await page.waitForFunction(()=>{const v=document.querySelector('.source-review video');return v&&v.readyState>=2&&!v.seeking;});
+ const sourcePosition=await page.locator('.source-review video').evaluate(v=>v.currentTime);assert(Math.abs(sourcePosition-(metrics.sourceStartMs+metrics.outboundMs)/1000)<.002);
+ await page.getByRole('region',{name:'录像证据',exact:true}).screenshot({path:output+'/evidence.png'});
  await page.locator('.stage').evaluate(e=>e.style.height='auto');
- await page.screenshot({path:output+'/review-desktop.png',fullPage:true});await strip.screenshot({path:output+'/evidence.png'});await review.screenshot({path:output+'/summary.png'});await page.locator('.training-coach').screenshot({path:output+'/coach.png'});
+ await page.screenshot({path:output+'/review-desktop.png',fullPage:true});await review.screenshot({path:output+'/summary.png'});await page.locator('.training-coach').screenshot({path:output+'/coach.png'});
  await page.setViewportSize({width:390,height:844});await strip.locator('button').first().click();await page.screenshot({path:output+'/review-mobile.png',fullPage:true});
  assert.equal(await page.evaluate(()=>localStorage.getItem('fitpal.history.v3')),null);
  await page.goto(new URL('/#/history',process.env.FITPAL_URL??'http://127.0.0.1:4173').href);

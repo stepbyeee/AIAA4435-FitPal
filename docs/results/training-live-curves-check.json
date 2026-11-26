@@ -400,5 +400,11 @@
     "mainHistoryChartUsesWholeCycle": true,
     "historyDisplayFixture": "A test-only history record is populated from the actual replay report; this is a display example, not a saved camera session.",
     "desktopAndMobileScreenshotsInspected": true
+  },
+  "sourceReviewFollowUp": {
+    "actualRearReplayPassed": true,
+    "readyFrameRequired": true,
+    "bottomSourceTimeMatchesMeasurement": true,
+    "toleranceSeconds": 0.002
   }
 }
