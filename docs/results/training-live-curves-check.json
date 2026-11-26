@@ -1,0 +1,404 @@
+{
+  "date": "2026-11-26",
+  "scope": "Whole-cycle timing presentation, bounded live histories, actionable coaching and responsive review",
+  "environment": "CPU-only headless Chromium 151 on allocated compute nodes",
+  "unitTests": 189,
+  "testFiles": 33,
+  "productionBuild": "passed",
+  "existingBrowserRegressions": [
+    "overlay-side",
+    "exit-demo",
+    "manual-history",
+    "privacy",
+    "camera-denied",
+    "pilot-summary",
+    "facilitator"
+  ],
+  "actualVideoFlows": [
+    {
+      "scenario": "rear",
+      "expected": 4,
+      "rangeChanges": true,
+      "torsoCurveObserved": false,
+      "selectedValues": [
+        "3.53 s",
+        "0.60 s",
+        "2.93 s",
+        "0.53 s"
+      ],
+      "pauseClearsLive": true,
+      "mobileOutsideVideo": true,
+      "internalLayout": [
+        {
+          "client": 356,
+          "scroll": 356,
+          "x": 16,
+          "right": 374
+        },
+        {
+          "client": 312,
+          "scroll": 312,
+          "x": 39,
+          "right": 351
+        },
+        {
+          "client": 312,
+          "scroll": 312,
+          "x": 39,
+          "right": 351
+        },
+        {
+          "client": 310,
+          "scroll": 310,
+          "x": 39,
+          "right": 351
+        },
+        {
+          "client": 310,
+          "scroll": 310,
+          "x": 39,
+          "right": 351
+        },
+        {
+          "client": 310,
+          "scroll": 310,
+          "x": 39,
+          "right": 351
+        }
+      ],
+      "wholeCycleBars": [
+        {
+          "height": 100,
+          "label": "第 1 下，已达标，整次 3.53 秒"
+        },
+        {
+          "height": 86.7925,
+          "label": "第 2 下，已达标，整次 3.07 秒"
+        },
+        {
+          "height": 94.3396,
+          "label": "第 3 下，已达标，整次 3.33 秒"
+        },
+        {
+          "height": 98.1132,
+          "label": "第 4 下，已达标，整次 3.47 秒"
+        }
+      ],
+      "keyboardSelection": true,
+      "errors": []
+    },
+    {
+      "scenario": "side",
+      "expected": 2,
+      "rangeChanges": true,
+      "torsoCurveObserved": true,
+      "selectedValues": [
+        "1.33 s",
+        "0.67 s",
+        "0.67 s",
+        "0.33 s"
+      ],
+      "pauseClearsLive": true,
+      "mobileOutsideVideo": true,
+      "internalLayout": [
+        {
+          "client": 356,
+          "scroll": 356,
+          "x": 16,
+          "right": 374
+        },
+        {
+          "client": 312,
+          "scroll": 312,
+          "x": 39,
+          "right": 351
+        },
+        {
+          "client": 312,
+          "scroll": 312,
+          "x": 39,
+          "right": 351
+        },
+        {
+          "client": 310,
+          "scroll": 310,
+          "x": 39,
+          "right": 351
+        },
+        {
+          "client": 310,
+          "scroll": 310,
+          "x": 39,
+          "right": 351
+        },
+        {
+          "client": 310,
+          "scroll": 310,
+          "x": 39,
+          "right": 351
+        }
+      ],
+      "wholeCycleBars": [
+        {
+          "height": 90.9091,
+          "label": "第 1 下，已达标，整次 1.33 秒"
+        },
+        {
+          "height": 100,
+          "label": "第 2 下，已达标，整次 1.47 秒"
+        }
+      ],
+      "keyboardSelection": true,
+      "errors": []
+    },
+    {
+      "scenario": "squat",
+      "expected": 2,
+      "rangeChanges": true,
+      "torsoCurveObserved": false,
+      "selectedValues": [
+        "2.13 s",
+        "0.87 s",
+        "1.27 s",
+        "0.07 s"
+      ],
+      "pauseClearsLive": true,
+      "mobileOutsideVideo": true,
+      "internalLayout": [
+        {
+          "client": 356,
+          "scroll": 356,
+          "x": 16,
+          "right": 374
+        },
+        {
+          "client": 312,
+          "scroll": 312,
+          "x": 39,
+          "right": 351
+        },
+        {
+          "client": 312,
+          "scroll": 312,
+          "x": 39,
+          "right": 351
+        },
+        {
+          "client": 310,
+          "scroll": 310,
+          "x": 39,
+          "right": 351
+        },
+        {
+          "client": 310,
+          "scroll": 310,
+          "x": 39,
+          "right": 351
+        }
+      ],
+      "wholeCycleBars": [
+        {
+          "height": 96.9697,
+          "label": "第 1 下，已达标，整次 2.13 秒"
+        },
+        {
+          "height": 100,
+          "label": "第 2 下，已达标，整次 2.20 秒"
+        }
+      ],
+      "keyboardSelection": true,
+      "errors": []
+    }
+  ],
+  "capturedPoseReplay": {
+    "clips": 18,
+    "allLegacyValuesEqual": true,
+    "mode": "captured-pose replay, no new inference or independent annotation",
+    "observability": [
+      {
+        "file": "dynamic-dual-pulldown.mp4",
+        "calibrated": true,
+        "verified": 0,
+        "rangeSamples": 39,
+        "tiltSamples": 0,
+        "maxBuffer": 40,
+        "invalidPaths": 0
+      },
+      {
+        "file": "lifetime-neutral-grip.mp4",
+        "calibrated": false,
+        "verified": 0,
+        "rangeSamples": 0,
+        "tiltSamples": 0,
+        "maxBuffer": 0,
+        "invalidPaths": 0
+      },
+      {
+        "file": "future-fitness-cable.mp4",
+        "calibrated": true,
+        "verified": 1,
+        "rangeSamples": 58,
+        "tiltSamples": 29,
+        "maxBuffer": 48,
+        "invalidPaths": 0
+      },
+      {
+        "file": "adelaide-parks.mp4",
+        "calibrated": false,
+        "verified": 0,
+        "rangeSamples": 0,
+        "tiltSamples": 0,
+        "maxBuffer": 0,
+        "invalidPaths": 0
+      },
+      {
+        "file": "mixkit-100549.mp4",
+        "calibrated": false,
+        "verified": 0,
+        "rangeSamples": 0,
+        "tiltSamples": 0,
+        "maxBuffer": 0,
+        "invalidPaths": 0
+      },
+      {
+        "file": "pexels-7934717.mp4",
+        "calibrated": false,
+        "verified": 0,
+        "rangeSamples": 0,
+        "tiltSamples": 0,
+        "maxBuffer": 0,
+        "invalidPaths": 0
+      },
+      {
+        "file": "pexels-35585697.mp4",
+        "calibrated": true,
+        "verified": 0,
+        "rangeSamples": 2,
+        "tiltSamples": 0,
+        "maxBuffer": 2,
+        "invalidPaths": 0
+      },
+      {
+        "file": "pulldown.webm",
+        "calibrated": true,
+        "verified": 2,
+        "rangeSamples": 62,
+        "tiltSamples": 62,
+        "maxBuffer": 46,
+        "invalidPaths": 0
+      },
+      {
+        "file": "pulldown-mistakes.webm",
+        "calibrated": false,
+        "verified": 0,
+        "rangeSamples": 0,
+        "tiltSamples": 0,
+        "maxBuffer": 0,
+        "invalidPaths": 0
+      },
+      {
+        "file": "squat-fitnessscape.webm",
+        "calibrated": false,
+        "verified": 0,
+        "rangeSamples": 0,
+        "tiltSamples": 0,
+        "maxBuffer": 0,
+        "invalidPaths": 0
+      },
+      {
+        "file": "ymove-barbell-back-squat.mp4",
+        "calibrated": true,
+        "verified": 1,
+        "rangeSamples": 30,
+        "tiltSamples": 0,
+        "maxBuffer": 30,
+        "invalidPaths": 0
+      },
+      {
+        "file": "ymove-goblet-squat-with-kettlebell.mp4",
+        "calibrated": true,
+        "verified": 2,
+        "rangeSamples": 57,
+        "tiltSamples": 0,
+        "maxBuffer": 46,
+        "invalidPaths": 0
+      },
+      {
+        "file": "pexels-3209802.mp4",
+        "calibrated": false,
+        "verified": 0,
+        "rangeSamples": 0,
+        "tiltSamples": 0,
+        "maxBuffer": 0,
+        "invalidPaths": 0
+      },
+      {
+        "file": "pexels-5983521.mp4",
+        "calibrated": false,
+        "verified": 0,
+        "rangeSamples": 0,
+        "tiltSamples": 0,
+        "maxBuffer": 0,
+        "invalidPaths": 0
+      },
+      {
+        "file": "szat-front.webm",
+        "calibrated": false,
+        "verified": 0,
+        "rangeSamples": 0,
+        "tiltSamples": 0,
+        "maxBuffer": 0,
+        "invalidPaths": 0
+      },
+      {
+        "file": "szat-side.webm",
+        "calibrated": true,
+        "verified": 6,
+        "rangeSamples": 173,
+        "tiltSamples": 0,
+        "maxBuffer": 46,
+        "invalidPaths": 0
+      },
+      {
+        "file": "go4it-rear.mp4",
+        "calibrated": true,
+        "verified": 4,
+        "rangeSamples": 176,
+        "tiltSamples": 0,
+        "maxBuffer": 48,
+        "invalidPaths": 0
+      },
+      {
+        "file": "goblet-squat.mp4",
+        "calibrated": true,
+        "verified": 2,
+        "rangeSamples": 68,
+        "tiltSamples": 0,
+        "maxBuffer": 46,
+        "invalidPaths": 0
+      }
+    ]
+  },
+  "limits": [
+    "Source videos are existing project material, not new independent participants or held-out sources.",
+    "The 18-clip check replays previously captured poses; it is not 18 new model-inference runs.",
+    "Duration starts at recognized onset after leaving the top region, not the first physical movement frame.",
+    "Neither absolute timing nor torso tilt has independent manual ground truth in this check.",
+    "Existing calibration failures and missed repetitions remain; no recognition-accuracy improvement is claimed.",
+    "Whole-cycle rhythm and experimental bilateral observations do not change EXP or wardrobe rules."
+  ],
+  "sourceSha256": {
+    "ui/src/analytics/liveTrends.ts": "16cc7c17ff6cef0c9ecbf4baa3c905a85de84c3e5ba356799a238b77f303319e",
+    "ui/src/analytics/motion.ts": "2f7d7c9e5a83d4ffa1d72c5cff15af7b276fe731ae915d2c35a56caeb65c88e1",
+    "ui/src/training/policy.ts": "1ca280330094b1b26113bc6426b01cf3ec10806ca37041db8b86dc98855d5914",
+    "ui/src/training/RepTimingChart.tsx": "4b8f6a4d8dd528c51967973011d9b9c7e8dbd0651b8de4fb24b0d928d93cbcea"
+  },
+  "additionalRearReplay": {
+    "passed": true,
+    "verifiedRepetitions": 4,
+    "durationBarsMatchReport": true,
+    "mainHistoryChartUsesWholeCycle": true,
+    "historyDisplayFixture": "A test-only history record is populated from the actual replay report; this is a display example, not a saved camera session.",
+    "desktopAndMobileScreenshotsInspected": true
+  }
+}

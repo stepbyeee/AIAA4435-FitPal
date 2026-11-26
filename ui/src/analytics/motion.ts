@@ -21,6 +21,20 @@ export const median = (values: number[]): number | null => {
   const sorted = [...values].sort((a, b) => a - b), mid = Math.floor(sorted.length / 2)
   return sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2
 }
+export type TimingKey = 'durationMs' | 'outboundMs' | 'returnMs' | 'bottomHoldMs'
+export const measuredTime = (rep: RepMetrics | undefined, key: TimingKey = 'durationMs') => {
+  const value = rep?.[key]
+  return rep?.verified && typeof value === 'number' && Number.isFinite(value) && (key === 'durationMs' ? value > 0 : value >= 0) ? value : null
+}
+export function wholeCycleStats(reps: readonly RepMetrics[]) {
+  const measured = reps.filter(r => measuredTime(r) !== null)
+  const durations = measured.map(r => r.durationMs)
+  const typical = median(durations)
+  const shortest = measured.reduce<RepMetrics | null>((best, r) => !best || r.durationMs < best.durationMs ? r : best, null)
+  const longest = measured.reduce<RepMetrics | null>((best, r) => !best || r.durationMs > best.durationMs ? r : best, null)
+  return { count: measured.length, typical, shortest, longest,
+    variation: measured.length >= 3 && typical !== null ? median(durations.map(n => Math.abs(n - typical)))! / typical : null }
+}
 const numbers = (values: (number | null)[]) => values.filter((n): n is number => n !== null && Number.isFinite(n))
 const round = (n: number) => Math.round(n)
 export function sameView(a: ViewSignature | null, b: ViewSignature | null) {
@@ -153,7 +167,7 @@ export function createMotionRecorder(limb: Limb) {
     })
   }
   return {
-    observe, capture, get latest() { return captured.at(-1) ?? null }, get samples() { return samples }, get live() { return live },
+    observe, capture, get reps(): readonly RepMetrics[] { return captured }, get latest() { return captured.at(-1) ?? null }, get samples() { return samples }, get live() { return live },
     finish(summary: SetSummary, review: RepReviewData): SetMotion {
       capture(summary, review)
       const reps = [...captured]

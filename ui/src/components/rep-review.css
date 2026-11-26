@@ -41,3 +41,7 @@
 .trunk-recheck h3, .trunk-recheck p { margin: 0 0 .35rem; }
 .trunk-recheck p:last-child { margin-bottom: 0; }
 .trunk-recheck[data-comparison="unavailable"] { border-color: var(--rule); }
+
+.rep-review[data-timed='true'] .review-choices button { flex-basis: 48px; }
+.review-key { font-size: 12px; color: var(--muted); margin: 7px 0 0; }
+.review-seconds { white-space: nowrap; font-variant-numeric: tabular-nums; }

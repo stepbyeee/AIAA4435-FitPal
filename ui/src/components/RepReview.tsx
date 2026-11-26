@@ -3,7 +3,7 @@ import { IN_RANGE, type RepResult, type SetSummary } from '../contract'
 import type { RepReviewData, RepTrace, ReviewSample } from '../perception/repReview'
 import './rep-review.css'
 import { SourceReview } from '../training/SourceReview'
-import type { RepMetrics } from '../analytics/motion'
+import { measuredTime, type RepMetrics } from '../analytics/motion'
 
 type Point = { x: number; y: number }
 type Project = (sample: ReviewSample) => Point
@@ -79,29 +79,36 @@ export function RepReview({ summary, review, mirrored = false, videoFile, metric
   const rep = summary.reps[selected]
   const trace = review.traces.find(item => item.repIndex === selected)
   const verified = rep.status === 'verified'
+  const timed = metrics !== undefined
+  const maxTime = Math.max(1, ...(metrics ?? []).map(r => measuredTime(r) ?? 0))
+  const selectedTime = timed ? measuredTime(metrics[selected]) : rep.durationMs
   const outboundMs = metrics ? metrics[selected]?.outboundMs ?? null : trace?.bottom?.ms ?? null
   const returnMs = metrics ? metrics[selected]?.returnMs ?? null : trace?.bottom ? rep.durationMs - trace.bottom.ms : null
   const rounded = rep.qMax === null ? null : Math.round(rep.qMax * 100)
   const percentage = rep.qMax !== null && rep.qMax < IN_RANGE && rounded === IN_RANGE * 100 ? `<${rounded}` : String(rounded)
-  return <section className="rep-review" aria-label="逐次动作回顾" data-side={review.side}>
+  return <section className="rep-review" aria-label="逐次动作回顾" data-side={review.side} data-timed={timed}>
     <div className="review-heading"><h3>逐次回顾</h3><span>{summary.calibration.basis === 'upper-arm' ? '上臂计数' : `个人幅度目标 ${IN_RANGE * 100}%`}</span></div>
+    {timed && <p className="review-key">柱高表示整次用时 · 点一下看详情</p>}
     <div className="review-choices" role="group" aria-label="选择要回顾的动作">
-      {summary.reps.map((result, index) => <button type="button" key={index}
+      {summary.reps.map((result, index) => {
+        const duration = timed ? measuredTime(metrics[index]) : null
+        return <button type="button" key={index}
         aria-pressed={index === selected} aria-controls={detailId}
-        aria-label={`第 ${index + 1} 下，${statusText(result)}${result.trunkForm?.status === 'swing' ? '，起拉后摆' : ''}`}
+        aria-label={`第 ${index + 1} 下，${statusText(result)}${timed ? duration === null ? '，整次计时不足' : `，整次 ${(duration / 1000).toFixed(2)} 秒` : ''}${result.trunkForm?.status === 'swing' ? '，起拉后摆' : ''}`}
         data-status={result.status === 'cannot_verify' ? 'gap' : result.qMax === null ? 'count-only' : result.qMax < IN_RANGE ? 'short' : 'met'}
         onClick={() => choose(index)}>
         <span className="review-meter" aria-hidden="true">
-          {result.status === 'verified' && result.qMax !== null ? <i style={{ height: `${result.qMax * 100}%` }} /> : '—'}
+          {timed ? duration === null ? '—' : <i style={{ height: `${duration / maxTime * 100}%` }} /> : result.status === 'verified' && result.qMax !== null ? <i style={{ height: `${result.qMax * 100}%` }} /> : '—'}
         </span>
         <small>{index + 1}</small>
+        {timed && <small className="review-seconds">{duration === null ? '—' : `${(duration / 1000).toFixed(2)}s`}</small>}
         {result.trunkForm?.status === 'swing' && <span className="form-mark" aria-hidden="true">后摆</span>}
-      </button>)}
+      </button>})}
     </div>
     <div id={detailId} className="review-detail">
       <div className="review-heading">
         <strong>第 {selected + 1} 下 · {statusText(rep)}</strong>
-        <span>{rep.qMax !== null && `${review.side === 'left' ? '左' : '右'}${joint} · `}{(rep.durationMs / 1000).toFixed(1)} 秒</span>
+        <span>{rep.qMax !== null && `${review.side === 'left' ? '左' : '右'}${joint} · `}{selectedTime === null ? '整次计时不足' : `${timed ? '整次 ' : ''}${(selectedTime / 1000).toFixed(2)} 秒`}</span>
       </div>
       <p>{verified && rep.qMax === null ? '上臂完成了一次下拉和还原。腕部证据不足，无法计算个人幅度。' : verified
         ? `达到个人校准幅度的 ${percentage}%${trace?.bottom ? `，底部${joint}角 ${Math.round(trace.bottom.angle)}°` : ''}。`
@@ -111,7 +118,9 @@ export function RepReview({ summary, review, mirrored = false, videoFile, metric
           ? `下拉阶段确认${rep.trunkForm.atMs < 0 ? '前' : '后'} ${(Math.abs(rep.trunkForm.atMs) / 1000).toFixed(2)} 秒，上身比稳定起点向后偏转约 ${rep.trunkForm.changeDeg}°（侧面投影）。`
           : rep.trunkForm ? '起拉阶段未检测到明显后摆。' : '起拉后摆未评估。需要侧面固定机位，并看清肩、髋和起拉动作。'}
       </p>}
-      {verified && rep.qMax !== null && <p className="rep-timing">{outboundMs !== null && returnMs !== null ? <>跟踪起点至底部 {(outboundMs / 1000).toFixed(1)} 秒 · 底部至确认返回 {(returnMs / 1000).toFixed(1)} 秒</> : metrics ? '连续画面不足，暂不显示分段时间' : null}</p>}
+      {verified && rep.qMax !== null && (timed
+        ? <details className="timing-details"><summary>查看这一下一共怎样用时</summary><p className="rep-timing">{outboundMs !== null && returnMs !== null ? <>跟踪起点至底部 {(outboundMs / 1000).toFixed(2)} 秒 · 底部至确认返回 {(returnMs / 1000).toFixed(2)} 秒</> : '连续画面不足，暂不显示分段时间'}</p></details>
+        : <p className="rep-timing">{outboundMs !== null && returnMs !== null && <>跟踪起点至底部 {(outboundMs / 1000).toFixed(1)} 秒 · 底部至确认返回 {(returnMs / 1000).toFixed(1)} 秒</>}</p>)}
       {summary.calibration.basis === 'upper-arm' || (verified && rep.qMax === null) ? null : trace
         ? <Traces trace={trace} calibration={summary.calibration} duration={rep.durationMs} mirrored={mirrored} squat={squat} />
         : <p>本组保留最近 32 下的详细轨迹。</p>}

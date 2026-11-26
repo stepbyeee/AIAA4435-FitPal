@@ -1,5 +1,5 @@
 import { expect, it } from 'vitest'
-import { settleTraining, answerTrainingQuestion, tempoHits } from './policy'
+import { settleTraining, answerTrainingQuestion, tempoHits, questionNames } from './policy'
 import { DEFAULT_PLAN } from './plan'
 import { summarizeMotion, type SetMotion, type RepMetrics } from '../analytics/motion'
 import type { SetSummary } from '../contract'
@@ -18,7 +18,8 @@ it('preserves the original rewards for every observation focus and timing target
       const plan = { ...DEFAULT_PLAN, focus, returnSeconds }
       const result = settleTraining(summary, null)
       expect(result.exp).toEqual({ verifiedReps: 30, qualityBonus: 5, fixedBonus: 0 })
-      expect(answerTrainingQuestion('reward', summary, motion, plan, result)).toContain('观察重点不影响 EXP')
+      expect(result.rewardReasons?.quality).toContain('观察重点不影响 EXP')
+      expect(plan.focus).toBe(focus)
     }
   }
 })
@@ -26,7 +27,7 @@ it('does not reward experimental bilateral measurements', () => {
   const { summary, motion } = fixture()
   const result = settleTraining(summary, null)
   expect(result.exp.qualityBonus).toBe(5)
-  expect(answerTrainingQuestion('coordination', summary, motion, DEFAULT_PLAN, result)).toContain('不用于')
+  expect(motion.summary.pairedReps).toBe(10)
 })
 it('does not award extra EXP when a personal timing target improves', () => {
   const before = fixture(700), after = fixture(2000), plan = { ...DEFAULT_PLAN, focus: 'tempo' as const }
@@ -59,4 +60,33 @@ it('does not present an unselected timing target as a personal choice', () => {
   const { summary, motion } = fixture()
   expect(answerTrainingQuestion('tempo', summary, motion, DEFAULT_PLAN, settleTraining(summary, null))).not.toContain('自选')
   expect(answerTrainingQuestion('tempo', summary, motion, { ...DEFAULT_PLAN, focus: 'tempo' }, settleTraining(summary, null))).toContain('自选 2 秒')
+})
+
+it('offers actionable questions rather than reward or bilateral explanations', () => {
+  expect(Object.values(questionNames)).toEqual(['这组哪里可以改进？', '每一下的节奏稳定吗？', '下一组先做什么？', '怎么确认有进步？'])
+})
+it('describes full-cycle rhythm, not just the return phase', () => {
+  const {summary, motion} = fixture()
+  motion.reps.forEach((r,i)=>{ r.durationMs = i === 9 ? 6000 : 3000 })
+  const answer = answerTrainingQuestion('tempo', summary, motion, DEFAULT_PLAN, settleTraining(summary,null))
+  expect(answer).toContain('整次')
+  expect(answer).toContain('3.00–6.00 秒')
+  expect(answer).toContain('第 10 下')
+  expect(answer).not.toContain('疲劳')
+})
+it('grounds improvement and recheck in specific short-range reps', () => {
+  const {summary,motion}=fixture()
+  summary.reps[2].qMax=.6;summary.issues=[{id:'short_range',repIndexes:[2]}]
+  const result=settleTraining(summary,null)
+  expect(answerTrainingQuestion('improve',summary,motion,DEFAULT_PLAN,result)).toContain('第 3 下')
+  expect(answerTrainingQuestion('improve',summary,motion,DEFAULT_PLAN,result)).toContain('幅度')
+  expect(answerTrainingQuestion('check',summary,motion,DEFAULT_PLAN,result)).toContain('同一机位')
+})
+it('prioritizes missing evidence and never calls an unobserved set perfect', () => {
+  const {summary,motion}=fixture()
+  summary.reps[0].status='cannot_verify';summary.issues=[{id:'out_of_view',repIndexes:[0]}]
+  motion.reps.forEach(r=>r.verified=false)
+  const answer=answerTrainingQuestion('improve',summary,motion,DEFAULT_PLAN,settleTraining(summary,null))
+  expect(answer).toContain('第 1 下');expect(answer).toContain('看清')
+  expect(answerTrainingQuestion('tempo',summary,motion,DEFAULT_PLAN,settleTraining(summary,null))).toContain('不足')
 })

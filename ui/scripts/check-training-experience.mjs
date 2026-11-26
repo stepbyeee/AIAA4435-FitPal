@@ -54,8 +54,8 @@ try {
   await page.locator('.panel').screenshot({path:output+'experience-'+exercise+'-progress.png'});
   await page.getByRole('button',{name:'暂停分析',exact:true}).click();
   const heldTime=await page.locator('video.stage-video').evaluate(v=>v.currentTime);
-  await page.getByText('等待清晰画面',{exact:true}).waitFor();
-  assert.equal(await page.locator('.motion-live .motion-metric dd').nth(0).innerText(),'—');
+  await page.locator('.camera-stats .continuous-trend .trend-caption').filter({hasText:'等待清晰画面'}).first().waitFor();
+  assert.equal(await page.locator('.camera-stats .continuous-trend .trend-current').first().innerText(),'—');
   await page.waitForTimeout(500);
   const pausedTime=await page.locator('video.stage-video').evaluate(v=>v.currentTime);
   assert(Math.abs(pausedTime-heldTime)<0.00001,'Pause must hold the source position (allow decoder microsecond rounding)');
@@ -73,7 +73,7 @@ try {
   const counts=await choices.count();
   await page.getByLabel('回顾时间').fill('0');
   assert.equal(await choices.count(),counts);
-  for(const name of ['我的节奏怎么样？','左右配合说明了什么？','为什么得到这些 EXP？','下一组先做什么？']) {
+  for(const name of ['每一下的节奏稳定吗？','这组哪里可以改进？','怎么确认有进步？','下一组先做什么？']) {
    await page.getByRole('button',{name,exact:true}).click();
    assert((await page.locator('.coach-answer').innerText()).length>10);
   }

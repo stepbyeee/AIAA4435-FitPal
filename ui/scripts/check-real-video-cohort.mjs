@@ -43,7 +43,7 @@ try{
    let report=null;
    if(calibrated){
     const choices=page.getByRole('group',{name:'选择要回顾的动作'}).getByRole('button');record.reviewEntries=await choices.count();
-    for(const name of ['我的节奏怎么样？','左右配合说明了什么？','为什么得到这些 EXP？','下一组先做什么？']){
+    for(const name of ['每一下的节奏稳定吗？','这组哪里可以改进？','怎么确认有进步？','下一组先做什么？']){
      await page.getByRole('button',{name,exact:true}).click();assert((await page.locator('.coach-answer').innerText()).length>10);
     }
     const download=page.waitForEvent('download');await page.getByRole('button',{name:'导出本次训练报告',exact:true}).click();

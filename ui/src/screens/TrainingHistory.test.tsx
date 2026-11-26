@@ -22,3 +22,12 @@ it('shows the saved trunk-swing feedback in the training history', () => {
   }]} />)
   expect(html).toContain('2 下起拉时上身后摆')
 })
+
+it('uses whole-cycle time for the main history chart while keeping return timing separate', () => {
+  const html = renderToStaticMarkup(<TrainingHistory preview history={[{ date: '2026-11-26', exerciseId: 'lat-pulldown',
+    sets: [{ verified: 3, quality: 0, fixed: 0, motion: { ...summarizeMotion([], 1, null), measuredReps: 3, medianDurationMs: 4200, medianReturnMs: 2100 } }],
+  }]} />)
+  expect(html).toContain('最近训练组的整次动作时间')
+  expect(html).toContain('整次 4.20 s')
+  expect(html).toContain('还原 2.10 s')
+})

@@ -27,7 +27,9 @@ import { initialSession, reduce } from '../session/session'
 import { createMotionRecorder, type SetMotion } from '../analytics/motion'
 import { DEFAULT_PLAN, focusNames, loadPlan, type TrainingPlan } from '../training/plan'
 import { settleTraining } from '../training/policy'
-import { LiveMetrics, MotionReview, TrainingCoach } from '../training/MotionPanels'
+import { MotionReview, TrainingCoach } from '../training/MotionPanels'
+import { LiveTrends } from '../training/LiveTrends'
+import { createLiveTrends } from '../analytics/liveTrends'
 import { TrainingSettings } from '../training/TrainingSettings'
 import { downloadReport, trainingReport } from '../training/report'
 
@@ -70,6 +72,7 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
   const planRef = useRef(plan)
   planRef.current = plan
   const recorder = useRef(createMotionRecorder(limb))
+  const trends = useRef(createLiveTrends(limb))
   const [trialCue, setTrialCue] = useState<{ text: string; target: boolean } | null>(null)
   const [trialContext] = useState<TrialContext>(() => {
     const params = new URLSearchParams(window.location.search)
@@ -112,6 +115,8 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
     const perception = squat ? createSquat(setCalibration) : createPulldown(setCalibration, { assessForm: !trial && focus === 'full' })
     const motionRecorder = createMotionRecorder(limb)
     recorder.current = motionRecorder
+    const liveTrends = createLiveTrends(limb, setCalibration)
+    trends.current = liveTrends
     const activePlan = { ...planRef.current }
     let previousPhase: FrameState['phase'] = 'ready'
     let previousAttempts = 0
@@ -144,6 +149,7 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
     consume.current = (sample) => {
       if (over) return
       const result = perception.accept(sample)
+      if (!trial) liveTrends.observe(sample, result)
       if (!trial) motionRecorder.observe(sample, result.visible && result.phase === 'ready' && result.q <= .18)
       setFrame(result)
       if (calibrating) {
@@ -316,7 +322,7 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
             {!calibrating && calibrationRef.current?.basis !== 'upper-arm' && <span>当前幅度 <b>{video.fresh && frame.visible ? Math.round(frame.q * 100) + '%' : '—'}</b></span>}
           </div>
           <ElbowTelemetry limb={limb} motion={video.motion} />
-          {!trial && <LiveMetrics active={video.fresh && video.status === 'tracking' && frame.visible} live={recorder.current.live} latest={recorder.current.latest} plan={plan} />}
+          {!trial && <LiveTrends active={video.fresh && video.status === 'tracking' && frame.visible} samples={trends.current.samples} reps={recorder.current.reps} plan={plan} limb={limb} calibrated={!calibrating} />}
         </div>}
         {reviewing && <section className="set-review-stage" aria-label="训练回顾">
           <header><h2>第 {reviewIndex + 1} 组回顾</h2>
@@ -330,7 +336,7 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
           {reviewIndex > 0 && state.results[reviewIndex - 1]?.cue?.issueId === 'trunk_swing' &&
             <TrunkRecheck previous={completed[reviewIndex - 1].summary} current={reviewing.summary} />}
           <SetEvidence summary={reviewing.summary} trigger={reviewing.trigger} />
-          <MotionReview motion={reviewing.motion} plan={reviewing.plan} previous={completed[reviewIndex - 1]} />
+          <MotionReview limb={limb} motion={reviewing.motion} plan={reviewing.plan} previous={completed[reviewIndex - 1]} />
           <TrainingCoach key={`coach-${reviewIndex}`} summary={reviewing.summary} motion={reviewing.motion} plan={reviewing.plan} result={state.results[reviewIndex]} />
           <button className="report-export" onClick={() => downloadReport(trainingReport(exercise.id, Boolean(videoFile), completed, state.results), `fitpal-${exercise.id}-report.json`)}>导出本次训练报告</button>
         </section>}
@@ -401,7 +407,7 @@ export function Session({ exercise, history, gear, useCamera, videoFile, onSaved
               {trialCue.target && calibrationRef.current && <TrialTarget format={trial.format} calibration={calibrationRef.current} exercise={exercise.id} />}
             </div>}
             {!paused && !preview && analysis && !overlay && <ElbowTelemetry limb={limb} motion={video.motion} />}
-            {!trial && !preview && analysis && !overlay && <LiveMetrics active={!paused && video.fresh && video.status === 'tracking' && frame.visible} live={recorder.current.live} latest={recorder.current.latest} plan={plan} />}
+            {!trial && !preview && analysis && <div className={overlay ? 'mobile-live-trends' : undefined}><LiveTrends active={!paused && video.fresh && video.status === 'tracking' && frame.visible} samples={trends.current.samples} reps={recorder.current.reps} plan={plan} limb={limb} calibrated={!calibrating} /></div>}
             {!videoFile && !preview && !trial && (paused || video.status === 'tracking') && (
               <button className="pause-action" onClick={togglePause}>{paused ? '继续训练' : '暂停训练'}</button>
             )}

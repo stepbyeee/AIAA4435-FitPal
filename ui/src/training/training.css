@@ -51,3 +51,50 @@
 .next-set-settings select { max-width: 65%; }
 .next-set-settings option { background: var(--surface); }
 .next-set-settings input:focus-visible, .next-set-settings select:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+.live-trends.motion-live { display: grid; gap: 10px; padding: 0; border: 0; background: transparent; }
+.live-trend-card { min-width: 0; padding: 12px; background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; }
+.live-trend-card header { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.live-trend-card h3 { margin: 0; font-size: 14px; font-weight: 600; }
+.live-trend-card header span { font-size: 11px; color: var(--muted); }
+.trend-current { font-size: 17px; font-variant-numeric: tabular-nums; }
+.live-trend-card svg { display: block; width: 100%; overflow: visible; }
+.live-trend-card svg text { fill: var(--muted); font-size: 12px; }
+.trend-grid { stroke: var(--rule); stroke-width: 1; }
+.live-trend-card path { fill: none; stroke-width: 2; vector-effect: non-scaling-stroke; }
+.live-trend-card [data-series='range'],.live-trend-card [data-series='returnMs'] { stroke: var(--accent); }
+.live-trend-card [data-series='tilt'],.live-trend-card [data-series='outboundMs'] { stroke: var(--arm-left); }
+.live-trend-card [data-series='durationMs'] { stroke: var(--text); stroke-dasharray: 4 3; }
+.live-trend-card [data-series='bottomHoldMs'] { stroke: var(--arm-right); }
+.live-trend-card circle { fill: var(--surface); stroke-width: 2; }
+.timing-target { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 3; }
+.trend-caption { margin: 4px 0 0; color: var(--muted); font-size: 11px; line-height: 1.45; }
+.timing-legend { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 6px; margin: 6px 0 0; }
+.timing-legend div { border-left: 2px solid var(--text); padding-left: 6px; }
+.timing-legend div[data-series='outboundMs'] { border-color: var(--arm-left); }.timing-legend div[data-series='returnMs'] { border-color: var(--accent); }.timing-legend div[data-series='bottomHoldMs'] { border-color: var(--arm-right); }
+.timing-legend dt { font-size: 10px; color: var(--muted); }.timing-legend dd { margin: 2px 0 0; font-size: 14px; font-variant-numeric: tabular-nums; }
+.timing-hit { fill: transparent; }.timing-rep { cursor: pointer; outline: none; }.timing-rep[aria-pressed='true'] .timing-hit,.timing-rep:focus .timing-hit { fill: #ffffff09; }.timing-rep:focus .timing-hit { stroke: var(--accent); }
+.timing-latest { margin-top: 6px; padding: 3px 0; font: inherit; font-size: 11px; color: var(--accent); background: transparent; border: 0; cursor: pointer; }
+.mobile-live-trends { display: none; }
+.camera-stats { width: clamp(170px, 28%, 240px); }
+.camera-stats .live-trends.motion-live { padding: 0; margin: 0; background: transparent; max-width: none; gap: 6px; }
+.camera-stats .live-trend-card { padding: 8px; background: rgb(17 17 17 / 90%); border-color: #ffffff2e; border-radius: 10px; }
+.camera-stats .live-trend-card h3 { font-size: 12px; }.camera-stats .trend-current { font-size: 14px; }
+.camera-stats .timing-rep,.camera-stats .timing-latest { pointer-events: auto; }
+@media (max-width: 900px), (max-height: 760px) {
+  .camera-stats .live-trends.motion-live { display: none; }
+  .mobile-live-trends { display: block; }
+  .camera-stats { width: 124px; }
+  .live-trends.motion-live { margin: 0; }
+}
+
+.panel-live > .live-panel { flex: 1 1 0%; min-width: 0; }
+.timing-total { margin: 6px 0 2px; }
+.timing-total > div { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+.timing-total dt { font-size: 12px; color: var(--muted); }
+.timing-total dd { margin: 0; font-size: 22px; font-variant-numeric: tabular-nums; }
+.timing-details { margin-top: 7px; font-size: 11px; color: var(--muted); }
+.timing-details summary { cursor: pointer; }
+.camera-stats .timing-details { pointer-events: auto; }
+.camera-stats .timing-details[open] { max-height: 140px; overflow-y: auto; }
+.live-trend-card [data-series='durationMs'] { stroke: var(--accent); stroke-dasharray: none; }
