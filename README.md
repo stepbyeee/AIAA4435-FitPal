@@ -6,6 +6,8 @@ FitPal tracks a workout on a laptop webcam. Its default coaching mode shows the 
 
 > Course project · AIAA4435 Interactive AI Systems · built from the midterm proposal below.
 
+The [interactive training experience](docs/interactive-training.md) adds personal goals, live motion metrics, source-linked repetition review, experimental bilateral timing, explanations of the existing EXP rules and compact history trends. Its calculations and interface have separate reproducible checks; bilateral observations remain descriptive and do not earn rewards.
+
 | | |
 |---|---|
 | **Team** | Jiaqi Li · Ray · Yueran Qiu | 
@@ -110,6 +112,8 @@ Video is processed on device. The optional language model receives permitted obs
 ---
 
 ## Evaluation
+
+The latest [recorded-pose recovery and source-held-out check](docs/recording-recovery.md) improved the fixed development cohort from 20/36 to 22/36 matched formal repetitions, with no previously matched windows lost. Four new source groups matched 12/12 in both versions; only their two pulldown clips supply formal references. The [earlier calibration repair](docs/recognition-reliability.md) changed development matching from 18/36 to 20/36, while its separate six-source check remained 2/10. Those six sources were not rerun for the latest candidate. General recognition reliability remains unresolved; these provisional matches do not establish the gates below.
 
 **Technical gates** — the system does not advance to the user study until these pass:
 

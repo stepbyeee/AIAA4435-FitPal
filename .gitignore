@@ -9,4 +9,5 @@ ui/public/demo/
 # Optional on-device language model and its local runtime.
 .local-coach/
 ui/.benchmark-assets/
+ui/artifacts/
 __pycache__/

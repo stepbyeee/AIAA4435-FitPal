@@ -16,17 +16,17 @@ function middle(values: number[]) {
 type Cycle = {
   top: number
   bottom: number
-  cropped: boolean
+  wristLimited: boolean
   start: number
   reachedBottom: boolean
   observedFlexion: boolean
 }
 
-function begin(angle: number, cropped: boolean, start: number): Cycle {
-  return { top: angle, bottom: angle, cropped, start, reachedBottom: false, observedFlexion: false }
+function begin(angle: number, wristLimited: boolean, start: number): Cycle {
+  return { top: angle, bottom: angle, wristLimited, start, reachedBottom: false, observedFlexion: false }
 }
 
-/** Count a directly observed shoulder/elbow cycle when overhead wrists repeatedly leave the image.
+/** Count a directly observed shoulder/elbow cycle when wrist observations are repeatedly unavailable.
  * Upper-arm elevation is not elbow flexion. These reps therefore have no elbow ROM measurement. */
 export function createUpperArmTrack(side: Side, fixed?: Calibration) {
   const calibration: Cycle[] = []
@@ -38,6 +38,7 @@ export function createUpperArmTrack(side: Side, fixed?: Calibration) {
   let highSince: number | null = null
   let lowSince: number | null = null
   let lastShoulder: { x: number; y: number } | null = null
+  let calibrationAnchor: { x: number; y: number } | null = null
   let available = false
   let angle = 0
   let phase: Phase = 'ready'
@@ -61,10 +62,14 @@ export function createUpperArmTrack(side: Side, fixed?: Calibration) {
       restart()
       return
     }
-    if (lastShoulder && Math.hypot(shoulder.x - lastShoulder.x, shoulder.y - lastShoulder.y) > 0.15) restart()
+    const priorPosition = fixed ? lastShoulder : calibrationAnchor
+    if (priorPosition && Math.hypot(shoulder.x - priorPosition.x, shoulder.y - priorPosition.y) > 0.15) {
+      if (!fixed) calibration.length = 0
+      restart()
+    }
+    if (!fixed) calibrationAnchor = shoulder
     lastShoulder = shoulder
     const wristVisible = Boolean(inFrame(wrist))
-    const wristAboveFrame = wrist.y < 0 && wrist.x >= 0 && wrist.x <= 1
     if (!Boolean(inFrame(elbow))) {
       // An elbow may briefly cross the bottom border after we see it lowered.
       // The wrist must remain directly visible on the same side near shoulder height.
@@ -74,11 +79,8 @@ export function createUpperArmTrack(side: Side, fixed?: Calibration) {
       return
     }
     lastElbow = t
-    // An unsupported wrist inside the image is not proof of a cropped grip.
-    if (!wristVisible && !wristAboveFrame && wrist.y > 0.12) {
-      restart()
-      return
-    }
+    // Keep the independently observed upper arm. A missing wrist cannot supply
+    // flexion evidence: the lowered bend must still be directly visible.
     const dx = (elbow.x - shoulder.x) * width
     const dy = (elbow.y - shoulder.y) * height
     if (Math.hypot(dx, dy) < 0.045 * Math.min(width, height)) {
@@ -93,11 +95,11 @@ export function createUpperArmTrack(side: Side, fixed?: Calibration) {
     highSince = high ? (highSince ?? t) : null
     lowSince = low ? (lowSince ?? t) : null
     if (!current) {
-      if (highSince !== null && t - highSince >= HOLD_MS) current = begin(angle, wristAboveFrame, t)
+      if (highSince !== null && t - highSince >= HOLD_MS) current = begin(angle, !wristVisible, t)
       return
     }
 
-    if (high) current.cropped ||= wristAboveFrame
+    current.wristLimited ||= !wristVisible
     current.bottom = Math.min(current.bottom, angle)
     if (!current.reachedBottom) {
       phase = high ? 'ready' : 'pull'
@@ -121,16 +123,16 @@ export function createUpperArmTrack(side: Side, fixed?: Calibration) {
       calibration.push(current)
       if (calibration.length > CALIBRATION_CYCLES) calibration.shift()
     }
-    current = begin(angle, wristAboveFrame, t)
+    current = begin(angle, !wristVisible, t)
     lowSince = null
     phase = 'ready'
   }
 
-  function croppedCycles() { return calibration.filter(cycle => cycle.cropped).length }
+  function wristLimitedCycles() { return calibration.filter(cycle => cycle.wristLimited).length }
 
   function getCalibration(): Calibration | null {
     if (fixed) return fixed
-    if (calibration.length !== CALIBRATION_CYCLES || croppedCycles() < 2) return null
+    if (calibration.length !== CALIBRATION_CYCLES || wristLimitedCycles() < 2) return null
     return {
       basis: 'upper-arm', side,
       thetaTop: middle(calibration.map(cycle => cycle.top)), thetaBottom: middle(calibration.map(cycle => cycle.bottom)),
@@ -138,7 +140,7 @@ export function createUpperArmTrack(side: Side, fixed?: Calibration) {
   }
   return {
     update, getCalibration, reps, side,
-    get count() { return fixed ? reps.length : getCalibration() ? CALIBRATION_CYCLES : croppedCycles() },
+    get count() { return fixed ? reps.length : getCalibration() ? CALIBRATION_CYCLES : wristLimitedCycles() },
     get visible() { return available },
     get phase() { return phase },
     get q() {

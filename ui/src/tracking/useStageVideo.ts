@@ -21,6 +21,9 @@ export type StageVideo = {
   /** Stabilized coordinates for drawing the overlay. */
   displayLandmarks: Landmark[] | null
   motion: LiveMotion
+  fresh: boolean
+  recording: { seconds: number; duration: number; paused: boolean }
+  toggleRecordingPause: () => void
   status: VideoStatus
 }
 
@@ -32,6 +35,7 @@ export function useStageVideo(options: {
   camera: boolean
   limb?: Limb
   file: string | null
+  analyzeFile?: boolean
   live: boolean
   onFrame: (frame: TrackedFrame) => void
   onEnded: () => void
@@ -43,6 +47,20 @@ export function useStageVideo(options: {
   const [displayLandmarks, setDisplayLandmarks] = useState<Landmark[] | null>(null)
   const [motion, setMotion] = useState(emptyLiveMotion)
   const [status, setStatus] = useState<VideoStatus>('starting')
+  const [fresh, setFresh] = useState(false)
+  const [recording, setRecording] = useState({ seconds: 0, duration: 0, paused: false })
+  const recordingPaused = useRef(false)
+  const managedFile = Boolean(options.file && options.analyzeFile)
+  const toggleRecordingPause = () => {
+    recordingPaused.current = !recordingPaused.current
+    setRecording(previous => ({ ...previous, paused: recordingPaused.current }))
+    if (recordingPaused.current) {
+      setFresh(false)
+      setLandmarks(null)
+      setDisplayLandmarks(null)
+      setMotion(emptyLiveMotion)
+    }
+  }
   const wantCamera = options.camera && !options.file && options.live
   const onFrame = useEffectEvent(options.onFrame)
   const onEnded = useEffectEvent(options.onEnded)
@@ -82,8 +100,11 @@ export function useStageVideo(options: {
     if (stream) video.srcObject = stream
     const cameraTracks = stream?.getVideoTracks() ?? []
     setStatus('starting')
+    recordingPaused.current = false
+    setRecording({ seconds: 0, duration: 0, paused: false })
     const display = createPoseDisplay()
     const clearMotion = () => {
+      setFresh(false)
       display.reset()
       setDisplayLandmarks(null)
       setMotion(emptyLiveMotion)
@@ -110,10 +131,12 @@ export function useStageVideo(options: {
     measure()
     video.addEventListener('loadedmetadata', measure)
     video.addEventListener('resize', measure)
-    video.addEventListener('waiting', clearMotion)
-    video.addEventListener('pause', clearMotion)
-    video.addEventListener('seeking', clearMotion)
-    if (!stream) video.addEventListener('ended', ended)
+    if (!managedFile) {
+      video.addEventListener('waiting', clearMotion)
+      video.addEventListener('pause', clearMotion)
+      video.addEventListener('seeking', clearMotion)
+      if (!stream) video.addEventListener('ended', ended)
+    }
     video.addEventListener('error', failed)
     for (const track of cameraTracks) {
       track.addEventListener('ended', failed)
@@ -124,6 +147,7 @@ export function useStageVideo(options: {
       const sample = { ...measured, landmarks: selectLandmarks(measured.landmarks, options.limb ?? 'arm', options.side ?? 'both') }
       const displayPoints = display.update(sample)
       setStatus('tracking')
+      setFresh(true)
       setLandmarks(sample.landmarks)
       setDisplayLandmarks(displayPoints)
       setMotion((previous) => advanceLiveMotion(previous, sample, options.limb, displayPoints))
@@ -137,7 +161,11 @@ export function useStageVideo(options: {
       video.pause()
     }, () => {
       video.play().catch(() => { if (!cancelled) failed() })
-    }, options.focus, options.pulldown)
+    }, options.focus, options.pulldown, managedFile ? {
+      onEnded: ended,
+      onProgress: (seconds, duration) => setRecording(previous => ({ ...previous, seconds, duration })),
+      isPaused: () => recordingPaused.current,
+    } : undefined)
     return () => {
       cancelled = true
       stop()
@@ -157,7 +185,7 @@ export function useStageVideo(options: {
       setFrame(null)
       clearMotion()
     }
-  }, [active, stream, options.focus, options.file, options.limb, options.side, options.pulldown])
+  }, [active, stream, options.focus, options.file, options.limb, options.side, options.pulldown, managedFile])
 
-  return { ref, source, frame, landmarks, displayLandmarks, motion, status }
+  return { ref, source, frame, landmarks, displayLandmarks, motion, status, fresh, recording, toggleRecordingPause }
 }

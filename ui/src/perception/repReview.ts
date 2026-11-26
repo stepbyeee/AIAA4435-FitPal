@@ -12,6 +12,8 @@ export type ReviewSample = {
 
 export type RepTrace = {
   repIndex: number
+  /** Source-video time for files; monotonic session time for camera input. */
+  startedAtMs?: number
   samples: readonly ReviewSample[]
   bottom: ReviewSample | null
 }
@@ -45,7 +47,7 @@ export function recordAttempt(startedAt: number) {
     },
     finish(repIndex: number, verified: boolean): RepTrace {
       if (last && samples.at(-1)?.ms !== last.ms) samples.push(last)
-      return { repIndex, samples, bottom: verified ? bottom : null }
+      return { repIndex, startedAtMs: startedAt, samples, bottom: verified ? bottom : null }
     },
   }
 }

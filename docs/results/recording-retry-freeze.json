@@ -1,0 +1,34 @@
+{
+  "baselineCommit": "71c4bfd98514cc96d6e452fbe95032ddfda0f537",
+  "candidateSourceSha256": {
+    "ui/src/perception/pulldown.ts": "281a885631bec4c514cab6cf192862683666026a25836167634eb288a60d5d09",
+    "ui/src/perception/pulldownForm.ts": "70283e89e3eff80093c255b2caf10e8ec2c9ba8a33e5cc34cc3970ed260b01ab",
+    "ui/src/perception/pulldownUpperArm.ts": "a9608ccd6b96ed02f6b1b21edfc62a66fca069f5d93990ac28ef6b621ea1b6b5",
+    "ui/src/perception/repReview.ts": "0c411cc9cff1a2ef1641dc6131fe0debd7f4702e25c93406486404bedaacef92",
+    "ui/src/perception/seatedRow.ts": "45f160d39ddbf77662bbef695983ef90b512c97fcf78ab863e4ee15cbc13cbaa",
+    "ui/src/perception/squat.ts": "e8da0ccf10415389ed1c5d84810c82662c534da7328c37750f4ca6f10d516700",
+    "ui/src/screens/Session.tsx": "c38d8c992bd1c053b9731b556deb50e7e86a13dea44e731c8ab77a453a682d15",
+    "ui/src/tracking/armLandmarks.ts": "3c63a6e2844b632dd4282ce3d7ce4d3ebb36aeffb3409b5818c114aa4bf63095",
+    "ui/src/tracking/armOcclusion.ts": "595d6f30aa7eb7a207aab39785ecb1e9b1491087a3b66b143afc174787fb92b7",
+    "ui/src/tracking/armTrails.ts": "910416c4b8ea92a45a9f4e77f313eed2b56436641f29df26165514910bf6f849",
+    "ui/src/tracking/focus.ts": "af12365e859fc9534c616ff9532bd58165a1e50ff5bb415ff6f3ab411cf4aaf2",
+    "ui/src/tracking/framing.ts": "78084307e7e58af7e6617026094c9a014479960d8a988f17994a0dc3a9beb437",
+    "ui/src/tracking/limbLandmarks.ts": "1ec36b043e06b8ecfd378b488611ea84fbbb468630725bd189bbe38128bee15e",
+    "ui/src/tracking/liveMotion.ts": "f7c22386a6540ca2c7413db025dc8fe2a65eaf6ddd4ed9db71a73320470888a1",
+    "ui/src/tracking/poseDisplay.ts": "bd89ed79413acccbb623234dc32c1815bb0f4a58ac20c5142307929da8bc8cdb",
+    "ui/src/tracking/poseTracker.ts": "0d98c349964948633b7607984b0416655b7778849f0eb67a95acea562e7f43bc",
+    "ui/src/tracking/recordedFrames.ts": "6dd04d2eaa8f0fb810f655094a3a0864ec296255123dc2bd917e042660011930",
+    "ui/src/tracking/sideSelection.ts": "8c43d6fe0e78ad4f569c3552d4137555d89dcb3d4a0357add301d53ae6e22952",
+    "ui/src/tracking/useStageVideo.ts": "7a25c6969e6e8b8032baa950ac30e5179354750755f79d46c05ac9012d38a7e2"
+  },
+  "scope": "One retry of an empty model result on the same paused recording image. Live cameras unchanged. No interpolation or count/reward threshold changes.",
+  "newSourceSelection": [
+    "Tuti Isnawati / Pexels40342562",
+    "JULLIAN PRODUCTION / Pexels34708331",
+    "Jill Burrow / Pexels8893521",
+    "Harvey Tan Villarino / Pexels6114481"
+  ],
+  "protocol": "Selected before candidate cohort outcomes. Original complete files, first three complete cycles reserved for calibration, same bottom-to-return plus0.35s matching. Visually annotate before inference. All selected sources retained including short/uncountable controls. No retuning on new-source outcomes.",
+  "annotatedManifestSha256": "7bf7c91db332d33bd729aa63edf73fd584f96268158ad5ebcd9c8a82ed101532",
+  "referenceFormalReps": 12
+}

@@ -14,18 +14,75 @@ for asset in ['mediapipe/pose_landmarker_full.task', 'showcase/go4it-rear.mp4','
     if not (dist/asset).is_file():
         raise SystemExit('Missing built asset: '+asset)
 
-launcher = '''from functools import partial
+launcher = r'''from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 import argparse
+import os
+import re
 import webbrowser
+
+
+class VideoHandler(SimpleHTTPRequestHandler):
+    # Browser source-time analysis needs seekable responses, including WebM.
+    def end_headers(self):
+        self.send_header('Accept-Ranges', 'bytes')
+        super().end_headers()
+
+    def send_head(self):
+        self.remaining = None
+        path = Path(self.translate_path(self.path))
+        header = self.headers.get('Range', '') if self.command == 'GET' else ''
+        match = re.fullmatch(r'bytes=(\d*)-(\d*)', header)
+        if not match or not path.is_file():
+            return super().send_head()
+        try:
+            file = path.open('rb')
+        except OSError:
+            return super().send_head()
+        stat = os.fstat(file.fileno())
+        size = stat.st_size
+        modified = self.date_time_string(stat.st_mtime)
+        if self.headers.get('If-Range', modified) != modified:
+            file.close()
+            return super().send_head()
+        first, last = match.groups()
+        start = int(first) if first else max(0, size - int(last or 0))
+        end = min(size - 1, int(last)) if first and last else size - 1
+        if start > end or start >= size:
+            file.close()
+            self.send_response(416)
+            self.send_header('Content-Range', f'bytes */{size}')
+            self.send_header('Content-Length', '0')
+            self.end_headers()
+            return None
+        self.send_response(206)
+        self.send_header('Content-Type', self.guess_type(str(path)))
+        self.send_header('Content-Range', f'bytes {start}-{end}/{size}')
+        self.send_header('Content-Length', str(end - start + 1))
+        self.send_header('Last-Modified', modified)
+        self.end_headers()
+        file.seek(start)
+        self.remaining = end - start + 1
+        return file
+
+    def copyfile(self, source, output):
+        if self.remaining is None:
+            return super().copyfile(source, output)
+        while self.remaining:
+            chunk = source.read(min(65536, self.remaining))
+            if not chunk:
+                break
+            output.write(chunk)
+            self.remaining -= len(chunk)
+
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--port', type=int, default=8765)
 parser.add_argument('--no-open', action='store_true')
 args = parser.parse_args()
 site = Path(__file__).resolve().parent / 'site'
-server = ThreadingHTTPServer(('127.0.0.1', args.port), partial(SimpleHTTPRequestHandler, directory=str(site)))
+server = ThreadingHTTPServer(('127.0.0.1', args.port), partial(VideoHandler, directory=str(site)))
 url = 'http://127.0.0.1:' + str(server.server_port) + '/'
 print('FitPal · ' + url + '  (Ctrl+C to stop)', flush=True)
 if not args.no_open:

@@ -1,0 +1,16 @@
+{
+  "source": "future-fitness-cable.mp4",
+  "sourceTimeMs": 17400,
+  "beforePoseAvailable": false,
+  "afterPoseAvailable": true,
+  "publishedSourceFramesBefore": 287,
+  "publishedSourceFramesAfter": 287,
+  "samePublishedSourceSchedule": true,
+  "scope": "Actual application-delivered observations, not fabricated/interpolated points. Retry obtains a new detection on the same paused image; source time and published sample count remain unchanged.",
+  "dynamicDiagnostic": {
+    "earlyPreviouslyEmptySourceTimesNowWithPoseMs": [
+      1200
+    ],
+    "scope": "Development observation only; the model tracking state can also change later directly inferred poses. Calibration side and completion events are retained in the primary comparison."
+  }
+}

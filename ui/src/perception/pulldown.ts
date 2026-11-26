@@ -58,7 +58,7 @@ function readArm(frame: PoseFrame, side: Side): ArmSample | null {
   }
 }
 
-function createSideTrack(side: Side, fixed?: Calibration, assessForm = false) {
+function createSideTrack(side: Side, fixed?: Calibration, assessForm = false, confirmedTop?: PoseFrame) {
   const endpoints: EndpointPair[] = []
   const reps: RepResult[] = []
   const traces: RepTrace[] = []
@@ -73,8 +73,20 @@ function createSideTrack(side: Side, fixed?: Calibration, assessForm = false) {
   let confidence = 0
   let verified = 0
   let previousArm: ArmSample | null = null
+  let calibrationAnchor: ArmSample | null = null
   let recentlyRaised: { arm: ArmSample; time: number } | null = null
   const form = assessForm ? createPulldownForm() : null
+
+  // Only the calibration-to-set handoff supplies this directly confirmed top.
+  // A new camera/next set still has to establish its own starting pose.
+  const anchor = confirmedTop && fixed && readArm(confirmedTop, side)
+  if (anchor && fixed && anchor.angle >= fixed.thetaTop - bounded(0.24 * (fixed.thetaTop - fixed.thetaBottom), 5, 26)) {
+    topAngle = fixed.thetaTop
+    topPose = anchor
+    topReady = true
+    previousArm = anchor
+    lastSampleTime = confirmedTop!.timestampMs
+  }
 
   function loseTracking() {
     recent.length = 0
@@ -94,19 +106,26 @@ function createSideTrack(side: Side, fixed?: Calibration, assessForm = false) {
     confidence = sample?.confidence ?? 0
     // A coherent jump of both anchors indicates a cut or change of tracked person.
     // Rotation about a stable elbow can move the shoulder during a genuine rep.
-    if (previousArm && sample) {
-      const sx = sample.shoulder.x - previousArm.shoulder.x
-      const sy = sample.shoulder.y - previousArm.shoulder.y
-      const ex = sample.elbow.x - previousArm.elbow.x
-      const ey = sample.elbow.y - previousArm.elbow.y
-      if (Math.hypot(sx, sy) > 0.15 && Math.hypot(ex, ey) > 0.15 && sx * ex + sy * ey > 0) loseTracking()
+    const priorPosition = fixed ? previousArm : calibrationAnchor
+    if (priorPosition && sample) {
+      const sx = sample.shoulder.x - priorPosition.shoulder.x
+      const sy = sample.shoulder.y - priorPosition.shoulder.y
+      const ex = sample.elbow.x - priorPosition.elbow.x
+      const ey = sample.elbow.y - priorPosition.elbow.y
+      if (Math.hypot(sx, sy) > 0.15 && Math.hypot(ex, ey) > 0.15 && sx * ex + sy * ey > 0) {
+        if (!fixed) endpoints.length = 0
+        loseTracking()
+      }
     }
+    // Retain the last observed calibration position across an empty frame.
+    if (!fixed && sample) calibrationAnchor = sample
     if (lastSampleTime !== null && timestampMs - lastSampleTime > MAX_FRAME_GAP_MS) loseTracking()
     // Calibration can re-arm from a directly observed top after a brief detector
     // dropout. The first returning frame must itself match the prior top on this
     // side. An active descent/return always follows the interrupted-attempt path.
-    if (!sample && !fixed && !attempt && topPose && topReady && previousArm && lastSampleTime !== null
-      && Math.abs(previousArm.angle - topPose.angle) <= 9) {
+    if (!sample && !fixed && !attempt && previousArm && lastSampleTime !== null
+      && ((topPose && topReady && Math.abs(previousArm.angle - topPose.angle) <= 9)
+        || (previousArm.normalizedLift >= OVERHEAD_WRIST_HEIGHT && previousArm.angle >= 132))) {
       recentlyRaised = { arm: previousArm, time: lastSampleTime }
     }
     previousArm = sample
@@ -118,8 +137,10 @@ function createSideTrack(side: Side, fixed?: Calibration, assessForm = false) {
     if (recentlyRaised) {
       const { arm, time } = recentlyRaised
       recentlyRaised = null
-      if (timestampMs - time <= 170 && Math.abs(sample.angle - arm.angle) <= 9
-        && Math.abs(sample.lift - arm.lift) <= 0.04
+      const sameOverhead = arm.normalizedLift >= OVERHEAD_WRIST_HEIGHT && arm.angle >= 132
+        && sample.normalizedLift >= OVERHEAD_WRIST_HEIGHT && sample.angle >= 132
+      if (timestampMs - time <= 250 && Math.abs(sample.angle - arm.angle) <= 9
+        && (Math.abs(sample.lift - arm.lift) <= 0.04 || sameOverhead)
         && Math.hypot(sample.shoulder.x - arm.shoulder.x, sample.shoulder.y - arm.shoulder.y) <= 0.06) {
         topAngle = sample.angle
         topPose = { angle: sample.angle, lift: sample.lift, normalizedLift: sample.normalizedLift }
@@ -298,10 +319,10 @@ function createSideTrack(side: Side, fixed?: Calibration, assessForm = false) {
   }
 }
 
-export function createPulldown(calibration?: Calibration, options: { assessForm?: boolean } = {}) {
+export function createPulldown(calibration?: Calibration, options: { assessForm?: boolean; confirmedTop?: PoseFrame } = {}) {
   const fixed = calibration && { ...calibration }
   const assessesTrunkForm = Boolean(fixed && fixed.basis !== 'upper-arm' && options.assessForm)
-  const tracks = fixed ? [createSideTrack(fixed.side, fixed, assessesTrunkForm)] : [createSideTrack('left'), createSideTrack('right')]
+  const tracks = fixed ? [createSideTrack(fixed.side, fixed, assessesTrunkForm, options.confirmedTop)] : [createSideTrack('left'), createSideTrack('right')]
   const upperTracks = fixed
     ? (fixed.basis === 'upper-arm' ? [createUpperArmTrack(fixed.side, fixed)] : [])
     : [createUpperArmTrack('left'), createUpperArmTrack('right')]

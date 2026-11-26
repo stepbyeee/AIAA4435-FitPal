@@ -1,0 +1,131 @@
+{
+  "scenario": "three camera-stream sets with separate targets",
+  "targets": [
+    10,
+    8,
+    6
+  ],
+  "focuses": [
+    "range",
+    "coordination",
+    "tempo"
+  ],
+  "history": [
+    {
+      "date": "2026-11-25",
+      "exerciseId": "lat-pulldown",
+      "outstandingIssueId": null,
+      "sets": [
+        {
+          "verified": 1,
+          "quality": 0,
+          "fixed": 0,
+          "motion": {
+            "measuredReps": 0,
+            "medianDurationMs": null,
+            "medianReturnMs": null,
+            "returnVariation": null,
+            "medianRange": null,
+            "pairedReps": 0,
+            "medianLagMs": null,
+            "coverage": 0.9523809523809523,
+            "view": null
+          },
+          "plan": {
+            "sets": 3,
+            "reps": 10,
+            "focus": "range",
+            "returnSeconds": 2,
+            "loadKg": null
+          }
+        },
+        {
+          "verified": 1,
+          "quality": 0,
+          "fixed": 0,
+          "motion": {
+            "measuredReps": 0,
+            "medianDurationMs": null,
+            "medianReturnMs": null,
+            "returnVariation": null,
+            "medianRange": null,
+            "pairedReps": 0,
+            "medianLagMs": null,
+            "coverage": 1,
+            "view": {
+              "x": 0.426285982131958,
+              "y": 0.7206439673900604,
+              "scale": 0.464051776543122,
+              "orientation": 0.6204426602666917
+            }
+          },
+          "plan": {
+            "sets": 3,
+            "reps": 8,
+            "focus": "coordination",
+            "returnSeconds": 2,
+            "loadKg": null
+          }
+        },
+        {
+          "verified": 1,
+          "quality": 0,
+          "fixed": 0,
+          "motion": {
+            "measuredReps": 0,
+            "medianDurationMs": null,
+            "medianReturnMs": null,
+            "returnVariation": null,
+            "medianRange": null,
+            "pairedReps": 0,
+            "medianLagMs": null,
+            "coverage": 0.98989898989899,
+            "view": null
+          },
+          "plan": {
+            "sets": 3,
+            "reps": 6,
+            "focus": "tempo",
+            "returnSeconds": 0.5,
+            "loadKg": null
+          }
+        }
+      ],
+      "lastSet": {
+        "depths": [
+          0.9988344972397227
+        ],
+        "countOnly": [],
+        "issue": null
+      }
+    }
+  ],
+  "appearance": [
+    {
+      "rewardFont": "16px",
+      "nextFont": "16px",
+      "rewardRule": "1px solid rgb(31, 31, 31)",
+      "nextRule": "1px solid rgb(31, 31, 31)",
+      "nextBackground": "rgba(0, 0, 0, 0)"
+    },
+    {
+      "rewardFont": "16px",
+      "nextFont": "16px",
+      "rewardRule": "1px solid rgb(31, 31, 31)",
+      "nextRule": "1px solid rgb(31, 31, 31)",
+      "nextBackground": "rgba(0, 0, 0, 0)"
+    }
+  ],
+  "errors": [],
+  "unitTests": 174,
+  "unitFiles": 31,
+  "productionBuild": true,
+  "keyboardEntryChecked": true,
+  "source": "Existing GO4IT clip streamed at 0.5x through getUserMedia; not a human trial",
+  "sourceHashes": {
+    "ui/src/screens/Session.tsx": "f42736dbca11dc6be4c52ea1a4cd407c259d1c3e9ffcd8d3ec9539785dafba5f",
+    "ui/src/training/TrainingSettings.tsx": "15e40e4d382ef33cdde95686eedef9c298dee254e9eb2604265722e2b7a3f3d4",
+    "ui/src/training/training.css": "6a9a729ca0d1b9c9e32d7ba86ff7555cae19b63512b4a04496a7e6e13230872e",
+    "ui/src/styles.css": "bc1ff3c4bd53c27e3d1ae7b06675c0c2d215ebb5035ba9f3ff5e11d1328a7272"
+  }
+}

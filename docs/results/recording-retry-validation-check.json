@@ -1,0 +1,117 @@
+{
+  "date": "2026-11-26",
+  "environment": "Allocated HPC compute nodes, CPU-only Chromium",
+  "unitTests": 205,
+  "testFiles": 33,
+  "productionBuild": "passed",
+  "browserChecks": [
+    {
+      "name": "overlay-side",
+      "pass": true,
+      "seconds": 15.798,
+      "frames": 0,
+      "callbackToNextAnimationFrameP95ms": null
+    },
+    {
+      "name": "exit-demo",
+      "pass": true,
+      "seconds": 6.254,
+      "frames": 0,
+      "callbackToNextAnimationFrameP95ms": null
+    },
+    {
+      "name": "manual-history",
+      "pass": true,
+      "seconds": 2.725,
+      "frames": 0,
+      "callbackToNextAnimationFrameP95ms": null
+    },
+    {
+      "name": "privacy",
+      "pass": true,
+      "seconds": 0.989,
+      "frames": 0,
+      "callbackToNextAnimationFrameP95ms": null
+    },
+    {
+      "name": "camera-denied",
+      "pass": true,
+      "seconds": 0.804,
+      "frames": 0,
+      "callbackToNextAnimationFrameP95ms": null
+    },
+    {
+      "name": "pilot-summary",
+      "pass": true,
+      "seconds": 0.628,
+      "frames": 0,
+      "callbackToNextAnimationFrameP95ms": null
+    },
+    {
+      "name": "rep-text",
+      "pass": true,
+      "seconds": 110.282,
+      "frames": 0,
+      "callbackToNextAnimationFrameP95ms": null
+    },
+    {
+      "name": "rep-card",
+      "pass": true,
+      "seconds": 109.917,
+      "frames": 0,
+      "callbackToNextAnimationFrameP95ms": null
+    },
+    {
+      "name": "set-text",
+      "pass": true,
+      "seconds": 109.055,
+      "frames": 0,
+      "callbackToNextAnimationFrameP95ms": null
+    },
+    {
+      "name": "set-card",
+      "pass": true,
+      "seconds": 111.37,
+      "frames": 0,
+      "callbackToNextAnimationFrameP95ms": null
+    },
+    {
+      "name": "facilitator",
+      "pass": true,
+      "seconds": 197.129,
+      "frames": 0,
+      "callbackToNextAnimationFrameP95ms": null
+    }
+  ],
+  "actualVideoRuns": 28,
+  "additionalPairedDevelopmentReplicationRuns": 2,
+  "distinctVideosThisRound": 22,
+  "developmentVideos": 18,
+  "newHeldoutSources": 4,
+  "heldoutVariants": 2,
+  "heldoutFormalReferences": 12,
+  "heldoutFormalExercises": [
+    "lat-pulldown"
+  ],
+  "heldoutSquatScope": "Two short controls with no post-calibration formal reference repetitions; no new-source squat counting efficacy claim.",
+  "priorSixSourceScope": "Previous round only; not rerun for this candidate. The earlier 2/10 result must not be presented as a current-version score.",
+  "sourceFreeze": "recording-retry-freeze.json",
+  "packagedTransportChecks": [
+    "full file",
+    "bounded range",
+    "open-ended range",
+    "suffix range",
+    "out-of-bounds rejection",
+    "HEAD ignores Range"
+  ],
+  "limitations": "Provisional source-window labels, not independent human ground truth. Source-held-out does not imply unseen by the pretrained model. No tuning on the four new-source outcomes; no live-camera, general accuracy, physical timing accuracy or participant-benefit claim.",
+  "poseModelSha256": "5134a3aad27a58b93da0088d431f366da362b44e3ccfbe3462b3827a839011b1",
+  "poseRuntimeVersion": "1.2.3",
+  "modelSharing": "Baseline public assets symlink to the candidate public assets; both use the same unchanged full model and runtime.",
+  "illustratedGuideCheck": {
+    "sections": 17,
+    "imagesLoaded": 27,
+    "desktopOverflow": false,
+    "mobileOverflow": false
+  }
+}

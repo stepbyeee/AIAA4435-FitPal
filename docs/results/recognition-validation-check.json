@@ -1,0 +1,107 @@
+{
+  "date": "2026-11-26",
+  "environment": "Allocated HPC compute nodes, CPU-only Chromium",
+  "unitTests": 201,
+  "testFiles": 33,
+  "productionBuild": "passed",
+  "browserChecks": [
+    {
+      "name": "overlay-side",
+      "pass": true,
+      "seconds": 23.967,
+      "frames": 0,
+      "callbackToNextAnimationFrameP95ms": null
+    },
+    {
+      "name": "exit-demo",
+      "pass": true,
+      "seconds": 3.709,
+      "frames": 0,
+      "callbackToNextAnimationFrameP95ms": null
+    },
+    {
+      "name": "manual-history",
+      "pass": true,
+      "seconds": 2.351,
+      "frames": 0,
+      "callbackToNextAnimationFrameP95ms": null
+    },
+    {
+      "name": "privacy",
+      "pass": true,
+      "seconds": 0.952,
+      "frames": 0,
+      "callbackToNextAnimationFrameP95ms": null
+    },
+    {
+      "name": "camera-denied",
+      "pass": true,
+      "seconds": 0.612,
+      "frames": 0,
+      "callbackToNextAnimationFrameP95ms": null
+    },
+    {
+      "name": "pilot-summary",
+      "pass": true,
+      "seconds": 0.562,
+      "frames": 0,
+      "callbackToNextAnimationFrameP95ms": null
+    },
+    {
+      "name": "facilitator",
+      "pass": true,
+      "seconds": 339.335,
+      "frames": 0,
+      "callbackToNextAnimationFrameP95ms": null
+    },
+    {
+      "name": "rep-text",
+      "pass": true,
+      "seconds": 185.716,
+      "frames": 0,
+      "callbackToNextAnimationFrameP95ms": null
+    },
+    {
+      "name": "rep-card",
+      "pass": true,
+      "seconds": 177.065,
+      "frames": 0,
+      "callbackToNextAnimationFrameP95ms": null
+    },
+    {
+      "name": "set-text",
+      "pass": true,
+      "seconds": 185.535,
+      "frames": 0,
+      "callbackToNextAnimationFrameP95ms": null
+    },
+    {
+      "name": "set-card",
+      "pass": true,
+      "seconds": 176.872,
+      "frames": 0,
+      "callbackToNextAnimationFrameP95ms": null
+    }
+  ],
+  "actualVideoRuns": 30,
+  "developmentVideos": 18,
+  "heldoutSources": 6,
+  "heldoutVariants": 2,
+  "sourceFreeze": "recognition-evaluation-freeze.json",
+  "packagedTransportChecks": [
+    "full file",
+    "bounded range",
+    "open-ended range",
+    "suffix range",
+    "out-of-bounds rejection",
+    "HEAD ignores Range"
+  ],
+  "offlineClassroomFlow": "facilitator passed using actual packaged launcher on a two-CPU allocation",
+  "earlierPackagedAttempt": {
+    "cpus": 1,
+    "result": "600-second survey wait expired with three formal repetitions visible and no browser faults",
+    "scope": "Retried with two CPUs; no detector or source changes"
+  },
+  "transportScope": "Packaging and fixture transport changed after the perception freeze; uploaded-file pipeline and frozen application sources were unchanged.",
+  "limitations": "Provisional reference windows; six source groups held out from this repair, not necessarily from pretrained model training. Recording previews are not real-time camera studies. No broad accuracy or live-camera throughput claim."
+}

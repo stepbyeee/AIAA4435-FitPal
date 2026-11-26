@@ -1,0 +1,99 @@
+{
+  "browser": "151.0.7922.34",
+  "cpuOnly": true,
+  "replayRate": 0.25,
+  "reports": [
+    {
+      "exercise": "lat-pulldown",
+      "attempts": 4,
+      "metrics": {
+        "measuredReps": 4,
+        "medianDurationMs": 3319.9829999999965,
+        "medianReturnMs": 2602.5995000000003,
+        "returnVariation": 0.05769212666028836,
+        "medianRange": 0.9995295210116222,
+        "pairedReps": 3,
+        "medianLagMs": -19,
+        "coverage": 0.984984984984985,
+        "view": null
+      }
+    },
+    {
+      "exercise": "squat",
+      "attempts": 2,
+      "metrics": {
+        "measuredReps": 2,
+        "medianDurationMs": 2220,
+        "medianReturnMs": 1299.999999999999,
+        "returnVariation": null,
+        "medianRange": 0.9528954617721541,
+        "pairedReps": 0,
+        "medianLagMs": null,
+        "coverage": 1,
+        "view": {
+          "x": 0.5200699418783188,
+          "y": 0.32566212862730026,
+          "scale": 0.21581226898174566,
+          "orientation": 0.431786166882248
+        }
+      }
+    },
+    {
+      "scenario": "simulated-camera-plan-and-storage-retry",
+      "sets": [
+        {
+          "verified": 1,
+          "quality": 0,
+          "fixed": 0,
+          "motion": {
+            "measuredReps": 0,
+            "medianDurationMs": null,
+            "medianReturnMs": null,
+            "returnVariation": null,
+            "medianRange": null,
+            "pairedReps": 0,
+            "medianLagMs": null,
+            "coverage": 0.9803921568627451,
+            "view": null
+          },
+          "plan": {
+            "sets": 2,
+            "reps": 1,
+            "focus": "tempo",
+            "returnSeconds": 2,
+            "loadKg": null
+          }
+        },
+        {
+          "verified": 1,
+          "quality": 0,
+          "fixed": 0,
+          "motion": {
+            "measuredReps": 0,
+            "medianDurationMs": null,
+            "medianReturnMs": null,
+            "returnVariation": null,
+            "medianRange": null,
+            "pairedReps": 0,
+            "medianLagMs": null,
+            "coverage": 0.9850746268656716,
+            "view": {
+              "x": 0.43576282262802124,
+              "y": 0.7146267741918564,
+              "scale": 0.4675743677884441,
+              "orientation": 0.5312836805804882
+            }
+          },
+          "plan": {
+            "sets": 2,
+            "reps": 1,
+            "focus": "coordination",
+            "returnSeconds": 2,
+            "loadKg": null
+          }
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

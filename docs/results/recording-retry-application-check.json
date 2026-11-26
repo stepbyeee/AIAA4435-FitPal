@@ -1,0 +1,3889 @@
+{
+  "method": "28 fresh actual app runs: 18 candidate development videos, 4 new sources in each of two variants, and a fresh paired Dynamic replication. The development baseline reuses the prior 71c4bfd application audit; its recorded source hashes were checked against that commit. auditedCountCheck is primary; trace-only matching cannot locate count-only repetitions without wrist traces.",
+  "runs": {
+    "development": {
+      "groups": [
+        {
+          "group": 0,
+          "sourceHashes": {
+            "tracking/poseTracker.ts": "0d98c349964948633b7607984b0416655b7778849f0eb67a95acea562e7f43bc",
+            "tracking/recordedFrames.ts": "6dd04d2eaa8f0fb810f655094a3a0864ec296255123dc2bd917e042660011930",
+            "perception/pulldown.ts": "281a885631bec4c514cab6cf192862683666026a25836167634eb288a60d5d09",
+            "perception/squat.ts": "e8da0ccf10415389ed1c5d84810c82662c534da7328c37750f4ca6f10d516700",
+            "analytics/motion.ts": "2f7d7c9e5a83d4ffa1d72c5cff15af7b276fe731ae915d2c35a56caeb65c88e1",
+            "screens/Session.tsx": "c38d8c992bd1c053b9731b556deb50e7e86a13dea44e731c8ab77a453a682d15"
+          },
+          "browser": "151.0.7922.34"
+        },
+        {
+          "group": 1,
+          "sourceHashes": {
+            "tracking/poseTracker.ts": "0d98c349964948633b7607984b0416655b7778849f0eb67a95acea562e7f43bc",
+            "tracking/recordedFrames.ts": "6dd04d2eaa8f0fb810f655094a3a0864ec296255123dc2bd917e042660011930",
+            "perception/pulldown.ts": "281a885631bec4c514cab6cf192862683666026a25836167634eb288a60d5d09",
+            "perception/squat.ts": "e8da0ccf10415389ed1c5d84810c82662c534da7328c37750f4ca6f10d516700",
+            "analytics/motion.ts": "2f7d7c9e5a83d4ffa1d72c5cff15af7b276fe731ae915d2c35a56caeb65c88e1",
+            "screens/Session.tsx": "c38d8c992bd1c053b9731b556deb50e7e86a13dea44e731c8ab77a453a682d15"
+          },
+          "browser": "151.0.7922.34"
+        },
+        {
+          "group": 2,
+          "sourceHashes": {
+            "tracking/poseTracker.ts": "0d98c349964948633b7607984b0416655b7778849f0eb67a95acea562e7f43bc",
+            "tracking/recordedFrames.ts": "6dd04d2eaa8f0fb810f655094a3a0864ec296255123dc2bd917e042660011930",
+            "perception/pulldown.ts": "281a885631bec4c514cab6cf192862683666026a25836167634eb288a60d5d09",
+            "perception/squat.ts": "e8da0ccf10415389ed1c5d84810c82662c534da7328c37750f4ca6f10d516700",
+            "analytics/motion.ts": "2f7d7c9e5a83d4ffa1d72c5cff15af7b276fe731ae915d2c35a56caeb65c88e1",
+            "screens/Session.tsx": "c38d8c992bd1c053b9731b556deb50e7e86a13dea44e731c8ab77a453a682d15"
+          },
+          "browser": "151.0.7922.34"
+        },
+        {
+          "group": 3,
+          "sourceHashes": {
+            "tracking/poseTracker.ts": "0d98c349964948633b7607984b0416655b7778849f0eb67a95acea562e7f43bc",
+            "tracking/recordedFrames.ts": "6dd04d2eaa8f0fb810f655094a3a0864ec296255123dc2bd917e042660011930",
+            "perception/pulldown.ts": "281a885631bec4c514cab6cf192862683666026a25836167634eb288a60d5d09",
+            "perception/squat.ts": "e8da0ccf10415389ed1c5d84810c82662c534da7328c37750f4ca6f10d516700",
+            "analytics/motion.ts": "2f7d7c9e5a83d4ffa1d72c5cff15af7b276fe731ae915d2c35a56caeb65c88e1",
+            "screens/Session.tsx": "c38d8c992bd1c053b9731b556deb50e7e86a13dea44e731c8ab77a453a682d15"
+          },
+          "browser": "151.0.7922.34"
+        }
+      ],
+      "results": [
+        {
+          "index": 0,
+          "file": "dynamic-dual-pulldown.mp4",
+          "exercise": "lat-pulldown",
+          "control": false,
+          "preparedSha256": "8f1e94aeb249ce66adfcbcd6e9d706ba762a6cf91698be2984a265b0a1c08fac",
+          "referenceWindows": [
+            [
+              1.85,
+              3.73
+            ],
+            [
+              6.2,
+              8.03
+            ],
+            [
+              10.42,
+              12.31
+            ],
+            [
+              14.64,
+              16.58
+            ],
+            [
+              19.47,
+              21.63
+            ]
+          ],
+          "errors": [],
+          "frames": 326,
+          "sourceSpanMs": [
+            0,
+            21666.666666666668
+          ],
+          "maxSourceGapMs": 66.66666666666788,
+          "terminalMessage": "\u8fd9\u4e00\u7ec4\u786e\u8ba4\u4e86 1 \u4e0b\u3002\n\n+1\nEXP\n\n\u56de\u653e\u7ed3\u7b97\uff0c\u4e0d\u8ba1\u5165\u4f60\u7684\u8bad\u7ec3\u8bb0\u5f55\u3002\n\n\u5b8c\u6210",
+          "calibrated": true,
+          "reviewEntries": 1,
+          "verified": 1,
+          "metrics": {
+            "measuredReps": 1,
+            "medianDurationMs": 2866.666666666668,
+            "medianReturnMs": 1333.333333333334,
+            "returnVariation": null,
+            "medianRange": 1,
+            "pairedReps": 0,
+            "medianLagMs": null,
+            "coverage": 0.9927536231884058,
+            "view": {
+              "x": 0.548673003911972,
+              "y": 0.7038823962211609,
+              "scale": 0.30588994917791523,
+              "orientation": 0.6030893535045576
+            }
+          },
+          "repetitions": [
+            {
+              "repIndex": 0,
+              "sourceStartMs": 13600,
+              "durationMs": 2866.666666666668,
+              "verified": true,
+              "range": 1,
+              "outboundMs": 1533.333333333334,
+              "returnMs": 1333.333333333334,
+              "bottomHoldMs": 933.3333333333339,
+              "minAngle": 33.732543887283825,
+              "maxAngle": 155.36028246992404,
+              "excursionDeg": 121.62773858264022,
+              "bilateralLagMs": null,
+              "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+              "pairedCoverage": 1
+            }
+          ],
+          "exp": {
+            "verifiedReps": 1,
+            "qualityBonus": 0,
+            "fixedBonus": 0
+          },
+          "cue": null,
+          "sourceReviewChecked": true,
+          "unlocatedVerified": 0,
+          "uiChecksPassed": true,
+          "pageErrors": [],
+          "elapsedSeconds": 151.545,
+          "traceBasedCountCheck": {
+            "expected": 2,
+            "matched": 1,
+            "missed": 1,
+            "extra": 0,
+            "matches": [
+              {
+                "window": [
+                  14.64,
+                  16.58
+                ],
+                "event": 16.46666666666667
+              }
+            ],
+            "misses": [
+              [
+                19.47,
+                21.63
+              ]
+            ],
+            "extraTimes": []
+          },
+          "auditedCountCheck": {
+            "expected": 2,
+            "matched": 1,
+            "missed": 1,
+            "unmatched": 0,
+            "matches": [
+              {
+                "window": [
+                  14.64,
+                  16.58
+                ],
+                "event": 16.46666666666667
+              }
+            ],
+            "misses": [
+              [
+                19.47,
+                21.63
+              ]
+            ],
+            "unmatchedTimes": []
+          }
+        },
+        {
+          "index": 1,
+          "file": "lifetime-neutral-grip.mp4",
+          "exercise": "lat-pulldown",
+          "control": false,
+          "preparedSha256": "4a6572bfa2dc50f1672ccc0f4ca16a2ccd9926e00f0e78dda792239ba3242f5a",
+          "referenceWindows": [
+            [
+              1.76,
+              2.83
+            ],
+            [
+              5.02,
+              6.53
+            ],
+            [
+              8.52,
+              9.98
+            ],
+            [
+              11.94,
+              13.48
+            ],
+            [
+              15.18,
+              16.73
+            ]
+          ],
+          "errors": [],
+          "frames": 255,
+          "sourceSpanMs": [
+            0,
+            16933.333333333332
+          ],
+          "maxSourceGapMs": 66.66666666666788,
+          "terminalMessage": "\u8fd9\u4e00\u7ec4\u786e\u8ba4\u4e86 2 \u4e0b\u3002\n\n+2\nEXP\n\n\u56de\u653e\u7ed3\u7b97\uff0c\u4e0d\u8ba1\u5165\u4f60\u7684\u8bad\u7ec3\u8bb0\u5f55\u3002\n\n\u5b8c\u6210",
+          "calibrated": true,
+          "reviewEntries": 2,
+          "verified": 2,
+          "metrics": {
+            "measuredReps": 0,
+            "medianDurationMs": null,
+            "medianReturnMs": null,
+            "returnVariation": null,
+            "medianRange": null,
+            "pairedReps": 0,
+            "medianLagMs": null,
+            "coverage": 1,
+            "view": {
+              "x": 0.43453681468963623,
+              "y": 0.7540056705474854,
+              "scale": 0.49321121629884773,
+              "orientation": 0.5564910441079775
+            }
+          },
+          "repetitions": [
+            {
+              "repIndex": 0,
+              "sourceStartMs": null,
+              "durationMs": 3400,
+              "verified": false,
+              "range": null,
+              "outboundMs": null,
+              "returnMs": null,
+              "bottomHoldMs": null,
+              "minAngle": null,
+              "maxAngle": null,
+              "excursionDeg": null,
+              "bilateralLagMs": null,
+              "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+              "pairedCoverage": 0
+            },
+            {
+              "repIndex": 1,
+              "sourceStartMs": null,
+              "durationMs": 3133.333333333332,
+              "verified": false,
+              "range": null,
+              "outboundMs": null,
+              "returnMs": null,
+              "bottomHoldMs": null,
+              "minAngle": null,
+              "maxAngle": null,
+              "excursionDeg": null,
+              "bilateralLagMs": null,
+              "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+              "pairedCoverage": 0
+            }
+          ],
+          "exp": {
+            "verifiedReps": 2,
+            "qualityBonus": 0,
+            "fixedBonus": 0
+          },
+          "cue": null,
+          "sourceReviewChecked": false,
+          "sourceReviewUnavailable": "count-only, no retained source trace",
+          "unlocatedVerified": 2,
+          "uiChecksPassed": true,
+          "pageErrors": [],
+          "elapsedSeconds": 104.883,
+          "traceBasedCountCheck": {
+            "expected": 2,
+            "matched": 0,
+            "missed": 2,
+            "extra": 2,
+            "matches": [],
+            "misses": [
+              [
+                11.94,
+                13.48
+              ],
+              [
+                15.18,
+                16.73
+              ]
+            ],
+            "extraTimes": []
+          },
+          "auditedCountCheck": {
+            "expected": 2,
+            "matched": 2,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [
+              {
+                "window": [
+                  11.94,
+                  13.48
+                ],
+                "event": 13.4
+              },
+              {
+                "window": [
+                  15.18,
+                  16.73
+                ],
+                "event": 16.53333333333333
+              }
+            ],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        {
+          "index": 2,
+          "file": "future-fitness-cable.mp4",
+          "exercise": "lat-pulldown",
+          "control": false,
+          "preparedSha256": "b1dfeff8a1f43cbcf1fb9a390e051e98db720a50b6f1c47831bea1cfa9125166",
+          "referenceWindows": [
+            [
+              2.45,
+              3.95
+            ],
+            [
+              6.21,
+              7.45
+            ],
+            [
+              10.07,
+              11.32
+            ],
+            [
+              13.7,
+              14.81
+            ],
+            [
+              17.13,
+              18.44
+            ]
+          ],
+          "errors": [],
+          "frames": 287,
+          "sourceSpanMs": [
+            0,
+            19066.666666666668
+          ],
+          "maxSourceGapMs": 66.66666666666788,
+          "terminalMessage": "\u8fd9\u4e00\u7ec4\u786e\u8ba4\u4e86 2 \u4e0b\u3002\n\n+2\nEXP\n\n\u56de\u653e\u7ed3\u7b97\uff0c\u4e0d\u8ba1\u5165\u4f60\u7684\u8bad\u7ec3\u8bb0\u5f55\u3002\n\n\u5b8c\u6210",
+          "calibrated": true,
+          "reviewEntries": 2,
+          "verified": 2,
+          "metrics": {
+            "measuredReps": 2,
+            "medianDurationMs": 1999.999999999999,
+            "medianReturnMs": 1433.333333333334,
+            "returnVariation": null,
+            "medianRange": 0.9953541591811629,
+            "pairedReps": 0,
+            "medianLagMs": null,
+            "coverage": 1,
+            "view": {
+              "x": 0.27791793644428253,
+              "y": 0.5187248587608337,
+              "scale": 0.1424904469909758,
+              "orientation": 0.4137048305842853
+            }
+          },
+          "repetitions": [
+            {
+              "repIndex": 0,
+              "sourceStartMs": 12933.333333333334,
+              "durationMs": 1933.3333333333321,
+              "verified": true,
+              "range": 0.9907083183623258,
+              "outboundMs": 533.3333333333321,
+              "returnMs": 1400,
+              "bottomHoldMs": 733.3333333333339,
+              "minAngle": 74.28829198956993,
+              "maxAngle": 154.37752384760873,
+              "excursionDeg": 80.0892318580388,
+              "bilateralLagMs": null,
+              "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+              "pairedCoverage": 0
+            },
+            {
+              "repIndex": 1,
+              "sourceStartMs": 16333.333333333334,
+              "durationMs": 2066.666666666666,
+              "verified": true,
+              "range": 1,
+              "outboundMs": 599.9999999999982,
+              "returnMs": 1466.6666666666679,
+              "bottomHoldMs": 266.6666666666679,
+              "minAngle": 69.49725270017615,
+              "maxAngle": 152.75502982494848,
+              "excursionDeg": 83.25777712477233,
+              "bilateralLagMs": null,
+              "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+              "pairedCoverage": 0
+            }
+          ],
+          "exp": {
+            "verifiedReps": 2,
+            "qualityBonus": 0,
+            "fixedBonus": 0
+          },
+          "cue": null,
+          "sourceReviewChecked": true,
+          "unlocatedVerified": 0,
+          "uiChecksPassed": true,
+          "pageErrors": [],
+          "elapsedSeconds": 147.05,
+          "traceBasedCountCheck": {
+            "expected": 2,
+            "matched": 2,
+            "missed": 0,
+            "extra": 0,
+            "matches": [
+              {
+                "window": [
+                  13.7,
+                  14.81
+                ],
+                "event": 14.866666666666665
+              },
+              {
+                "window": [
+                  17.13,
+                  18.44
+                ],
+                "event": 18.4
+              }
+            ],
+            "misses": [],
+            "extraTimes": []
+          },
+          "auditedCountCheck": {
+            "expected": 2,
+            "matched": 2,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [
+              {
+                "window": [
+                  13.7,
+                  14.81
+                ],
+                "event": 14.866666666666665
+              },
+              {
+                "window": [
+                  17.13,
+                  18.44
+                ],
+                "event": 18.4
+              }
+            ],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        {
+          "index": 3,
+          "file": "adelaide-parks.mp4",
+          "exercise": "lat-pulldown",
+          "control": false,
+          "preparedSha256": "e956dea635646bba422c8239f3ce7c5291863dc9a3b45ab350dd9456050cae2b",
+          "referenceWindows": [
+            [
+              2.73,
+              4.6
+            ],
+            [
+              6.42,
+              7.63
+            ],
+            [
+              9.37,
+              10.93
+            ],
+            [
+              12.49,
+              14.16
+            ],
+            [
+              15.75,
+              17.03
+            ]
+          ],
+          "errors": [],
+          "frames": 260,
+          "sourceSpanMs": [
+            0,
+            17266.666666666668
+          ],
+          "maxSourceGapMs": 66.66666666666788,
+          "terminalMessage": "\u4e2a\u4eba\u6821\u51c6\n\u7b49\u5f85\u5173\u952e\u70b9\n1\n/ 3 \u6b21\n\n\u5f55\u50cf\u5df2\u7ed3\u675f\u3002\u6821\u51c6\u9700\u8981 3 \u6b21\u6e05\u6670\u7684\u5b8c\u6574\u4e0b\u62c9\u3002\n\n\u9010\u5e27\u5206\u6790 \u00b7 17 / 18 \u79d2\n\u6682\u505c\u5206\u6790\n\n\u7b2c 1 / 1 \u7ec4 \u00b7 \u76ee\u6807 10 \u6b21 \u00b7 \u52a8\u4f5c\u5e45\u5ea6\n\n\u91cd\u8bd5",
+          "calibrated": false,
+          "verified": 0,
+          "reviewEntries": 0,
+          "metrics": null,
+          "repetitions": [],
+          "unlocatedVerified": 0,
+          "uiChecksPassed": true,
+          "pageErrors": [],
+          "elapsedSeconds": 118.793,
+          "traceBasedCountCheck": {
+            "expected": 2,
+            "matched": 0,
+            "missed": 2,
+            "extra": 0,
+            "matches": [],
+            "misses": [
+              [
+                12.49,
+                14.16
+              ],
+              [
+                15.75,
+                17.03
+              ]
+            ],
+            "extraTimes": []
+          },
+          "auditedCountCheck": {
+            "expected": 2,
+            "matched": 0,
+            "missed": 2,
+            "unmatched": 0,
+            "matches": [],
+            "misses": [
+              [
+                12.49,
+                14.16
+              ],
+              [
+                15.75,
+                17.03
+              ]
+            ],
+            "unmatchedTimes": []
+          }
+        },
+        {
+          "index": 4,
+          "file": "mixkit-100549.mp4",
+          "exercise": "lat-pulldown",
+          "control": false,
+          "preparedSha256": "9a51060a0d0ee20cdbc16cb2480e1b5adf6b9a8786eea3854661b637da861e16",
+          "referenceWindows": [
+            [
+              3.28,
+              4.87
+            ],
+            [
+              6.45,
+              8.06
+            ],
+            [
+              9.56,
+              11.02
+            ],
+            [
+              12.28,
+              13.64
+            ],
+            [
+              15.1,
+              16.49
+            ]
+          ],
+          "errors": [],
+          "frames": 265,
+          "sourceSpanMs": [
+            0,
+            17600
+          ],
+          "maxSourceGapMs": 66.66666666666788,
+          "terminalMessage": "\u4e2a\u4eba\u6821\u51c6\n\u7b49\u5f85\u5173\u952e\u70b9\n0\n/ 3 \u6b21\n\n\u5f55\u50cf\u5df2\u7ed3\u675f\u3002\u6821\u51c6\u9700\u8981 3 \u6b21\u6e05\u6670\u7684\u5b8c\u6574\u4e0b\u62c9\u3002\n\n\u9010\u5e27\u5206\u6790 \u00b7 17 / 18 \u79d2\n\u6682\u505c\u5206\u6790\n\n\u7b2c 1 / 1 \u7ec4 \u00b7 \u76ee\u6807 10 \u6b21 \u00b7 \u52a8\u4f5c\u5e45\u5ea6\n\n\u91cd\u8bd5",
+          "calibrated": false,
+          "verified": 0,
+          "reviewEntries": 0,
+          "metrics": null,
+          "repetitions": [],
+          "unlocatedVerified": 0,
+          "uiChecksPassed": true,
+          "pageErrors": [],
+          "elapsedSeconds": 136.6,
+          "traceBasedCountCheck": {
+            "expected": 2,
+            "matched": 0,
+            "missed": 2,
+            "extra": 0,
+            "matches": [],
+            "misses": [
+              [
+                12.28,
+                13.64
+              ],
+              [
+                15.1,
+                16.49
+              ]
+            ],
+            "extraTimes": []
+          },
+          "auditedCountCheck": {
+            "expected": 2,
+            "matched": 0,
+            "missed": 2,
+            "unmatched": 0,
+            "matches": [],
+            "misses": [
+              [
+                12.28,
+                13.64
+              ],
+              [
+                15.1,
+                16.49
+              ]
+            ],
+            "unmatchedTimes": []
+          }
+        },
+        {
+          "index": 5,
+          "file": "pexels-7934717.mp4",
+          "exercise": "lat-pulldown",
+          "control": false,
+          "preparedSha256": "33803f148fcb8b88eb3821d5fcb9474bf5b1fb24e5fc1b7492db25bc13ef90b9",
+          "referenceWindows": [
+            [
+              2.22,
+              3.65
+            ],
+            [
+              5.2,
+              6.7
+            ],
+            [
+              8.08,
+              9.6
+            ]
+          ],
+          "errors": [],
+          "frames": 170,
+          "sourceSpanMs": [
+            0,
+            11266.666666666666
+          ],
+          "maxSourceGapMs": 66.66666666666788,
+          "terminalMessage": "\u4e2a\u4eba\u6821\u51c6\n\u7b49\u5f85\u5173\u952e\u70b9\n0\n/ 3 \u6b21\n\n\u5f55\u50cf\u5df2\u7ed3\u675f\u3002\u6821\u51c6\u9700\u8981 3 \u6b21\u6e05\u6670\u7684\u5b8c\u6574\u4e0b\u62c9\u3002\n\n\u9010\u5e27\u5206\u6790 \u00b7 11 / 12 \u79d2\n\u6682\u505c\u5206\u6790\n\n\u7b2c 1 / 1 \u7ec4 \u00b7 \u76ee\u6807 10 \u6b21 \u00b7 \u52a8\u4f5c\u5e45\u5ea6\n\n\u91cd\u8bd5",
+          "calibrated": false,
+          "verified": 0,
+          "reviewEntries": 0,
+          "metrics": null,
+          "repetitions": [],
+          "unlocatedVerified": 0,
+          "uiChecksPassed": true,
+          "pageErrors": [],
+          "elapsedSeconds": 70.625,
+          "traceBasedCountCheck": {
+            "expected": 0,
+            "matched": 0,
+            "missed": 0,
+            "extra": 0,
+            "matches": [],
+            "misses": [],
+            "extraTimes": []
+          },
+          "auditedCountCheck": {
+            "expected": 0,
+            "matched": 0,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        {
+          "index": 6,
+          "file": "pexels-35585697.mp4",
+          "exercise": "lat-pulldown",
+          "control": false,
+          "preparedSha256": "cadb3f11bc6e5ec282d58c8ac8ae1ac908bffef01a14c65f3555d58ea7f2e718",
+          "referenceWindows": [
+            [
+              4.84,
+              5.52
+            ],
+            [
+              6.18,
+              6.88
+            ],
+            [
+              7.44,
+              8.1
+            ],
+            [
+              8.75,
+              9.34
+            ],
+            [
+              10.07,
+              10.74
+            ],
+            [
+              11.41,
+              12.06
+            ],
+            [
+              12.72,
+              13.42
+            ],
+            [
+              14.04,
+              14.64
+            ]
+          ],
+          "errors": [],
+          "frames": 224,
+          "sourceSpanMs": [
+            0,
+            14866.666666666666
+          ],
+          "maxSourceGapMs": 66.66666666666788,
+          "terminalMessage": "\u4e2a\u4eba\u6821\u51c6\n\u7b49\u5f85\u5173\u952e\u70b9\n1\n/ 3 \u6b21\n\n\u5f55\u50cf\u5df2\u7ed3\u675f\u3002\u6821\u51c6\u9700\u8981 3 \u6b21\u6e05\u6670\u7684\u5b8c\u6574\u4e0b\u62c9\u3002\n\n\u9010\u5e27\u5206\u6790 \u00b7 14 / 15 \u79d2\n\u6682\u505c\u5206\u6790\n\n\u7b2c 1 / 1 \u7ec4 \u00b7 \u76ee\u6807 10 \u6b21 \u00b7 \u52a8\u4f5c\u5e45\u5ea6\n\n\u91cd\u8bd5",
+          "calibrated": false,
+          "verified": 0,
+          "reviewEntries": 0,
+          "metrics": null,
+          "repetitions": [],
+          "unlocatedVerified": 0,
+          "uiChecksPassed": true,
+          "pageErrors": [],
+          "elapsedSeconds": 141.247,
+          "traceBasedCountCheck": {
+            "expected": 5,
+            "matched": 0,
+            "missed": 5,
+            "extra": 0,
+            "matches": [],
+            "misses": [
+              [
+                8.75,
+                9.34
+              ],
+              [
+                10.07,
+                10.74
+              ],
+              [
+                11.41,
+                12.06
+              ],
+              [
+                12.72,
+                13.42
+              ],
+              [
+                14.04,
+                14.64
+              ]
+            ],
+            "extraTimes": []
+          },
+          "auditedCountCheck": {
+            "expected": 5,
+            "matched": 0,
+            "missed": 5,
+            "unmatched": 0,
+            "matches": [],
+            "misses": [
+              [
+                8.75,
+                9.34
+              ],
+              [
+                10.07,
+                10.74
+              ],
+              [
+                11.41,
+                12.06
+              ],
+              [
+                12.72,
+                13.42
+              ],
+              [
+                14.04,
+                14.64
+              ]
+            ],
+            "unmatchedTimes": []
+          }
+        },
+        {
+          "index": 7,
+          "file": "pulldown.webm",
+          "exercise": "lat-pulldown",
+          "control": false,
+          "preparedSha256": "f6200b7691acc6e99b1b0ddee7783fea56da3a6e155c5b3020cdda958cd49e34",
+          "referenceWindows": [
+            [
+              2.15,
+              4.1
+            ],
+            [
+              5.88,
+              7.6
+            ],
+            [
+              9.25,
+              11
+            ],
+            [
+              12.72,
+              14.7
+            ],
+            [
+              16.32,
+              18.27
+            ]
+          ],
+          "errors": [],
+          "frames": 275,
+          "sourceSpanMs": [
+            0,
+            18266.666666666668
+          ],
+          "maxSourceGapMs": 66.66666666666788,
+          "terminalMessage": "\u8fd9\u4e00\u7ec4\u786e\u8ba4\u4e86 2 \u4e0b\u3002\n\n+2\nEXP\n\n\u56de\u653e\u7ed3\u7b97\uff0c\u4e0d\u8ba1\u5165\u4f60\u7684\u8bad\u7ec3\u8bb0\u5f55\u3002\n\n\u5b8c\u6210",
+          "calibrated": true,
+          "reviewEntries": 2,
+          "verified": 2,
+          "metrics": {
+            "measuredReps": 2,
+            "medianDurationMs": 1400,
+            "medianReturnMs": 700,
+            "returnVariation": null,
+            "medianRange": 0.9898560357831985,
+            "pairedReps": 0,
+            "medianLagMs": null,
+            "coverage": 1,
+            "view": {
+              "x": 0.41830162703990936,
+              "y": 0.5324161201715469,
+              "scale": 0.18594153756271464,
+              "orientation": 0.1087162709153787
+            }
+          },
+          "repetitions": [
+            {
+              "repIndex": 0,
+              "sourceStartMs": 12200,
+              "durationMs": 1333.333333333334,
+              "verified": true,
+              "range": 0.9881020641567191,
+              "outboundMs": 666.6666666666661,
+              "returnMs": 666.6666666666679,
+              "bottomHoldMs": 333.33333333333394,
+              "minAngle": 15.106832024305039,
+              "maxAngle": 152.40793263283817,
+              "excursionDeg": 137.30110060853312,
+              "bilateralLagMs": null,
+              "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+              "pairedCoverage": 0
+            },
+            {
+              "repIndex": 1,
+              "sourceStartMs": 15666.666666666666,
+              "durationMs": 1466.666666666666,
+              "verified": true,
+              "range": 0.9916100074096779,
+              "outboundMs": 733.3333333333339,
+              "returnMs": 733.3333333333321,
+              "bottomHoldMs": 333.33333333333394,
+              "minAngle": 14.546487108485755,
+              "maxAngle": 152.8156024272059,
+              "excursionDeg": 138.26911531872014,
+              "bilateralLagMs": null,
+              "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+              "pairedCoverage": 0
+            }
+          ],
+          "exp": {
+            "verifiedReps": 2,
+            "qualityBonus": 0,
+            "fixedBonus": 0
+          },
+          "cue": null,
+          "sourceReviewChecked": true,
+          "unlocatedVerified": 0,
+          "uiChecksPassed": true,
+          "pageErrors": [],
+          "elapsedSeconds": 121.549,
+          "traceBasedCountCheck": {
+            "expected": 2,
+            "matched": 2,
+            "missed": 0,
+            "extra": 0,
+            "matches": [
+              {
+                "window": [
+                  12.72,
+                  14.7
+                ],
+                "event": 13.533333333333333
+              },
+              {
+                "window": [
+                  16.32,
+                  18.27
+                ],
+                "event": 17.133333333333333
+              }
+            ],
+            "misses": [],
+            "extraTimes": []
+          },
+          "auditedCountCheck": {
+            "expected": 2,
+            "matched": 2,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [
+              {
+                "window": [
+                  12.72,
+                  14.7
+                ],
+                "event": 13.533333333333333
+              },
+              {
+                "window": [
+                  16.32,
+                  18.27
+                ],
+                "event": 17.133333333333333
+              }
+            ],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        {
+          "index": 8,
+          "file": "pulldown-mistakes.webm",
+          "exercise": "lat-pulldown",
+          "control": false,
+          "preparedSha256": "0765784da54e2bf0ec32bc0def3014a729b009b54d39533b135dc64a312efcf5",
+          "referenceWindows": [
+            [
+              9.4,
+              10.86
+            ]
+          ],
+          "errors": [],
+          "frames": 165,
+          "sourceSpanMs": [
+            0,
+            10933.333333333334
+          ],
+          "maxSourceGapMs": 66.66666666666788,
+          "terminalMessage": "\u4e2a\u4eba\u6821\u51c6\n\u7b49\u5f85\u5173\u952e\u70b9\n1\n/ 3 \u6b21\n\n\u5f55\u50cf\u5df2\u7ed3\u675f\u3002\u6821\u51c6\u9700\u8981 3 \u6b21\u6e05\u6670\u7684\u5b8c\u6574\u4e0b\u62c9\u3002\n\n\u9010\u5e27\u5206\u6790 \u00b7 10 / 11 \u79d2\n\u6682\u505c\u5206\u6790\n\n\u7b2c 1 / 1 \u7ec4 \u00b7 \u76ee\u6807 10 \u6b21 \u00b7 \u52a8\u4f5c\u5e45\u5ea6\n\n\u91cd\u8bd5",
+          "calibrated": false,
+          "verified": 0,
+          "reviewEntries": 0,
+          "metrics": null,
+          "repetitions": [],
+          "unlocatedVerified": 0,
+          "uiChecksPassed": true,
+          "pageErrors": [],
+          "elapsedSeconds": 100.066,
+          "traceBasedCountCheck": {
+            "expected": 0,
+            "matched": 0,
+            "missed": 0,
+            "extra": 0,
+            "matches": [],
+            "misses": [],
+            "extraTimes": []
+          },
+          "auditedCountCheck": {
+            "expected": 0,
+            "matched": 0,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        {
+          "index": 9,
+          "file": "squat-fitnessscape.webm",
+          "exercise": "squat",
+          "control": false,
+          "preparedSha256": "2440985661c3533a4ce78472b0f4577dbdf023aff3f8f9a225bbb5ff8071b1e9",
+          "referenceWindows": [
+            [
+              2,
+              3.5
+            ],
+            [
+              5.2,
+              6.7
+            ]
+          ],
+          "errors": [],
+          "frames": 107,
+          "sourceSpanMs": [
+            0,
+            7066.666666666667
+          ],
+          "maxSourceGapMs": 66.66666666666697,
+          "terminalMessage": "\u4e2a\u4eba\u6821\u51c6\n\u7b49\u5f85\u5173\u952e\u70b9\n1\n/ 3 \u6b21\n\n\u5f55\u50cf\u5df2\u7ed3\u675f\u3002\u6821\u51c6\u9700\u8981 3 \u6b21\u6e05\u6670\u7684\u5b8c\u6574\u6df1\u8e72\u3002\n\n\u9010\u5e27\u5206\u6790 \u00b7 7 / 8 \u79d2\n\u6682\u505c\u5206\u6790\n\n\u7b2c 1 / 1 \u7ec4 \u00b7 \u76ee\u6807 10 \u6b21 \u00b7 \u52a8\u4f5c\u5e45\u5ea6\n\n\u91cd\u8bd5",
+          "calibrated": false,
+          "verified": 0,
+          "reviewEntries": 0,
+          "metrics": null,
+          "repetitions": [],
+          "unlocatedVerified": 0,
+          "uiChecksPassed": true,
+          "pageErrors": [],
+          "elapsedSeconds": 43.491,
+          "traceBasedCountCheck": {
+            "expected": 0,
+            "matched": 0,
+            "missed": 0,
+            "extra": 0,
+            "matches": [],
+            "misses": [],
+            "extraTimes": []
+          },
+          "auditedCountCheck": {
+            "expected": 0,
+            "matched": 0,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        {
+          "index": 10,
+          "file": "ymove-barbell-back-squat.mp4",
+          "exercise": "squat",
+          "control": false,
+          "preparedSha256": "e1619abcd21b0f97d83703b13f36c4a3f3261535417d92f50df99ffb7810d993",
+          "referenceWindows": [
+            [
+              1.4,
+              2.85
+            ],
+            [
+              5.15,
+              6.4
+            ],
+            [
+              8.65,
+              10.15
+            ],
+            [
+              12.35,
+              13.9
+            ]
+          ],
+          "errors": [],
+          "frames": 210,
+          "sourceSpanMs": [
+            0,
+            13933.333333333334
+          ],
+          "maxSourceGapMs": 66.66666666666788,
+          "terminalMessage": "\u8fd9\u4e00\u7ec4\u786e\u8ba4\u4e86 1 \u4e0b\u3002\n\n+1\nEXP\n\n\u56de\u653e\u7ed3\u7b97\uff0c\u4e0d\u8ba1\u5165\u4f60\u7684\u8bad\u7ec3\u8bb0\u5f55\u3002\n\n\u5b8c\u6210",
+          "calibrated": true,
+          "reviewEntries": 1,
+          "verified": 1,
+          "metrics": {
+            "measuredReps": 1,
+            "medianDurationMs": 1933.333333333334,
+            "medianReturnMs": 1200,
+            "returnVariation": null,
+            "medianRange": 0.996458011896259,
+            "pairedReps": 0,
+            "medianLagMs": null,
+            "coverage": 1,
+            "view": {
+              "x": 0.4648970067501068,
+              "y": 0.2717340812087059,
+              "scale": 0.17468729363194901,
+              "orientation": 0.3595555813479175
+            }
+          },
+          "repetitions": [
+            {
+              "repIndex": 0,
+              "sourceStartMs": 11666.666666666666,
+              "durationMs": 1933.333333333334,
+              "verified": true,
+              "range": 0.996458011896259,
+              "outboundMs": 733.3333333333339,
+              "returnMs": 1200,
+              "bottomHoldMs": 66.66666666666606,
+              "minAngle": 52.65586868348607,
+              "maxAngle": 164.91131791218191,
+              "excursionDeg": 112.25544922869585,
+              "bilateralLagMs": null,
+              "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+              "pairedCoverage": 0.26666666666666666
+            }
+          ],
+          "exp": {
+            "verifiedReps": 1,
+            "qualityBonus": 0,
+            "fixedBonus": 0
+          },
+          "cue": null,
+          "sourceReviewChecked": true,
+          "unlocatedVerified": 0,
+          "uiChecksPassed": true,
+          "pageErrors": [],
+          "elapsedSeconds": 78.498,
+          "traceBasedCountCheck": {
+            "expected": 1,
+            "matched": 1,
+            "missed": 0,
+            "extra": 0,
+            "matches": [
+              {
+                "window": [
+                  12.35,
+                  13.9
+                ],
+                "event": 13.6
+              }
+            ],
+            "misses": [],
+            "extraTimes": []
+          },
+          "auditedCountCheck": {
+            "expected": 1,
+            "matched": 1,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [
+              {
+                "window": [
+                  12.35,
+                  13.9
+                ],
+                "event": 13.6
+              }
+            ],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        {
+          "index": 11,
+          "file": "ymove-goblet-squat-with-kettlebell.mp4",
+          "exercise": "squat",
+          "control": false,
+          "preparedSha256": "c161fa1de4a9a03d51d0561d54b2a43964e187b6b99b5c6865f768c4ce56051b",
+          "referenceWindows": [
+            [
+              1.6,
+              2.9
+            ],
+            [
+              4.85,
+              6.1
+            ],
+            [
+              8.3,
+              9.65
+            ],
+            [
+              11.8,
+              13.2
+            ],
+            [
+              15.55,
+              17.15
+            ]
+          ],
+          "errors": [],
+          "frames": 258,
+          "sourceSpanMs": [
+            0,
+            17133.333333333332
+          ],
+          "maxSourceGapMs": 66.66666666666788,
+          "terminalMessage": "\u8fd9\u4e00\u7ec4\u786e\u8ba4\u4e86 2 \u4e0b\u3002\n\n+2\nEXP\n\n\u56de\u653e\u7ed3\u7b97\uff0c\u4e0d\u8ba1\u5165\u4f60\u7684\u8bad\u7ec3\u8bb0\u5f55\u3002\n\n\u5b8c\u6210",
+          "calibrated": true,
+          "reviewEntries": 2,
+          "verified": 2,
+          "metrics": {
+            "measuredReps": 2,
+            "medianDurationMs": 2266.666666666667,
+            "medianReturnMs": 1133.333333333334,
+            "returnVariation": null,
+            "medianRange": 0.940696527677902,
+            "pairedReps": 0,
+            "medianLagMs": null,
+            "coverage": 1,
+            "view": {
+              "x": 0.5304166674613953,
+              "y": 0.2916753590106964,
+              "scale": 0.19183006509508474,
+              "orientation": 0.5121887717125332
+            }
+          },
+          "repetitions": [
+            {
+              "repIndex": 0,
+              "sourceStartMs": 11000,
+              "durationMs": 2200,
+              "verified": true,
+              "range": 0.9499102089344744,
+              "outboundMs": 1133.333333333334,
+              "returnMs": 1066.666666666666,
+              "bottomHoldMs": 466.6666666666679,
+              "minAngle": 66.59447823898695,
+              "maxAngle": 166.44831221292148,
+              "excursionDeg": 99.85383397393453,
+              "bilateralLagMs": null,
+              "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+              "pairedCoverage": 1
+            },
+            {
+              "repIndex": 1,
+              "sourceStartMs": 14733.333333333334,
+              "durationMs": 2333.333333333334,
+              "verified": true,
+              "range": 0.9314828464213295,
+              "outboundMs": 1133.3333333333321,
+              "returnMs": 1200.0000000000018,
+              "bottomHoldMs": 466.6666666666679,
+              "minAngle": 68.73446668098414,
+              "maxAngle": 166.26713252714725,
+              "excursionDeg": 97.53266584616311,
+              "bilateralLagMs": null,
+              "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+              "pairedCoverage": 0.9722222222222222
+            }
+          ],
+          "exp": {
+            "verifiedReps": 2,
+            "qualityBonus": 0,
+            "fixedBonus": 0
+          },
+          "cue": null,
+          "sourceReviewChecked": true,
+          "unlocatedVerified": 0,
+          "uiChecksPassed": true,
+          "pageErrors": [],
+          "elapsedSeconds": 103.499,
+          "traceBasedCountCheck": {
+            "expected": 2,
+            "matched": 2,
+            "missed": 0,
+            "extra": 0,
+            "matches": [
+              {
+                "window": [
+                  11.8,
+                  13.2
+                ],
+                "event": 13.2
+              },
+              {
+                "window": [
+                  15.55,
+                  17.15
+                ],
+                "event": 17.066666666666666
+              }
+            ],
+            "misses": [],
+            "extraTimes": []
+          },
+          "auditedCountCheck": {
+            "expected": 2,
+            "matched": 2,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [
+              {
+                "window": [
+                  11.8,
+                  13.2
+                ],
+                "event": 13.2
+              },
+              {
+                "window": [
+                  15.55,
+                  17.15
+                ],
+                "event": 17.066666666666666
+              }
+            ],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        {
+          "index": 12,
+          "file": "pexels-3209802.mp4",
+          "exercise": "lat-pulldown",
+          "control": false,
+          "preparedSha256": "f260d0e78608c08766bfdb32452b35df26f1b8e57ac258758fe29d57fe232525",
+          "referenceWindows": null,
+          "errors": [],
+          "frames": 225,
+          "sourceSpanMs": [
+            0,
+            14933.333333333334
+          ],
+          "maxSourceGapMs": 66.66666666666788,
+          "terminalMessage": "\u4e2a\u4eba\u6821\u51c6\n\u7b49\u5f85\u5173\u952e\u70b9\n0\n/ 3 \u6b21\n\n\u5f55\u50cf\u5df2\u7ed3\u675f\u3002\u6821\u51c6\u9700\u8981 3 \u6b21\u6e05\u6670\u7684\u5b8c\u6574\u4e0b\u62c9\u3002\n\n\u9010\u5e27\u5206\u6790 \u00b7 14 / 15 \u79d2\n\u6682\u505c\u5206\u6790\n\n\u7b2c 1 / 1 \u7ec4 \u00b7 \u76ee\u6807 10 \u6b21 \u00b7 \u52a8\u4f5c\u5e45\u5ea6\n\n\u91cd\u8bd5",
+          "calibrated": false,
+          "verified": 0,
+          "reviewEntries": 0,
+          "metrics": null,
+          "repetitions": [],
+          "unlocatedVerified": 0,
+          "uiChecksPassed": true,
+          "pageErrors": [],
+          "elapsedSeconds": 101.232,
+          "traceBasedCountCheck": null,
+          "auditedCountCheck": null
+        },
+        {
+          "index": 13,
+          "file": "pexels-5983521.mp4",
+          "exercise": "lat-pulldown",
+          "control": false,
+          "preparedSha256": "36c08e1fac43d6777846e09fe0d6fea7794b30fbc95226dbf9bb04ecd14fd10a",
+          "referenceWindows": [
+            [
+              6,
+              10.45
+            ]
+          ],
+          "errors": [],
+          "frames": 162,
+          "sourceSpanMs": [
+            0,
+            10733.333333333334
+          ],
+          "maxSourceGapMs": 66.66666666666788,
+          "terminalMessage": "\u4e2a\u4eba\u6821\u51c6\n\u7b49\u5f85\u5173\u952e\u70b9\n1\n/ 3 \u6b21\n\n\u5f55\u50cf\u5df2\u7ed3\u675f\u3002\u6821\u51c6\u9700\u8981 3 \u6b21\u6e05\u6670\u7684\u5b8c\u6574\u4e0b\u62c9\u3002\n\n\u9010\u5e27\u5206\u6790 \u00b7 10 / 11 \u79d2\n\u6682\u505c\u5206\u6790\n\n\u7b2c 1 / 1 \u7ec4 \u00b7 \u76ee\u6807 10 \u6b21 \u00b7 \u52a8\u4f5c\u5e45\u5ea6\n\n\u91cd\u8bd5",
+          "calibrated": false,
+          "verified": 0,
+          "reviewEntries": 0,
+          "metrics": null,
+          "repetitions": [],
+          "unlocatedVerified": 0,
+          "uiChecksPassed": true,
+          "pageErrors": [],
+          "elapsedSeconds": 63.586,
+          "traceBasedCountCheck": {
+            "expected": 0,
+            "matched": 0,
+            "missed": 0,
+            "extra": 0,
+            "matches": [],
+            "misses": [],
+            "extraTimes": []
+          },
+          "auditedCountCheck": {
+            "expected": 0,
+            "matched": 0,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        {
+          "index": 14,
+          "file": "szat-front.webm",
+          "exercise": "squat",
+          "control": false,
+          "preparedSha256": "dfe48449484d5de067adbca059b20158b027e092e945bfee4c33578055140156",
+          "referenceWindows": [
+            [
+              6.3,
+              8.5
+            ],
+            [
+              11.1,
+              13.25
+            ],
+            [
+              15.8,
+              17.9
+            ],
+            [
+              20.4,
+              22.3
+            ],
+            [
+              24.8,
+              27
+            ],
+            [
+              29.9,
+              31.8
+            ],
+            [
+              34.4,
+              36.8
+            ]
+          ],
+          "errors": [],
+          "frames": 560,
+          "sourceSpanMs": [
+            0,
+            37266.666666666664
+          ],
+          "maxSourceGapMs": 66.66666666667152,
+          "terminalMessage": "\u4e2a\u4eba\u6821\u51c6\n\u7b49\u5f85\u5173\u952e\u70b9\n0\n/ 3 \u6b21\n\n\u5f55\u50cf\u5df2\u7ed3\u675f\u3002\u6821\u51c6\u9700\u8981 3 \u6b21\u6e05\u6670\u7684\u5b8c\u6574\u6df1\u8e72\u3002\n\n\u9010\u5e27\u5206\u6790 \u00b7 37 / 38 \u79d2\n\u6682\u505c\u5206\u6790\n\n\u7b2c 1 / 1 \u7ec4 \u00b7 \u76ee\u6807 10 \u6b21 \u00b7 \u52a8\u4f5c\u5e45\u5ea6\n\n\u91cd\u8bd5",
+          "calibrated": false,
+          "verified": 0,
+          "reviewEntries": 0,
+          "metrics": null,
+          "repetitions": [],
+          "unlocatedVerified": 0,
+          "uiChecksPassed": true,
+          "pageErrors": [],
+          "elapsedSeconds": 248.094,
+          "traceBasedCountCheck": {
+            "expected": 4,
+            "matched": 0,
+            "missed": 4,
+            "extra": 0,
+            "matches": [],
+            "misses": [
+              [
+                20.4,
+                22.3
+              ],
+              [
+                24.8,
+                27
+              ],
+              [
+                29.9,
+                31.8
+              ],
+              [
+                34.4,
+                36.8
+              ]
+            ],
+            "extraTimes": []
+          },
+          "auditedCountCheck": {
+            "expected": 4,
+            "matched": 0,
+            "missed": 4,
+            "unmatched": 0,
+            "matches": [],
+            "misses": [
+              [
+                20.4,
+                22.3
+              ],
+              [
+                24.8,
+                27
+              ],
+              [
+                29.9,
+                31.8
+              ],
+              [
+                34.4,
+                36.8
+              ]
+            ],
+            "unmatchedTimes": []
+          }
+        },
+        {
+          "index": 15,
+          "file": "szat-side.webm",
+          "exercise": "squat",
+          "control": false,
+          "preparedSha256": "db9917c7bec60dafab7814e12a545a0cc8f026c0ba1f4e7e1992d21451d2e921",
+          "referenceWindows": [
+            [
+              4.6,
+              6.1
+            ],
+            [
+              7.8,
+              9.15
+            ],
+            [
+              10.75,
+              12.2
+            ],
+            [
+              13.6,
+              15.2
+            ],
+            [
+              16.55,
+              18.2
+            ],
+            [
+              19.8,
+              21.2
+            ],
+            [
+              22.5,
+              24.3
+            ],
+            [
+              27.9,
+              29.8
+            ],
+            [
+              32.3,
+              34.7
+            ]
+          ],
+          "errors": [],
+          "frames": 529,
+          "sourceSpanMs": [
+            0,
+            35200
+          ],
+          "maxSourceGapMs": 66.66666666667152,
+          "terminalMessage": "\u8fd9\u4e00\u7ec4\u786e\u8ba4\u4e86 6 \u4e0b\u3002\n\n+6\nEXP\n\n\u56de\u653e\u7ed3\u7b97\uff0c\u4e0d\u8ba1\u5165\u4f60\u7684\u8bad\u7ec3\u8bb0\u5f55\u3002\n\n\u5b8c\u6210",
+          "calibrated": true,
+          "reviewEntries": 6,
+          "verified": 6,
+          "metrics": {
+            "measuredReps": 6,
+            "medianDurationMs": 2733.333333333334,
+            "medianReturnMs": 1400,
+            "returnVariation": 0,
+            "medianRange": 1,
+            "pairedReps": 0,
+            "medianLagMs": null,
+            "coverage": 1,
+            "view": null
+          },
+          "repetitions": [
+            {
+              "repIndex": 0,
+              "sourceStartMs": 12466.666666666666,
+              "durationMs": 2666.666666666668,
+              "verified": true,
+              "range": 1,
+              "outboundMs": 1266.6666666666679,
+              "returnMs": 1400,
+              "bottomHoldMs": 466.66666666666606,
+              "minAngle": 40.633469059506275,
+              "maxAngle": 172.90084905299085,
+              "excursionDeg": 132.26737999348458,
+              "bilateralLagMs": null,
+              "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+              "pairedCoverage": 0
+            },
+            {
+              "repIndex": 1,
+              "sourceStartMs": 15466.666666666666,
+              "durationMs": 2666.666666666666,
+              "verified": true,
+              "range": 1,
+              "outboundMs": 1266.666666666666,
+              "returnMs": 1400,
+              "bottomHoldMs": 266.6666666666679,
+              "minAngle": 40.43333560172417,
+              "maxAngle": 168.2160628397559,
+              "excursionDeg": 127.78272723803173,
+              "bilateralLagMs": null,
+              "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+              "pairedCoverage": 0
+            },
+            {
+              "repIndex": 2,
+              "sourceStartMs": 18466.666666666668,
+              "durationMs": 2666.6666666666642,
+              "verified": true,
+              "range": 1,
+              "outboundMs": 1266.6666666666642,
+              "returnMs": 1400,
+              "bottomHoldMs": 133.33333333333576,
+              "minAngle": 42.788120590287065,
+              "maxAngle": 177.36423124557896,
+              "excursionDeg": 134.5761106552919,
+              "bilateralLagMs": null,
+              "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+              "pairedCoverage": 0
+            },
+            {
+              "repIndex": 3,
+              "sourceStartMs": 21400,
+              "durationMs": 2800,
+              "verified": true,
+              "range": 0.9965689233653056,
+              "outboundMs": 1333.3333333333321,
+              "returnMs": 1466.6666666666679,
+              "bottomHoldMs": 400,
+              "minAngle": 44.243409226301964,
+              "maxAngle": 166.6018103528079,
+              "excursionDeg": 122.35840112650592,
+              "bilateralLagMs": null,
+              "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+              "pairedCoverage": 0
+            },
+            {
+              "repIndex": 4,
+              "sourceStartMs": 26733.333333333332,
+              "durationMs": 2866.666666666668,
+              "verified": true,
+              "range": 1,
+              "outboundMs": 1466.6666666666679,
+              "returnMs": 1400,
+              "bottomHoldMs": 466.66666666666424,
+              "minAngle": 41.890841266873586,
+              "maxAngle": 166.7308246705979,
+              "excursionDeg": 124.83998340372432,
+              "bilateralLagMs": null,
+              "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+              "pairedCoverage": 0
+            },
+            {
+              "repIndex": 5,
+              "sourceStartMs": 30933.333333333332,
+              "durationMs": 3533.333333333332,
+              "verified": true,
+              "range": 1,
+              "outboundMs": 1866.6666666666679,
+              "returnMs": 1666.6666666666642,
+              "bottomHoldMs": 466.6666666666679,
+              "minAngle": 38.50559813764308,
+              "maxAngle": 174.21710459506525,
+              "excursionDeg": 135.71150645742216,
+              "bilateralLagMs": null,
+              "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+              "pairedCoverage": 0
+            }
+          ],
+          "exp": {
+            "verifiedReps": 6,
+            "qualityBonus": 0,
+            "fixedBonus": 0
+          },
+          "cue": null,
+          "sourceReviewChecked": true,
+          "unlocatedVerified": 0,
+          "uiChecksPassed": true,
+          "pageErrors": [],
+          "elapsedSeconds": 227.905,
+          "traceBasedCountCheck": {
+            "expected": 6,
+            "matched": 6,
+            "missed": 0,
+            "extra": 0,
+            "matches": [
+              {
+                "window": [
+                  13.6,
+                  15.2
+                ],
+                "event": 15.133333333333335
+              },
+              {
+                "window": [
+                  16.55,
+                  18.2
+                ],
+                "event": 18.133333333333333
+              },
+              {
+                "window": [
+                  19.8,
+                  21.2
+                ],
+                "event": 21.133333333333333
+              },
+              {
+                "window": [
+                  22.5,
+                  24.3
+                ],
+                "event": 24.2
+              },
+              {
+                "window": [
+                  27.9,
+                  29.8
+                ],
+                "event": 29.6
+              },
+              {
+                "window": [
+                  32.3,
+                  34.7
+                ],
+                "event": 34.46666666666666
+              }
+            ],
+            "misses": [],
+            "extraTimes": []
+          },
+          "auditedCountCheck": {
+            "expected": 6,
+            "matched": 6,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [
+              {
+                "window": [
+                  13.6,
+                  15.2
+                ],
+                "event": 15.133333333333335
+              },
+              {
+                "window": [
+                  16.55,
+                  18.2
+                ],
+                "event": 18.133333333333333
+              },
+              {
+                "window": [
+                  19.8,
+                  21.2
+                ],
+                "event": 21.133333333333333
+              },
+              {
+                "window": [
+                  22.5,
+                  24.3
+                ],
+                "event": 24.2
+              },
+              {
+                "window": [
+                  27.9,
+                  29.8
+                ],
+                "event": 29.6
+              },
+              {
+                "window": [
+                  32.3,
+                  34.7
+                ],
+                "event": 34.46666666666666
+              }
+            ],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        {
+          "index": 16,
+          "file": "go4it-rear.mp4",
+          "exercise": "lat-pulldown",
+          "control": true,
+          "preparedSha256": "04b1050fffcbc236314ad79290d7501db77cc592b36ba723e26b44bdcde5dacc",
+          "referenceWindows": [
+            [
+              2.2,
+              5.75
+            ],
+            [
+              7.35,
+              11.35
+            ],
+            [
+              13.05,
+              17.35
+            ],
+            [
+              18.95,
+              23.35
+            ],
+            [
+              25.05,
+              29.05
+            ],
+            [
+              30.4,
+              34.05
+            ],
+            [
+              35.85,
+              39.55
+            ]
+          ],
+          "errors": [],
+          "frames": 601,
+          "sourceSpanMs": [
+            0,
+            40000
+          ],
+          "maxSourceGapMs": 66.66666666667152,
+          "terminalMessage": "\u8fd9\u4e00\u7ec4\u786e\u8ba4\u4e86 4 \u4e0b\u3002\n\n+4\nEXP\n\n\u56de\u653e\u7ed3\u7b97\uff0c\u4e0d\u8ba1\u5165\u4f60\u7684\u8bad\u7ec3\u8bb0\u5f55\u3002\n\n\u5b8c\u6210",
+          "calibrated": true,
+          "reviewEntries": 4,
+          "verified": 4,
+          "metrics": {
+            "measuredReps": 4,
+            "medianDurationMs": 3399.999999999998,
+            "medianReturnMs": 2700,
+            "returnVariation": 0.06172839506172817,
+            "medianRange": 0.9876118725701386,
+            "pairedReps": 3,
+            "medianLagMs": -39,
+            "coverage": 0.9748603351955307,
+            "view": null
+          },
+          "repetitions": [
+            {
+              "repIndex": 0,
+              "sourceStartMs": 18333.333333333332,
+              "durationMs": 3533.3333333333358,
+              "verified": true,
+              "range": 0.9935329807401411,
+              "outboundMs": 600,
+              "returnMs": 2933.3333333333358,
+              "bottomHoldMs": 533.3333333333321,
+              "minAngle": 56.271920624727066,
+              "maxAngle": 135.4783707371949,
+              "excursionDeg": 79.20645011246782,
+              "bilateralLagMs": -120,
+              "bilateralReason": "\u53f3\u4fa7\u51cf\u5de6\u4fa7\u7684\u8fd8\u539f\u4e2d\u70b9\u65f6\u95f4\uff1b\u5b9e\u9a8c\u89c2\u5bdf\u503c\uff0c\u4e0d\u7528\u4e8e\u8bc4\u5206",
+              "pairedCoverage": 1
+            },
+            {
+              "repIndex": 1,
+              "sourceStartMs": 24533.333333333332,
+              "durationMs": 3066.666666666668,
+              "verified": true,
+              "range": 0.9785477660421578,
+              "outboundMs": 600,
+              "returnMs": 2466.666666666668,
+              "bottomHoldMs": 533.3333333333321,
+              "minAngle": 57.837132872721796,
+              "maxAngle": 137.03661103350714,
+              "excursionDeg": 79.19947816078535,
+              "bilateralLagMs": -5,
+              "bilateralReason": "\u53f3\u4fa7\u51cf\u5de6\u4fa7\u7684\u8fd8\u539f\u4e2d\u70b9\u65f6\u95f4\uff1b\u5b9e\u9a8c\u89c2\u5bdf\u503c\uff0c\u4e0d\u7528\u4e8e\u8bc4\u5206",
+              "pairedCoverage": 1
+            },
+            {
+              "repIndex": 2,
+              "sourceStartMs": 29666.666666666668,
+              "durationMs": 3333.333333333332,
+              "verified": true,
+              "range": 1,
+              "outboundMs": 733.3333333333321,
+              "returnMs": 2600,
+              "bottomHoldMs": 333.33333333333576,
+              "minAngle": 55.02686993832411,
+              "maxAngle": 136.80899990212237,
+              "excursionDeg": 81.78212996379825,
+              "bilateralLagMs": -39,
+              "bilateralReason": "\u53f3\u4fa7\u51cf\u5de6\u4fa7\u7684\u8fd8\u539f\u4e2d\u70b9\u65f6\u95f4\uff1b\u5b9e\u9a8c\u89c2\u5bdf\u503c\uff0c\u4e0d\u7528\u4e8e\u8bc4\u5206",
+              "pairedCoverage": 1
+            },
+            {
+              "repIndex": 3,
+              "sourceStartMs": 35133.333333333336,
+              "durationMs": 3466.6666666666642,
+              "verified": true,
+              "range": 0.9816907644001363,
+              "outboundMs": 666.6666666666642,
+              "returnMs": 2800,
+              "bottomHoldMs": 466.66666666666424,
+              "minAngle": 57.50884531565414,
+              "maxAngle": 135.92198355411662,
+              "excursionDeg": 78.41313823846248,
+              "bilateralLagMs": null,
+              "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+              "pairedCoverage": 0.6792452830188679
+            }
+          ],
+          "exp": {
+            "verifiedReps": 4,
+            "qualityBonus": 0,
+            "fixedBonus": 0
+          },
+          "cue": null,
+          "sourceReviewChecked": true,
+          "unlocatedVerified": 0,
+          "uiChecksPassed": true,
+          "pageErrors": [],
+          "elapsedSeconds": 201.08,
+          "traceBasedCountCheck": {
+            "expected": 4,
+            "matched": 4,
+            "missed": 0,
+            "extra": 0,
+            "matches": [
+              {
+                "window": [
+                  18.95,
+                  23.35
+                ],
+                "event": 21.866666666666667
+              },
+              {
+                "window": [
+                  25.05,
+                  29.05
+                ],
+                "event": 27.6
+              },
+              {
+                "window": [
+                  30.4,
+                  34.05
+                ],
+                "event": 33
+              },
+              {
+                "window": [
+                  35.85,
+                  39.55
+                ],
+                "event": 38.6
+              }
+            ],
+            "misses": [],
+            "extraTimes": []
+          },
+          "auditedCountCheck": {
+            "expected": 4,
+            "matched": 4,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [
+              {
+                "window": [
+                  18.95,
+                  23.35
+                ],
+                "event": 21.866666666666667
+              },
+              {
+                "window": [
+                  25.05,
+                  29.05
+                ],
+                "event": 27.6
+              },
+              {
+                "window": [
+                  30.4,
+                  34.05
+                ],
+                "event": 33
+              },
+              {
+                "window": [
+                  35.85,
+                  39.55
+                ],
+                "event": 38.6
+              }
+            ],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        {
+          "index": 17,
+          "file": "goblet-squat.mp4",
+          "exercise": "squat",
+          "control": true,
+          "preparedSha256": "b904f193848260c75d89c56cccf00237cbcbca1d15b27136f698853a1e5f6536",
+          "referenceWindows": [
+            [
+              1.65,
+              3
+            ],
+            [
+              5.25,
+              6.65
+            ],
+            [
+              8.65,
+              10.1
+            ],
+            [
+              12.25,
+              13.7
+            ],
+            [
+              16.1,
+              17.7
+            ]
+          ],
+          "errors": [],
+          "frames": 287,
+          "sourceSpanMs": [
+            0,
+            19066.666666666668
+          ],
+          "maxSourceGapMs": 66.66666666666788,
+          "terminalMessage": "\u8fd9\u4e00\u7ec4\u786e\u8ba4\u4e86 2 \u4e0b\u3002\n\n+2\nEXP\n\n\u56de\u653e\u7ed3\u7b97\uff0c\u4e0d\u8ba1\u5165\u4f60\u7684\u8bad\u7ec3\u8bb0\u5f55\u3002\n\n\u5b8c\u6210",
+          "calibrated": true,
+          "reviewEntries": 2,
+          "verified": 2,
+          "metrics": {
+            "measuredReps": 2,
+            "medianDurationMs": 2166.666666666666,
+            "medianReturnMs": 1299.999999999999,
+            "returnVariation": null,
+            "medianRange": 0.9828618903945749,
+            "pairedReps": 0,
+            "medianLagMs": null,
+            "coverage": 1,
+            "view": {
+              "x": 0.5213250368833542,
+              "y": 0.32462313771247864,
+              "scale": 0.21420089070886797,
+              "orientation": 0.44206599601396984
+            }
+          },
+          "repetitions": [
+            {
+              "repIndex": 0,
+              "sourceStartMs": 11466.666666666666,
+              "durationMs": 2133.333333333334,
+              "verified": true,
+              "range": 0.9665731911362044,
+              "outboundMs": 866.6666666666679,
+              "returnMs": 1266.666666666666,
+              "bottomHoldMs": 66.66666666666606,
+              "minAngle": 85.66098409518371,
+              "maxAngle": 166.66603704008708,
+              "excursionDeg": 81.00505294490337,
+              "bilateralLagMs": null,
+              "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+              "pairedCoverage": 0.8484848484848485
+            },
+            {
+              "repIndex": 1,
+              "sourceStartMs": 15133.333333333334,
+              "durationMs": 2199.999999999998,
+              "verified": true,
+              "range": 0.9991505896529453,
+              "outboundMs": 866.6666666666661,
+              "returnMs": 1333.3333333333321,
+              "bottomHoldMs": 466.6666666666679,
+              "minAngle": 82.53013136752661,
+              "maxAngle": 165.7706952641488,
+              "excursionDeg": 83.24056389662219,
+              "bilateralLagMs": null,
+              "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+              "pairedCoverage": 0.8823529411764706
+            }
+          ],
+          "exp": {
+            "verifiedReps": 2,
+            "qualityBonus": 0,
+            "fixedBonus": 0
+          },
+          "cue": null,
+          "sourceReviewChecked": true,
+          "unlocatedVerified": 0,
+          "uiChecksPassed": true,
+          "pageErrors": [],
+          "elapsedSeconds": 98.804,
+          "traceBasedCountCheck": {
+            "expected": 2,
+            "matched": 2,
+            "missed": 0,
+            "extra": 0,
+            "matches": [
+              {
+                "window": [
+                  12.25,
+                  13.7
+                ],
+                "event": 13.6
+              },
+              {
+                "window": [
+                  16.1,
+                  17.7
+                ],
+                "event": 17.333333333333332
+              }
+            ],
+            "misses": [],
+            "extraTimes": []
+          },
+          "auditedCountCheck": {
+            "expected": 2,
+            "matched": 2,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [
+              {
+                "window": [
+                  12.25,
+                  13.7
+                ],
+                "event": 13.6
+              },
+              {
+                "window": [
+                  16.1,
+                  17.7
+                ],
+                "event": 17.333333333333332
+              }
+            ],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        }
+      ]
+    },
+    "heldoutBaseline": {
+      "groups": [
+        {
+          "group": 0,
+          "sourceHashes": {
+            "tracking/poseTracker.ts": "edf2e7fc311dcbc581f2dfb29cd1df9fb52d9b6fcb919e9a735a59fee9a2a16f",
+            "tracking/recordedFrames.ts": "6dd04d2eaa8f0fb810f655094a3a0864ec296255123dc2bd917e042660011930",
+            "perception/pulldown.ts": "281a885631bec4c514cab6cf192862683666026a25836167634eb288a60d5d09",
+            "perception/squat.ts": "e8da0ccf10415389ed1c5d84810c82662c534da7328c37750f4ca6f10d516700",
+            "analytics/motion.ts": "2f7d7c9e5a83d4ffa1d72c5cff15af7b276fe731ae915d2c35a56caeb65c88e1",
+            "screens/Session.tsx": "c38d8c992bd1c053b9731b556deb50e7e86a13dea44e731c8ab77a453a682d15"
+          },
+          "browser": "151.0.7922.34"
+        },
+        {
+          "group": 1,
+          "sourceHashes": {
+            "tracking/poseTracker.ts": "edf2e7fc311dcbc581f2dfb29cd1df9fb52d9b6fcb919e9a735a59fee9a2a16f",
+            "tracking/recordedFrames.ts": "6dd04d2eaa8f0fb810f655094a3a0864ec296255123dc2bd917e042660011930",
+            "perception/pulldown.ts": "281a885631bec4c514cab6cf192862683666026a25836167634eb288a60d5d09",
+            "perception/squat.ts": "e8da0ccf10415389ed1c5d84810c82662c534da7328c37750f4ca6f10d516700",
+            "analytics/motion.ts": "2f7d7c9e5a83d4ffa1d72c5cff15af7b276fe731ae915d2c35a56caeb65c88e1",
+            "screens/Session.tsx": "c38d8c992bd1c053b9731b556deb50e7e86a13dea44e731c8ab77a453a682d15"
+          },
+          "browser": "151.0.7922.34"
+        },
+        {
+          "group": 2,
+          "sourceHashes": {
+            "tracking/poseTracker.ts": "edf2e7fc311dcbc581f2dfb29cd1df9fb52d9b6fcb919e9a735a59fee9a2a16f",
+            "tracking/recordedFrames.ts": "6dd04d2eaa8f0fb810f655094a3a0864ec296255123dc2bd917e042660011930",
+            "perception/pulldown.ts": "281a885631bec4c514cab6cf192862683666026a25836167634eb288a60d5d09",
+            "perception/squat.ts": "e8da0ccf10415389ed1c5d84810c82662c534da7328c37750f4ca6f10d516700",
+            "analytics/motion.ts": "2f7d7c9e5a83d4ffa1d72c5cff15af7b276fe731ae915d2c35a56caeb65c88e1",
+            "screens/Session.tsx": "c38d8c992bd1c053b9731b556deb50e7e86a13dea44e731c8ab77a453a682d15"
+          },
+          "browser": "151.0.7922.34"
+        },
+        {
+          "group": 3,
+          "sourceHashes": {
+            "tracking/poseTracker.ts": "edf2e7fc311dcbc581f2dfb29cd1df9fb52d9b6fcb919e9a735a59fee9a2a16f",
+            "tracking/recordedFrames.ts": "6dd04d2eaa8f0fb810f655094a3a0864ec296255123dc2bd917e042660011930",
+            "perception/pulldown.ts": "281a885631bec4c514cab6cf192862683666026a25836167634eb288a60d5d09",
+            "perception/squat.ts": "e8da0ccf10415389ed1c5d84810c82662c534da7328c37750f4ca6f10d516700",
+            "analytics/motion.ts": "2f7d7c9e5a83d4ffa1d72c5cff15af7b276fe731ae915d2c35a56caeb65c88e1",
+            "screens/Session.tsx": "c38d8c992bd1c053b9731b556deb50e7e86a13dea44e731c8ab77a453a682d15"
+          },
+          "browser": "151.0.7922.34"
+        }
+      ],
+      "results": [
+        {
+          "index": 0,
+          "file": "tuti-pulldown.mp4",
+          "exercise": "lat-pulldown",
+          "control": false,
+          "preparedSha256": "703edec5519f9101f741f55d003395a137130240ccc1991f2aa7ca24f5a9c23b",
+          "referenceWindows": [
+            [
+              1,
+              1.75
+            ],
+            [
+              2.5,
+              3.5
+            ],
+            [
+              4.25,
+              5
+            ],
+            [
+              5.75,
+              6.5
+            ],
+            [
+              7.25,
+              8.25
+            ],
+            [
+              9,
+              9.75
+            ],
+            [
+              10.5,
+              11.25
+            ],
+            [
+              12,
+              13
+            ],
+            [
+              13.75,
+              14.75
+            ],
+            [
+              15.5,
+              16.25
+            ],
+            [
+              17,
+              17.75
+            ]
+          ],
+          "errors": [],
+          "frames": 286,
+          "sourceSpanMs": [
+            0,
+            19000
+          ],
+          "maxSourceGapMs": 66.66666666666788,
+          "terminalMessage": "\u8fd9\u4e00\u7ec4\u786e\u8ba4\u4e86 8 \u4e0b\u3002\n\n+13\nEXP\n\n\u56de\u653e\u7ed3\u7b97\uff0c\u4e0d\u8ba1\u5165\u4f60\u7684\u8bad\u7ec3\u8bb0\u5f55\u3002\n\n\u5b8c\u6210",
+          "calibrated": true,
+          "reviewEntries": 8,
+          "verified": 8,
+          "metrics": {
+            "measuredReps": 8,
+            "medianDurationMs": 1000,
+            "medianReturnMs": 633.333333333333,
+            "returnVariation": 0.05263157894736797,
+            "medianRange": 1,
+            "pairedReps": 0,
+            "medianLagMs": null,
+            "coverage": 1,
+            "view": null
+          },
+          "repetitions": [
+            {
+              "repIndex": 0,
+              "sourceStartMs": 5533.333333333333,
+              "durationMs": 1000,
+              "verified": true,
+              "range": 1,
+              "outboundMs": 400,
+              "returnMs": 600,
+              "bottomHoldMs": 133.33333333333394,
+              "minAngle": 42.172375995829135,
+              "maxAngle": 126.704582828063,
+              "excursionDeg": 84.53220683223387,
+              "bilateralLagMs": null,
+              "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+              "pairedCoverage": 0
+            },
+            {
+              "repIndex": 1,
+              "sourceStartMs": 7133.333333333333,
+              "durationMs": 1000,
+              "verified": true,
+              "range": 1,
+              "outboundMs": 333.33333333333394,
+              "returnMs": 666.6666666666661,
+              "bottomHoldMs": 266.66666666666606,
+              "minAngle": 44.52950445993279,
+              "maxAngle": 134.15069216034152,
+              "excursionDeg": 89.62118770040874,
+              "bilateralLagMs": null,
+              "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+              "pairedCoverage": 0
+            },
+            {
+              "repIndex": 2,
+              "sourceStartMs": 8666.666666666666,
+              "durationMs": 1000,
+              "verified": true,
+              "range": 1,
+              "outboundMs": 333.33333333333394,
+              "returnMs": 666.6666666666661,
+              "bottomHoldMs": 66.66666666666606,
+              "minAngle": 43.96200308918461,
+              "maxAngle": 125.66961330077275,
+              "excursionDeg": 81.70761021158813,
+              "bilateralLagMs": null,
+              "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+              "pairedCoverage": 0
+            },
+            {
+              "repIndex": 3,
+              "sourceStartMs": 10200,
+              "durationMs": 1066.666666666666,
+              "verified": true,
+              "range": 1,
+              "outboundMs": 400,
+              "returnMs": 666.6666666666661,
+              "bottomHoldMs": 0,
+              "minAngle": 42.43289673179117,
+              "maxAngle": 123.71760775584062,
+              "excursionDeg": 81.28471102404944,
+              "bilateralLagMs": null,
+              "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+              "pairedCoverage": 0
+            },
+            {
+              "repIndex": 4,
+              "sourceStartMs": 11800,
+              "durationMs": 1066.666666666666,
+              "verified": true,
+              "range": 1,
+              "outboundMs": 466.66666666666606,
+              "returnMs": 600,
+              "bottomHoldMs": 133.33333333333394,
+              "minAngle": 41.403468489921046,
+              "maxAngle": 131.43262410732916,
+              "excursionDeg": 90.02915561740812,
+              "bilateralLagMs": null,
+              "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+              "pairedCoverage": 0
+            },
+            {
+              "repIndex": 5,
+              "sourceStartMs": 13400,
+              "durationMs": 1000,
+              "verified": true,
+              "range": 1,
+              "outboundMs": 533.3333333333339,
+              "returnMs": 466.66666666666606,
+              "bottomHoldMs": 133.33333333333394,
+              "minAngle": 42.24111615146227,
+              "maxAngle": 124.31318832616152,
+              "excursionDeg": 82.07207217469926,
+              "bilateralLagMs": null,
+              "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+              "pairedCoverage": 0
+            },
+            {
+              "repIndex": 6,
+              "sourceStartMs": 15200,
+              "durationMs": 933.3333333333339,
+              "verified": true,
+              "range": 0.9273609883338653,
+              "outboundMs": 333.33333333333394,
+              "returnMs": 600,
+              "bottomHoldMs": 266.6666666666679,
+              "minAngle": 52.94097046874793,
+              "maxAngle": 129.7006595276583,
+              "excursionDeg": 76.75968905891037,
+              "bilateralLagMs": null,
+              "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+              "pairedCoverage": 0
+            },
+            {
+              "repIndex": 7,
+              "sourceStartMs": 16733.333333333332,
+              "durationMs": 1066.6666666666679,
+              "verified": true,
+              "range": 0.9500773433530311,
+              "outboundMs": 400,
+              "returnMs": 666.6666666666679,
+              "bottomHoldMs": 266.66666666666424,
+              "minAngle": 50.6061189341851,
+              "maxAngle": 127.92897049283977,
+              "excursionDeg": 77.32285155865466,
+              "bilateralLagMs": null,
+              "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+              "pairedCoverage": 0
+            }
+          ],
+          "exp": {
+            "verifiedReps": 8,
+            "qualityBonus": 5,
+            "fixedBonus": 0
+          },
+          "cue": null,
+          "sourceReviewChecked": true,
+          "unlocatedVerified": 0,
+          "uiChecksPassed": true,
+          "pageErrors": [],
+          "elapsedSeconds": 179.099,
+          "traceBasedCountCheck": {
+            "expected": 8,
+            "matched": 8,
+            "missed": 0,
+            "extra": 0,
+            "matches": [
+              {
+                "window": [
+                  5.75,
+                  6.5
+                ],
+                "event": 6.533333333333333
+              },
+              {
+                "window": [
+                  7.25,
+                  8.25
+                ],
+                "event": 8.133333333333333
+              },
+              {
+                "window": [
+                  9,
+                  9.75
+                ],
+                "event": 9.666666666666666
+              },
+              {
+                "window": [
+                  10.5,
+                  11.25
+                ],
+                "event": 11.266666666666666
+              },
+              {
+                "window": [
+                  12,
+                  13
+                ],
+                "event": 12.866666666666665
+              },
+              {
+                "window": [
+                  13.75,
+                  14.75
+                ],
+                "event": 14.4
+              },
+              {
+                "window": [
+                  15.5,
+                  16.25
+                ],
+                "event": 16.133333333333333
+              },
+              {
+                "window": [
+                  17,
+                  17.75
+                ],
+                "event": 17.8
+              }
+            ],
+            "misses": [],
+            "extraTimes": []
+          },
+          "auditedCountCheck": {
+            "expected": 8,
+            "matched": 8,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [
+              {
+                "window": [
+                  5.75,
+                  6.5
+                ],
+                "event": 6.533333333333333
+              },
+              {
+                "window": [
+                  7.25,
+                  8.25
+                ],
+                "event": 8.133333333333333
+              },
+              {
+                "window": [
+                  9,
+                  9.75
+                ],
+                "event": 9.666666666666666
+              },
+              {
+                "window": [
+                  10.5,
+                  11.25
+                ],
+                "event": 11.266666666666666
+              },
+              {
+                "window": [
+                  12,
+                  13
+                ],
+                "event": 12.866666666666665
+              },
+              {
+                "window": [
+                  13.75,
+                  14.75
+                ],
+                "event": 14.4
+              },
+              {
+                "window": [
+                  15.5,
+                  16.25
+                ],
+                "event": 16.133333333333333
+              },
+              {
+                "window": [
+                  17,
+                  17.75
+                ],
+                "event": 17.8
+              }
+            ],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        {
+          "index": 1,
+          "file": "jullian-pulldown.mp4",
+          "exercise": "lat-pulldown",
+          "control": false,
+          "preparedSha256": "a61b4c0ee4be4249053d2a2cb494de46192e34de2430cadf71792beda57b2297",
+          "referenceWindows": [
+            [
+              2.5,
+              3.25
+            ],
+            [
+              4.25,
+              5
+            ],
+            [
+              6,
+              6.75
+            ],
+            [
+              7.5,
+              8.5
+            ],
+            [
+              9.25,
+              10
+            ],
+            [
+              11,
+              11.75
+            ],
+            [
+              12.5,
+              13.5
+            ]
+          ],
+          "errors": [],
+          "frames": 225,
+          "sourceSpanMs": [
+            0,
+            14933.333333333334
+          ],
+          "maxSourceGapMs": 66.66666666666788,
+          "terminalMessage": "\u8fd9\u4e00\u7ec4\u786e\u8ba4\u4e86 4 \u4e0b\u3002\n\n+4\nEXP\n\n\u56de\u653e\u7ed3\u7b97\uff0c\u4e0d\u8ba1\u5165\u4f60\u7684\u8bad\u7ec3\u8bb0\u5f55\u3002\n\n\u5b8c\u6210",
+          "calibrated": true,
+          "reviewEntries": 4,
+          "verified": 4,
+          "metrics": {
+            "measuredReps": 4,
+            "medianDurationMs": 1000,
+            "medianReturnMs": 733.333333333333,
+            "returnVariation": 0.0454545454545463,
+            "medianRange": 1,
+            "pairedReps": 0,
+            "medianLagMs": null,
+            "coverage": 1,
+            "view": {
+              "x": 0.6757730841636658,
+              "y": 0.7493557631969452,
+              "scale": 0.2539467611694712,
+              "orientation": 0.45520516630770835
+            }
+          },
+          "repetitions": [
+            {
+              "repIndex": 0,
+              "sourceStartMs": 7400,
+              "durationMs": 1000,
+              "verified": true,
+              "range": 1,
+              "outboundMs": 133.33333333333303,
+              "returnMs": 866.666666666667,
+              "bottomHoldMs": 466.66666666666697,
+              "minAngle": 28.661262375293173,
+              "maxAngle": 163.07443541532805,
+              "excursionDeg": 134.41317304003488,
+              "bilateralLagMs": null,
+              "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+              "pairedCoverage": 0.4375
+            },
+            {
+              "repIndex": 1,
+              "sourceStartMs": 9066.666666666666,
+              "durationMs": 933.3333333333339,
+              "verified": true,
+              "range": 1,
+              "outboundMs": 200,
+              "returnMs": 733.3333333333339,
+              "bottomHoldMs": 466.66666666666606,
+              "minAngle": 28.70681424559867,
+              "maxAngle": 158.65061757449914,
+              "excursionDeg": 129.94380332890046,
+              "bilateralLagMs": null,
+              "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+              "pairedCoverage": 0.4666666666666667
+            },
+            {
+              "repIndex": 2,
+              "sourceStartMs": 10666.666666666666,
+              "durationMs": 1000,
+              "verified": true,
+              "range": 1,
+              "outboundMs": 333.33333333333394,
+              "returnMs": 666.6666666666661,
+              "bottomHoldMs": 266.66666666666606,
+              "minAngle": 29.135471577719077,
+              "maxAngle": 165.27408070687036,
+              "excursionDeg": 136.1386091291513,
+              "bilateralLagMs": null,
+              "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+              "pairedCoverage": 0.375
+            },
+            {
+              "repIndex": 3,
+              "sourceStartMs": 12466.666666666666,
+              "durationMs": 1000,
+              "verified": true,
+              "range": 1,
+              "outboundMs": 266.6666666666679,
+              "returnMs": 733.3333333333321,
+              "bottomHoldMs": 466.66666666666606,
+              "minAngle": 30.04429203071353,
+              "maxAngle": 154.0565698349347,
+              "excursionDeg": 124.01227780422116,
+              "bilateralLagMs": null,
+              "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+              "pairedCoverage": 0.5
+            }
+          ],
+          "exp": {
+            "verifiedReps": 4,
+            "qualityBonus": 0,
+            "fixedBonus": 0
+          },
+          "cue": null,
+          "sourceReviewChecked": true,
+          "unlocatedVerified": 0,
+          "uiChecksPassed": true,
+          "pageErrors": [],
+          "elapsedSeconds": 191.549,
+          "traceBasedCountCheck": {
+            "expected": 4,
+            "matched": 4,
+            "missed": 0,
+            "extra": 0,
+            "matches": [
+              {
+                "window": [
+                  7.5,
+                  8.5
+                ],
+                "event": 8.4
+              },
+              {
+                "window": [
+                  9.25,
+                  10
+                ],
+                "event": 10
+              },
+              {
+                "window": [
+                  11,
+                  11.75
+                ],
+                "event": 11.666666666666666
+              },
+              {
+                "window": [
+                  12.5,
+                  13.5
+                ],
+                "event": 13.466666666666667
+              }
+            ],
+            "misses": [],
+            "extraTimes": []
+          },
+          "auditedCountCheck": {
+            "expected": 4,
+            "matched": 4,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [
+              {
+                "window": [
+                  7.5,
+                  8.5
+                ],
+                "event": 8.4
+              },
+              {
+                "window": [
+                  9.25,
+                  10
+                ],
+                "event": 10
+              },
+              {
+                "window": [
+                  11,
+                  11.75
+                ],
+                "event": 11.666666666666666
+              },
+              {
+                "window": [
+                  12.5,
+                  13.5
+                ],
+                "event": 13.466666666666667
+              }
+            ],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        {
+          "index": 2,
+          "file": "jill-squat.mp4",
+          "exercise": "squat",
+          "control": true,
+          "preparedSha256": "da7fdf6b284d08b42c9e829c7b11ea84a973802a32e8ebdfd0f165bb97663199",
+          "referenceWindows": [
+            [
+              2.75,
+              6.25
+            ],
+            [
+              14.5,
+              17.5
+            ]
+          ],
+          "errors": [],
+          "frames": 348,
+          "sourceSpanMs": [
+            0,
+            23133.333333333332
+          ],
+          "maxSourceGapMs": 66.66666666666788,
+          "terminalMessage": "\u4e2a\u4eba\u6821\u51c6\n\u7b49\u5f85\u5173\u952e\u70b9\n1\n/ 3 \u6b21\n\n\u5f55\u50cf\u5df2\u7ed3\u675f\u3002\u6821\u51c6\u9700\u8981 3 \u6b21\u6e05\u6670\u7684\u5b8c\u6574\u6df1\u8e72\u3002\n\n\u9010\u5e27\u5206\u6790 \u00b7 23 / 24 \u79d2\n\u6682\u505c\u5206\u6790\n\n\u7b2c 1 / 1 \u7ec4 \u00b7 \u76ee\u6807 10 \u6b21 \u00b7 \u52a8\u4f5c\u5e45\u5ea6\n\n\u91cd\u8bd5",
+          "calibrated": false,
+          "verified": 0,
+          "reviewEntries": 0,
+          "metrics": null,
+          "repetitions": [],
+          "unlocatedVerified": 0,
+          "uiChecksPassed": true,
+          "pageErrors": [],
+          "elapsedSeconds": 191.77,
+          "traceBasedCountCheck": {
+            "expected": 0,
+            "matched": 0,
+            "missed": 0,
+            "extra": 0,
+            "matches": [],
+            "misses": [],
+            "extraTimes": []
+          },
+          "auditedCountCheck": {
+            "expected": 0,
+            "matched": 0,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        {
+          "index": 3,
+          "file": "harvey-squat.mp4",
+          "exercise": "squat",
+          "control": true,
+          "preparedSha256": "15100edfd6734211b55e04313dff0dee18faff0906acf12372f8703b1247cd9a",
+          "referenceWindows": [
+            [
+              3.5,
+              4.5
+            ],
+            [
+              6,
+              7
+            ]
+          ],
+          "errors": [],
+          "frames": 114,
+          "sourceSpanMs": [
+            0,
+            7533.333333333333
+          ],
+          "maxSourceGapMs": 66.66666666666697,
+          "terminalMessage": "\u4e2a\u4eba\u6821\u51c6\n\u7b49\u5f85\u5173\u952e\u70b9\n1\n/ 3 \u6b21\n\n\u5f55\u50cf\u5df2\u7ed3\u675f\u3002\u6821\u51c6\u9700\u8981 3 \u6b21\u6e05\u6670\u7684\u5b8c\u6574\u6df1\u8e72\u3002\n\n\u9010\u5e27\u5206\u6790 \u00b7 7 / 8 \u79d2\n\u6682\u505c\u5206\u6790\n\n\u7b2c 1 / 1 \u7ec4 \u00b7 \u76ee\u6807 10 \u6b21 \u00b7 \u52a8\u4f5c\u5e45\u5ea6\n\n\u91cd\u8bd5",
+          "calibrated": false,
+          "verified": 0,
+          "reviewEntries": 0,
+          "metrics": null,
+          "repetitions": [],
+          "unlocatedVerified": 0,
+          "uiChecksPassed": true,
+          "pageErrors": [],
+          "elapsedSeconds": 60.903,
+          "traceBasedCountCheck": {
+            "expected": 0,
+            "matched": 0,
+            "missed": 0,
+            "extra": 0,
+            "matches": [],
+            "misses": [],
+            "extraTimes": []
+          },
+          "auditedCountCheck": {
+            "expected": 0,
+            "matched": 0,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        }
+      ]
+    },
+    "heldoutCandidate": {
+      "groups": [
+        {
+          "group": 0,
+          "sourceHashes": {
+            "tracking/poseTracker.ts": "0d98c349964948633b7607984b0416655b7778849f0eb67a95acea562e7f43bc",
+            "tracking/recordedFrames.ts": "6dd04d2eaa8f0fb810f655094a3a0864ec296255123dc2bd917e042660011930",
+            "perception/pulldown.ts": "281a885631bec4c514cab6cf192862683666026a25836167634eb288a60d5d09",
+            "perception/squat.ts": "e8da0ccf10415389ed1c5d84810c82662c534da7328c37750f4ca6f10d516700",
+            "analytics/motion.ts": "2f7d7c9e5a83d4ffa1d72c5cff15af7b276fe731ae915d2c35a56caeb65c88e1",
+            "screens/Session.tsx": "c38d8c992bd1c053b9731b556deb50e7e86a13dea44e731c8ab77a453a682d15"
+          },
+          "browser": "151.0.7922.34"
+        },
+        {
+          "group": 1,
+          "sourceHashes": {
+            "tracking/poseTracker.ts": "0d98c349964948633b7607984b0416655b7778849f0eb67a95acea562e7f43bc",
+            "tracking/recordedFrames.ts": "6dd04d2eaa8f0fb810f655094a3a0864ec296255123dc2bd917e042660011930",
+            "perception/pulldown.ts": "281a885631bec4c514cab6cf192862683666026a25836167634eb288a60d5d09",
+            "perception/squat.ts": "e8da0ccf10415389ed1c5d84810c82662c534da7328c37750f4ca6f10d516700",
+            "analytics/motion.ts": "2f7d7c9e5a83d4ffa1d72c5cff15af7b276fe731ae915d2c35a56caeb65c88e1",
+            "screens/Session.tsx": "c38d8c992bd1c053b9731b556deb50e7e86a13dea44e731c8ab77a453a682d15"
+          },
+          "browser": "151.0.7922.34"
+        },
+        {
+          "group": 2,
+          "sourceHashes": {
+            "tracking/poseTracker.ts": "0d98c349964948633b7607984b0416655b7778849f0eb67a95acea562e7f43bc",
+            "tracking/recordedFrames.ts": "6dd04d2eaa8f0fb810f655094a3a0864ec296255123dc2bd917e042660011930",
+            "perception/pulldown.ts": "281a885631bec4c514cab6cf192862683666026a25836167634eb288a60d5d09",
+            "perception/squat.ts": "e8da0ccf10415389ed1c5d84810c82662c534da7328c37750f4ca6f10d516700",
+            "analytics/motion.ts": "2f7d7c9e5a83d4ffa1d72c5cff15af7b276fe731ae915d2c35a56caeb65c88e1",
+            "screens/Session.tsx": "c38d8c992bd1c053b9731b556deb50e7e86a13dea44e731c8ab77a453a682d15"
+          },
+          "browser": "151.0.7922.34"
+        },
+        {
+          "group": 3,
+          "sourceHashes": {
+            "tracking/poseTracker.ts": "0d98c349964948633b7607984b0416655b7778849f0eb67a95acea562e7f43bc",
+            "tracking/recordedFrames.ts": "6dd04d2eaa8f0fb810f655094a3a0864ec296255123dc2bd917e042660011930",
+            "perception/pulldown.ts": "281a885631bec4c514cab6cf192862683666026a25836167634eb288a60d5d09",
+            "perception/squat.ts": "e8da0ccf10415389ed1c5d84810c82662c534da7328c37750f4ca6f10d516700",
+            "analytics/motion.ts": "2f7d7c9e5a83d4ffa1d72c5cff15af7b276fe731ae915d2c35a56caeb65c88e1",
+            "screens/Session.tsx": "c38d8c992bd1c053b9731b556deb50e7e86a13dea44e731c8ab77a453a682d15"
+          },
+          "browser": "151.0.7922.34"
+        }
+      ],
+      "results": [
+        {
+          "index": 0,
+          "file": "tuti-pulldown.mp4",
+          "exercise": "lat-pulldown",
+          "control": false,
+          "preparedSha256": "703edec5519f9101f741f55d003395a137130240ccc1991f2aa7ca24f5a9c23b",
+          "referenceWindows": [
+            [
+              1,
+              1.75
+            ],
+            [
+              2.5,
+              3.5
+            ],
+            [
+              4.25,
+              5
+            ],
+            [
+              5.75,
+              6.5
+            ],
+            [
+              7.25,
+              8.25
+            ],
+            [
+              9,
+              9.75
+            ],
+            [
+              10.5,
+              11.25
+            ],
+            [
+              12,
+              13
+            ],
+            [
+              13.75,
+              14.75
+            ],
+            [
+              15.5,
+              16.25
+            ],
+            [
+              17,
+              17.75
+            ]
+          ],
+          "errors": [],
+          "frames": 286,
+          "sourceSpanMs": [
+            0,
+            19000
+          ],
+          "maxSourceGapMs": 66.66666666666788,
+          "terminalMessage": "\u8fd9\u4e00\u7ec4\u786e\u8ba4\u4e86 8 \u4e0b\u3002\n\n+13\nEXP\n\n\u56de\u653e\u7ed3\u7b97\uff0c\u4e0d\u8ba1\u5165\u4f60\u7684\u8bad\u7ec3\u8bb0\u5f55\u3002\n\n\u5b8c\u6210",
+          "calibrated": true,
+          "reviewEntries": 8,
+          "verified": 8,
+          "metrics": {
+            "measuredReps": 8,
+            "medianDurationMs": 1000,
+            "medianReturnMs": 633.333333333333,
+            "returnVariation": 0.05263157894736797,
+            "medianRange": 1,
+            "pairedReps": 0,
+            "medianLagMs": null,
+            "coverage": 1,
+            "view": null
+          },
+          "repetitions": [
+            {
+              "repIndex": 0,
+              "sourceStartMs": 5533.333333333333,
+              "durationMs": 1000,
+              "verified": true,
+              "range": 1,
+              "outboundMs": 400,
+              "returnMs": 600,
+              "bottomHoldMs": 133.33333333333394,
+              "minAngle": 42.172375995829135,
+              "maxAngle": 126.704582828063,
+              "excursionDeg": 84.53220683223387,
+              "bilateralLagMs": null,
+              "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+              "pairedCoverage": 0
+            },
+            {
+              "repIndex": 1,
+              "sourceStartMs": 7133.333333333333,
+              "durationMs": 1000,
+              "verified": true,
+              "range": 1,
+              "outboundMs": 333.33333333333394,
+              "returnMs": 666.6666666666661,
+              "bottomHoldMs": 266.66666666666606,
+              "minAngle": 44.52950445993279,
+              "maxAngle": 134.15069216034152,
+              "excursionDeg": 89.62118770040874,
+              "bilateralLagMs": null,
+              "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+              "pairedCoverage": 0
+            },
+            {
+              "repIndex": 2,
+              "sourceStartMs": 8666.666666666666,
+              "durationMs": 1000,
+              "verified": true,
+              "range": 1,
+              "outboundMs": 333.33333333333394,
+              "returnMs": 666.6666666666661,
+              "bottomHoldMs": 66.66666666666606,
+              "minAngle": 43.96200308918461,
+              "maxAngle": 125.66961330077275,
+              "excursionDeg": 81.70761021158813,
+              "bilateralLagMs": null,
+              "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+              "pairedCoverage": 0
+            },
+            {
+              "repIndex": 3,
+              "sourceStartMs": 10200,
+              "durationMs": 1066.666666666666,
+              "verified": true,
+              "range": 1,
+              "outboundMs": 400,
+              "returnMs": 666.6666666666661,
+              "bottomHoldMs": 0,
+              "minAngle": 42.43289673179117,
+              "maxAngle": 123.71760775584062,
+              "excursionDeg": 81.28471102404944,
+              "bilateralLagMs": null,
+              "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+              "pairedCoverage": 0
+            },
+            {
+              "repIndex": 4,
+              "sourceStartMs": 11800,
+              "durationMs": 1066.666666666666,
+              "verified": true,
+              "range": 1,
+              "outboundMs": 466.66666666666606,
+              "returnMs": 600,
+              "bottomHoldMs": 133.33333333333394,
+              "minAngle": 41.403468489921046,
+              "maxAngle": 131.43262410732916,
+              "excursionDeg": 90.02915561740812,
+              "bilateralLagMs": null,
+              "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+              "pairedCoverage": 0
+            },
+            {
+              "repIndex": 5,
+              "sourceStartMs": 13400,
+              "durationMs": 1000,
+              "verified": true,
+              "range": 1,
+              "outboundMs": 533.3333333333339,
+              "returnMs": 466.66666666666606,
+              "bottomHoldMs": 133.33333333333394,
+              "minAngle": 42.24111615146227,
+              "maxAngle": 124.31318832616152,
+              "excursionDeg": 82.07207217469926,
+              "bilateralLagMs": null,
+              "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+              "pairedCoverage": 0
+            },
+            {
+              "repIndex": 6,
+              "sourceStartMs": 15200,
+              "durationMs": 933.3333333333339,
+              "verified": true,
+              "range": 0.9273609883338653,
+              "outboundMs": 333.33333333333394,
+              "returnMs": 600,
+              "bottomHoldMs": 266.6666666666679,
+              "minAngle": 52.94097046874793,
+              "maxAngle": 129.7006595276583,
+              "excursionDeg": 76.75968905891037,
+              "bilateralLagMs": null,
+              "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+              "pairedCoverage": 0
+            },
+            {
+              "repIndex": 7,
+              "sourceStartMs": 16733.333333333332,
+              "durationMs": 1066.6666666666679,
+              "verified": true,
+              "range": 0.9500773433530311,
+              "outboundMs": 400,
+              "returnMs": 666.6666666666679,
+              "bottomHoldMs": 266.66666666666424,
+              "minAngle": 50.6061189341851,
+              "maxAngle": 127.92897049283977,
+              "excursionDeg": 77.32285155865466,
+              "bilateralLagMs": null,
+              "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+              "pairedCoverage": 0
+            }
+          ],
+          "exp": {
+            "verifiedReps": 8,
+            "qualityBonus": 5,
+            "fixedBonus": 0
+          },
+          "cue": null,
+          "sourceReviewChecked": true,
+          "unlocatedVerified": 0,
+          "uiChecksPassed": true,
+          "pageErrors": [],
+          "elapsedSeconds": 177.699,
+          "traceBasedCountCheck": {
+            "expected": 8,
+            "matched": 8,
+            "missed": 0,
+            "extra": 0,
+            "matches": [
+              {
+                "window": [
+                  5.75,
+                  6.5
+                ],
+                "event": 6.533333333333333
+              },
+              {
+                "window": [
+                  7.25,
+                  8.25
+                ],
+                "event": 8.133333333333333
+              },
+              {
+                "window": [
+                  9,
+                  9.75
+                ],
+                "event": 9.666666666666666
+              },
+              {
+                "window": [
+                  10.5,
+                  11.25
+                ],
+                "event": 11.266666666666666
+              },
+              {
+                "window": [
+                  12,
+                  13
+                ],
+                "event": 12.866666666666665
+              },
+              {
+                "window": [
+                  13.75,
+                  14.75
+                ],
+                "event": 14.4
+              },
+              {
+                "window": [
+                  15.5,
+                  16.25
+                ],
+                "event": 16.133333333333333
+              },
+              {
+                "window": [
+                  17,
+                  17.75
+                ],
+                "event": 17.8
+              }
+            ],
+            "misses": [],
+            "extraTimes": []
+          },
+          "auditedCountCheck": {
+            "expected": 8,
+            "matched": 8,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [
+              {
+                "window": [
+                  5.75,
+                  6.5
+                ],
+                "event": 6.533333333333333
+              },
+              {
+                "window": [
+                  7.25,
+                  8.25
+                ],
+                "event": 8.133333333333333
+              },
+              {
+                "window": [
+                  9,
+                  9.75
+                ],
+                "event": 9.666666666666666
+              },
+              {
+                "window": [
+                  10.5,
+                  11.25
+                ],
+                "event": 11.266666666666666
+              },
+              {
+                "window": [
+                  12,
+                  13
+                ],
+                "event": 12.866666666666665
+              },
+              {
+                "window": [
+                  13.75,
+                  14.75
+                ],
+                "event": 14.4
+              },
+              {
+                "window": [
+                  15.5,
+                  16.25
+                ],
+                "event": 16.133333333333333
+              },
+              {
+                "window": [
+                  17,
+                  17.75
+                ],
+                "event": 17.8
+              }
+            ],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        {
+          "index": 1,
+          "file": "jullian-pulldown.mp4",
+          "exercise": "lat-pulldown",
+          "control": false,
+          "preparedSha256": "a61b4c0ee4be4249053d2a2cb494de46192e34de2430cadf71792beda57b2297",
+          "referenceWindows": [
+            [
+              2.5,
+              3.25
+            ],
+            [
+              4.25,
+              5
+            ],
+            [
+              6,
+              6.75
+            ],
+            [
+              7.5,
+              8.5
+            ],
+            [
+              9.25,
+              10
+            ],
+            [
+              11,
+              11.75
+            ],
+            [
+              12.5,
+              13.5
+            ]
+          ],
+          "errors": [],
+          "frames": 225,
+          "sourceSpanMs": [
+            0,
+            14933.333333333334
+          ],
+          "maxSourceGapMs": 66.66666666666788,
+          "terminalMessage": "\u8fd9\u4e00\u7ec4\u786e\u8ba4\u4e86 4 \u4e0b\u3002\n\n+4\nEXP\n\n\u56de\u653e\u7ed3\u7b97\uff0c\u4e0d\u8ba1\u5165\u4f60\u7684\u8bad\u7ec3\u8bb0\u5f55\u3002\n\n\u5b8c\u6210",
+          "calibrated": true,
+          "reviewEntries": 4,
+          "verified": 4,
+          "metrics": {
+            "measuredReps": 4,
+            "medianDurationMs": 1000,
+            "medianReturnMs": 733.333333333333,
+            "returnVariation": 0.0454545454545463,
+            "medianRange": 1,
+            "pairedReps": 0,
+            "medianLagMs": null,
+            "coverage": 1,
+            "view": {
+              "x": 0.6757730841636658,
+              "y": 0.7493557631969452,
+              "scale": 0.2539467611694712,
+              "orientation": 0.45520516630770835
+            }
+          },
+          "repetitions": [
+            {
+              "repIndex": 0,
+              "sourceStartMs": 7400,
+              "durationMs": 1000,
+              "verified": true,
+              "range": 1,
+              "outboundMs": 133.33333333333303,
+              "returnMs": 866.666666666667,
+              "bottomHoldMs": 466.66666666666697,
+              "minAngle": 28.661262375293173,
+              "maxAngle": 163.07443541532805,
+              "excursionDeg": 134.41317304003488,
+              "bilateralLagMs": null,
+              "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+              "pairedCoverage": 0.4375
+            },
+            {
+              "repIndex": 1,
+              "sourceStartMs": 9066.666666666666,
+              "durationMs": 933.3333333333339,
+              "verified": true,
+              "range": 1,
+              "outboundMs": 200,
+              "returnMs": 733.3333333333339,
+              "bottomHoldMs": 466.66666666666606,
+              "minAngle": 28.70681424559867,
+              "maxAngle": 158.65061757449914,
+              "excursionDeg": 129.94380332890046,
+              "bilateralLagMs": null,
+              "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+              "pairedCoverage": 0.4666666666666667
+            },
+            {
+              "repIndex": 2,
+              "sourceStartMs": 10666.666666666666,
+              "durationMs": 1000,
+              "verified": true,
+              "range": 1,
+              "outboundMs": 333.33333333333394,
+              "returnMs": 666.6666666666661,
+              "bottomHoldMs": 266.66666666666606,
+              "minAngle": 29.135471577719077,
+              "maxAngle": 165.27408070687036,
+              "excursionDeg": 136.1386091291513,
+              "bilateralLagMs": null,
+              "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+              "pairedCoverage": 0.375
+            },
+            {
+              "repIndex": 3,
+              "sourceStartMs": 12466.666666666666,
+              "durationMs": 1000,
+              "verified": true,
+              "range": 1,
+              "outboundMs": 266.6666666666679,
+              "returnMs": 733.3333333333321,
+              "bottomHoldMs": 466.66666666666606,
+              "minAngle": 30.04429203071353,
+              "maxAngle": 154.0565698349347,
+              "excursionDeg": 124.01227780422116,
+              "bilateralLagMs": null,
+              "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+              "pairedCoverage": 0.5
+            }
+          ],
+          "exp": {
+            "verifiedReps": 4,
+            "qualityBonus": 0,
+            "fixedBonus": 0
+          },
+          "cue": null,
+          "sourceReviewChecked": true,
+          "unlocatedVerified": 0,
+          "uiChecksPassed": true,
+          "pageErrors": [],
+          "elapsedSeconds": 191.942,
+          "traceBasedCountCheck": {
+            "expected": 4,
+            "matched": 4,
+            "missed": 0,
+            "extra": 0,
+            "matches": [
+              {
+                "window": [
+                  7.5,
+                  8.5
+                ],
+                "event": 8.4
+              },
+              {
+                "window": [
+                  9.25,
+                  10
+                ],
+                "event": 10
+              },
+              {
+                "window": [
+                  11,
+                  11.75
+                ],
+                "event": 11.666666666666666
+              },
+              {
+                "window": [
+                  12.5,
+                  13.5
+                ],
+                "event": 13.466666666666667
+              }
+            ],
+            "misses": [],
+            "extraTimes": []
+          },
+          "auditedCountCheck": {
+            "expected": 4,
+            "matched": 4,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [
+              {
+                "window": [
+                  7.5,
+                  8.5
+                ],
+                "event": 8.4
+              },
+              {
+                "window": [
+                  9.25,
+                  10
+                ],
+                "event": 10
+              },
+              {
+                "window": [
+                  11,
+                  11.75
+                ],
+                "event": 11.666666666666666
+              },
+              {
+                "window": [
+                  12.5,
+                  13.5
+                ],
+                "event": 13.466666666666667
+              }
+            ],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        {
+          "index": 2,
+          "file": "jill-squat.mp4",
+          "exercise": "squat",
+          "control": true,
+          "preparedSha256": "da7fdf6b284d08b42c9e829c7b11ea84a973802a32e8ebdfd0f165bb97663199",
+          "referenceWindows": [
+            [
+              2.75,
+              6.25
+            ],
+            [
+              14.5,
+              17.5
+            ]
+          ],
+          "errors": [],
+          "frames": 348,
+          "sourceSpanMs": [
+            0,
+            23133.333333333332
+          ],
+          "maxSourceGapMs": 66.66666666666788,
+          "terminalMessage": "\u4e2a\u4eba\u6821\u51c6\n\u7b49\u5f85\u5173\u952e\u70b9\n1\n/ 3 \u6b21\n\n\u5f55\u50cf\u5df2\u7ed3\u675f\u3002\u6821\u51c6\u9700\u8981 3 \u6b21\u6e05\u6670\u7684\u5b8c\u6574\u6df1\u8e72\u3002\n\n\u9010\u5e27\u5206\u6790 \u00b7 23 / 24 \u79d2\n\u6682\u505c\u5206\u6790\n\n\u7b2c 1 / 1 \u7ec4 \u00b7 \u76ee\u6807 10 \u6b21 \u00b7 \u52a8\u4f5c\u5e45\u5ea6\n\n\u91cd\u8bd5",
+          "calibrated": false,
+          "verified": 0,
+          "reviewEntries": 0,
+          "metrics": null,
+          "repetitions": [],
+          "unlocatedVerified": 0,
+          "uiChecksPassed": true,
+          "pageErrors": [],
+          "elapsedSeconds": 189.769,
+          "traceBasedCountCheck": {
+            "expected": 0,
+            "matched": 0,
+            "missed": 0,
+            "extra": 0,
+            "matches": [],
+            "misses": [],
+            "extraTimes": []
+          },
+          "auditedCountCheck": {
+            "expected": 0,
+            "matched": 0,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        },
+        {
+          "index": 3,
+          "file": "harvey-squat.mp4",
+          "exercise": "squat",
+          "control": true,
+          "preparedSha256": "15100edfd6734211b55e04313dff0dee18faff0906acf12372f8703b1247cd9a",
+          "referenceWindows": [
+            [
+              3.5,
+              4.5
+            ],
+            [
+              6,
+              7
+            ]
+          ],
+          "errors": [],
+          "frames": 114,
+          "sourceSpanMs": [
+            0,
+            7533.333333333333
+          ],
+          "maxSourceGapMs": 66.66666666666697,
+          "terminalMessage": "\u4e2a\u4eba\u6821\u51c6\n\u7b49\u5f85\u5173\u952e\u70b9\n1\n/ 3 \u6b21\n\n\u5f55\u50cf\u5df2\u7ed3\u675f\u3002\u6821\u51c6\u9700\u8981 3 \u6b21\u6e05\u6670\u7684\u5b8c\u6574\u6df1\u8e72\u3002\n\n\u9010\u5e27\u5206\u6790 \u00b7 7 / 8 \u79d2\n\u6682\u505c\u5206\u6790\n\n\u7b2c 1 / 1 \u7ec4 \u00b7 \u76ee\u6807 10 \u6b21 \u00b7 \u52a8\u4f5c\u5e45\u5ea6\n\n\u91cd\u8bd5",
+          "calibrated": false,
+          "verified": 0,
+          "reviewEntries": 0,
+          "metrics": null,
+          "repetitions": [],
+          "unlocatedVerified": 0,
+          "uiChecksPassed": true,
+          "pageErrors": [],
+          "elapsedSeconds": 62.064,
+          "traceBasedCountCheck": {
+            "expected": 0,
+            "matched": 0,
+            "missed": 0,
+            "extra": 0,
+            "matches": [],
+            "misses": [],
+            "extraTimes": []
+          },
+          "auditedCountCheck": {
+            "expected": 0,
+            "matched": 0,
+            "missed": 0,
+            "unmatched": 0,
+            "matches": [],
+            "misses": [],
+            "unmatchedTimes": []
+          }
+        }
+      ]
+    },
+    "replicationBaseline": {
+      "groups": [
+        {
+          "group": 0,
+          "sourceHashes": {
+            "tracking/poseTracker.ts": "edf2e7fc311dcbc581f2dfb29cd1df9fb52d9b6fcb919e9a735a59fee9a2a16f",
+            "tracking/recordedFrames.ts": "6dd04d2eaa8f0fb810f655094a3a0864ec296255123dc2bd917e042660011930",
+            "perception/pulldown.ts": "281a885631bec4c514cab6cf192862683666026a25836167634eb288a60d5d09",
+            "perception/squat.ts": "e8da0ccf10415389ed1c5d84810c82662c534da7328c37750f4ca6f10d516700",
+            "analytics/motion.ts": "2f7d7c9e5a83d4ffa1d72c5cff15af7b276fe731ae915d2c35a56caeb65c88e1",
+            "screens/Session.tsx": "c38d8c992bd1c053b9731b556deb50e7e86a13dea44e731c8ab77a453a682d15"
+          },
+          "browser": "151.0.7922.34"
+        }
+      ],
+      "results": [
+        {
+          "index": 0,
+          "file": "dynamic-dual-pulldown.mp4",
+          "exercise": "lat-pulldown",
+          "control": false,
+          "preparedSha256": "8f1e94aeb249ce66adfcbcd6e9d706ba762a6cf91698be2984a265b0a1c08fac",
+          "referenceWindows": [
+            [
+              1.85,
+              3.73
+            ],
+            [
+              6.2,
+              8.03
+            ],
+            [
+              10.42,
+              12.31
+            ],
+            [
+              14.64,
+              16.58
+            ],
+            [
+              19.47,
+              21.63
+            ]
+          ],
+          "errors": [],
+          "frames": 326,
+          "sourceSpanMs": [
+            0,
+            21666.666666666668
+          ],
+          "maxSourceGapMs": 66.66666666666788,
+          "terminalMessage": "\u6709 1 \u4e0b\u955c\u5934\u6ca1\u770b\u6e05\u3002\u4e0b\u4e00\u7ec4\u8c03\u6574\u955c\u5934\uff0c\u8ba9\u624b\u8098\u59cb\u7ec8\u5728\u753b\u9762\u91cc\u3002\n\n+0\nEXP\n\n\u56de\u653e\u7ed3\u7b97\uff0c\u4e0d\u8ba1\u5165\u4f60\u7684\u8bad\u7ec3\u8bb0\u5f55\u3002\n\n\u5b8c\u6210",
+          "calibrated": true,
+          "reviewEntries": 1,
+          "verified": 0,
+          "metrics": {
+            "measuredReps": 0,
+            "medianDurationMs": null,
+            "medianReturnMs": null,
+            "returnVariation": null,
+            "medianRange": null,
+            "pairedReps": 0,
+            "medianLagMs": null,
+            "coverage": 0.9875,
+            "view": {
+              "x": 0.5518051981925964,
+              "y": 0.7119773328304291,
+              "scale": 0.3227107382606954,
+              "orientation": 0.5568365765437042
+            }
+          },
+          "repetitions": [
+            {
+              "repIndex": 0,
+              "sourceStartMs": 17800,
+              "durationMs": 3800,
+              "verified": false,
+              "range": null,
+              "outboundMs": null,
+              "returnMs": null,
+              "bottomHoldMs": null,
+              "minAngle": null,
+              "maxAngle": null,
+              "excursionDeg": null,
+              "bilateralLagMs": null,
+              "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+              "pairedCoverage": 0.9482758620689655
+            }
+          ],
+          "exp": {
+            "verifiedReps": 0,
+            "qualityBonus": 0,
+            "fixedBonus": 0
+          },
+          "cue": {
+            "issueId": "out_of_view",
+            "text": "\u6709 1 \u4e0b\u955c\u5934\u6ca1\u770b\u6e05\u3002\u4e0b\u4e00\u7ec4\u8c03\u6574\u955c\u5934\uff0c\u8ba9\u624b\u8098\u59cb\u7ec8\u5728\u753b\u9762\u91cc\u3002"
+          },
+          "sourceReviewChecked": true,
+          "unlocatedVerified": 0,
+          "uiChecksPassed": true,
+          "pageErrors": [],
+          "elapsedSeconds": 153.419,
+          "traceBasedCountCheck": {
+            "expected": 2,
+            "matched": 0,
+            "missed": 2,
+            "extra": 0,
+            "matches": [],
+            "misses": [
+              [
+                14.64,
+                16.58
+              ],
+              [
+                19.47,
+                21.63
+              ]
+            ],
+            "extraTimes": []
+          },
+          "auditedCountCheck": {
+            "expected": 2,
+            "matched": 0,
+            "missed": 2,
+            "unmatched": 0,
+            "matches": [],
+            "misses": [
+              [
+                14.64,
+                16.58
+              ],
+              [
+                19.47,
+                21.63
+              ]
+            ],
+            "unmatchedTimes": []
+          }
+        }
+      ]
+    },
+    "replicationCandidate": {
+      "groups": [
+        {
+          "group": 0,
+          "sourceHashes": {
+            "tracking/poseTracker.ts": "0d98c349964948633b7607984b0416655b7778849f0eb67a95acea562e7f43bc",
+            "tracking/recordedFrames.ts": "6dd04d2eaa8f0fb810f655094a3a0864ec296255123dc2bd917e042660011930",
+            "perception/pulldown.ts": "281a885631bec4c514cab6cf192862683666026a25836167634eb288a60d5d09",
+            "perception/squat.ts": "e8da0ccf10415389ed1c5d84810c82662c534da7328c37750f4ca6f10d516700",
+            "analytics/motion.ts": "2f7d7c9e5a83d4ffa1d72c5cff15af7b276fe731ae915d2c35a56caeb65c88e1",
+            "screens/Session.tsx": "c38d8c992bd1c053b9731b556deb50e7e86a13dea44e731c8ab77a453a682d15"
+          },
+          "browser": "151.0.7922.34"
+        }
+      ],
+      "results": [
+        {
+          "index": 0,
+          "file": "dynamic-dual-pulldown.mp4",
+          "exercise": "lat-pulldown",
+          "control": false,
+          "preparedSha256": "8f1e94aeb249ce66adfcbcd6e9d706ba762a6cf91698be2984a265b0a1c08fac",
+          "referenceWindows": [
+            [
+              1.85,
+              3.73
+            ],
+            [
+              6.2,
+              8.03
+            ],
+            [
+              10.42,
+              12.31
+            ],
+            [
+              14.64,
+              16.58
+            ],
+            [
+              19.47,
+              21.63
+            ]
+          ],
+          "errors": [],
+          "frames": 326,
+          "sourceSpanMs": [
+            0,
+            21666.666666666668
+          ],
+          "maxSourceGapMs": 66.66666666666788,
+          "terminalMessage": "\u8fd9\u4e00\u7ec4\u786e\u8ba4\u4e86 1 \u4e0b\u3002\n\n+1\nEXP\n\n\u56de\u653e\u7ed3\u7b97\uff0c\u4e0d\u8ba1\u5165\u4f60\u7684\u8bad\u7ec3\u8bb0\u5f55\u3002\n\n\u5b8c\u6210",
+          "calibrated": true,
+          "reviewEntries": 1,
+          "verified": 1,
+          "metrics": {
+            "measuredReps": 1,
+            "medianDurationMs": 2866.666666666668,
+            "medianReturnMs": 1333.333333333334,
+            "returnVariation": null,
+            "medianRange": 1,
+            "pairedReps": 0,
+            "medianLagMs": null,
+            "coverage": 0.9927536231884058,
+            "view": {
+              "x": 0.548673003911972,
+              "y": 0.7038823962211609,
+              "scale": 0.30588994917791523,
+              "orientation": 0.6030893535045576
+            }
+          },
+          "repetitions": [
+            {
+              "repIndex": 0,
+              "sourceStartMs": 13600,
+              "durationMs": 2866.666666666668,
+              "verified": true,
+              "range": 1,
+              "outboundMs": 1533.333333333334,
+              "returnMs": 1333.333333333334,
+              "bottomHoldMs": 933.3333333333339,
+              "minAngle": 33.732543887283825,
+              "maxAngle": 155.36028246992404,
+              "excursionDeg": 121.62773858264022,
+              "bilateralLagMs": null,
+              "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+              "pairedCoverage": 1
+            }
+          ],
+          "exp": {
+            "verifiedReps": 1,
+            "qualityBonus": 0,
+            "fixedBonus": 0
+          },
+          "cue": null,
+          "sourceReviewChecked": true,
+          "unlocatedVerified": 0,
+          "uiChecksPassed": true,
+          "pageErrors": [],
+          "elapsedSeconds": 154.566,
+          "traceBasedCountCheck": {
+            "expected": 2,
+            "matched": 1,
+            "missed": 1,
+            "extra": 0,
+            "matches": [
+              {
+                "window": [
+                  14.64,
+                  16.58
+                ],
+                "event": 16.46666666666667
+              }
+            ],
+            "misses": [
+              [
+                19.47,
+                21.63
+              ]
+            ],
+            "extraTimes": []
+          },
+          "auditedCountCheck": {
+            "expected": 2,
+            "matched": 1,
+            "missed": 1,
+            "unmatched": 0,
+            "matches": [
+              {
+                "window": [
+                  14.64,
+                  16.58
+                ],
+                "event": 16.46666666666667
+              }
+            ],
+            "misses": [
+              [
+                19.47,
+                21.63
+              ]
+            ],
+            "unmatchedTimes": []
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,772 @@
+{
+  "date": "2026-11-25",
+  "testsPassed": 172,
+  "testFilesPassed": 31,
+  "buildPassed": true,
+  "sourceSamplingHz": 15,
+  "counterThresholdsChanged": false,
+  "rewardRulesChanged": false,
+  "expectedPulldownReferenceWindowsSeconds": [
+    [
+      18.95,
+      23.35
+    ],
+    [
+      25.05,
+      29.05
+    ],
+    [
+      30.4,
+      34.05
+    ],
+    [
+      35.85,
+      39.55
+    ]
+  ],
+  "checks": "Each pulldown repetition midpoint must belong to its corresponding labelled source interval. UI count equals review choices and exported verified repetitions. Pause holds source position within 10 microseconds (decoder rounding); source review seeking changes no counts. Replay writes no history. Each replay browser run checks responsive widths, plan persistence, source review, all coach questions and export. Camera simulation verifies two plans and failed-save retry.",
+  "runs": [
+    {
+      "run": 1,
+      "browser": "151.0.7922.34",
+      "cpuOnly": true,
+      "scenario": "lat-pulldown",
+      "analysisMode": "source-15hz",
+      "reports": [
+        {
+          "exercise": "lat-pulldown",
+          "attempts": 4,
+          "metrics": {
+            "measuredReps": 4,
+            "medianDurationMs": 3399.999999999998,
+            "medianReturnMs": 2700,
+            "returnVariation": 0.06172839506172817,
+            "medianRange": 0.9876118725701386,
+            "pairedReps": 3,
+            "medianLagMs": -39,
+            "coverage": 0.9748603351955307,
+            "view": null
+          }
+        }
+      ],
+      "errors": [],
+      "replaySource": "bundled",
+      "exportedReports": [
+        {
+          "exercise": "lat-pulldown",
+          "source": "video-replay",
+          "sets": [
+            {
+              "plan": {
+                "sets": 1,
+                "reps": 12,
+                "focus": "tempo",
+                "returnSeconds": 2.5,
+                "loadKg": 35
+              },
+              "calibration": {
+                "thetaTop": 160.04687624484643,
+                "thetaBottom": 55.59643762648138
+              },
+              "coverage": 0.9748603351955307,
+              "reps": [
+                {
+                  "status": "verified",
+                  "qMax": 0.9935329807401411,
+                  "durationMs": 3533.3333333333358
+                },
+                {
+                  "status": "verified",
+                  "qMax": 0.9785477660421578,
+                  "durationMs": 3066.666666666668
+                },
+                {
+                  "status": "verified",
+                  "qMax": 1,
+                  "durationMs": 3333.333333333332
+                },
+                {
+                  "status": "verified",
+                  "qMax": 0.9816907644001363,
+                  "durationMs": 3466.6666666666642
+                }
+              ],
+              "motion": {
+                "reps": [
+                  {
+                    "repIndex": 0,
+                    "sourceStartMs": 18333.333333333332,
+                    "durationMs": 3533.3333333333358,
+                    "verified": true,
+                    "range": 0.9935329807401411,
+                    "outboundMs": 600,
+                    "returnMs": 2933.3333333333358,
+                    "bottomHoldMs": 533.3333333333321,
+                    "minAngle": 56.271920624727066,
+                    "maxAngle": 135.4783707371949,
+                    "excursionDeg": 79.20645011246782,
+                    "bilateralLagMs": -120,
+                    "bilateralReason": "\u53f3\u4fa7\u51cf\u5de6\u4fa7\u7684\u8fd8\u539f\u4e2d\u70b9\u65f6\u95f4\uff1b\u5b9e\u9a8c\u89c2\u5bdf\u503c\uff0c\u4e0d\u7528\u4e8e\u8bc4\u5206",
+                    "pairedCoverage": 1
+                  },
+                  {
+                    "repIndex": 1,
+                    "sourceStartMs": 24533.333333333332,
+                    "durationMs": 3066.666666666668,
+                    "verified": true,
+                    "range": 0.9785477660421578,
+                    "outboundMs": 600,
+                    "returnMs": 2466.666666666668,
+                    "bottomHoldMs": 533.3333333333321,
+                    "minAngle": 57.837132872721796,
+                    "maxAngle": 137.03661103350714,
+                    "excursionDeg": 79.19947816078535,
+                    "bilateralLagMs": -5,
+                    "bilateralReason": "\u53f3\u4fa7\u51cf\u5de6\u4fa7\u7684\u8fd8\u539f\u4e2d\u70b9\u65f6\u95f4\uff1b\u5b9e\u9a8c\u89c2\u5bdf\u503c\uff0c\u4e0d\u7528\u4e8e\u8bc4\u5206",
+                    "pairedCoverage": 1
+                  },
+                  {
+                    "repIndex": 2,
+                    "sourceStartMs": 29666.666666666668,
+                    "durationMs": 3333.333333333332,
+                    "verified": true,
+                    "range": 1,
+                    "outboundMs": 733.3333333333321,
+                    "returnMs": 2600,
+                    "bottomHoldMs": 333.33333333333576,
+                    "minAngle": 55.02686993832411,
+                    "maxAngle": 136.80899990212237,
+                    "excursionDeg": 81.78212996379825,
+                    "bilateralLagMs": -39,
+                    "bilateralReason": "\u53f3\u4fa7\u51cf\u5de6\u4fa7\u7684\u8fd8\u539f\u4e2d\u70b9\u65f6\u95f4\uff1b\u5b9e\u9a8c\u89c2\u5bdf\u503c\uff0c\u4e0d\u7528\u4e8e\u8bc4\u5206",
+                    "pairedCoverage": 1
+                  },
+                  {
+                    "repIndex": 3,
+                    "sourceStartMs": 35133.333333333336,
+                    "durationMs": 3466.6666666666642,
+                    "verified": true,
+                    "range": 0.9816907644001363,
+                    "outboundMs": 666.6666666666642,
+                    "returnMs": 2800,
+                    "bottomHoldMs": 466.66666666666424,
+                    "minAngle": 57.50884531565414,
+                    "maxAngle": 135.92198355411662,
+                    "excursionDeg": 78.41313823846248,
+                    "bilateralLagMs": null,
+                    "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+                    "pairedCoverage": 0.6792452830188679
+                  }
+                ],
+                "summary": {
+                  "measuredReps": 4,
+                  "medianDurationMs": 3399.999999999998,
+                  "medianReturnMs": 2700,
+                  "returnVariation": 0.06172839506172817,
+                  "medianRange": 0.9876118725701386,
+                  "pairedReps": 3,
+                  "medianLagMs": -39,
+                  "coverage": 0.9748603351955307,
+                  "view": null
+                }
+              },
+              "result": {
+                "cue": null,
+                "exp": {
+                  "verifiedReps": 4,
+                  "qualityBonus": 0,
+                  "fixedBonus": 0
+                },
+                "hadIssueToFix": false,
+                "rewardReasons": {
+                  "quality": "\u81f3\u5c11 8 \u4e0b\u4e14\u516b\u6210\u52a8\u4f5c\u8fbe\u5230\u4e2a\u4eba\u5e45\u5ea6\u76ee\u6807\uff1b\u89c2\u5bdf\u91cd\u70b9\u4e0d\u5f71\u54cd EXP\u3002",
+                  "improvement": "\u9700\u8981\u786e\u8ba4\u6d88\u9664\u4e0a\u4e00\u7ec4\u7684\u5e45\u5ea6\u6216\u53d6\u666f\u95ee\u9898\uff0c\u624d\u80fd\u83b7\u5f97\u6539\u8fdb\u5956\u52b1\u3002"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "run": 2,
+      "browser": "151.0.7922.34",
+      "cpuOnly": true,
+      "scenario": "lat-pulldown",
+      "analysisMode": "source-15hz",
+      "reports": [
+        {
+          "exercise": "lat-pulldown",
+          "attempts": 4,
+          "metrics": {
+            "measuredReps": 4,
+            "medianDurationMs": 3399.999999999998,
+            "medianReturnMs": 2700,
+            "returnVariation": 0.06172839506172817,
+            "medianRange": 0.9876118725701386,
+            "pairedReps": 3,
+            "medianLagMs": -39,
+            "coverage": 0.9748603351955307,
+            "view": null
+          }
+        }
+      ],
+      "errors": [],
+      "replaySource": "bundled",
+      "exportedReports": [
+        {
+          "exercise": "lat-pulldown",
+          "source": "video-replay",
+          "sets": [
+            {
+              "plan": {
+                "sets": 1,
+                "reps": 12,
+                "focus": "tempo",
+                "returnSeconds": 2.5,
+                "loadKg": 35
+              },
+              "calibration": {
+                "thetaTop": 160.04687624484643,
+                "thetaBottom": 55.59643762648138
+              },
+              "coverage": 0.9748603351955307,
+              "reps": [
+                {
+                  "status": "verified",
+                  "qMax": 0.9935329807401411,
+                  "durationMs": 3533.3333333333358
+                },
+                {
+                  "status": "verified",
+                  "qMax": 0.9785477660421578,
+                  "durationMs": 3066.666666666668
+                },
+                {
+                  "status": "verified",
+                  "qMax": 1,
+                  "durationMs": 3333.333333333332
+                },
+                {
+                  "status": "verified",
+                  "qMax": 0.9816907644001363,
+                  "durationMs": 3466.6666666666642
+                }
+              ],
+              "motion": {
+                "reps": [
+                  {
+                    "repIndex": 0,
+                    "sourceStartMs": 18333.333333333332,
+                    "durationMs": 3533.3333333333358,
+                    "verified": true,
+                    "range": 0.9935329807401411,
+                    "outboundMs": 600,
+                    "returnMs": 2933.3333333333358,
+                    "bottomHoldMs": 533.3333333333321,
+                    "minAngle": 56.271920624727066,
+                    "maxAngle": 135.4783707371949,
+                    "excursionDeg": 79.20645011246782,
+                    "bilateralLagMs": -120,
+                    "bilateralReason": "\u53f3\u4fa7\u51cf\u5de6\u4fa7\u7684\u8fd8\u539f\u4e2d\u70b9\u65f6\u95f4\uff1b\u5b9e\u9a8c\u89c2\u5bdf\u503c\uff0c\u4e0d\u7528\u4e8e\u8bc4\u5206",
+                    "pairedCoverage": 1
+                  },
+                  {
+                    "repIndex": 1,
+                    "sourceStartMs": 24533.333333333332,
+                    "durationMs": 3066.666666666668,
+                    "verified": true,
+                    "range": 0.9785477660421578,
+                    "outboundMs": 600,
+                    "returnMs": 2466.666666666668,
+                    "bottomHoldMs": 533.3333333333321,
+                    "minAngle": 57.837132872721796,
+                    "maxAngle": 137.03661103350714,
+                    "excursionDeg": 79.19947816078535,
+                    "bilateralLagMs": -5,
+                    "bilateralReason": "\u53f3\u4fa7\u51cf\u5de6\u4fa7\u7684\u8fd8\u539f\u4e2d\u70b9\u65f6\u95f4\uff1b\u5b9e\u9a8c\u89c2\u5bdf\u503c\uff0c\u4e0d\u7528\u4e8e\u8bc4\u5206",
+                    "pairedCoverage": 1
+                  },
+                  {
+                    "repIndex": 2,
+                    "sourceStartMs": 29666.666666666668,
+                    "durationMs": 3333.333333333332,
+                    "verified": true,
+                    "range": 1,
+                    "outboundMs": 733.3333333333321,
+                    "returnMs": 2600,
+                    "bottomHoldMs": 333.33333333333576,
+                    "minAngle": 55.02686993832411,
+                    "maxAngle": 136.80899990212237,
+                    "excursionDeg": 81.78212996379825,
+                    "bilateralLagMs": -39,
+                    "bilateralReason": "\u53f3\u4fa7\u51cf\u5de6\u4fa7\u7684\u8fd8\u539f\u4e2d\u70b9\u65f6\u95f4\uff1b\u5b9e\u9a8c\u89c2\u5bdf\u503c\uff0c\u4e0d\u7528\u4e8e\u8bc4\u5206",
+                    "pairedCoverage": 1
+                  },
+                  {
+                    "repIndex": 3,
+                    "sourceStartMs": 35133.333333333336,
+                    "durationMs": 3466.6666666666642,
+                    "verified": true,
+                    "range": 0.9816907644001363,
+                    "outboundMs": 666.6666666666642,
+                    "returnMs": 2800,
+                    "bottomHoldMs": 466.66666666666424,
+                    "minAngle": 57.50884531565414,
+                    "maxAngle": 135.92198355411662,
+                    "excursionDeg": 78.41313823846248,
+                    "bilateralLagMs": null,
+                    "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+                    "pairedCoverage": 0.6792452830188679
+                  }
+                ],
+                "summary": {
+                  "measuredReps": 4,
+                  "medianDurationMs": 3399.999999999998,
+                  "medianReturnMs": 2700,
+                  "returnVariation": 0.06172839506172817,
+                  "medianRange": 0.9876118725701386,
+                  "pairedReps": 3,
+                  "medianLagMs": -39,
+                  "coverage": 0.9748603351955307,
+                  "view": null
+                }
+              },
+              "result": {
+                "cue": null,
+                "exp": {
+                  "verifiedReps": 4,
+                  "qualityBonus": 0,
+                  "fixedBonus": 0
+                },
+                "hadIssueToFix": false,
+                "rewardReasons": {
+                  "quality": "\u81f3\u5c11 8 \u4e0b\u4e14\u516b\u6210\u52a8\u4f5c\u8fbe\u5230\u4e2a\u4eba\u5e45\u5ea6\u76ee\u6807\uff1b\u89c2\u5bdf\u91cd\u70b9\u4e0d\u5f71\u54cd EXP\u3002",
+                  "improvement": "\u9700\u8981\u786e\u8ba4\u6d88\u9664\u4e0a\u4e00\u7ec4\u7684\u5e45\u5ea6\u6216\u53d6\u666f\u95ee\u9898\uff0c\u624d\u80fd\u83b7\u5f97\u6539\u8fdb\u5956\u52b1\u3002"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "run": 3,
+      "browser": "151.0.7922.34",
+      "cpuOnly": true,
+      "scenario": "lat-pulldown",
+      "replaySource": "upload",
+      "analysisMode": "source-15hz",
+      "reports": [
+        {
+          "exercise": "lat-pulldown",
+          "attempts": 4,
+          "metrics": {
+            "measuredReps": 4,
+            "medianDurationMs": 3399.999999999998,
+            "medianReturnMs": 2700,
+            "returnVariation": 0.06172839506172817,
+            "medianRange": 0.9876118725701386,
+            "pairedReps": 3,
+            "medianLagMs": -39,
+            "coverage": 0.9748603351955307,
+            "view": null
+          }
+        }
+      ],
+      "errors": [],
+      "exportedReports": [
+        {
+          "exercise": "lat-pulldown",
+          "source": "video-replay",
+          "sets": [
+            {
+              "plan": {
+                "sets": 1,
+                "reps": 12,
+                "focus": "tempo",
+                "returnSeconds": 2.5,
+                "loadKg": 35
+              },
+              "calibration": {
+                "thetaTop": 160.04687624484643,
+                "thetaBottom": 55.59643762648138
+              },
+              "coverage": 0.9748603351955307,
+              "reps": [
+                {
+                  "status": "verified",
+                  "qMax": 0.9935329807401411,
+                  "durationMs": 3533.3333333333358
+                },
+                {
+                  "status": "verified",
+                  "qMax": 0.9785477660421578,
+                  "durationMs": 3066.666666666668
+                },
+                {
+                  "status": "verified",
+                  "qMax": 1,
+                  "durationMs": 3333.333333333332
+                },
+                {
+                  "status": "verified",
+                  "qMax": 0.9816907644001363,
+                  "durationMs": 3466.6666666666642
+                }
+              ],
+              "motion": {
+                "reps": [
+                  {
+                    "repIndex": 0,
+                    "sourceStartMs": 18333.333333333332,
+                    "durationMs": 3533.3333333333358,
+                    "verified": true,
+                    "range": 0.9935329807401411,
+                    "outboundMs": 600,
+                    "returnMs": 2933.3333333333358,
+                    "bottomHoldMs": 533.3333333333321,
+                    "minAngle": 56.271920624727066,
+                    "maxAngle": 135.4783707371949,
+                    "excursionDeg": 79.20645011246782,
+                    "bilateralLagMs": -120,
+                    "bilateralReason": "\u53f3\u4fa7\u51cf\u5de6\u4fa7\u7684\u8fd8\u539f\u4e2d\u70b9\u65f6\u95f4\uff1b\u5b9e\u9a8c\u89c2\u5bdf\u503c\uff0c\u4e0d\u7528\u4e8e\u8bc4\u5206",
+                    "pairedCoverage": 1
+                  },
+                  {
+                    "repIndex": 1,
+                    "sourceStartMs": 24533.333333333332,
+                    "durationMs": 3066.666666666668,
+                    "verified": true,
+                    "range": 0.9785477660421578,
+                    "outboundMs": 600,
+                    "returnMs": 2466.666666666668,
+                    "bottomHoldMs": 533.3333333333321,
+                    "minAngle": 57.837132872721796,
+                    "maxAngle": 137.03661103350714,
+                    "excursionDeg": 79.19947816078535,
+                    "bilateralLagMs": -5,
+                    "bilateralReason": "\u53f3\u4fa7\u51cf\u5de6\u4fa7\u7684\u8fd8\u539f\u4e2d\u70b9\u65f6\u95f4\uff1b\u5b9e\u9a8c\u89c2\u5bdf\u503c\uff0c\u4e0d\u7528\u4e8e\u8bc4\u5206",
+                    "pairedCoverage": 1
+                  },
+                  {
+                    "repIndex": 2,
+                    "sourceStartMs": 29666.666666666668,
+                    "durationMs": 3333.333333333332,
+                    "verified": true,
+                    "range": 1,
+                    "outboundMs": 733.3333333333321,
+                    "returnMs": 2600,
+                    "bottomHoldMs": 333.33333333333576,
+                    "minAngle": 55.02686993832411,
+                    "maxAngle": 136.80899990212237,
+                    "excursionDeg": 81.78212996379825,
+                    "bilateralLagMs": -39,
+                    "bilateralReason": "\u53f3\u4fa7\u51cf\u5de6\u4fa7\u7684\u8fd8\u539f\u4e2d\u70b9\u65f6\u95f4\uff1b\u5b9e\u9a8c\u89c2\u5bdf\u503c\uff0c\u4e0d\u7528\u4e8e\u8bc4\u5206",
+                    "pairedCoverage": 1
+                  },
+                  {
+                    "repIndex": 3,
+                    "sourceStartMs": 35133.333333333336,
+                    "durationMs": 3466.6666666666642,
+                    "verified": true,
+                    "range": 0.9816907644001363,
+                    "outboundMs": 666.6666666666642,
+                    "returnMs": 2800,
+                    "bottomHoldMs": 466.66666666666424,
+                    "minAngle": 57.50884531565414,
+                    "maxAngle": 135.92198355411662,
+                    "excursionDeg": 78.41313823846248,
+                    "bilateralLagMs": null,
+                    "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+                    "pairedCoverage": 0.6792452830188679
+                  }
+                ],
+                "summary": {
+                  "measuredReps": 4,
+                  "medianDurationMs": 3399.999999999998,
+                  "medianReturnMs": 2700,
+                  "returnVariation": 0.06172839506172817,
+                  "medianRange": 0.9876118725701386,
+                  "pairedReps": 3,
+                  "medianLagMs": -39,
+                  "coverage": 0.9748603351955307,
+                  "view": null
+                }
+              },
+              "result": {
+                "cue": null,
+                "exp": {
+                  "verifiedReps": 4,
+                  "qualityBonus": 0,
+                  "fixedBonus": 0
+                },
+                "hadIssueToFix": false,
+                "rewardReasons": {
+                  "quality": "\u81f3\u5c11 8 \u4e0b\u4e14\u516b\u6210\u52a8\u4f5c\u8fbe\u5230\u4e2a\u4eba\u5e45\u5ea6\u76ee\u6807\uff1b\u89c2\u5bdf\u91cd\u70b9\u4e0d\u5f71\u54cd EXP\u3002",
+                  "improvement": "\u9700\u8981\u786e\u8ba4\u6d88\u9664\u4e0a\u4e00\u7ec4\u7684\u5e45\u5ea6\u6216\u53d6\u666f\u95ee\u9898\uff0c\u624d\u80fd\u83b7\u5f97\u6539\u8fdb\u5956\u52b1\u3002"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "run": 4,
+      "browser": "151.0.7922.34",
+      "cpuOnly": true,
+      "scenario": "squat",
+      "analysisMode": "source-15hz",
+      "reports": [
+        {
+          "exercise": "squat",
+          "attempts": 2,
+          "metrics": {
+            "measuredReps": 2,
+            "medianDurationMs": 2166.666666666666,
+            "medianReturnMs": 1299.999999999999,
+            "returnVariation": null,
+            "medianRange": 0.9828618903945749,
+            "pairedReps": 0,
+            "medianLagMs": null,
+            "coverage": 1,
+            "view": {
+              "x": 0.5213250368833542,
+              "y": 0.32462313771247864,
+              "scale": 0.21420089070886797,
+              "orientation": 0.44206599601396984
+            }
+          }
+        }
+      ],
+      "errors": [],
+      "replaySource": "bundled",
+      "exportedReports": [
+        {
+          "exercise": "squat",
+          "source": "video-replay",
+          "sets": [
+            {
+              "plan": {
+                "sets": 1,
+                "reps": 12,
+                "focus": "tempo",
+                "returnSeconds": 2.5,
+                "loadKg": 35
+              },
+              "calibration": {
+                "thetaTop": 178.55355531734284,
+                "thetaBottom": 82.44849873806389
+              },
+              "coverage": 1,
+              "reps": [
+                {
+                  "status": "verified",
+                  "qMax": 0.9665731911362044,
+                  "durationMs": 2133.333333333334
+                },
+                {
+                  "status": "verified",
+                  "qMax": 0.9991505896529453,
+                  "durationMs": 2199.999999999998
+                }
+              ],
+              "motion": {
+                "reps": [
+                  {
+                    "repIndex": 0,
+                    "sourceStartMs": 11466.666666666666,
+                    "durationMs": 2133.333333333334,
+                    "verified": true,
+                    "range": 0.9665731911362044,
+                    "outboundMs": 866.6666666666679,
+                    "returnMs": 1266.666666666666,
+                    "bottomHoldMs": 66.66666666666606,
+                    "minAngle": 85.66098409518371,
+                    "maxAngle": 166.66603704008708,
+                    "excursionDeg": 81.00505294490337,
+                    "bilateralLagMs": null,
+                    "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+                    "pairedCoverage": 0.8484848484848485
+                  },
+                  {
+                    "repIndex": 1,
+                    "sourceStartMs": 15133.333333333334,
+                    "durationMs": 2199.999999999998,
+                    "verified": true,
+                    "range": 0.9991505896529453,
+                    "outboundMs": 866.6666666666661,
+                    "returnMs": 1333.3333333333321,
+                    "bottomHoldMs": 466.6666666666679,
+                    "minAngle": 82.53013136752661,
+                    "maxAngle": 165.7706952641488,
+                    "excursionDeg": 83.24056389662219,
+                    "bilateralLagMs": null,
+                    "bilateralReason": "\u9700\u8981\u4e24\u4fa7\u5168\u7a0b\u6e05\u6670\u3001\u6b63\u9762\u6216\u80cc\u9762\u56fa\u5b9a\u673a\u4f4d",
+                    "pairedCoverage": 0.8823529411764706
+                  }
+                ],
+                "summary": {
+                  "measuredReps": 2,
+                  "medianDurationMs": 2166.666666666666,
+                  "medianReturnMs": 1299.999999999999,
+                  "returnVariation": null,
+                  "medianRange": 0.9828618903945749,
+                  "pairedReps": 0,
+                  "medianLagMs": null,
+                  "coverage": 1,
+                  "view": {
+                    "x": 0.5213250368833542,
+                    "y": 0.32462313771247864,
+                    "scale": 0.21420089070886797,
+                    "orientation": 0.44206599601396984
+                  }
+                }
+              },
+              "result": {
+                "cue": null,
+                "exp": {
+                  "verifiedReps": 2,
+                  "qualityBonus": 0,
+                  "fixedBonus": 0
+                },
+                "hadIssueToFix": false,
+                "rewardReasons": {
+                  "quality": "\u81f3\u5c11 8 \u4e0b\u4e14\u516b\u6210\u52a8\u4f5c\u8fbe\u5230\u4e2a\u4eba\u5e45\u5ea6\u76ee\u6807\uff1b\u89c2\u5bdf\u91cd\u70b9\u4e0d\u5f71\u54cd EXP\u3002",
+                  "improvement": "\u9700\u8981\u786e\u8ba4\u6d88\u9664\u4e0a\u4e00\u7ec4\u7684\u5e45\u5ea6\u6216\u53d6\u666f\u95ee\u9898\uff0c\u624d\u80fd\u83b7\u5f97\u6539\u8fdb\u5956\u52b1\u3002"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "run": 5,
+      "browser": "151.0.7922.34",
+      "cpuOnly": true,
+      "scenario": "camera",
+      "analysisMode": "source-15hz",
+      "reports": [
+        {
+          "scenario": "simulated-camera-plan-and-storage-retry",
+          "sets": [
+            {
+              "verified": 1,
+              "quality": 0,
+              "fixed": 0,
+              "motion": {
+                "measuredReps": 0,
+                "medianDurationMs": null,
+                "medianReturnMs": null,
+                "returnVariation": null,
+                "medianRange": null,
+                "pairedReps": 0,
+                "medianLagMs": null,
+                "coverage": 0.9482758620689655,
+                "view": null
+              },
+              "plan": {
+                "sets": 2,
+                "reps": 1,
+                "focus": "tempo",
+                "returnSeconds": 2,
+                "loadKg": null
+              }
+            },
+            {
+              "verified": 1,
+              "quality": 0,
+              "fixed": 0,
+              "motion": {
+                "measuredReps": 0,
+                "medianDurationMs": null,
+                "medianReturnMs": null,
+                "returnVariation": null,
+                "medianRange": null,
+                "pairedReps": 0,
+                "medianLagMs": null,
+                "coverage": 0.9824561403508771,
+                "view": null
+              },
+              "plan": {
+                "sets": 2,
+                "reps": 1,
+                "focus": "coordination",
+                "returnSeconds": 2,
+                "loadKg": null
+              }
+            }
+          ]
+        }
+      ],
+      "errors": [],
+      "replaySource": null,
+      "exportedReports": []
+    }
+  ],
+  "regression": [
+    {
+      "name": "overlay-side",
+      "pass": true,
+      "seconds": 15.752,
+      "frames": 0,
+      "callbackToNextAnimationFrameP95ms": null
+    },
+    {
+      "name": "exit-demo",
+      "pass": true,
+      "seconds": 1.399,
+      "frames": 0,
+      "callbackToNextAnimationFrameP95ms": null
+    },
+    {
+      "name": "manual-history",
+      "pass": true,
+      "seconds": 0.716,
+      "frames": 0,
+      "callbackToNextAnimationFrameP95ms": null
+    },
+    {
+      "name": "privacy",
+      "pass": true,
+      "seconds": 0.844,
+      "frames": 0,
+      "callbackToNextAnimationFrameP95ms": null
+    },
+    {
+      "name": "camera-denied",
+      "pass": true,
+      "seconds": 0.608,
+      "frames": 0,
+      "callbackToNextAnimationFrameP95ms": null
+    },
+    {
+      "name": "pilot-summary",
+      "pass": true,
+      "seconds": 0.661,
+      "frames": 0,
+      "callbackToNextAnimationFrameP95ms": null
+    },
+    {
+      "name": "facilitator",
+      "pass": true,
+      "seconds": 45.801,
+      "frames": 127,
+      "callbackToNextAnimationFrameP95ms": 334.7
+    }
+  ],
+  "sourceHashes": {
+    "ui/src/tracking/recordedFrames.ts": "6dd04d2eaa8f0fb810f655094a3a0864ec296255123dc2bd917e042660011930",
+    "ui/src/tracking/poseTracker.ts": "edf2e7fc311dcbc581f2dfb29cd1df9fb52d9b6fcb919e9a735a59fee9a2a16f",
+    "ui/src/tracking/useStageVideo.ts": "7a25c6969e6e8b8032baa950ac30e5179354750755f79d46c05ac9012d38a7e2",
+    "ui/src/screens/Session.tsx": "9e92e292047483d325b47be21bbf7bb8ed80ad18d1cd48e798602ca9136983ca"
+  },
+  "limitations": [
+    "Three repetitions of one source are a repeatability check, not a population accuracy estimate.",
+    "The webcam route still processes advancing live frames and can miss evidence on slow devices.",
+    "Bilateral values are descriptive, not validated against independent side-timing labels.",
+    "Camera persistence is tested with prerecorded video captured as a stream, not a real participant."
+  ]
+}

@@ -1,0 +1,112 @@
+# Interactive training experience
+
+FitPal now connects a chosen training goal to live evidence, an inspectable set review, one next-set focus, bounded rewards and saved progress. This layer consumes the existing perception outputs; it does not replace the calibrated counters or claim a newly trained pose model.
+
+## Original capabilities and added product behavior
+
+The original left/right elbow-angle values and angle curves are still visible alongside the new process charts in **分析** and **画中分析**. Personal range normalizes existing calibrated movement observations; torso tilt plots the existing eligible side-view observation. Neither chart is a new body detector or independent proof of form quality. Completed-repetition timing instead organizes the detected movement start and confirmed return into a per-attempt record.
+
+The product contribution is the connected interaction: set a plan before starting, inspect the current movement, select an attempt after the set, read advice tied to available evidence, adjust the actual next set, and retain each set's original context in history. Existing counters, calibration, avatar, wardrobe and EXP are not reclassified as newly built features. Product-flow checks and recognition repairs support different claims; neither proves improved training outcomes in people.
+
+## Walkthrough
+
+On the home screen, open **训练计划**. Choose 1–8 sets, 1–30 repetitions, an optional self-reported load, and a focus: personal range, return timing or experimental bilateral observation. Range remains the default. A selected repetition count is a target, not an automatic stop or a reason to continue beyond comfort. The original three calibration repetitions remain separate from training.
+
+During training, the quiet view retains the counter. **分析** and **画中分析** retain the original angle telemetry and add a bounded six-second personal-range curve, a side-view torso-tilt curve when observable, and a completed-repetition whole-cycle time chart. Duplicate angle/rate tiles are removed. The main timing plot shows one whole-cycle series; optional phase details stay collapsed. Existing wrist/hip trails and angle curves remain available. Load is never inferred or verified from the picture. A stalled, paused or unavailable stream clears continuous curves and current values until a fresh frame arrives. Completed-repetition timings remain explicitly historical. Narrow or short viewports place the added charts below the video.
+
+Recorded files use fixed source-time sampling at 15 Hz. Each frame is decoded and analyzed before seeking to the next scheduled position, so slow inference increases waiting time rather than silently skipping source positions. The panel shows source-time progress and explicit pause/resume controls. The file remains natively paused during analysis; normal playback is reserved for the separate evidence player. Published movement measurements retain source time. An empty pose result is retried at most once on the same paused image, with a strictly later internal model timestamp; the retry does not publish an extra frame. Ordinary replay and classroom recording previews share complete source-time sampling. These recording paths do not establish live-camera throughput or guarantee recognition of every movement, and do not change counting thresholds.
+
+After a set, formal-training review bars use one shared duration scale: bar height is proportional to valid whole-cycle time, with seconds printed below. Range status remains separate. Missing timing has no invented height. Select a repetition to inspect its range, angle curve, movement trail and bilateral evidence. The classroom strip retains its existing range encoding. Uploaded or included video has a separate review player: selecting a repetition and scrubbing its time changes only that player. The original source timestamp identifies the frame. Camera sessions do not record video, so their review contains curves but no purported source footage.
+
+The set overview shows typical whole-cycle time, observed minimum/maximum, median absolute duration deviation relative to the median (only with at least three measured reps), median personal range, selected-side visibility and experimental bilateral timing. The coach offers four evidence-bound questions: what can improve, whether whole-cycle timing is consistent, what to do next, and how to check improvement. Answers prioritize missing evidence, short range and observed early trunk swing; they identify relevant attempts or the shortest/longest measured repetitions. They do not infer fatigue or strength imbalance from timing. Local speech is optional and only offered when a local Chinese voice is available. Existing optional local-model wording remains separate; the question answers do not invoke a remote model or produce unsupported diagnoses.
+
+Between sets, the original reward rows and white start button remain. Compact rows name the actual next set, current exercise, editable repetition target and observation focus. Timing is only shown when that focus is selected. The live heading also shows current/total sets. Each completed set keeps the plan that actually applied to it; changing set 2 does not rewrite set 1. Numeric fields retain an editable draft so clearing a value or typing 0.5 does not force a default midway through typing. Comparison requires at least three measured repetitions in each set, at least 90% selected-side frame coverage, comparable neutral-position view signatures, unchanged goal/load and no material range reduction. The main comparison now describes whole-cycle duration. A longer or shorter duration is a change, not inherently an improvement; the optional selected return target still applies only to the return phase.
+
+History charts use the already-stored median whole-cycle duration, retaining return time as a separate detail. Old records without whole-cycle time are not fabricated. History retains compact set summaries and plans alongside the original repetitions, EXP, levels and equipment. Existing history remains readable; malformed optional measurements are discarded without erasing valid old progress. Explicit downloads export either a session report or history. They contain no video, raw landmarks or replayable progress credits. Storage errors are visible and retryable. Disabling local summaries prevents future persistent plan/history updates; clearing local progress also clears the plan.
+
+## Measurements and limits
+
+Timing starts at the counter's tracked movement onset, after leaving the calibrated top region; it does not include the initial sub-threshold physical movement. It ends when the counter confirms return. The interface calls this recognized whole-cycle time, not independently annotated physical onset-to-offset time. Return time is only the segment from the observed minimum angle to that same confirmed endpoint. These are observed angle phases, not anatomical contraction phases. Bottom dwell is the contiguous interval within three projected degrees of the observed minimum. The bottom interval is included in whole-cycle duration and can overlap both phase intervals; it is never added again. Live torso tilt describes signed side-view projection from the existing visibility/view gate, not a new form score. Frontal, occluded or incompatible views abstain, and temporal/view gaps disconnect paths. Live buffers retain six seconds with a hard limit of 128 samples and no additional pose inference. Detailed curves retain the existing 32-repetition limit; compact measurements are captured as each attempt settles so older metrics do not disappear with evicted curves.
+
+Bilateral timing is the right-minus-left crossing time of each side's own return-angle midpoint. Positive means the right side crossed later. Both sides must remain visible, show sufficient excursion, and have continuous synchronized samples and a compatible viewing orientation. No bilateral grade, strength imbalance claim, medical inference or EXP is generated. The orientation heuristic and thresholds still require validation against independent real-video labels. A missing value is deliberate abstention, not a zero delay.
+
+Selected-side coverage is a fraction of processed frames, not elapsed time and not bilateral confidence. Saved cross-session charts show descriptive values only: uncontrolled cameras, targets and load do not support causal improvement claims.
+
+## Reward policy
+
+Each verified repetition contributes one base EXP, preserving the existing count and equipment progression. Each set has one quality pool of at most 5 EXP and one improvement pool of at most 5 EXP. Adding displays does not multiply rewards.
+
+All three observation focuses retain the original range quality rule: at least eight verified repetitions meet the personal range target, comprising at least 80% of all attempts. Focus and user-selected timing targets only affect displays and suggestions; they cannot change EXP. Short planned sets can earn base EXP but do not satisfy this eight-repetition quality minimum. The original improvement reward remains tied to resolving the previous range or visibility issue, not a change in timing.
+
+Home equipment and the top-navigation wardrobe use separate existing currencies. EXP thresholds are `20 * level * (level - 1)`; each level above 1 earns two equipment points. Equipment also requires at least one verified recorded repetition for its body half. Headband/wristbands/knee sleeves cost one point each; tank/gloves/shorts/shoes cost two. Collection tickets instead come from one check-in per local date and one ticket per recorded camera session containing a verified repetition. Multiple sets in the same session do not multiply tickets, but restarting sessions can; there is currently no daily training-ticket cap. A ticket draws one unowned cosmetic among four, with no duplicates. These policies are documented, not changed by this update.
+
+Replay and classroom-study sessions do not write personal training progress. The original classroom study conditions and settlement policy stay isolated from this product extension.
+
+## Validation
+
+Run from `ui/` in an environment with Node and the local pose/demo assets:
+
+```sh
+npm test -- --maxWorkers=1
+npm run build
+node scripts/check-training-metrics.mjs analytic-timing.json
+npm run preview -- --host 127.0.0.1
+# In a second shell, set FITPAL_CHROME if a browser executable is not installed by Playwright.
+node scripts/check-training-experience.mjs artifacts/training-experience
+# For a headless compute node without a hardware WebGL device:
+FITPAL_CPU_ONLY=1 node scripts/check-training-experience.mjs artifacts/training-experience-cpu
+# Optional bounded scenarios: lat-pulldown, squat, camera (each still verifies home/history).
+FITPAL_CPU_ONLY=1 FITPAL_SCENARIO=lat-pulldown node scripts/check-training-experience.mjs artifacts/recording-repeat-1
+```
+
+The analytic sweep uses known angle trajectories across sampling rates, movement durations, signed delays, angular noise and missing-side observations. It verifies the arithmetic and abstention behavior, not the accuracy of the pose model. Browser checks exercise the real bundled clips, source-linked seeking, export, history and responsive layouts. These are different evidence levels and must be reported separately.
+
+### Recorded checks on 2026-11-25
+
+Before the recorded-frame delivery change, the unit suite passed 168 tests across 30 files and the production build passed. Seven existing browser scenarios also passed: mobile overlay/side selection, demo exit, manual history, privacy, camera denial, pilot summary and facilitator flow. Reward regressions cover unchanged EXP across focus/target choices and missing timing measurements. Per-repetition review also withholds phase timing when the new analyzer rejects sparse samples; the classroom fallback remains unchanged.
+
+The [analytic sweep](results/training-metrics-analytic.json) contains 270 deterministic angle-input cases and the analyzer SHA-256. Across 45 complete cases per noise level, mean absolute lag error was 4.4 ms without noise, 17.4 ms at 1 degree noise and 38.9 ms at 3 degrees noise. All 135 missing-side cases abstained. These figures describe arithmetic on synthetic angles, not pose-estimation accuracy.
+
+The earlier [browser flow report](results/training-experience-check.json) records CPU-only Chromium 151 with video playback at 0.25×: four pulldown repetitions and two squat repetitions, source seeking, all four coach questions, report export, history, responsive layouts, pause invalidation and two simulated-camera sets including storage failure/retry. Source timestamps, rather than wall-clock playback time, drive replay metrics. The simulated-camera trace was too sparse for phase timing; those fields correctly remained unavailable. A final focused browser check confirmed all observation explanations, the unchanged-EXP notice, matching original card backgrounds and mobile width after the final copy/style update.
+
+The [natural-speed comparison](results/training-runtime-profile.json) is a single paired run, not a statistical performance benchmark. The baseline and extended version both processed 133 frames and counted three of the expected four repetitions on the same CPU-only compute environment; median callback work was 299.0 and 297.4 ms respectively. Slow-playback success therefore does not establish real-time accuracy. A later UI walkthrough at 0.25× recovered three rather than four repetitions; the earlier successful replay is therefore not evidence of repeatable count accuracy on this environment. Device-level repeatability checks and independently labelled bilateral video remain required.
+
+## Next empirical evaluation
+
+Keep the existing four-condition classroom pilot unchanged. Evaluate this extension separately: counter-only baseline versus goal → evidence review → next-set focus, with balanced order and identical exercise/load where appropriate. Record target understanding, ability to locate the relevant repetition, chosen next-set focus, interruption, perceived control and willingness to continue. Timing/range changes are secondary descriptive measures and require comparable evidence. Record which recommendations were actually read, rather than treating display as compliance.
+
+For bilateral validation, independently label each side's return midpoint in consented fixed-view clips, including synchronized movement, deliberate timing differences, partial occlusion, view changes and low excursion. Use two annotators, report their disagreement, retain abstentions in the denominator, and split by person/source rather than adjacent frames. Report measurable coverage and timing error together. Do not select thresholds on the same participants used for final reporting. No participant study result is claimed by the software checks.
+
+### Interface follow-up
+
+Training plan typography now matches the existing exercise labels, body text and primary controls. One contextual hint replaces the three explanatory paragraphs. The [UI walkthrough](results/training-ui-walkthrough.json) records the computed font matches, plan persistence, mobile width and the repeated replay result separately from counting accuracy. Replay attribution now follows the review content instead of overlapping the source player.
+
+### Recorded-file reliability follow-up
+
+The [delivery diagnosis](results/recording-delivery-check.json) separates UI presentation from detector input: captured frames replayed directly through the detector reproduce the UI counts. One normal-playback run delayed calibration to 33.47 s and produced zero formal repetitions; one 0.25× run produced three. A fixed 15 Hz source-position control produced four under both tested model timestamp scales. These development-server traces diagnose the failure; they are not a paired speed benchmark.
+
+The corrected production app passed [three complete pulldown runs](results/recording-analysis-check.json), each with four verified repetitions, identical exported timing summaries, and each repetition midpoint inside its corresponding existing project reference window. Two runs opened the bundled source and the third uploaded the same MP4 through the home page. An independent squat run produced two repetitions. The browser checks also verified explicit pause/resume, source seeking, four question answers, export consistency, no replay persistence and mobile width. Decoder currentTime can round a requested seek by one microsecond; the pause assertion allows ten microseconds, far below the 66.7 ms sample interval, without relaxing count or reference-window assertions.
+
+All 172 unit tests across 31 files and the production build passed. Seven existing browser scenarios passed again, including the original classroom facilitator path. Two simulated-camera sets preserved their separate focuses and recovered a failed history save. No counting thresholds, reward criteria or classroom analysis mode were changed. Source hashes, per-repetition exported values, browser versions and explicit limitations accompany the results. These checks establish repeatability for the tested recordings, not live-camera accuracy, independently validated bilateral timing or real-user benefit.
+
+### Next-set and broader-video follow-up
+
+The [next-set browser scenario](results/next-set-check.json) completes three camera-stream sets with targets 10, 8 and 6, then checks the saved plan for each set, set 2/3 numbering, final-set termination, matching reward typography/dividers, and mobile width. It types the numeric fields using real key events, including clearing and entering 0.5. The underlying source is the existing GO4IT video captured as a stream, not a participant study. Reward row labels retain the original compact copy; the complete rules are documented in the reward-policy section.
+
+The [expanded video report](training-video-validation.md) includes all 18 declared recordings, calibration failures and recognition misses, separately from successful UI checks. It reuses known project sources; it is not a new held-out dataset. Existing source windows include agent review and are not independently human-validated. In particular, no broad bilateral-accuracy or live-camera claim follows from successful replay processing.
+
+### Whole-cycle curves and actionable review
+
+The [whole-cycle display report](results/training-live-curves-check.json) records 189 passing tests across 33 files, a successful production build and seven existing browser regressions. Actual rear-view pulldown, side-view pulldown and squat uploads passed source-value checks, proportional duration bars, selected-repetition interaction, keyboard activation, pause behavior, coach questions and report export. Phone checks inspect each card's internal scroll width after selection, not only the document width; an earlier false pass exposed a nonshrinking panel child, now corrected. Tablet and short desktop viewports also move the detailed charts outside the video.
+
+A separate replay of all 18 previously captured pose streams preserved every prior count, timing summary, per-repetition measurement and EXP result. The new curves used bounded buffers with no invalid path coordinates. Two sources supplied some side-view torso observations; this is availability, not an angle-accuracy result. No new independent video, person or manual timing annotation is added by these checks. The prior calibration failures and missed repetitions remain visible in the broader-video report.
+
+A further rear-view run also checked the history presentation using an explicitly seeded display example from the actual replay report. The whole-cycle value and separate return value matched that report; this did not convert replay into a saved camera session or award progress. Final desktop/mobile captures, compact review bars and the collapsed phase details were inspected separately from the automated layout assertions.
+
+### Calibration and counting repair
+
+The [recognition repair report](recognition-reliability.md) separates actual counting changes from display work. A directly observed upper-arm cycle can support count-only calibration when the wrist is unavailable; the calibration completion pose is retained for the first formal cycle, and explicit position changes reset accumulated calibration. The fixed eighteen clips improved from 18/36 to 20/36 matched formal repetitions with no previously matched windows lost. Six separately sourced held-out clips remained at 2/10 for both baseline and frozen candidate. All failures remain in the reports. EXP and wardrobe rules are unchanged.
+
+### Recorded-pose recovery follow-up
+
+The [recording recovery report](recording-recovery.md) documents one bounded retry of an empty pose result on the same paused image, preserving one published source observation and leaving live-camera inputs unchanged. It raises development matching from 20/36 to 22/36 with no lost matched windows or unmatched confirmations; calibration still completes on nine clips. Future Fitness changes from 1/2 to 2/2, and Dynamic from 0/2 to 1/2 with earlier calibration. A fresh paired Dynamic rerun reproduces that latter improvement. Four new source groups remain 12/12 in both versions, with formal references only in their two pulldown clips. The previous six-source result is historical, not a current-version rerun. All 205 tests, the build and eleven browser scenarios passed on allocated HPC nodes. No new display, EXP formula or wardrobe policy is introduced by this follow-up.

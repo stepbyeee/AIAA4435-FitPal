@@ -1,0 +1,28 @@
+[
+  {
+    "version": "baseline",
+    "source": "go4it-rear",
+    "playbackRate": 1,
+    "delegate": "CPU",
+    "browser": "151.0.7922.34",
+    "frames": 133,
+    "attempts": 3,
+    "medianWorkMs": 299,
+    "p95WorkMs": 323.19999980926514,
+    "medianSourceGapMs": 300.3,
+    "p95SourceGapMs": 333.66700000000196
+  },
+  {
+    "version": "current",
+    "source": "go4it-rear",
+    "playbackRate": 1,
+    "delegate": "CPU",
+    "browser": "151.0.7922.34",
+    "frames": 133,
+    "attempts": 3,
+    "medianWorkMs": 297.40000009536743,
+    "p95WorkMs": 323.30000019073486,
+    "medianSourceGapMs": 300.3,
+    "p95SourceGapMs": 333.66700000000014
+  }
+]
